@@ -2,6 +2,6 @@ title: Amiqus Developers
 
 repository: amiqus/developers
 
-domain: amiqus.github.io
-baseurl: /developers/
-url: https://amiqus.github.io
+domain: developers.amiqus.co
+baseurl: /
+url: https://developers.amiqus.co/

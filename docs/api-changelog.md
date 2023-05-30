@@ -81,4 +81,4 @@
 
 ### May 10 2023
 
-- Removed `enabled` query parameter`_List all forms for a client_` endpoint
+- Removed `enabled` query parameter from _List all forms for a client_ endpoint

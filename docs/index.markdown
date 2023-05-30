@@ -5,5 +5,5 @@
 layout: home
 ---
 
-- [Amiqus API Reference]({{ 'api' | relative_url }})
+- [Amiqus API Reference]({{ 'api' | relative_url }}) ([Changelog]({{ 'api-changelog' | relative_url }}))
 - [Amiqus SDK API Reference]({{ 'sdk' | relative_url }})

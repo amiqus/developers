@@ -1,5 +1,10 @@
 ## API Changelog
 
+### May 29 2023
+
+- Added `secret` property to `Webhook` object
+- Added `201 Created` success responses to _Update assignees for a record_ and _Update assignees for a client_ endpoints
+
 ### May 26 2023
 
 ⚠️ This release includes breaking changes.
@@ -7,7 +12,7 @@
 - Changed Document Transfer record step preferences
     - Added required `attachment` property to "New Document" type
 
-#### May 22 2023
+### May 22 2023
 
 - Changed HSCNI Access NI record step preferences
     - Updated `barring_adults` and `barring_children` description with details of requirement

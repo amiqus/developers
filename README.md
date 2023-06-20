@@ -1,3 +1,5 @@
+![Logo](./assets/images/logos/amiqus-full.png)
+
 # Amiqus Developer Documentation
 
-Visit https://amiqus.github.io/developers for developer documentation.
+Visit https://developers.amiqus.co/ for developer documentation.

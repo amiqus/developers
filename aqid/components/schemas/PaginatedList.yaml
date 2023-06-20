@@ -1,0 +1,44 @@
+title: Paginated List
+type: object
+properties:
+  object:
+    type: string
+    enum:
+      - paginated_list
+  data:
+    type: array
+  total:
+    type: integer
+    minimum: 0
+  count:
+    type: integer
+    minimum: 0
+  limit:
+    type: integer
+    maximum: 100
+    minimum: 1
+  current_page:
+    type: integer
+    minimum: 1
+  total_pages:
+    type: integer
+    minimum: 1
+  links:
+    oneOf:
+      - type: "null"
+      - title: Pagination links
+        type: object
+        required:
+          - next
+          - previous
+        properties:
+          next:
+            type:
+              - "null"
+              - string
+            format: url
+          previous:
+            type:
+              - "null"
+              - string
+            format: url

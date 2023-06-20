@@ -1,0 +1,42 @@
+title: Record
+type: object
+additionalProperties: false
+properties:
+  object:
+    type: string
+    readOnly: true
+    enum:
+      - record
+  id:
+    type: integer
+    readOnly: true
+  status:
+    $ref: ./RecordStatus.yaml
+  email:
+    type: string
+    format: email
+  client:
+    readOnly: true
+    x-expandable: true
+    oneOf:
+      - $ref: ./Client.yaml
+      - type: integer
+  steps:
+    type: array
+    minItems: 1
+    items:
+      $ref: ./Steps/RecordSteps.yaml
+  created_at:
+    type: string
+    format: date-time
+    readOnly: true
+  updated_at:
+    type: string
+    format: date-time
+    readOnly: true
+  archived_at:
+    type:
+      - "null"
+      - string
+    format: date-time
+    readOnly: true

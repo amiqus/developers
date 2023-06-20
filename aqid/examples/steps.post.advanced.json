@@ -1,0 +1,49 @@
+{
+    "steps": [
+        {
+            "type": "check.photo_id",
+            "preferences": {
+                "report_type": "standard",
+                "facial_similarity": true,
+                "live_document": true,
+                "docs": [
+                    "passport"
+                ]
+            }
+        },
+        {
+            "type": "document.request",
+            "preferences": {
+                "template": 88456
+            }
+        },
+        {
+            "type": "document.transfer",
+            "preferences": {
+                "template": 3316,
+                "returned": true,
+                "instructions": "Rental agreement",
+                "return_message": "Please sign and return the rental agreement."
+            }
+        },
+        {
+            "type": "document.transfer",
+            "preferences": {
+                "name": "Non-disclosure agreement",
+                "attachment": 7432
+            }
+        },
+        {
+            "type": "form",
+            "preferences": {
+                "form": "61085d27-676e-47ae-a3b6-ae4e5d857fc1"
+            }
+        },
+        {
+            "type": "form",
+            "preferences": {
+                "form": "e2019279-8c53-47ee-a910-e5048300b334"
+            }
+        }
+    ]
+}

@@ -1,0 +1,76 @@
+title: Client Form
+type: object
+additionalProperties: false
+properties:
+  object:
+    type: string
+    readOnly: true
+    enum:
+      - client_form
+  id:
+    type: integer
+    readOnly: true
+  reference:
+    type: string
+    format: uuid
+    readOnly: true
+  type:
+    type: string
+    description: Forms are either for internal data collection (`internal`), or are requested for completion by the client (`requested`).
+    enum:
+      - internal
+      - requested
+  client:
+    readOnly: true
+    x-expandable: true
+    oneOf:
+      - $ref: ./Client.yaml
+      - type: integer
+  record:
+    description: "Always `null` when `type: internal`"
+    readOnly: true
+    x-expandable: true
+    oneOf:
+      - $ref: ./Record.yaml
+      - type: integer
+      - type: "null"
+  name:
+    type: string
+    maxLength: 255
+  description:
+    type:
+      - "null"
+      - string
+  instructions:
+    oneOf:
+      - type: "null"
+      - $ref: ./Forms/Fields/TipTap/Document.yaml
+  fields:
+    type: array
+    description: The first field must always be a Section. Any Fields not present in a Section are omitted.
+    minItems: 2
+    items:
+      $ref: ./Forms/CollectorFields.yaml
+  version:
+    type: integer
+    readOnly: true
+  created_at:
+    type: string
+    format: date-time
+    readOnly: true
+  updated_at:
+    type: string
+    format: date-time
+    readOnly: true
+  completed_at:
+    type:
+      - "null"
+      - string
+    format: date-time
+    readOnly: true
+  archived_at:
+    type:
+      - "null"
+      - string
+    format: date-time
+    readOnly: true

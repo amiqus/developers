@@ -1,0 +1,78 @@
+parameters:
+  - name: reference
+    in: path
+    required: true
+    schema:
+      type: string
+      format: uuid
+get:
+  summary: Retrieve a form
+  description: Retrieve a form.
+  operationId: get-forms-id
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Forms
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/FormTemplate.yaml
+          example:
+            $ref: ../examples/forms.id.get.200.simple.json
+patch:
+  summary: Update a form
+  description: Update a form.
+  operationId: patch-forms-id
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Forms
+  requestBody:
+    content:
+      application/json:
+        schema:
+          minProperties: 1
+          $ref:  ../components/schemas/FormTemplate.yaml
+        examples:
+          fields:
+            summary: Add fields
+            description: Update the "New starter form" adding a new multple choice answer.
+            value:
+              $ref: ../examples/forms.id.patch.json
+          disable:
+            summary: Disable form
+            description: Disable the "New starter form".
+            value:
+              $ref: ../examples/forms.id.patch.disable.json
+          details:
+            summary: Form details
+            description: Update name and description details.
+            value:
+              $ref: ../examples/forms.id.patch.details.json
+
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/FormTemplate.yaml
+          example:
+            $ref: ../examples/forms.id.patch.200.json
+delete:
+  summary: Delete a form
+  description: Delete a form.
+  operationId: delete-forms-id
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Forms
+  responses:
+    '204':
+      description: No Content

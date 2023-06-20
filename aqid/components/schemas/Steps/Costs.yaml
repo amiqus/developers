@@ -1,0 +1,9 @@
+type: object
+properties:
+  costs:
+    type: array
+    minItems: 1
+    items:
+      type: integer
+      minimum: 0
+

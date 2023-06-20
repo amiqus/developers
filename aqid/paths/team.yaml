@@ -1,0 +1,44 @@
+get:
+  summary: Retrieve current team
+  description: Returns basic details of the current team.
+  operationId: get-team
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Your Team
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Team.yaml
+          example:
+            $ref: ../examples/team.get.200.json
+patch:
+  summary: Update current team
+  description: Updates basic details of the current team.
+  operationId: patch-team
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Your Team
+  requestBody:
+    content:
+      application/json:
+        schema:
+          minProperties: 1
+          $ref:  ../components/schemas/Team.yaml
+        example:
+            $ref: ../examples/team.patch.json
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Team.yaml
+          example:
+            $ref: ../examples/team.patch.200.json

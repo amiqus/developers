@@ -1,0 +1,78 @@
+get:
+  summary: Retrieve all organisations
+  description: |
+    Returns a paginated list of the team's organisations.
+
+    To retrieve a specific client's organisations, refer to **[List all organisations for a client](#tag/Client-Organisations/operation/get-clients-id-organisations)**.
+
+  operationId: get-organisations
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Organisations
+  parameters:
+    - name: page
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+    - name: limit
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            allOf:
+                - $ref: ../components/schemas/PaginatedList.yaml
+                - type: object
+                  properties:
+                    data:
+                      items:
+                        $ref: ../components/schemas/Organisation.yaml
+          example:
+            $ref: ../examples/organisations.get.200.json
+    '401':
+        $ref: ../components/schemas/Errors/401.yaml
+post:
+  summary: Create an organisation
+  description: Create a new organisation.
+  operationId: post-organisations
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Organisations
+  requestBody:
+    content:
+      application/json:
+        schema:
+          allOf:
+            - $ref: ../components/schemas/Organisation.yaml
+            - type: object
+              properties:
+                jurisdiction:
+                  description: Required with `company_number`
+              required:
+                - name
+        example:
+          $ref: ../examples/organisations.post.json
+  responses:
+    '201':
+      description: Created
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Organisation.yaml
+          example:
+            $ref: ../examples/organisations.id.get.200.json
+    '401':
+      $ref: ../components/schemas/Errors/401.yaml
+    '422':
+      $ref: ../components/schemas/Errors/422.yaml

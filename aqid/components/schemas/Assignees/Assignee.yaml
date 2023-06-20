@@ -1,0 +1,14 @@
+title: Assignee
+type: object
+properties:
+  object:
+    type: string
+    readOnly: true
+    enum:
+      - assignee
+  id:
+    type: integer
+    readOnly: true
+    description: The assignee ID
+  type:
+    type: string

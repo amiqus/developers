@@ -1,0 +1,23 @@
+type: object
+required:
+  - preferences
+properties:
+  preferences:
+    type: object
+    minProperties: 1
+    properties:
+      GMC:
+        type: boolean
+        description: General Medical Council (GMC)
+      NMC:
+        type: boolean
+        description: Nursing and Midwifery Council (NMC)
+      HCP:
+        type: boolean
+        description: Health and Care Professions Council (HCPC)
+      GDC:
+        type: boolean
+        description: General Dental Council (GDC)
+      GPC:
+        type: boolean
+        description: General Pharmaceutical Council (GPhC or GPC)

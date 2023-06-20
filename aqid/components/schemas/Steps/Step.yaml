@@ -1,0 +1,14 @@
+type: object
+required:
+  - type
+properties:
+  object:
+    type: string
+    enum:
+      - step
+    readOnly: true
+  id:
+    type: integer
+    readOnly: true
+  type:
+    type: string

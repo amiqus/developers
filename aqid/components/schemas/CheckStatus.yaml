@@ -1,0 +1,9 @@
+type: string
+enum:
+  - pending
+  - submitted
+  - accepted
+  - rejected
+  - refer
+  - failed
+  - paused

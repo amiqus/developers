@@ -1,0 +1,26 @@
+delete:
+  summary: Delete assignee for a record
+  description: Remove a single assignee from a record.
+  operationId: delete-records-recordId-assignees-assigneeId
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Record Assignees
+  parameters:
+    - name: recordId
+      in: path
+      required: true
+      schema:
+        type: integer
+    - name: assigneeId
+      in: path
+      required: true
+      schema:
+        type: integer
+  requestBody:
+    content:
+      application/json: {}
+  responses:
+    '204':
+      description: No Content

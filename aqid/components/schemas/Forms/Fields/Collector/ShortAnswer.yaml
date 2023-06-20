@@ -1,0 +1,3 @@
+allOf:
+  - $ref: ../ShortAnswer.yaml
+  - $ref: ./Input.yaml

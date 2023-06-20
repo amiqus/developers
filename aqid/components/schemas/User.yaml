@@ -1,0 +1,45 @@
+title: User
+type: object
+additionalProperties: false
+properties:
+  object:
+    type: string
+    readOnly: true
+    enum:
+      - user
+  id:
+    type: integer
+    readOnly: true
+    description: Unique user identifier
+  name:
+    type: string
+    description: |
+      Full or partial name
+
+      The value is not formatted (e.g. title case), and appears as written.
+  email:
+    type: string
+    format: email
+    description: Unique user email address
+  is_verified:
+    type: boolean
+    readOnly: true
+    description: |
+      `true` once a new user has verified their email address
+  is_disabled:
+    type: boolean
+    readOnly: true
+    description: |
+      `true` when a user account has been disabled
+
+      User accounts disabled due to failed login attempts are automatically re-enabled after a delay. Please contact support@amiqus.co for further details.
+  created_at:
+    type: string
+    format: date-time
+    readOnly: true
+    description: Date and time the user account was created
+  updated_at:
+    type: string
+    format: date-time
+    readOnly: true
+    description: Date and time the user's details were last updated

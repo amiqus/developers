@@ -1,0 +1,14 @@
+type: object
+required:
+  - preferences
+properties:
+  preferences:
+    writeOnly: true
+    type: object
+    required:
+      - form
+    properties:
+      form:
+        type: string
+        format: uuid
+        description: Form template reference

@@ -1,0 +1,13 @@
+title: NHS ESR
+allOf:
+  - $ref: ../Check.yaml
+  - type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - check.nhs_esr
+      provider:
+        x-internal: true
+        enum:
+          - Nhs\Esr

@@ -1,0 +1,8 @@
+type: object
+properties:
+  check:
+    readOnly: true
+    x-expandable: true
+    oneOf:
+      - $ref: ../Check.yaml
+      - type: integer

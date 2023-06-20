@@ -1,0 +1,13 @@
+title: Criminal record
+allOf:
+  - $ref: ../Check.yaml
+  - type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - check.criminal_record
+      provider:
+        x-internal: true
+        enum:
+          - CriminalRecord

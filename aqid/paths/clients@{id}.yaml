@@ -1,0 +1,93 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  summary: Retrieve a client
+  description: Retrieve a client.
+  operationId: get-clients-id
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Clients
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../components/schemas/Client.yaml
+              - type: object
+                properties:
+                  status:
+                    oneOf:
+                      - type: "null"
+                      - type: string
+                        enum:
+                          - pending
+                          - approved
+                          - rejected
+          example:
+            $ref: ../examples/clients.id.get.200.json
+patch:
+  summary: Update a client
+  description: Update a client.
+  operationId: patch-clients
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Clients
+  requestBody:
+    content:
+      application/json:
+        schema:
+          allOf:
+            - $ref:  ../components/schemas/Client.yaml
+            - type: object
+              minProperties: 1
+              properties:
+                status:
+                  type: string
+                  enum:
+                    - pending
+                    - approved
+                    - rejected
+        examples:
+          email:
+            summary: Email
+            description: Update the client's email address.
+            value:
+              $ref: ../examples/clients.id.patch.json
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../components/schemas/Client.yaml
+              - type: object
+                properties:
+                  status:
+                    oneOf:
+                      - type: "null"
+                      - type: string
+                        enum:
+                          - pending
+                          - approved
+                          - rejected
+          example:
+            $ref: ../examples/clients.id.patch.200.json
+delete:
+  summary: Delete a client
+  description: Delete a client. Can be performed by Admin or Member users only. Clients with requests attached can only be deleted by Admin users.
+  operationId: delete-clients-id
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Clients
+  responses:
+    '204':
+      description: No Content

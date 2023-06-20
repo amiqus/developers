@@ -1,0 +1,11 @@
+title: Multiple Choice
+allOf:
+  - $ref: ../MultiInput.yaml
+  - type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - checkbox
+      label:
+        $ref: ../Choice.yaml

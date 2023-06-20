@@ -1,0 +1,72 @@
+{
+    "object": "paginated_list",
+    "data": [
+        {
+            "object": "record_document",
+            "id": 3245,
+            "type": "sent",
+            "name": "3e337df9-872a-4753-b86a-87cb535ee16d.pdf",
+            "status": "complete",
+            "config": {
+                "require_return": true,
+                "require_confirmation": false,
+                "instructions": "Non-disclosure agreement",
+                "return_message": "Please sign and return the NDA."
+            },
+            "source": {
+                "type": "record",
+                "id": 456884
+            },
+            "attachments": [
+                {
+                    "object": "attachment",
+                    "id": 1267,
+                    "name": "1d420ac7-a87a-444a-936b-dc29991ab8ed.pdf",
+                    "original": "NDA-final.pdf",
+                    "type": "application/pdf",
+                    "size": 74590,
+                    "av_status": "clean",
+                    "created_at": "2022-08-24T14:15:22Z",
+                    "updated_at": "2022-08-24T14:15:22Z"
+                }
+            ],
+            "created_at": "2022-08-24T14:15:22Z",
+            "updated_at": "2022-08-24T14:15:22Z",
+            "completed_at": "2022-08-25T11:02:13Z"
+        },
+        {
+            "object": "record_document",
+            "id": 3389,
+            "type": "returned",
+            "name": "35adbb44-be59-450c-bc41-fb32bded8e86.pdf",
+            "status": "complete",
+            "config": null,
+            "source": {
+                "type": "record_document",
+                "id": 3245
+            },
+            "attachments": [
+                {
+                    "object": "attachment",
+                    "id": 1484,
+                    "name": "35adbb44-be59-450c-bc41-fb32bded8e86.pdf",
+                    "original": "NDA-final (signed).pdf",
+                    "type": "application/pdf",
+                    "size": 78448,
+                    "av_status": "clean",
+                    "created_at": "2022-08-25T11:02:13Z",
+                    "updated_at": "2022-08-25T11:02:13Z"
+                }
+            ],
+            "created_at": "2022-08-24T14:15:22Z",
+            "updated_at": "2022-08-25T11:02:13Z",
+            "completed_at": "2022-08-25T11:02:13Z"
+        }
+    ],
+    "total": 2,
+    "count": 2,
+    "limit": 100,
+    "current_page": 1,
+    "total_pages": 1,
+    "links": null
+}

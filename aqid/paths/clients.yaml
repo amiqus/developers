@@ -1,0 +1,102 @@
+get:
+  summary: List all clients
+  description: List all clients.
+  operationId: get-clients
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Clients
+  parameters:
+    - name: page
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+    - name: limit
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            allOf:
+                - $ref: ../components/schemas/PaginatedList.yaml
+                - type: object
+                  properties:
+                    data:
+                      items:
+                        allOf:
+                          - $ref: ../components/schemas/Client.yaml
+                          - type: object
+                            properties:
+                              status:
+                                oneOf:
+                                  - type: "null"
+                                  - type: string
+                                    enum:
+                                      - pending
+                                      - approved
+                                      - rejected
+          example:
+            $ref: ../examples/clients.get.200.json
+post:
+  summary: Create a client
+  description: Create a client.
+  operationId: post-clients
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Clients
+  requestBody:
+    content:
+      application/json:
+        schema:
+          allOf:
+            - $ref:  ../components/schemas/Client.yaml
+            - type: object
+              required:
+                - email
+                - name
+              properties:
+                status:
+                  type: string
+                  enum:
+                    - pending
+                    - approved
+                    - rejected
+                name:
+                  allOf:
+                    - $ref: ../components/schemas/Name.yaml
+                    - type: object
+                      required:
+                        - first_name
+                        - last_name
+        example:
+          $ref: ../examples/clients.post.json
+  responses:
+    '201':
+      description: Created
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../components/schemas/Client.yaml
+              - type: object
+                properties:
+                  status:
+                    oneOf:
+                      - type: "null"
+                      - type: string
+                        enum:
+                          - pending
+                          - approved
+                          - rejected
+          example:
+            $ref: ../examples/clients.id.get.200.json

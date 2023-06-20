@@ -1,0 +1,14 @@
+get:
+  summary: Retrieve team membership
+  description: |
+    Retrieve membership details for the user's current team.
+
+    To retrieve the user's basic details, refer to **[Retrieve user account](#tag/Your-Team/operation/get-me)**.
+  operationId: get-team-me
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Your Team
+  responses:
+    $ref: ./teams@{teamId}@members@{teamMemberId}.yaml#/get/responses

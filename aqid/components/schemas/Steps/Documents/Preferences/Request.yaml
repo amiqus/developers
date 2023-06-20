@@ -1,0 +1,9 @@
+type: object
+required:
+  - title
+  - instructions
+properties:
+  title:
+    type: string
+  instructions:
+    type: string

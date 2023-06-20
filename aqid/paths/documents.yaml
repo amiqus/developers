@@ -1,0 +1,58 @@
+get:
+  summary: List all documents
+  description: List all library documents.
+  operationId: get-documents
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Documents
+  parameters:
+    - name: page
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+    - name: limit
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+    - name: enabled
+      in: query
+      schema:
+        type: boolean
+    - name: expand
+      in: query
+      explode: false
+      schema:
+        type: array
+        items:
+          type: string
+          enum:
+            - attachment
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            allOf:
+                - $ref: ../components/schemas/PaginatedList.yaml
+                - type: object
+                  properties:
+                    data:
+                      items:
+                        $ref: ../components/schemas/Document.yaml
+          examples:
+            single:
+              summary: Single document
+              description: A single document with attachment expanded.
+              value:
+                $ref: ../examples/documents.get.200.single.json
+            multiple:
+              summary: Multiple documents
+              description: Multiple documents without attachments expanded.
+              value:
+                $ref: ../examples/documents.get.200.multiple.json

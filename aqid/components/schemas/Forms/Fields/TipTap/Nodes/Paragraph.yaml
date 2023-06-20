@@ -1,0 +1,15 @@
+title: TipTap Paragraph
+type: object
+required:
+  - type
+  - content
+properties:
+  type:
+    type: string
+    enum:
+      - paragraph
+  content:
+    type: array
+    minItems: 1
+    items:
+      $ref: ./Text.yaml

@@ -1,0 +1,17 @@
+{
+    "steps": [
+        {
+            "type": "check.identity"
+        },
+        {
+            "type": "check.photo_id",
+            "preferences": {
+                "report_type": "standard",
+                "docs": [
+                    "passport",
+                    "driving_licence"
+                ]
+            }
+        }
+    ]
+}

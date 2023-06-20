@@ -1,0 +1,82 @@
+type: object
+required:
+  - preferences
+properties:
+  preferences:
+    type: object
+    oneOf:
+      - title: Disclosure Scotland
+        required:
+          - region
+        properties:
+          region:
+            type: string
+            enum:
+              - scotland
+          enable_payment:
+            title: Pass on fee
+            description: Require the person to pay for the processing of this check.
+            type: boolean
+      - title: "DBS: Basic"
+        required:
+          - region
+          - type
+        properties:
+          region:
+            type: string
+            enum:
+              - england
+          type:
+            type: string
+            enum:
+              - basic
+          enable_payment:
+            title: Pass on fee
+            description: Require the person to pay for the processing of this check.
+            type: boolean
+      - title: "DBS: Standard"
+        required:
+          - region
+          - type
+        properties:
+          region:
+            type: string
+            enum:
+              - england
+          type:
+            type: string
+            enum:
+              - standard
+          free_volunteer:
+            title: Reduced rate COVID-19 application
+            description: This check will cost 1 credit for eligible roles when responding to COVID-19.
+            type: boolean
+            readOnly: true
+            x-Deprecated: true
+          enable_payment:
+            title: Pass on fee
+            description: Require the person to pay for the processing of this check.
+            type: boolean
+      - title: "DBS: Enhanced"
+        required:
+          - region
+          - type
+        properties:
+          region:
+            type: string
+            enum:
+              - england
+          type:
+            type: string
+            enum:
+              - enhanced
+          free_volunteer:
+            title: Reduced rate COVID-19 application
+            description: This check will cost 1 credit for eligible roles when responding to COVID-19.
+            type: boolean
+            readOnly: true
+            x-Deprecated: true
+          enable_payment:
+            title: Pass on fee
+            description: Require the person to pay for the processing of this check.
+            type: boolean

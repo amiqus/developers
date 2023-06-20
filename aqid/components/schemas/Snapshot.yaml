@@ -1,0 +1,13 @@
+title: Snapshot
+type: object
+properties:
+  object:
+    type: string
+    enum:
+      - snapshot
+  name:
+    $ref: ./Name.yaml
+  reference:
+    type:
+      - "null"
+      - string

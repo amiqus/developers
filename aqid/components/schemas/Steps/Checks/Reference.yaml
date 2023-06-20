@@ -1,0 +1,13 @@
+title: Employment history
+allOf:
+  - $ref: ../Check.yaml
+  - type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - check.reference
+      provider:
+        x-internal: true
+        enum:
+          - Reference

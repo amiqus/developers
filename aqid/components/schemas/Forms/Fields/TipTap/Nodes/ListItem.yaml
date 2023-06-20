@@ -1,0 +1,13 @@
+title: TipTap List Item
+type: object
+properties:
+  type:
+    type: string
+    enum:
+      - listItem
+  content:
+    type: array
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ../Nodes.yaml

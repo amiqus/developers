@@ -1,0 +1,75 @@
+get:
+  summary: List all records
+  description: List all records.
+  operationId: get-records
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Records
+  parameters:
+    - name: expand
+      in: query
+      explode : false
+      schema:
+        type: array
+        items:
+          type: string
+          enum:
+            - client
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../components/schemas/PaginatedList.yaml
+              - type: object
+                properties:
+                  data:
+                    items:
+                      $ref: ../components/schemas/Record.yaml
+          example:
+            $ref: ../examples/records.get.200.json
+post:
+  summary: Create a record
+  description: Create a record.
+  operationId: post-records
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Records
+  responses:
+    '201':
+      description: Created
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Record.yaml
+          example:
+            $ref: ../examples/records.id.get.200.json
+  requestBody:
+    content:
+      application/json:
+        schema:
+          allOf:
+            - type: object
+              properties:
+                client:
+                  type: integer
+              required:
+                - client
+            - $ref:  ../components/schemas/RecordSettings.yaml
+        examples:
+          simple:
+            summary: Single step
+            description: A request with a single step containing a Photo ID check
+            value:
+              $ref: ../examples/records.post.simple.json
+          advanced:
+            summary: Multiple steps
+            description: A request with a multiple steps including checks and documents
+            value:
+              $ref: ../examples/records.post.advanced.json

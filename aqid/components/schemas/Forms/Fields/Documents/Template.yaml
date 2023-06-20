@@ -1,0 +1,11 @@
+title: Template
+type: object
+required:
+  - template_id
+properties:
+  type:
+    type: string
+    enum:
+      - document
+  template_id:
+    type: integer

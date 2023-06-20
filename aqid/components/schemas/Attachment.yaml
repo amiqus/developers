@@ -1,0 +1,39 @@
+title: Attachment
+type: object
+additionalProperties: false
+properties:
+  object:
+    type: string
+    readOnly: true
+    enum:
+      - attachment
+  id:
+    type: integer
+    readOnly: true
+  name:
+    type: string
+    readOnly: true
+  original:
+    type: string
+  type:
+    type: string
+    readOnly: true
+  size:
+    type: integer
+    readOnly: true
+  av_status:
+    type: string
+    readOnly: true
+    enum:
+      - pending
+      - clean
+      - infected
+      - error
+  created_at:
+    type: string
+    format: date-time
+    readOnly: true
+  updated_at:
+    type: string
+    format: date-time
+    readOnly: true

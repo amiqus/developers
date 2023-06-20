@@ -1,0 +1,13 @@
+title: Watchlist
+allOf:
+  - $ref: ../Check.yaml
+  - type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - check.watchlist
+      provider:
+        x-internal: true
+        enum:
+          - ComplyAdvantage\Watchlist

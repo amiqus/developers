@@ -1,0 +1,15 @@
+get:
+  summary: Check service status
+  description: |
+    The status endpoint can be used to perform an authenticated request to verify the access token is valid and that the service is operational.
+  operationId: get-status
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Service Status
+  responses:
+    '204':
+      description: No Content
+    '401':
+      $ref: ../components/schemas/Errors/401.yaml

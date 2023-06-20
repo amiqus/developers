@@ -1,0 +1,38 @@
+title: Webhook
+type: object
+properties:
+  object:
+    type: string
+    readOnly: true
+    enum:
+      - webhook
+  id:
+    type: integer
+    readOnly: true
+  uuid:
+    type: string
+    format: uuid
+    readOnly: true
+  url:
+    type: string
+  secret:
+    type: string
+    readOnly: true
+  events:
+    type: array
+    description: |
+      The event or events this webhook is subscribed to. Supports wildcards; `*` all events, `client.*` all client events, etc.
+    minItems: 1
+    uniqueItems: true
+    items:
+      $ref: ./WebhookSubscribeEvents.yaml
+  is_enabled:
+    type: boolean
+  created_at:
+    type: string
+    format: date-time
+    readOnly: true
+  updated_at:
+    type: string
+    format: date-time
+    readOnly: true

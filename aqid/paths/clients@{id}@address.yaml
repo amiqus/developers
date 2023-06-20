@@ -1,0 +1,49 @@
+parameters:
+- $ref: ../components/parameters/resourceId.yaml
+get:
+  summary: Retrieve address for a client
+  description: Retrieve address for a client.
+  operationId: get-clients-id-address
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Clients
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Address.yaml
+          example:
+            $ref: ../examples/clients.id.address.get.200.json
+put:
+  summary: Replace an address for a client
+  description: |
+    Replace address for a client.
+
+    Each country has its own field requirements. Any field can become required if the selected country demands it, most commonly `postcode`.
+  operationId: put-clients-id-address
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Clients
+  requestBody:
+    content:
+      application/json:
+        schema:
+          minProperties: 1
+          $ref: ../components/schemas/Address.yaml
+        example:
+          $ref: ../examples/clients.id.address.put.json
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Address.yaml
+          example:
+            $ref: ../examples/clients.id.address.put.200.json

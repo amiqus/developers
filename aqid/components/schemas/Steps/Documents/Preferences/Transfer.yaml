@@ -1,0 +1,18 @@
+type: object
+properties:
+  require_return:
+    type: boolean
+    default: false
+  require_confirmation:
+    type: boolean
+    default: false
+  instructions:
+    type:
+      - "null"
+      - string
+  return_message:
+    description: |
+      Required if `require_return: true`
+    type:
+      - "null"
+      - string

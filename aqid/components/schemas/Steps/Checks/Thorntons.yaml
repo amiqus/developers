@@ -1,0 +1,13 @@
+title: Thorntons Onboarding
+allOf:
+  - $ref: ../Check.yaml
+  - type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - check.thorntons_onboarding
+      provider:
+        x-internal: true
+        enum:
+          - Thorntons\Onboarding

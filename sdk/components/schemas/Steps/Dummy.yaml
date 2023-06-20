@@ -1,0 +1,19 @@
+title: Dummy
+type: object
+required:
+  - state
+  - postcode
+properties:
+  state:
+    description: The check will return this result state once submitted.
+    type: string
+    enum:
+      - submitted
+      - accepted
+      - rejected
+      - refer
+      - failed
+      - paused
+  postcode:
+    type: string
+    description: An arbitrary piece of information that will be displayed on the check results.

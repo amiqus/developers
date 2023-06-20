@@ -1,0 +1,53 @@
+title: Form Template
+type: object
+additionalProperties: false
+properties:
+  object:
+    type: string
+    readOnly: true
+    enum:
+      - form_template
+  id:
+    type: integer
+    readOnly: true
+  reference:
+    type: string
+    format: uuid
+    readOnly: true
+  name:
+    type: string
+    maxLength: 255
+  description:
+    type:
+      - "null"
+      - string
+    maxLength: 255
+  instructions:
+    oneOf:
+      - type: "null"
+      - $ref: ./Forms/Fields/TipTap/Document.yaml
+  fields:
+    type: array
+    description: The first field must always be a Section. Any Fields not present in a Section are omitted.
+    minItems: 2
+    items:
+      $ref: ./Forms/BuilderFields.yaml
+  version:
+    type: integer
+    readOnly: true
+  is_enabled:
+    type: boolean
+  created_at:
+    type: string
+    format: date-time
+    readOnly: true
+  updated_at:
+    type: string
+    format: date-time
+    readOnly: true
+  archived_at:
+    type:
+      - "null"
+      - string
+    format: date-time
+    readOnly: true

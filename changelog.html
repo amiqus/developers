@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+<title>Change Log</title>
+<link rel="icon" type="image/svg+xml" sizes="32x32" href="/developers-stage/assets/images/badge--amiqus.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="/developers-stage/assets/css/main.css" rel="stylesheet"/>
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
+</head>
+<body>
+    <a id="top"></a>
+    <div class="nav-container">
+    <a class="logo" href="/developers-stage/index.html" title="Amiqus API Documentation">
+        <img src="/developers-stage/assets/images/logos/amiqus-full.png" alt="Amiqus Logo" width="200" />
+    </a>
+    <ul class="navigation">
+        <li><a href="/developers-stage/aqid/api-reference.html">API Reference</a></li>
+        <li><a href="/developers-stage/sdk/sdk-api-reference.html">SDK API Reference</a></li>
+        <li><a href="/developers-stage/guide/">Guides</a></li>
+    </ul>
+</div>
+
+
+    <div id="main-container" class="changelog-container">
+        <h1 id="api-changelog">API Changelog</h1>
+<h2 id="may-29-2023"><a href="#may-29-2023">May 29 2023</a></h2>
+
+<ul>
+  <li>Added <code class="language-plaintext highlighter-rouge">secret</code> property to <code class="language-plaintext highlighter-rouge">Webhook</code> object</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">201 Created</code> success responses to <em>Update assignees for a record</em> and <em>Update assignees for a client</em> endpoints</li>
+</ul>
+
+<h2 id="may-26-2023"><a href="#may-26-2023">May 26 2023</a></h2>
+
+<p>⚠️ This release includes breaking changes.</p>
+
+<ul>
+  <li>Changed Document Transfer record step preferences
+    <ul>
+      <li>Added required <code class="language-plaintext highlighter-rouge">attachment</code> property to “New Document” type</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="may-22-2023"><a href="#may-22-2023">May 22 2023</a></h2>
+
+<ul>
+  <li>Changed HSCNI Access NI record step preferences
+    <ul>
+      <li>Updated <code class="language-plaintext highlighter-rouge">barring_adults</code> and <code class="language-plaintext highlighter-rouge">barring_children</code> description with details of requirement</li>
+      <li>Changed <code class="language-plaintext highlighter-rouge">false</code> as default value for <code class="language-plaintext highlighter-rouge">barring_adults</code> and <code class="language-plaintext highlighter-rouge">barring_children</code> properties</li>
+    </ul>
+  </li>
+  <li>Changed Watchlist record step preferences
+    <ul>
+      <li>Changed <code class="language-plaintext highlighter-rouge">true</code> as default value for <code class="language-plaintext highlighter-rouge">silent</code> property</li>
+      <li>Updated <code class="language-plaintext highlighter-rouge">silent</code> description with details of availability</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="may-18-2023"><a href="#may-18-2023">May 18 2023</a></h2>
+
+<p>⚠️ This release includes breaking changes.</p>
+
+<ul>
+  <li>Changed Dummy record step preferences
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">preferences</code> is no longer a required property</li>
+      <li>Changed <code class="language-plaintext highlighter-rouge">payment_amount</code> from <code class="language-plaintext highlighter-rouge">float</code> to <code class="language-plaintext highlighter-rouge">integer</code></li>
+      <li>Updated <code class="language-plaintext highlighter-rouge">payment_amount</code> description with details of value format</li>
+      <li>Changed minimum and maximum value of <code class="language-plaintext highlighter-rouge">payment_amount</code> to <code class="language-plaintext highlighter-rouge">0</code> – <code class="language-plaintext highlighter-rouge">10000</code></li>
+      <li>Changed minimum and maximum value of <code class="language-plaintext highlighter-rouge">credit_cost</code> to <code class="language-plaintext highlighter-rouge">0</code> – <code class="language-plaintext highlighter-rouge">100</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="may-17-2023"><a href="#may-17-2023">May 17 2023</a></h2>
+
+<p>⚠️ This release includes breaking changes.</p>
+
+<ul>
+  <li>Changed Banking Information record step preferences
+    <ul>
+      <li>Renamed step type <code class="language-plaintext highlighter-rouge">check.open_banking</code> to <code class="language-plaintext highlighter-rouge">check.banking_information</code></li>
+      <li><code class="language-plaintext highlighter-rouge">preferences</code> is no longer a required property</li>
+      <li>Added <code class="language-plaintext highlighter-rouge">false</code> as default value for <code class="language-plaintext highlighter-rouge">balance</code> and <code class="language-plaintext highlighter-rouge">transactions</code> properties</li>
+    </ul>
+  </li>
+  <li>Changed Criminal Record step preferences
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">free_volunteer</code> property for DBS: Standard and DBS: Enhanced types is now <strong>read only</strong></li>
+    </ul>
+  </li>
+  <li>Changed Document Transfer step preferences
+    <ul>
+      <li>Renamed property <code class="language-plaintext highlighter-rouge">confirmed</code> to <code class="language-plaintext highlighter-rouge">require_confirmation</code></li>
+      <li>Renamed property <code class="language-plaintext highlighter-rouge">returned</code> to <code class="language-plaintext highlighter-rouge">require_return</code></li>
+    </ul>
+  </li>
+  <li>Changed Photo ID step preferences
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">face</code> and <code class="language-plaintext highlighter-rouge">liveness</code> properties for <code class="language-plaintext highlighter-rouge">standard</code> report type are now <strong>read only</strong></li>
+      <li>Added <code class="language-plaintext highlighter-rouge">issuing_countries</code> property for <code class="language-plaintext highlighter-rouge">standard</code> and <code class="language-plaintext highlighter-rouge">biometric</code> report types</li>
+      <li>Updated <code class="language-plaintext highlighter-rouge">facial_similarity</code> description for <code class="language-plaintext highlighter-rouge">standard</code> report type with details of cost changes</li>
+    </ul>
+  </li>
+  <li>Changed Photo ID step preferences
+    <ul>
+      <li>Added <code class="language-plaintext highlighter-rouge">1</code> and <code class="language-plaintext highlighter-rouge">3</code> options to <code class="language-plaintext highlighter-rouge">monitor</code> property</li>
+      <li>Added <code class="language-plaintext highlighter-rouge">false</code> as default value for <code class="language-plaintext highlighter-rouge">silent</code> and <code class="language-plaintext highlighter-rouge">monitor</code> properties</li>
+      <li>Updated <code class="language-plaintext highlighter-rouge">silent</code> and <code class="language-plaintext highlighter-rouge">monitor</code> descriptions with details of availability and cost changes</li>
+    </ul>
+  </li>
+  <li>Changed <code class="language-plaintext highlighter-rouge">RecordDocument</code> object
+    <ul>
+      <li>Renamed config choice headings
+        <ul>
+          <li>“Sent” to “Document Transfer”</li>
+          <li>“Requested” to “Document Request”</li>
+        </ul>
+      </li>
+      <li>Renamed property <code class="language-plaintext highlighter-rouge">description</code> to <code class="language-plaintext highlighter-rouge">instructions</code></li>
+      <li>Renamed property <code class="language-plaintext highlighter-rouge">instructions</code> to <code class="language-plaintext highlighter-rouge">return_message</code></li>
+      <li>Added <code class="language-plaintext highlighter-rouge">return_message</code> description</li>
+    </ul>
+  </li>
+  <li>Removed <code class="language-plaintext highlighter-rouge">link</code> and <code class="language-plaintext highlighter-rouge">in_person</code> notification types from <em>Create a record</em> endpoint</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">false</code> notification type to <em>Create a record</em> endpoint</li>
+</ul>
+
+<h2 id="may-12-2023"><a href="#may-12-2023">May 12 2023</a></h2>
+
+<p>⚠️ This release includes breaking changes.</p>
+
+<ul>
+  <li>Changed success response codes from <code class="language-plaintext highlighter-rouge">200 OK</code> to <code class="language-plaintext highlighter-rouge">201 Created</code> for endpoints:
+    <ul>
+      <li><em>Create a client</em></li>
+      <li><em>Set assignees for a client</em></li>
+      <li><em>Create an organisation</em></li>
+      <li><em>Create a record</em></li>
+      <li><em>Set assignees for a record</em></li>
+      <li><em>Create a webhook</em></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="may-11-2023"><a href="#may-11-2023">May 11 2023</a></h2>
+
+<ul>
+  <li>Changed maximum length of <code class="language-plaintext highlighter-rouge">message</code> property to <code class="language-plaintext highlighter-rouge">5000</code> for <em>Create a record</em> endpoint</li>
+</ul>
+
+<h2 id="may-10-2023"><a href="#may-10-2023">May 10 2023</a></h2>
+
+<ul>
+  <li>Removed <code class="language-plaintext highlighter-rouge">enabled</code> query parameter from <em>List all forms for a client</em> endpoint</li>
+</ul>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"> </script>
+
+    <a href="#top" id="back-to-top">Back to top</a>
+</body>
+</html>

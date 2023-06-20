@@ -1,0 +1,42 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  summary: List all deliveries for a webhook
+  description: List all deliveries for a webhook.
+  operationId: get-webhooks-id-deliveries
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Webhooks
+  parameters:
+    - name: page
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+    - name: limit
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            allOf:
+                - $ref: ../components/schemas/PaginatedList.yaml
+                - type: object
+                  properties:
+                    data:
+                      items:
+                        $ref: ../components/schemas/WebhookDelivery.yaml
+          examples:
+            ping:
+              summary: Ping
+              description: Example of a successful delivery for a `ping` event.
+              value:
+                $ref: ../examples/webhooks.id.deliveries.get.200.ping.json

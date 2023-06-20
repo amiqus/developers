@@ -1,0 +1,82 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+    description: Unique organisation identifier
+get:
+  summary: Retrieve an organisation
+  description: Returns a single organisation.
+  operationId: get-organisations-id
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Organisations
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Organisation.yaml
+          example:
+            $ref: ../examples/organisations.id.get.200.json
+    '401':
+      $ref: ../components/schemas/Errors/401.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                default: Organisation not found
+patch:
+  summary: Update an organisation
+  description:  |
+    Update the details of an organisation.
+
+    To add clients to or remove clients from the organisation, refer to **[Update organisations for a client](#tag/Client-Organisations/operation/patch-clients-id-organisations)**.
+  operationId: patch-organisations-id
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Organisations
+  requestBody:
+    content:
+      application/json:
+        schema:
+          allOf:
+            - $ref: ../components/schemas/Organisation.yaml
+            - type: object
+              properties:
+                jurisdiction:
+                  description: 'Required with `company_number`'
+              required:
+                - name
+        example:
+          $ref: ../examples/organisations.id.patch.json
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Organisation.yaml
+          example:
+            $ref: ../examples/organisations.id.patch.200.json
+    '401':
+      $ref: ../components/schemas/Errors/401.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                default: Organisation not found
+    '422':
+      $ref: ../components/schemas/Errors/422.yaml

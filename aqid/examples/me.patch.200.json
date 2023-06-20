@@ -1,0 +1,10 @@
+{
+    "object": "user",
+    "id": 345789,
+    "name": "Robert Gale",
+    "email": "bob@example.com",
+    "is_verified": true,
+    "is_disabled": false,
+    "created_at": "2019-08-24T14:15:22Z",
+    "updated_at": "2019-08-24T14:15:22Z"
+}

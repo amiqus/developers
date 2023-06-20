@@ -1,0 +1,25 @@
+title: Team Member
+type: object
+additionalProperties: false
+properties:
+  object:
+    type: string
+    readOnly: true
+    enum:
+      - team_member
+  id:
+    type: integer
+    readOnly: true
+  name:
+    type: string
+  email:
+    type: string
+    format: email
+  role:
+    type: string
+    enum:
+      - assumed
+      - owner
+      - member
+      - read-only
+      - assigned-only

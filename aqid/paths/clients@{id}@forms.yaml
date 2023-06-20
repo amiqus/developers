@@ -1,0 +1,56 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  summary: List all forms for a client
+  description: List all forms for a client.
+  operationId: get-clients-id-forms
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Clients
+  parameters:
+    - name: page
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+    - name: limit
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+    - name: expand
+      in: query
+      explode : false
+      schema:
+        type: array
+        items:
+          type: string
+          enum:
+            - client
+            - record
+    - name: type
+      in: query
+      description: Filter by internal client forms (`internal`), or requested for completion by the client (`requested`). Includes both by default.
+      schema:
+        type: string
+        enum:
+          - internal
+          - requested
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../components/schemas/PaginatedList.yaml
+              - type: object
+                properties:
+                  data:
+                    items:
+                      $ref: ../components/schemas/ClientForm.yaml
+          example:
+            $ref: ../examples/clients.id.forms.get.200.json

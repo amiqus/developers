@@ -1,0 +1,27 @@
+title: Record Settings
+type: object
+required:
+  - steps
+  - notification
+properties:
+  steps:
+    type: array
+    minItems: 1
+    items:
+      $ref: ./Steps/RecordStepsWrite.yaml
+  notification:
+    oneOf:
+      - type: string
+        enum:
+          - email
+      - type: boolean
+        enum:
+          - false
+  message:
+    type:
+      - "null"
+      - string
+    maxLength: 5000
+  reminder:
+    type: boolean
+    default: false

@@ -1,0 +1,5 @@
+title: TipTap Nodes
+anyOf:
+  - $ref: ./Nodes/Paragraph.yaml
+  - $ref: ./Nodes/BulletList.yaml
+  - $ref: ./Nodes/OrderedList.yaml

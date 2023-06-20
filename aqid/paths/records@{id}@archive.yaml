@@ -1,0 +1,29 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  summary: Archive a record
+  description: Archive a record.
+  operationId: post-records-id-archive
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Records
+  parameters:
+    - name: expand
+      in: query
+      explode : false
+      schema:
+        type: array
+        items:
+          type: string
+          enum:
+            - client
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Record.yaml
+

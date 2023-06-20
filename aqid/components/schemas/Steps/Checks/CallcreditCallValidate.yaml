@@ -1,0 +1,13 @@
+title: TransUnion
+allOf:
+  - $ref: ../Check.yaml
+  - type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - check.identity
+      provider:
+        x-internal: true
+        enum:
+          - Callcredit\CallValidate

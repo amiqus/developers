@@ -1,0 +1,19 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  summary: Download a record
+  description: Download a record.
+  operationId: get-records-id-download
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Records
+  responses:
+    '200':
+      description: OK
+      content:
+        application/pdf:
+          schema:
+            type: string
+            format: binary

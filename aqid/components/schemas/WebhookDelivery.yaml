@@ -1,0 +1,30 @@
+title: Webhook Delivery
+type: object
+properties:
+  object:
+    type: string
+    readOnly: true
+    enum:
+      - webhook_delivery
+  id:
+    type: integer
+    readOnly: true
+  uuid:
+    type: string
+    format: uuid
+    readOnly: true
+  event:
+    readOnly: true
+    $ref: ./WebhookDeliveryEvents.yaml
+  attempts:
+    type: integer
+    minimum: 0
+    readOnly: true
+  request:
+    $ref: ./WebhookDeliveryRequest.yaml
+  response:
+    $ref: ./WebhookDeliveryResponse.yaml
+  last_sent_at:
+    type: string
+    format: date-time
+    readOnly: true

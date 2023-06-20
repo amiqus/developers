@@ -1,0 +1,135 @@
+parameters:
+- $ref: ../components/parameters/resourceId.yaml
+get:
+  summary: List all assignees for a record
+  description: List all assignees for a record.
+  operationId: get-records-id-assignees
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Record Assignees
+  parameters:
+    - name: page
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+    - name: limit
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../components/schemas/PaginatedList.yaml
+              - type: object
+                properties:
+                  data:
+                    items:
+                      allOf:
+                        - $ref: ../components/schemas/Assignees/User.yaml
+                        - type: object
+                          properties:
+                            user:
+                              $ref: ../components/schemas/User.yaml
+          example:
+            $ref: ../examples/records.id.assignees.get.200.json
+post:
+  summary: Set assignees for a record
+  description: Set the assignees for a record according to the exact values provided in the request, overwriting any existing assignees. To add additional assignees, refer to **[Update assignees for a record](#tag/Record-Assignees/operation/patch-records-id-assignees)**.
+  operationId: post-records-id-assignees
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Record Assignees
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: array
+          minItems: 1
+          items:
+            allOf:
+              - $ref: ../components/schemas/Assignees/User.yaml
+              - type: object
+                required:
+                  - type
+                  - user
+                additionalProperties: false
+                properties:
+                  user:
+                    type: integer
+                  type:
+                    type: string
+        example:
+          $ref: ../examples/records.id.assignees.post.json
+  responses:
+    '201':
+      description: Created
+      content:
+        application/json:
+          schema:
+            $ref: ./records@{id}@assignees.yaml#/get/responses/200/content/application~1json/schema
+          example:
+            $ref: ../examples/records.id.assignees.get.200.json
+patch:
+  summary: Update assignees for a record
+  description: Add one or more assignees to a record, merging them with existing assignees.
+  operationId: patch-records-id-assignees
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Record Assignees
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: array
+          minItems: 1
+          items:
+            anyOf:
+              - $ref: ../components/schemas/Assignees/User.yaml
+                required:
+                  - type
+                  - user
+                properties:
+                  user:
+                    type: integer
+        example:
+          $ref: ../examples/records.id.assignees.patch.json
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ./records@{id}@assignees.yaml#/get/responses/200/content/application~1json/schema
+          example:
+            $ref: ../examples/records.id.assignees.patch.200.json
+    '201':
+      description: Created
+      $ref: ./records@{id}@assignees.yaml#/get/responses/200
+delete:
+  summary: Delete assignees for a record
+  description: Remove all assignees from a record.
+  operationId: delete-records-id-assignees
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Record Assignees
+  requestBody:
+    content:
+      application/json: {}
+  responses:
+    '204':
+      description: No Content

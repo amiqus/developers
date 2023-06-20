@@ -1,0 +1,11 @@
+type: object
+required:
+  - type
+properties:
+  object:
+    type: string
+    enum:
+      - available_step
+    readOnly: true
+  type:
+    type: string

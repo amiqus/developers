@@ -1,0 +1,31 @@
+get:
+  summary: Retrieve a team member
+  description: Returns the member of a team.
+  operationId: get-teams-teamId-members-teamMemberId
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Teams
+  parameters:
+    - name: teamId
+      in: path
+      required: true
+      schema:
+        type: integer
+    - name: teamMemberId
+      in: path
+      required: true
+      schema:
+        type: integer
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/TeamMember.yaml
+          example:
+            $ref: ../examples/teams.id.members.id.get.200.json
+    '401':
+      $ref: ../components/schemas/Errors/401.yaml

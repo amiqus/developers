@@ -1,0 +1,35 @@
+get:
+  summary: Retrieve a form for a client
+  description: Retrieve a form for a client.
+  operationId: get-clients-id-forms-reference
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Clients
+  parameters:
+    - $ref: ../components/parameters/resourceId.yaml
+    - name: reference
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ClientForm.yaml
+          examples:
+            requested:
+              summary: Requested form
+              description: A form for completion by the client
+              value:
+                $ref: ../examples/clients.id.forms.reference.get.200.requested.json
+            internal:
+              summary: Internal form
+              description: A form for internal data collection
+              value:
+                $ref: ../examples/clients.id.forms.reference.get.200.internal.json

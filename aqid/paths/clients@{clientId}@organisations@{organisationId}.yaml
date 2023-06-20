@@ -1,0 +1,24 @@
+delete:
+  summary: Delete organisation for a client
+  description: Delete a single client organisation membership.
+  operationId: get-clients-clientId-organisations-organisationId
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Client Organisations
+  parameters:
+    - name: clientId
+      in: path
+      required: true
+      schema:
+        type: integer
+    - name: organisationId
+      in: path
+      required: true
+      schema:
+        type: integer
+  responses:
+    '204':
+      description: No Content
+

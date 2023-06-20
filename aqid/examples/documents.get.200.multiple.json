@@ -1,0 +1,31 @@
+{
+    "object": "paginated_list",
+    "data": [
+        {
+            "object": "document",
+            "id": 3342,
+            "name": "Non-disclosure agreement",
+            "description": "Generic non-disclosure agreement",
+            "is_enabled": true,
+            "attachment": 43375,
+            "created_at": "2022-08-17T13:56:05Z",
+            "updated_at": "2022-08-17T13:56:05Z"
+        },
+        {
+            "object": "document",
+            "id": 3561,
+            "name": "Rental application",
+            "description": "Rental and housing application form",
+            "is_enabled": false,
+            "attachment": 45418,
+            "created_at": "2022-09-02T11:53:34Z",
+            "updated_at": "2022-09-02T11:53:34Z"
+        }
+    ],
+    "total": 2,
+    "count": 2,
+    "limit": 100,
+    "current_page": 1,
+    "total_pages": 1,
+    "links": null
+}

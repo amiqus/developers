@@ -1,0 +1,9 @@
+title: User Assignee
+allOf:
+  - $ref: ./Assignee.yaml
+  - type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - user

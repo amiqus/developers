@@ -1,0 +1,13 @@
+title: Banking information
+allOf:
+  - $ref: ../Check.yaml
+  - type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - check.banking_information
+      provider:
+        x-internal: true
+        enum:
+          - TrueLayer

@@ -1,0 +1,25 @@
+title: List
+type: object
+properties:
+  object:
+    type: string
+    enum:
+      - list
+  data:
+    type: array
+  total:
+    type: integer
+    minimum: 0
+  count:
+    type: integer
+    minimum: 0
+  limit:
+    type: integer
+    maximum: 100
+    minimum: 1
+  has_more:
+    type: boolean
+  url:
+    type:
+      - string
+      - "null"

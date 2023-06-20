@@ -1,0 +1,26 @@
+delete:
+  summary: Delete an assignee for a client
+  description: Remove a single assignee from a client.
+  operationId: delete-clients-clientId-assignees-assigneeId
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Client Assignees
+  parameters:
+    - name: clientId
+      in: path
+      required: true
+      schema:
+        type: integer
+    - name: assigneeId
+      in: path
+      required: true
+      schema:
+        type: integer
+  requestBody:
+    content:
+      application/json: {}
+  responses:
+    '204':
+      description: No Content

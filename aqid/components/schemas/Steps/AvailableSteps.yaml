@@ -1,0 +1,74 @@
+title: Available Steps
+anyOf:
+  - title: Credit report
+    anyOf:
+      - allOf:
+        - $ref: ./AvailableStep.yaml
+        - $ref: ./Checks/CallcreditCallReport.yaml
+        - $ref: ./Costs.yaml
+      - allOf:
+        - $ref: ./AvailableStep.yaml
+        - $ref: ./Checks/EquifaxCredit.yaml
+        - $ref: ./Costs.yaml
+  - allOf:
+    - $ref: ./AvailableStep.yaml
+    - $ref: ./Checks/CriminalRecord.yaml
+    - $ref: ./Costs.yaml
+  - allOf:
+      - $ref: ./AvailableStep.yaml
+      - $ref: ./Checks/Dummy.yaml
+      - $ref: ./Costs.yaml
+  - allOf:
+    - $ref: ./AvailableStep.yaml
+    - $ref: ./Checks/Thorntons.yaml
+    - $ref: ./Costs.yaml
+  - allOf:
+    - $ref: ./AvailableStep.yaml
+    - $ref: ./Checks/HscniAccessNi.yaml
+    - $ref: ./Costs.yaml
+  - title: Identity report
+    anyOf:
+      - allOf:
+        - $ref: ./AvailableStep.yaml
+        - $ref: ./Checks/CallcreditCallValidate.yaml
+        - $ref: ./Costs.yaml
+      - allOf:
+        - $ref: ./AvailableStep.yaml
+        - $ref: ./Checks/EquifaxIdentity.yaml
+        - $ref: ./Costs.yaml
+  - allOf:
+    - $ref: ./AvailableStep.yaml
+    - $ref: ./Checks/NhsEsr.yaml
+    - $ref: ./Costs.yaml
+  - allOf:
+    - $ref: ./AvailableStep.yaml
+    - $ref: ./Checks/Onfido.yaml
+    - $ref: ./Costs.yaml
+  - allOf:
+    - $ref: ./AvailableStep.yaml
+    - $ref: ./Checks/Reference.yaml
+    - $ref: ./Costs.yaml
+  - allOf:
+    - $ref: ./AvailableStep.yaml
+    - $ref: ./Checks/TrueLayer.yaml
+    - $ref: ./Costs.yaml
+  - allOf:
+    - $ref: ./AvailableStep.yaml
+    - $ref: ./Checks/Video.yaml
+    - $ref: ./Costs.yaml
+  - allOf:
+    - $ref: ./AvailableStep.yaml
+    - $ref: ./Checks/Watchlist.yaml
+    - $ref: ./Costs.yaml
+  - allOf:
+    - $ref: ./AvailableStep.yaml
+    - $ref: ./Documents/Request.yaml
+    - $ref: ./Costs.yaml
+  - allOf:
+    - $ref: ./AvailableStep.yaml
+    - $ref: ./Documents/Transfer.yaml
+    - $ref: ./Costs.yaml
+  - allOf:
+    - $ref: ./AvailableStep.yaml
+    - $ref: ./Forms/Form.yaml
+    - $ref: ./Costs.yaml

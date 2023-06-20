@@ -1,0 +1,5 @@
+type: object
+properties:
+  error:
+    type: string
+    description: Description of the error

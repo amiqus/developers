@@ -1,0 +1,53 @@
+title: Name
+type: object
+additionalProperties: false
+properties:
+  object:
+    type: string
+    readOnly: true
+    enum:
+      - name
+  title:
+    type:
+      - "null"
+      - string
+    enum:
+      - miss
+      - ms
+      - mrs
+      - mr
+      - dr
+      - sir
+      - master
+      - mx
+      - dame
+      - lord
+      - lady
+      - prof
+      - other
+  other_title:
+    type:
+      - "null"
+      - string
+    description: |
+      Required if `title: "other"`
+  first_name:
+    type: string
+  middle_name:
+    type:
+      - "null"
+      - string
+  last_name:
+    type: string
+  name:
+    type: string
+    description: First and Last name.
+    readOnly: true
+  full_name:
+    type: string
+    description: First, Middle and Last names.
+    readOnly: true
+  complete_name:
+    type: string
+    description: Title and Full name.
+    readOnly: true

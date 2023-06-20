@@ -1,0 +1,87 @@
+{
+    "name": "Property requirements",
+    "description": null,
+    "fields": [
+        {
+            "id": "2",
+            "type": "section",
+            "label": "",
+            "fields": [
+                "3",
+                "7",
+                "12"
+            ]
+        },
+        {
+            "id": "3",
+            "type": "section",
+            "label": "Current property",
+            "fields": [
+                "4",
+                "8"
+            ]
+        },
+        {
+            "id": "4",
+            "type": "radio",
+            "validation": [
+                "required"
+            ],
+            "label": {
+                "value": "Ownership",
+                "options": [
+                    "Rented",
+                    "Home-owner (outright)",
+                    "Home-owner (mortgaged)",
+                    "Other"
+                ]
+            }
+        },
+        {
+            "id": "7",
+            "type": "section",
+            "label": "Requirements",
+            "fields": [
+                "11",
+                "10"
+            ]
+        },
+        {
+            "id": "8",
+            "type": "text",
+            "label": "Duration",
+            "description": "The number of months you've been a resident at your current property.",
+            "validation": [
+                "required"
+            ]
+        },
+        {
+            "id": "10",
+            "type": "text",
+            "label": "Bedrooms",
+            "description": "Enter the minimum number of bedrooms required.",
+            "validation": [
+                "required"
+            ]
+        },
+        {
+            "id": "11",
+            "type": "checkbox",
+            "label": {
+                "value": "Requirements",
+                "options": [
+                    "Garden",
+                    "Driveway",
+                    "New Home"
+                ]
+            },
+            "description": "Tick any specific requirements."
+        },
+        {
+            "id": "12",
+            "type": "textarea",
+            "label": "Notes",
+            "description": "Provide any additional details that might be useful."
+        }
+    ]
+}

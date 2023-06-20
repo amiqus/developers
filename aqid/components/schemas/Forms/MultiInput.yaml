@@ -1,0 +1,14 @@
+allOf:
+  - $ref: ./Field.yaml
+  - type: object
+    required:
+      - label
+    properties:
+      label:
+        type: object
+      description:
+        type:
+          - "null"
+          - string
+  - $ref: ./Validation.yaml
+  - $ref: ./Dynamic.yaml

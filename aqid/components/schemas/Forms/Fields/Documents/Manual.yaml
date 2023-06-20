@@ -1,0 +1,14 @@
+title: Manual
+type: object
+required:
+  - label
+  - description
+properties:
+  type:
+    type: string
+    enum:
+      - document
+  label:
+    type: string
+  description:
+    type: string

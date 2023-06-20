@@ -1,0 +1,15 @@
+{
+    "object": "validated_steps",
+    "steps": [
+        {
+            "object": "validated_step",
+            "type": "check.identity",
+            "cost": 2
+        },
+        {
+            "object": "validated_step",
+            "type": "check.photo_id",
+            "cost": 2
+        }
+    ]
+}

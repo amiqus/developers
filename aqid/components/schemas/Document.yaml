@@ -1,0 +1,34 @@
+title: Document
+type: object
+additionalProperties: false
+properties:
+  object:
+    type: string
+    readOnly: true
+    enum:
+      - document
+  id:
+    type: integer
+    readOnly: true
+  name:
+    type: string
+  description:
+    type:
+      - "null"
+      - string
+  is_enabled:
+    type: boolean
+  attachment:
+    readOnly: true
+    x-expandable: true
+    oneOf:
+      - $ref: ./Attachment.yaml
+      - type: integer
+  created_at:
+    type: string
+    format: date-time
+    readOnly: true
+  updated_at:
+    type: string
+    format: date-time
+    readOnly: true

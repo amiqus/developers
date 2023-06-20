@@ -1,0 +1,47 @@
+{
+    "object": "paginated_list",
+    "data": [
+        {
+            "object": "webhook_delivery",
+            "id": 4532,
+            "uuid": "095be615-a8ad-4c33-8e9c-c7612fbf6c9f",
+            "event": "ping",
+            "attempts": 1,
+            "request": {
+                "url": "https://example.org/incoming/webhooks/amiqus",
+                "method": "POST",
+                "headers": {
+                    "Content-Length": "1234",
+                    "Host": "example.org",
+                    "User-Agent": "Amiqus AmiqusID/8927532",
+                    "Content-Type": "application/json",
+                    "X-AQID-Signature": "I4BqQLTTfg1i24UFa9o9wS+qf+lo9BVeuBlO6tS5Y20=",
+                    "X-AQID-Delivery-Id": "d7583a16-ad9e-4ec8-a53f-ffc67fd2445c"
+                },
+                "body": {
+                    "uuid": "095be615-a8ad-4c33-8e9c-c7612fbf6c9f",
+                    "event": "ping",
+                    "sent_at": "2019-08-24T14:15:22Z",
+                    "data": [
+                        "ping"
+                    ]
+                }
+            },
+            "response": {
+                "status_code": "204",
+                "headers": {
+                    "Cache-Control": "no-cache, private",
+                    "Date": "Mon, 22 Aug 2022 16:20:33 GMT"
+                },
+                "body": {}
+            },
+            "last_sent_at": "2019-08-24T14:15:22Z"
+        }
+    ],
+    "total": 1,
+    "count": 1,
+    "limit": 100,
+    "current_page": 1,
+    "total_pages": 1,
+    "links": null
+}

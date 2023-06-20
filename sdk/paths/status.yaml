@@ -1,0 +1,36 @@
+get:
+  summary: SDK token status
+  description: Check validity of the SDK token and retrieve details of the scoped Record.
+  operationId: get-status
+  security:
+    - sdk_token: []
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RecordStatus.yaml
+          example:
+            $ref: ../examples/status.get.200.json
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                default: Unauthenticated
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    '503':
+      description: Service Unavailable

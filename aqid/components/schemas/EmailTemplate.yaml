@@ -1,0 +1,28 @@
+title: Email Template
+type: object
+additionalProperties: false
+properties:
+  object:
+    type: string
+    readOnly: true
+    enum:
+      - email_template
+  id:
+    type: integer
+    readOnly: true
+  name:
+    type: string
+  description:
+    type: string
+  content:
+    type: string
+  is_enabled:
+    type: boolean
+  created_at:
+    type: string
+    format: date-time
+    readOnly: true
+  updated_at:
+    type: string
+    format: date-time
+    readOnly: true

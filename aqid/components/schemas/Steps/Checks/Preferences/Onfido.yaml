@@ -1,0 +1,85 @@
+type: object
+required:
+  - preferences
+properties:
+  preferences:
+    oneOf:
+      - title: Document verification
+        type: object
+        required:
+          - report_type
+          - docs
+        properties:
+          report_type:
+            type: string
+            enum:
+              - standard
+          face:
+            type: boolean
+            x-Deprecated: true
+            readOnly: true
+            default: false
+            description: Request a photograph of this person to compare against their ID document.
+          liveness:
+            type: boolean
+            x-Deprecated: true
+            readOnly: true
+            default: false
+            description: Ask this person to present a unique code when taking their photograph to help verify they are the one carrying out the check.
+          facial_similarity:
+            type: boolean
+            default: false
+            description: |
+              Biometric analysis to verify document ownership, compared against a photo or motion video of the person performing the request.
+
+              **Costs +1 Additional credit**
+          live_document:
+            type: boolean
+            default: false
+            description: |
+              Ask this person to take a photo of their document with a smartphone or tablet device.
+
+              _This feature may not be enabled for all teams._
+          docs:
+            type: array
+            minItems: 1
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - passport
+                - driving_licence
+                - national_id
+          issuing_countries:
+            description: Accept documents issued by only these countries.
+            oneOf:
+              - type: array
+                minItems: 1
+                uniqueItems: true
+                items:
+                  type: string
+                  enum:
+                    - GBR
+                    - IRL
+              - type: "null"
+      - title: Biometric
+        type: object
+        required:
+          - report_type
+        properties:
+          report_type:
+            type: string
+            enum:
+              - biometric
+          issuing_countries:
+            description: Accept documents issued by only these countries.
+            oneOf:
+              - type: array
+                minItems: 1
+                uniqueItems: true
+                items:
+                  type: string
+                  enum:
+                    - GBR
+                    - IRL
+              - type: "null"

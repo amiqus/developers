@@ -1,0 +1,55 @@
+title: Client
+type: object
+additionalProperties: false
+properties:
+  object:
+    type: string
+    readOnly: true
+    enum:
+      - client
+  id:
+    type: integer
+    readOnly: true
+  status:
+    type:
+      - "null"
+      - string
+  name:
+    $ref: ./Name.yaml
+  email:
+    type: string
+    format: email
+  landline:
+    type:
+      - "null"
+      - string
+  mobile:
+    type:
+      - "null"
+      - string
+  dob:
+    type:
+      - "null"
+      - string
+    format: date
+  reference:
+    type:
+      - "null"
+      - string
+  is_deletable:
+    type: boolean
+    readOnly: true
+  created_at:
+    type: string
+    format: date-time
+    readOnly: true
+  updated_at:
+    type: string
+    format: date-time
+    readOnly: true
+  archived_at:
+    type:
+      - "null"
+      - string
+    format: date-time
+    readOnly: true

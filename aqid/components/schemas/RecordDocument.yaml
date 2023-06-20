@@ -1,0 +1,90 @@
+title: RecordDocument
+type: object
+additionalProperties: false
+properties:
+  object:
+    type: string
+    readOnly: true
+    enum:
+      - record_document
+  id:
+    type: integer
+    readOnly: true
+  type:
+    type: string
+    enum:
+      - requested
+      - sent
+      - returned
+  name:
+    type:
+      - string
+      - "null"
+  status:
+    type: string
+    enum:
+      - pending
+      - complete
+  config:
+    anyOf:
+      - type: "null"
+      - type: object
+        title: Document Request
+        required:
+          - instructions
+        properties:
+          instructions:
+            type: string
+      - type: object
+        title: Document Transfer
+        properties:
+          require_return:
+            type: boolean
+            default: false
+          require_confirmation:
+            type: boolean
+            default: false
+          instructions:
+            type:
+              - string
+              - "null"
+          return_message:
+            type:
+              - string
+              - "null"
+            description: |
+              Required if `require_return: true`
+  source:
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - record
+          - record_document
+      id:
+        type: integer
+  attachments:
+    readOnly: true
+    x-expandable: true
+    oneOf:
+      - type: "null"
+      - type: array
+        items:
+          oneOf:
+            - $ref: ./Attachment.yaml
+            - type: integer
+  created_at:
+    type: string
+    format: date-time
+    readOnly: true
+  updated_at:
+    type: string
+    format: date-time
+    readOnly: true
+  completed_at:
+    type:
+      - "null"
+      - string
+    format: date-time
+    readOnly: true

@@ -1,0 +1,118 @@
+parameters:
+- $ref: ../components/parameters/resourceId.yaml
+get:
+  summary: List all organisations for a client
+  description: Returns a paginated list of a client's organisation memberships.
+  operationId: get-clients-id-organisations
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Client Organisations
+  parameters:
+    - name: page
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+    - name: limit
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            allOf:
+                - $ref: ../components/schemas/PaginatedList.yaml
+                - type: object
+                  properties:
+                    data:
+                      items:
+                        $ref: ../components/schemas/Organisation.yaml
+          example:
+            $ref: ../examples/clients.id.organisations.get.200.json
+patch:
+  summary: Update organisations for a client
+  description: Update a client's organisation memberships.
+  operationId: patch-clients-id-organisations
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Client Organisations
+  requestBody:
+    content:
+      application/json:
+        schema:
+          minItems: 1
+          type: array
+          items:
+            type: integer
+        example:
+          $ref: ../examples/clients.id.organisations.patch.json
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../components/schemas/PaginatedList.yaml
+              - type: object
+                properties:
+                  data:
+                    items:
+                      $ref: ../components/schemas/Organisation.yaml
+          example:
+            $ref: ../examples/clients.id.organisations.patch.200.json
+put:
+  summary: Replace organisations for a client
+  description: Replaces a client's organisation memberships.
+  operationId: put-clients-id-organisations
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Client Organisations
+  requestBody:
+    content:
+      application/json:
+        schema:
+          minItems: 1
+          type: array
+          items:
+            type: integer
+        example:
+          $ref: ../examples/clients.id.organisations.put.json
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../components/schemas/PaginatedList.yaml
+              - type: object
+                properties:
+                  data:
+                    items:
+                      $ref: ../components/schemas/Organisation.yaml
+          example:
+            $ref: ../examples/clients.id.organisations.put.200.json
+delete:
+  summary: Delete organisations for a client
+  description: Delete all of a client's organisation memberships.
+  operationId: delete-clients-id-organisations
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Client Organisations
+  responses:
+    '204':
+      description: No Content

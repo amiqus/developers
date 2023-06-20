@@ -1,0 +1,62 @@
+{
+    "object": "client_form",
+    "id": 37523,
+    "reference": "4fdb5ab5-f83e-4b52-926b-340e880bb030",
+    "type": "internal",
+    "client": 73212,
+    "record": null,
+    "name": "Onboarding checklist",
+    "description": "Checklist for all new employees.",
+    "instructions": null,
+    "fields": [
+        {
+            "id": "1",
+            "type": "section",
+            "label": "",
+            "fields": [
+                "2",
+                "3"
+            ]
+        },
+        {
+            "id": "2",
+            "type": "radio",
+            "label": {
+                "value": "Location",
+                "options": [
+                    "Office",
+                    "Remote",
+                    "Hybrid"
+                ]
+            },
+            "validation": [
+                "required"
+            ],
+            "flag": false,
+            "value": "Remote"
+        },
+        {
+            "id": "3",
+            "type": "radio",
+            "label": {
+                "value": "Department",
+                "options": [
+                    "Sales",
+                    "Marketing",
+                    "Legal",
+                    "Admin"
+                ]
+            },
+            "validation": [
+                "required"
+            ],
+            "flag": false,
+            "value": "Admin"
+        }
+    ],
+    "version": 2,
+    "created_at": "2022-11-02T15:55:38Z",
+    "updated_at": "2022-11-05T20:02:06Z",
+    "completed_at": null,
+    "archived_at": null
+}

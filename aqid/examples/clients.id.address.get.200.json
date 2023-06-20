@@ -1,0 +1,13 @@
+{
+    "object": "address",
+    "unit": "3rd Floor",
+    "house_name": "Citypoint",
+    "house_number": "65",
+    "street_name": "Haymarket Terrace",
+    "second_street": null,
+    "district": null,
+    "city": "Edinburgh",
+    "province": null,
+    "postcode": "EH12 5HD",
+    "country": "GB"
+}

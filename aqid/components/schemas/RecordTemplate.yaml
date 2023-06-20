@@ -1,0 +1,43 @@
+title: Record Template
+type: object
+additionalProperties: false
+required:
+  - name
+  - description
+  - presets
+properties:
+  object:
+    type: string
+    readOnly: true
+    enum:
+      - record_template
+  id:
+    type: integer
+    readOnly: true
+  name:
+    type: string
+    maxLength: 255
+  description:
+    type: string
+  presets:
+    title: Record Template Presets
+    type: object
+    allOf:
+      - $ref: ./RecordSettings.yaml
+      - properties:
+          assignees:
+            type: array
+            description: IDs of team members assigned to the Record.
+            items:
+              type: integer
+  is_enabled:
+    type: boolean
+    default: false
+  created_at:
+    type: string
+    format: date-time
+    readOnly: true
+  updated_at:
+    type: string
+    format: date-time
+    readOnly: true

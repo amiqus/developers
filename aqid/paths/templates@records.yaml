@@ -1,0 +1,40 @@
+get:
+  summary: List all record templates
+  description: List all record templates.
+  operationId: get-templates-records
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Templates
+  parameters:
+    - name: page
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+    - name: limit
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+    - name: enabled
+      in: query
+      schema:
+        type: boolean
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            allOf:
+                - $ref: ../components/schemas/PaginatedList.yaml
+                - type: object
+                  properties:
+                    data:
+                      items:
+                        $ref: ../components/schemas/RecordTemplate.yaml
+          example:
+            $ref: ../examples/templates.records.get.200.json

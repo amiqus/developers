@@ -1,0 +1,15 @@
+openapi: 3.1.0
+info:
+  title: Guides
+  description: The Amiqus ID API.
+  contact:
+    email: engineering@amiqus.co
+    name: Amiqus Engineering
+    url: 'https://developers.amiqus.co/guide/'
+tags:
+  - name: Getting Started
+    description:
+      $ref: client.md
+  - name: OAuth 2.0 flow
+    description:
+      $ref: oauth.md

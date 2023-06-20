@@ -1,0 +1,7 @@
+description: Unauthorized
+content:
+  application/json:
+    schema:
+      $ref: ../Error.yaml
+    example:
+      $ref: ../../../examples/errors.401.json

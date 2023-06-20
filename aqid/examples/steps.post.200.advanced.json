@@ -1,0 +1,35 @@
+{
+    "object": "validated_steps",
+    "steps": [
+        {
+            "object": "validated_step",
+            "type": "check.photo_id",
+            "cost": 2
+        },
+        {
+            "object": "validated_step",
+            "type": "document.request",
+            "cost": 0
+        },
+        {
+            "object": "validated_step",
+            "type": "document.transfer",
+            "cost": 0
+        },
+        {
+            "object": "validated_step",
+            "type": "document.transfer",
+            "cost": 0
+        },
+        {
+            "object": "validated_step",
+            "type": "form",
+            "cost": 0
+        },
+        {
+            "object": "validated_step",
+            "type": "form",
+            "cost": 0
+        }
+    ]
+}

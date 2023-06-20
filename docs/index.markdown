@@ -1,9 +1,0 @@
----
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-
-layout: home
----
-
-- [Amiqus API Reference]({{ 'api' | relative_url }}) ([Changelog]({{ 'api-changelog' | relative_url }}))
-- [Amiqus SDK API Reference]({{ 'sdk' | relative_url }})

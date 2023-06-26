@@ -32,6 +32,16 @@ get:
             - check
             - form
             - document
+      examples:
+        one:
+          value:
+            - check
+          summary: Expand one step type
+        multiple:
+          value:
+            - check
+            - form
+          summary: Expand multiple step types
   responses:
     '200':
       description: OK

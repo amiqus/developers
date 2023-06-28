@@ -3228,20 +3228,51 @@
           "content": {
             "application/json": {
               "schema": {
-                "allOf": [
+                "oneOf": [
                   {
-                    "type": "object",
-                    "properties": {
-                      "client": {
-                        "type": "integer"
+                    "title": "Manual",
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "required": [
+                          "client"
+                        ],
+                        "properties": {
+                          "client": {
+                            "type": "integer"
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/RecordSettings"
                       }
-                    },
-                    "required": [
-                      "client"
                     ]
                   },
                   {
-                    "$ref": "#/components/schemas/RecordSettings"
+                    "title": "Template",
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "required": [
+                          "client",
+                          "template"
+                        ],
+                        "properties": {
+                          "client": {
+                            "type": "integer"
+                          },
+                          "template": {
+                            "type": "integer",
+                            "description": "Create a record using an existing [record template ID](#tag/Templates/operation/get-templates-records).\n"
+                          },
+                          "assignees": {
+                            "type": "boolean",
+                            "default": true,
+                            "description": "Automatically assign team members defined in the record template to the new record."
+                          }
+                        }
+                      }
+                    ]
                   }
                 ]
               },
@@ -3302,6 +3333,14 @@
                     "notification": "email",
                     "message": "Please complete the following request to begin onboarding with Fusion Industries.",
                     "reminder": true
+                  }
+                },
+                "template": {
+                  "summary": "Template",
+                  "description": "Use an existing record template",
+                  "value": {
+                    "client": 34853,
+                    "template": 43723
                   }
                 }
               }

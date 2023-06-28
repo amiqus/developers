@@ -54,14 +54,33 @@ post:
     content:
       application/json:
         schema:
-          allOf:
-            - type: object
-              properties:
-                client:
-                  type: integer
-              required:
-                - client
-            - $ref:  ../components/schemas/RecordSettings.yaml
+          oneOf:
+            - title: Manual
+              allOf:
+                - type: object
+                  required:
+                    - client
+                  properties:
+                    client:
+                      type: integer
+                - $ref:  ../components/schemas/RecordSettings.yaml
+            - title: Template
+              allOf:
+                - type: object
+                  required:
+                    - client
+                    - template
+                  properties:
+                    client:
+                      type: integer
+                    template:
+                      type: integer
+                      description: |
+                        Create a record using an existing [record template ID](#tag/Templates/operation/get-templates-records).
+                    assignees:
+                      type: boolean
+                      default: true
+                      description: Automatically assign team members defined in the record template to the new record.
         examples:
           simple:
             summary: Single step
@@ -73,3 +92,8 @@ post:
             description: A request with a multiple steps including checks and documents
             value:
               $ref: ../examples/records.post.advanced.json
+          template:
+            summary: Template
+            description: Use an existing record template
+            value:
+              $ref: ../examples/records.post.template.json

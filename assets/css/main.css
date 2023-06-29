@@ -76,6 +76,7 @@ body {
 }
 #main-container {
     position:relative;
+    min-height: 100%;
 }
 
 .logo {
@@ -158,6 +159,13 @@ body {
     border-radius: 5px;
 }
 
+@media (max-width: 768px) {
+
+    #back-to-top {
+        bottom: 64px;
+  }
+}
+
 .guide-container > #redoc > .redoc-wrap > .api-content > div:first-child {
     display:none;
 }
@@ -168,4 +176,12 @@ h1, h2, h3, h4 {
     /*font-size: 1.85714em;*/
     line-height: 1.6em;
     color: #333333;
+}
+
+footer {
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    padding: 10px 5px;
+    margin-top: 67px;
 }

@@ -16,7 +16,6 @@ properties:
     maximum: 255
     description: |
       Organisation or company name
-    
       The value is not formatted (e.g. title case), and appears as written.
   company_number:
     type:
@@ -168,7 +167,7 @@ properties:
       - us_wv
       - us_wi
       - us_wy
-    description: The country code or region where the company is registered
+    description: The country code or region where the company is registered. Required if `company_number` is provided.
   created_at:
     type: string
     format: date-time

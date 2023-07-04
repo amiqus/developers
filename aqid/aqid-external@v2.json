@@ -7425,7 +7425,7 @@
           "name": {
             "type": "string",
             "maximum": 255,
-            "description": "Organisation or company name\n\nThe value is not formatted (e.g. title case), and appears as written.\n"
+            "description": "Organisation or company name\nThe value is not formatted (e.g. title case), and appears as written.\n"
           },
           "company_number": {
             "type": [
@@ -7581,7 +7581,7 @@
               "us_wi",
               "us_wy"
             ],
-            "description": "The country code or region where the company is registered"
+            "description": "The country code or region where the company is registered. Required if `company_number` is provided."
           },
           "created_at": {
             "type": "string",

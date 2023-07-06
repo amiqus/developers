@@ -1582,12 +1582,13 @@
     "/clients/{id}/organisations": {
       "parameters": [
         {
-          "$ref": "#/components/parameters/resourceId"
+          "$ref": "#/components/parameters/resourceId",
+          "description": "Unique client identifier"
         }
       ],
       "get": {
         "summary": "List all organisations for a client",
-        "description": "Returns a paginated list of a client's organisation memberships.",
+        "description": "Returns a paginated list of a client's organisation memberships.\n\nTo retrieve organisations for the team, refer to **[List all organisations](#tag/Organisations/operation/get-organisations)**.\n",
         "operationId": "get-clients-id-organisations",
         "security": [
           {
@@ -1663,12 +1664,31 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Client not found"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
       "patch": {
         "summary": "Update organisations for a client",
-        "description": "Update a client's organisation memberships.",
+        "description": "Add the client to one or more organisations, merging them with existing organisation memberships.\n\nTo update an organisation's basic details, refer to **[Update an organisation](#tag/Organisations/operation/patch-organisations-id)**.\n",
         "operationId": "patch-clients-id-organisations",
         "security": [
           {
@@ -1688,7 +1708,8 @@
                 "minItems": 1,
                 "type": "array",
                 "items": {
-                  "type": "integer"
+                  "type": "integer",
+                  "description": "Unique organisation identifier"
                 }
               },
               "example": [
@@ -1750,6 +1771,22 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Client not found"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -1775,7 +1812,8 @@
                 "minItems": 1,
                 "type": "array",
                 "items": {
-                  "type": "integer"
+                  "type": "integer",
+                  "description": "Unique organisation identifier"
                 }
               },
               "example": [
@@ -1838,6 +1876,25 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Client not found"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -1859,6 +1916,25 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Client not found"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -1882,6 +1958,7 @@
         "parameters": [
           {
             "name": "clientId",
+            "description": "Unique client identifier",
             "in": "path",
             "required": true,
             "schema": {
@@ -1890,6 +1967,7 @@
           },
           {
             "name": "organisationId",
+            "description": "Unique organisation identifier",
             "in": "path",
             "required": true,
             "schema": {
@@ -1900,6 +1978,28 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "Client not found",
+                        "Organisation not found"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }

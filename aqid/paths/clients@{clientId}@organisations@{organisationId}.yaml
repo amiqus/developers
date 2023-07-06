@@ -9,11 +9,13 @@ delete:
     - Client Organisations
   parameters:
     - name: clientId
+      description: Unique client identifier
       in: path
       required: true
       schema:
         type: integer
     - name: organisationId
+      description: Unique organisation identifier
       in: path
       required: true
       schema:
@@ -21,4 +23,18 @@ delete:
   responses:
     '204':
       description: No Content
+    '401':
+      $ref: ../components/schemas/Errors/401.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                enum:
+                  - Client not found
+                  - Organisation not found
 

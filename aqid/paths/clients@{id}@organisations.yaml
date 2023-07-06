@@ -1,8 +1,12 @@
 parameters:
 - $ref: ../components/parameters/resourceId.yaml
+  description: Unique client identifier
 get:
   summary: List all organisations for a client
-  description: Returns a paginated list of a client's organisation memberships.
+  description: |
+    Returns a paginated list of a client's organisation memberships.
+
+    To retrieve organisations for the team, refer to **[List all organisations](#tag/Organisations/operation/get-organisations)**.
   operationId: get-clients-id-organisations
   security:
     - personal_token: []
@@ -36,9 +40,24 @@ get:
                         $ref: ../components/schemas/Organisation.yaml
           example:
             $ref: ../examples/clients.id.organisations.get.200.json
+    '401':
+        $ref: ../components/schemas/Errors/401.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                default: Client not found
 patch:
   summary: Update organisations for a client
-  description: Update a client's organisation memberships.
+  description: |
+    Add the client to one or more organisations, merging them with existing organisation memberships.
+
+    To update an organisation's basic details, refer to **[Update an organisation](#tag/Organisations/operation/patch-organisations-id)**.
   operationId: patch-clients-id-organisations
   security:
     - personal_token: []
@@ -53,6 +72,7 @@ patch:
           type: array
           items:
             type: integer
+            description: Unique organisation identifier
         example:
           $ref: ../examples/clients.id.organisations.patch.json
   responses:
@@ -70,6 +90,16 @@ patch:
                       $ref: ../components/schemas/Organisation.yaml
           example:
             $ref: ../examples/clients.id.organisations.patch.200.json
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                default: Client not found
 put:
   summary: Replace organisations for a client
   description: Replaces a client's organisation memberships.
@@ -87,6 +117,7 @@ put:
           type: array
           items:
             type: integer
+            description: Unique organisation identifier
         example:
           $ref: ../examples/clients.id.organisations.put.json
   responses:
@@ -104,6 +135,18 @@ put:
                       $ref: ../components/schemas/Organisation.yaml
           example:
             $ref: ../examples/clients.id.organisations.put.200.json
+    '401':
+      $ref: ../components/schemas/Errors/401.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                default: Client not found
 delete:
   summary: Delete organisations for a client
   description: Delete all of a client's organisation memberships.
@@ -116,3 +159,15 @@ delete:
   responses:
     '204':
       description: No Content
+    '401':
+      $ref: ../components/schemas/Errors/401.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                default: Client not found

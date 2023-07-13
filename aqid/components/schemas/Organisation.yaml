@@ -167,7 +167,10 @@ properties:
       - us_wv
       - us_wi
       - us_wy
-    description: The country code or region where the company is registered. Required if `company_number` is provided.
+    description: |
+      The country code or region where the company is registered.
+
+      Required if `company_number` is provided.
   created_at:
     type: string
     format: date-time

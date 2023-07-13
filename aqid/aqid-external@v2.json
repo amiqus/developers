@@ -7681,7 +7681,7 @@
               "us_wi",
               "us_wy"
             ],
-            "description": "The country code or region where the company is registered. Required if `company_number` is provided."
+            "description": "The country code or region where the company is registered.\n\nRequired if `company_number` is provided.\n"
           },
           "created_at": {
             "type": "string",

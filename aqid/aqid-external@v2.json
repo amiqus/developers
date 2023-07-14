@@ -3141,6 +3141,23 @@
         ],
         "parameters": [
           {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          {
             "name": "expand",
             "in": "query",
             "explode": false,
@@ -3152,6 +3169,30 @@
                   "client"
                 ]
               }
+            }
+          },
+          {
+            "name": "status",
+            "description": "Filter records by their current status",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/RecordStatus"
+            }
+          },
+          {
+            "name": "creator",
+            "description": "Filter records created by team member user ID",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "assignee",
+            "description": "Filter records assigned to team member user ID",
+            "in": "query",
+            "schema": {
+              "type": "integer"
             }
           }
         ],

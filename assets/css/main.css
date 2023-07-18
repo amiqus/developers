@@ -159,10 +159,10 @@ body {
     border-radius: 5px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 800px) {
 
     #back-to-top {
-        bottom: 64px;
+        bottom: 110px;
   }
 }
 

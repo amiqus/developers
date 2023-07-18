@@ -13,6 +13,9 @@ tags:
   - name: OAuth 2.0 flow
     description:
       $ref: oauth.md
+  - name: Concepts
+    description:
+      $ref: concepts.md
   - name: Webhooks
     description:
       $ref: webhooks.md

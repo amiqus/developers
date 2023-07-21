@@ -28,3 +28,33 @@ get:
             $ref: ../components/schemas/Record.yaml
           example:
             $ref: ../examples/records.id.get.200.json
+patch:
+  summary: Update a record
+  description: Update a record
+  operationId: patch-records-id
+  security:
+    - personal_token: []
+    - oauth: []
+  tags:
+    - Records
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          minProperties: 1
+          properties:
+            is_archived:
+              type: boolean
+        example:
+          $ref: ../examples/records.id.patch.json
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Record.yaml
+          example:
+            $ref: ../examples/records.id.patch.200.json

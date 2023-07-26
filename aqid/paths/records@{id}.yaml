@@ -30,7 +30,10 @@ get:
             $ref: ../examples/records.id.get.200.json
 patch:
   summary: Update a record
-  description: Update a record
+  description:  |
+    Update the details of a record.
+
+    To mark a record as expired, refer to **[Expire a record](#tag/Records/operation/post-records-id-expire)**.
   operationId: patch-records-id
   security:
     - personal_token: []
@@ -47,6 +50,10 @@ patch:
           properties:
             is_archived:
               type: boolean
+              description: 'Allows toggling of archived state'
+            is_reviewed:
+              type: boolean
+              description: 'Allows toggling of reviewed state'
         example:
           $ref: ../examples/records.id.patch.json
   responses:
@@ -58,3 +65,17 @@ patch:
             $ref: ../components/schemas/Record.yaml
           example:
             $ref: ../examples/records.id.patch.200.json
+    '401':
+      $ref: ../components/schemas/Errors/401.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                default: Record not found
+    '422':
+      $ref: ../components/schemas/Errors/422.yaml

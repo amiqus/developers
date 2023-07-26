@@ -3594,7 +3594,7 @@
       },
       "patch": {
         "summary": "Update a record",
-        "description": "Update a record",
+        "description": "Update the details of a record.\n\nTo mark a record as expired, refer to **[Expire a record](#tag/Records/operation/post-records-id-expire)**.\n",
         "operationId": "patch-records-id",
         "security": [
           {
@@ -3616,7 +3616,12 @@
                 "minProperties": 1,
                 "properties": {
                   "is_archived": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Allows toggling of archived state"
+                  },
+                  "is_reviewed": {
+                    "type": "boolean",
+                    "description": "Allows toggling of reviewed state"
                   }
                 }
               },
@@ -3688,6 +3693,28 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Record not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
           }
         }
       }

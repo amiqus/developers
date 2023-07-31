@@ -12,6 +12,16 @@ properties:
     readOnly: true
   status:
     $ref: ./RecordStatus.yaml
+  perform_url:
+    description: The unique URL to complete the record steps in a browser.
+    oneOf:
+      - type: string
+        format: url
+      - type: boolean
+        enum:
+          - false
+        description: Value is `false` when none of the steps are available for submission due to completion, expiry or for any other reason.
+    readOnly: true
   email:
     type: string
     format: email

@@ -3313,6 +3313,7 @@
                   "object": "record",
                   "id": 983434,
                   "status": "pending",
+                  "perform_url": "https://id.amiqus.co/i/0vz32B9CZpO1yLsKPdy9q",
                   "email": "marty@example.com",
                   "steps": [
                     {
@@ -3539,6 +3540,7 @@
                   "object": "record",
                   "id": 983434,
                   "status": "pending",
+                  "perform_url": "https://id.amiqus.co/i/0vz32B9CZpO1yLsKPdy9q",
                   "email": "marty@example.com",
                   "steps": [
                     {
@@ -9550,6 +9552,23 @@
           },
           "status": {
             "$ref": "#/components/schemas/RecordStatus"
+          },
+          "perform_url": {
+            "description": "The unique URL to complete the record steps in a browser.",
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "url"
+              },
+              {
+                "type": "boolean",
+                "enum": [
+                  false
+                ],
+                "description": "Value is `false` when none of the steps are available for submission due to completion, expiry or for any other reason."
+              }
+            ],
+            "readOnly": true
           },
           "email": {
             "type": "string",

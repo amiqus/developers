@@ -5,7 +5,7 @@
     "version": "1.0",
     "description": "The Amiqus SDK API is used to undertake Amiqus requests on behalf of a data subject. All API requests require SDK Token authentication. SDK Tokens are generated using the Amiqus API, scoped to a single Record and are valid for 60 minutes.",
     "contact": {
-      "email": "engineering@amiqus.co",
+      "email": "developers@amiqus.co",
       "name": "Amiqus Engineering",
       "url": "https://developers.amiqus.co/sdk/sdk-api-reference.html"
     }

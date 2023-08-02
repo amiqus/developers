@@ -3729,7 +3729,7 @@
       ],
       "post": {
         "summary": "Archive a record",
-        "description": "Archive a record.",
+        "description": "Archive a record.\n\nThis operation is deprecated and will be removed in future versions. To archive a record, please refer to **[Update a record](#tag/Records/operation/patch-records-id)**.\n",
         "operationId": "post-records-id-archive",
         "security": [
           {
@@ -3742,6 +3742,7 @@
         "tags": [
           "Records"
         ],
+        "deprecated": true,
         "parameters": [
           {
             "name": "expand",
@@ -8134,7 +8135,7 @@
                     "description": "This check will cost 1 credit for eligible roles when responding to COVID-19.",
                     "type": "boolean",
                     "readOnly": true,
-                    "x-Deprecated": true
+                    "deprecated": true
                   },
                   "enable_payment": {
                     "title": "Pass on fee",
@@ -8167,7 +8168,7 @@
                     "description": "This check will cost 1 credit for eligible roles when responding to COVID-19.",
                     "type": "boolean",
                     "readOnly": true,
-                    "x-Deprecated": true
+                    "deprecated": true
                   },
                   "enable_payment": {
                     "title": "Pass on fee",
@@ -8509,14 +8510,14 @@
                   },
                   "face": {
                     "type": "boolean",
-                    "x-Deprecated": true,
+                    "deprecated": true,
                     "readOnly": true,
                     "default": false,
                     "description": "Request a photograph of this person to compare against their ID document."
                   },
                   "liveness": {
                     "type": "boolean",
-                    "x-Deprecated": true,
+                    "deprecated": true,
                     "readOnly": true,
                     "default": false,
                     "description": "Ask this person to present a unique code when taking their photograph to help verify they are the one carrying out the check."

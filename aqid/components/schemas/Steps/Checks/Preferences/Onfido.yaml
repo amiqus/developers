@@ -16,13 +16,13 @@ properties:
               - standard
           face:
             type: boolean
-            x-Deprecated: true
+            deprecated: true
             readOnly: true
             default: false
             description: Request a photograph of this person to compare against their ID document.
           liveness:
             type: boolean
-            x-Deprecated: true
+            deprecated: true
             readOnly: true
             default: false
             description: Ask this person to present a unique code when taking their photograph to help verify they are the one carrying out the check.

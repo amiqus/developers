@@ -52,7 +52,7 @@ properties:
             description: This check will cost 1 credit for eligible roles when responding to COVID-19.
             type: boolean
             readOnly: true
-            x-Deprecated: true
+            deprecated: true
           enable_payment:
             title: Pass on fee
             description: Require the person to pay for the processing of this check.
@@ -75,7 +75,7 @@ properties:
             description: This check will cost 1 credit for eligible roles when responding to COVID-19.
             type: boolean
             readOnly: true
-            x-Deprecated: true
+            deprecated: true
           enable_payment:
             title: Pass on fee
             description: Require the person to pay for the processing of this check.

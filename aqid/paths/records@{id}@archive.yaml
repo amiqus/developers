@@ -2,13 +2,17 @@ parameters:
   - $ref: ../components/parameters/resourceId.yaml
 post:
   summary: Archive a record
-  description: Archive a record.
+  description: |
+    Archive a record.
+
+    This operation is deprecated and will be removed in future versions. To archive a record, please refer to **[Update a record](#tag/Records/operation/patch-records-id)**.
   operationId: post-records-id-archive
   security:
     - personal_token: []
     - oauth: []
   tags:
     - Records
+  deprecated: true
   parameters:
     - name: expand
       in: query

@@ -1,6 +1,9 @@
 get:
   summary: List all clients
-  description: List all clients.
+  description: |
+    Returns a paginated list of clients.
+
+    To retrieve a client, refer to **[Retrieve a client](#tag/Clients/operation/get-clients-id)**.
   operationId: get-clients
   security:
     - personal_token: []
@@ -45,9 +48,11 @@ get:
                                       - rejected
           example:
             $ref: ../examples/clients.get.200.json
+    '401':
+      $ref: ../components/schemas/Errors/401.yaml
 post:
   summary: Create a client
-  description: Create a client.
+  description: Create a new client.
   operationId: post-clients
   security:
     - personal_token: []
@@ -100,3 +105,7 @@ post:
                           - rejected
           example:
             $ref: ../examples/clients.id.get.200.json
+    '401':
+      $ref: ../components/schemas/Errors/401.yaml
+    '422':
+      $ref: ../components/schemas/Errors/422.yaml

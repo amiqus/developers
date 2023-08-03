@@ -1,8 +1,9 @@
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
+    description: Unique client identifier
 get:
   summary: Retrieve a client
-  description: Retrieve a client.
+  description: Returns a single client.
   operationId: get-clients-id
   security:
     - personal_token: []
@@ -29,9 +30,24 @@ get:
                           - rejected
           example:
             $ref: ../examples/clients.id.get.200.json
+    '401':
+      $ref: ../components/schemas/Errors/401.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                default: Client not found
 patch:
   summary: Update a client
-  description: Update a client.
+  description:  |
+    Update the details of a client.
+
+    To add or update a client's address, refer to **[Replace an address for a client](#tag/Clients/operation/put-clients-id-address)**.
   operationId: patch-clients
   security:
     - personal_token: []
@@ -79,6 +95,20 @@ patch:
                           - rejected
           example:
             $ref: ../examples/clients.id.patch.200.json
+    '401':
+      $ref: ../components/schemas/Errors/401.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                default: Client not found
+    '422':
+      $ref: ../components/schemas/Errors/422.yaml
 delete:
   summary: Delete a client
   description: Delete a client. Can be performed by Admin or Member users only. Clients with requests attached can only be deleted by Admin users.

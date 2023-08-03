@@ -528,7 +528,7 @@
     "/clients": {
       "get": {
         "summary": "List all clients",
-        "description": "List all clients.",
+        "description": "Returns a paginated list of clients.\n\nTo retrieve a client, refer to **[Retrieve a client](#tag/Clients/operation/get-clients-id)**.\n",
         "operationId": "get-clients",
         "security": [
           {
@@ -694,12 +694,15 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
           }
         }
       },
       "post": {
         "summary": "Create a client",
-        "description": "Create a client.",
+        "description": "Create a new client.",
         "operationId": "post-clients",
         "security": [
           {
@@ -824,6 +827,12 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
           }
         }
       }
@@ -831,12 +840,13 @@
     "/clients/{id}": {
       "parameters": [
         {
-          "$ref": "#/components/parameters/resourceId"
+          "$ref": "#/components/parameters/resourceId",
+          "description": "Unique client identifier"
         }
       ],
       "get": {
         "summary": "Retrieve a client",
-        "description": "Retrieve a client.",
+        "description": "Returns a single client.",
         "operationId": "get-clients-id",
         "security": [
           {
@@ -908,12 +918,31 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Client not found"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
       "patch": {
         "summary": "Update a client",
-        "description": "Update a client.",
+        "description": "Update the details of a client.\n\nTo add or update a client's address, refer to **[Replace an address for a client](#tag/Clients/operation/put-clients-id-address)**.\n",
         "operationId": "patch-clients",
         "security": [
           {
@@ -1021,6 +1050,28 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Client not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
           }
         }
       },
@@ -7216,59 +7267,70 @@
           },
           "id": {
             "type": "integer",
-            "readOnly": true
+            "readOnly": true,
+            "description": "Unique client identifier."
           },
           "status": {
             "type": [
               "null",
               "string"
-            ]
+            ],
+            "description": "A status can be set to signify a decision has been made by a team member on the outcome of the client's checks."
           },
           "name": {
-            "$ref": "#/components/schemas/Name"
+            "$ref": "#/components/schemas/Name",
+            "description": "The client's names.\n\nIncludes automatic compilations of the client's full name for display purposes.\n"
           },
           "email": {
             "type": "string",
-            "format": "email"
+            "format": "email",
+            "description": "Client's contact email address."
           },
           "landline": {
             "type": [
               "null",
               "string"
-            ]
+            ],
+            "description": "Client's landline telephone number."
           },
           "mobile": {
             "type": [
               "null",
               "string"
-            ]
+            ],
+            "description": "Client's mobile telephone number."
           },
           "dob": {
             "type": [
               "null",
               "string"
             ],
-            "format": "date"
+            "format": "date",
+            "description": "Client's date of birth."
           },
           "reference": {
             "type": [
               "null",
               "string"
-            ]
+            ],
+            "description": "An external reference or identifier to cross-reference with your system."
           },
           "is_deletable": {
             "type": "boolean",
-            "readOnly": true
+            "readOnly": true,
+            "description": "Indicates if the client can be deleted."
           },
           "created_at": {
             "type": "string",
             "format": "date-time",
-            "readOnly": true
+            "readOnly": true,
+            "description": "Date and time the client was created."
           },
           "updated_at": {
             "type": "string",
             "format": "date-time",
-            "readOnly": true
+            "readOnly": true,
+            "description": "Date and time the client's details were last updated."
           },
           "archived_at": {
             "type": [
@@ -7276,7 +7338,8 @@
               "string"
             ],
             "format": "date-time",
-            "readOnly": true
+            "readOnly": true,
+            "description": "Date and time the client was archived."
           }
         }
       },

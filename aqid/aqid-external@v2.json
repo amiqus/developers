@@ -1100,7 +1100,8 @@
     "/clients/{id}/address": {
       "parameters": [
         {
-          "$ref": "#/components/parameters/resourceId"
+          "$ref": "#/components/parameters/resourceId",
+          "description": "Unique client identifier."
         }
       ],
       "get": {
@@ -1138,6 +1139,25 @@
                   "province": null,
                   "postcode": "EH12 5HD",
                   "country": "GB"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Client not found"
+                    }
+                  }
                 }
               }
             }
@@ -1201,6 +1221,28 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Client not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
           }
         }
       }
@@ -7359,55 +7401,64 @@
             "type": [
               "null",
               "string"
-            ]
+            ],
+            "description": "Unit, flat or apartment name or number."
           },
           "house_name": {
             "type": [
               "null",
               "string"
-            ]
+            ],
+            "description": "House or building name."
           },
           "house_number": {
             "type": [
               "null",
               "string"
-            ]
+            ],
+            "description": "House or building number."
           },
           "street_name": {
             "type": [
               "null",
               "string"
-            ]
+            ],
+            "description": "First line of the street name."
           },
           "second_street": {
             "type": [
               "null",
               "string"
-            ]
+            ],
+            "description": "Second line of the street name if applicable."
           },
           "district": {
             "type": [
               "null",
               "string"
-            ]
+            ],
+            "description": "District, town, village, suburb or equivalent."
           },
           "city": {
             "type": [
               "null",
               "string"
-            ]
+            ],
+            "description": "City name if applicable."
           },
           "province": {
             "type": [
               "null",
               "string"
-            ]
+            ],
+            "description": "Province, county, municipality, township or equivalent."
           },
           "postcode": {
             "type": [
               "null",
               "string"
-            ]
+            ],
+            "description": "Postcode, zip code or equivalent."
           },
           "country": {
             "type": [
@@ -7665,7 +7716,8 @@
               "YU",
               "ZM",
               "ZW"
-            ]
+            ],
+            "description": "ISO3601 alpha-2 country code."
           }
         }
       },

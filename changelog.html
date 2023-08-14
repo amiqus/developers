@@ -36,6 +36,137 @@
 
     <div id="main-container" class="changelog-container">
         <h1 id="api-changelog">API Changelog</h1>
+
+<h2 id="august-14-2023"><a href="#august-14-2023">August 14 2023</a></h2>
+
+<ul>
+  <li>Updated <em>Delete an assignee for a client</em> endpoint
+    <ul>
+      <li>Added <code class="language-plaintext highlighter-rouge">401</code> response</li>
+      <li>Added <code class="language-plaintext highlighter-rouge">404</code> response</li>
+      <li>Updated query parameter descriptions</li>
+    </ul>
+  </li>
+  <li>Updated <em>List all assignees for a client</em> endpoint
+    <ul>
+      <li>Added <code class="language-plaintext highlighter-rouge">401</code> response</li>
+      <li>Added <code class="language-plaintext highlighter-rouge">404</code> response</li>
+      <li>Updated description</li>
+    </ul>
+  </li>
+  <li>Updated <em>Set assignees for a client</em> endpoint
+    <ul>
+      <li>Added <code class="language-plaintext highlighter-rouge">401</code> response</li>
+      <li>Added <code class="language-plaintext highlighter-rouge">404</code> response</li>
+      <li>Added <code class="language-plaintext highlighter-rouge">422</code> response</li>
+      <li>Updated query parameter descriptions</li>
+    </ul>
+  </li>
+  <li>Updated <em>Update assignees for a client</em> endpoint
+    <ul>
+      <li>Added <code class="language-plaintext highlighter-rouge">401</code> response</li>
+      <li>Added <code class="language-plaintext highlighter-rouge">404</code> response</li>
+      <li>Added <code class="language-plaintext highlighter-rouge">422</code> response</li>
+      <li>Updated query parameter descriptions</li>
+    </ul>
+  </li>
+  <li>Updated <em>Delete assignees for a client</em> endpoint
+    <ul>
+      <li>Added <code class="language-plaintext highlighter-rouge">401</code> response</li>
+      <li>Added <code class="language-plaintext highlighter-rouge">404</code> response</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="august-9-2023"><a href="#august-9-2023">August 9 2023</a></h2>
+
+<ul>
+  <li>Added <code class="language-plaintext highlighter-rouge">address</code> object property descriptions</li>
+  <li>Updated <em>Retrieve address for a client</em> endpoint
+    <ul>
+      <li>Added <code class="language-plaintext highlighter-rouge">401</code> response</li>
+      <li>Added <code class="language-plaintext highlighter-rouge">404</code> response</li>
+      <li>Updated description</li>
+    </ul>
+  </li>
+  <li>Updated <em>Replace an address for a client</em> endpoint
+    <ul>
+      <li>Added <code class="language-plaintext highlighter-rouge">401</code> response</li>
+      <li>Added <code class="language-plaintext highlighter-rouge">404</code> response</li>
+      <li>Added <code class="language-plaintext highlighter-rouge">422</code> response</li>
+      <li>Updated description</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="august-3-2023"><a href="#august-3-2023">August 3 2023</a></h2>
+
+<ul>
+  <li>Added <code class="language-plaintext highlighter-rouge">client</code> object property descriptions</li>
+  <li>Updated <em>List all clients</em> endpoint
+    <ul>
+      <li>Added <code class="language-plaintext highlighter-rouge">401</code> response</li>
+      <li>Updated description</li>
+    </ul>
+  </li>
+  <li>Updated <em>Create a client</em> endpoint
+    <ul>
+      <li>Added <code class="language-plaintext highlighter-rouge">401</code> response</li>
+      <li>Added <code class="language-plaintext highlighter-rouge">422</code> response</li>
+      <li>Updated description</li>
+    </ul>
+  </li>
+  <li>Updated <em>Retrieve a client</em> endpoint
+    <ul>
+      <li>Added <code class="language-plaintext highlighter-rouge">401</code> response</li>
+      <li>Added <code class="language-plaintext highlighter-rouge">404</code> response</li>
+      <li>Updated description</li>
+    </ul>
+  </li>
+  <li>Updated <em>Update a client</em> endpoint
+    <ul>
+      <li>Added <code class="language-plaintext highlighter-rouge">401</code> response</li>
+      <li>Added <code class="language-plaintext highlighter-rouge">404</code> response</li>
+      <li>Added <code class="language-plaintext highlighter-rouge">422</code> response</li>
+      <li>Updated description</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="august-2-2023"><a href="#august-2-2023">August 2 2023</a></h2>
+
+<ul>
+  <li>Deprecated <em>Archive a record</em> endpoint. Replaced by <em>Update a record</em> endpoint.</li>
+</ul>
+
+<h2 id="july-31-2023"><a href="#july-31-2023">July 31 2023</a></h2>
+
+<ul>
+  <li>Added <code class="language-plaintext highlighter-rouge">perform_link</code> to <code class="language-plaintext highlighter-rouge">record</code> object</li>
+</ul>
+
+<h2 id="july-26-2023"><a href="#july-31-2023">July 26 2023</a></h2>
+
+<ul>
+  <li>Added <code class="language-plaintext highlighter-rouge">is_reviewed</code> property to <em>Update a record</em> endpoint. Allows toggling a record’s reviewed state.</li>
+</ul>
+
+<h2 id="july-21-2023"><a href="#july-31-2023">July 21 2023</a></h2>
+
+<ul>
+  <li>Added <em>Update a record</em> endpoint</li>
+</ul>
+
+<h2 id="july-14-2023"><a href="#july-14-2023">July 14 2023</a></h2>
+
+<ul>
+  <li>Updated <em>List all records</em> endpoint
+    <ul>
+      <li>Added <code class="language-plaintext highlighter-rouge">page</code>, <code class="language-plaintext highlighter-rouge">limit</code>, <code class="language-plaintext highlighter-rouge">status</code>, <code class="language-plaintext highlighter-rouge">creator</code> and <code class="language-plaintext highlighter-rouge">assignee</code> query parameters</li>
+    </ul>
+  </li>
+</ul>
+
 <h2 id="july-6-2023"><a href="#july-6-2023">July 6 2023</a></h2>
 
 <ul>
@@ -194,7 +325,7 @@
 <h2 id="may-29-2023"><a href="#may-29-2023">May 29 2023</a></h2>
 
 <ul>
-  <li>Added <code class="language-plaintext highlighter-rouge">secret</code> property to <code class="language-plaintext highlighter-rouge">Webhook</code> object</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">secret</code> property to <code class="language-plaintext highlighter-rouge">webhook</code> object</li>
   <li>Added <code class="language-plaintext highlighter-rouge">201 Created</code> success responses to <em>Update assignees for a record</em> and <em>Update assignees for a client</em> endpoints</li>
 </ul>
 
@@ -280,7 +411,7 @@
       <li>Updated <code class="language-plaintext highlighter-rouge">silent</code> and <code class="language-plaintext highlighter-rouge">monitor</code> descriptions with details of availability and cost changes</li>
     </ul>
   </li>
-  <li>Changed <code class="language-plaintext highlighter-rouge">RecordDocument</code> object
+  <li>Changed <code class="language-plaintext highlighter-rouge">record_document</code> object
     <ul>
       <li>Renamed config choice headings
         <ul>

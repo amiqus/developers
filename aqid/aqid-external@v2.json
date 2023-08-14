@@ -1250,12 +1250,13 @@
     "/clients/{id}/assignees": {
       "parameters": [
         {
-          "$ref": "#/components/parameters/resourceId"
+          "$ref": "#/components/parameters/resourceId",
+          "description": "Unique client identifier."
         }
       ],
       "get": {
         "summary": "List all assignees for a client",
-        "description": "List all assignees for a client.",
+        "description": "Returns a paginated list of the client's assignees.",
         "operationId": "get-clients-id-assignees",
         "security": [
           {
@@ -1364,6 +1365,25 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Client not found"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -1402,10 +1422,12 @@
                       "additionalProperties": false,
                       "properties": {
                         "user": {
-                          "type": "integer"
+                          "type": "integer",
+                          "description": "The unique identifier of the user to be assigned to the client."
                         },
                         "type": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "The type of assignee to be assigned to the client."
                         }
                       }
                     }
@@ -1476,6 +1498,28 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Client not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
           }
         }
       },
@@ -1510,7 +1554,12 @@
                       ],
                       "properties": {
                         "user": {
-                          "type": "integer"
+                          "type": "integer",
+                          "description": "The unique identifier of the user to be assigned to the client."
+                        },
+                        "type": {
+                          "type": "string",
+                          "description": "The type of assignee to be assigned to the client."
                         }
                       }
                     }
@@ -1593,9 +1642,27 @@
               }
             }
           },
-          "201": {
-            "description": "Created",
-            "$ref": "#/components/responses/200"
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Client not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
           }
         }
       },
@@ -1622,6 +1689,25 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Client not found"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -1648,7 +1734,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "description": "Unique client identifier."
             }
           },
           {
@@ -1656,7 +1743,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "description": "Unique assignee identifier."
             }
           }
         ],
@@ -1668,6 +1756,28 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "Client not found",
+                        "Assignee not found"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }

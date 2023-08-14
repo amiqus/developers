@@ -13,14 +13,30 @@ delete:
       required: true
       schema:
         type: integer
+        description: Unique client identifier.
     - name: assigneeId
       in: path
       required: true
       schema:
         type: integer
+        description: Unique assignee identifier.
   requestBody:
     content:
       application/json: {}
   responses:
     '204':
       description: No Content
+    '401':
+      $ref: ../components/schemas/Errors/401.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                enum:
+                  - Client not found
+                  - Assignee not found

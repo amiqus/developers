@@ -58,6 +58,8 @@ get:
                       $ref: ../components/schemas/Record.yaml
           example:
             $ref: ../examples/records.get.200.json
+    '401':
+      $ref: ../components/schemas/Errors/401.yaml
 post:
   summary: Create a record
   description: Create a record.
@@ -76,6 +78,10 @@ post:
             $ref: ../components/schemas/Record.yaml
           example:
             $ref: ../examples/records.id.get.200.json
+    '401':
+      $ref: ../components/schemas/Errors/401.yaml
+    '422':
+      $ref: ../components/schemas/Errors/422.yaml
   requestBody:
     content:
       application/json:
@@ -89,6 +95,7 @@ post:
                   properties:
                     client:
                       type: integer
+                      description: Unique client identifier.
                 - $ref:  ../components/schemas/RecordSettings.yaml
             - title: Template
               allOf:
@@ -99,6 +106,7 @@ post:
                   properties:
                     client:
                       type: integer
+                      description: Unique client identifier.
                     template:
                       type: integer
                       description: |

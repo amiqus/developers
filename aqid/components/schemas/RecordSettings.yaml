@@ -9,6 +9,7 @@ properties:
     minItems: 1
     items:
       $ref: ./Steps/RecordStepsWrite.yaml
+    description: Steps to be completed by the client.
   notification:
     oneOf:
       - type: string
@@ -17,11 +18,20 @@ properties:
       - type: boolean
         enum:
           - false
+    description: Enable or disable a "New Request" notification to the client.
   message:
     type:
       - "null"
       - string
     maxLength: 5000
+    description: |
+      Include a message for client.
+
+      Message is shown to the client before they begin the first step. It is also included in an email notification, if sent.
   reminder:
     type: boolean
     default: false
+    description: |
+      Enable or disable email reminders.
+
+      When enabled, the client is sent a reminder email every 2 days until all steps have been completed, the record expires or is archived.

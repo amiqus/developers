@@ -1,5 +1,6 @@
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
+    description: Unique record identifier.
 get:
   summary: Retrieve a record
   description: Retrieve a record.
@@ -28,6 +29,18 @@ get:
             $ref: ../components/schemas/Record.yaml
           example:
             $ref: ../examples/records.id.get.200.json
+    '401':
+      $ref: ../components/schemas/Errors/401.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                default: Record not found
 patch:
   summary: Update a record
   description:  |

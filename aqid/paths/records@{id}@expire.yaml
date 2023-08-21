@@ -1,5 +1,6 @@
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
+    description: Unique record identifier.
 post:
   summary: Expire a record
   description: Expire a record.
@@ -26,3 +27,17 @@ post:
         application/json:
           schema:
             $ref: ../components/schemas/Record.yaml
+    '401':
+      $ref: ../components/schemas/Errors/401.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                default: Record not found
+    '422':
+      $ref: ../components/schemas/Errors/422.yaml

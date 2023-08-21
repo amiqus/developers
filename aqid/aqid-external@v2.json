@@ -3486,6 +3486,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
           }
         }
       },
@@ -3567,6 +3570,12 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
           }
         },
         "requestBody": {
@@ -3584,7 +3593,8 @@
                         ],
                         "properties": {
                           "client": {
-                            "type": "integer"
+                            "type": "integer",
+                            "description": "Unique client identifier."
                           }
                         }
                       },
@@ -3604,7 +3614,8 @@
                         ],
                         "properties": {
                           "client": {
-                            "type": "integer"
+                            "type": "integer",
+                            "description": "Unique client identifier."
                           },
                           "template": {
                             "type": "integer",
@@ -3697,7 +3708,8 @@
     "/records/{id}": {
       "parameters": [
         {
-          "$ref": "#/components/parameters/resourceId"
+          "$ref": "#/components/parameters/resourceId",
+          "description": "Unique record identifier."
         }
       ],
       "get": {
@@ -3791,6 +3803,25 @@
                   "created_at": "2022-05-22T08:22:12Z",
                   "updated_at": "2022-05-22T08:22:12Z",
                   "archived_at": null
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Record not found"
+                    }
+                  }
                 }
               }
             }
@@ -3979,7 +4010,8 @@
     "/records/{id}/expire": {
       "parameters": [
         {
-          "$ref": "#/components/parameters/resourceId"
+          "$ref": "#/components/parameters/resourceId",
+          "description": "Unique record identifier."
         }
       ],
       "post": {
@@ -4023,6 +4055,28 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Record not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
           }
         }
       }
@@ -9774,10 +9828,12 @@
           },
           "id": {
             "type": "integer",
-            "readOnly": true
+            "readOnly": true,
+            "description": "The unique record identifier."
           },
           "status": {
-            "$ref": "#/components/schemas/RecordStatus"
+            "$ref": "#/components/schemas/RecordStatus",
+            "description": "The overall status of the record.\n\nStatus is determined by the combined states of a record's steps, expiry and review:\n- `pending`: Active without any completed steps\n- `started`: Active with at least one completed step\n- `complete`: All steps completed\n- `incomplete`: Expired with at least one completed step\n- `waiting`: At least one check step is awaiting results\n- `failed`: _Deprecated_\n- `empty`: Expired without any completed steps\n- `paused`: At least one paused check step\n- `amendments`: Pending record amendment approval or rejection\n- `reviewed`: Record marked as having been reviewed\n"
           },
           "perform_url": {
             "description": "The unique URL to complete the record steps in a browser.",
@@ -9798,7 +9854,8 @@
           },
           "email": {
             "type": "string",
-            "format": "email"
+            "format": "email",
+            "description": "Contact email address for this record.\n\nNew request and reminder emails (if enabled) and completion receipts are sent to this email address. It is a snapshot of the client email address taken at the time the record was created or re-sent.\n"
           },
           "client": {
             "readOnly": true,
@@ -9808,7 +9865,8 @@
                 "$ref": "#/components/schemas/Client"
               },
               {
-                "type": "integer"
+                "type": "integer",
+                "description": "Unique client identifier."
               }
             ]
           },
@@ -9817,17 +9875,20 @@
             "minItems": 1,
             "items": {
               "$ref": "#/components/schemas/RecordSteps"
-            }
+            },
+            "description": "List of complete and incomplete steps."
           },
           "created_at": {
             "type": "string",
             "format": "date-time",
-            "readOnly": true
+            "readOnly": true,
+            "description": "Date and time the record was created.."
           },
           "updated_at": {
             "type": "string",
             "format": "date-time",
-            "readOnly": true
+            "readOnly": true,
+            "description": "Date and time the record's details were last updated or a step was completed."
           },
           "archived_at": {
             "type": [
@@ -9835,7 +9896,8 @@
               "string"
             ],
             "format": "date-time",
-            "readOnly": true
+            "readOnly": true,
+            "description": "Date and time the record was archived."
           }
         }
       },
@@ -11005,7 +11067,8 @@
             "minItems": 1,
             "items": {
               "$ref": "#/components/schemas/RecordStepsWrite"
-            }
+            },
+            "description": "Steps to be completed by the client."
           },
           "notification": {
             "oneOf": [
@@ -11021,18 +11084,21 @@
                   false
                 ]
               }
-            ]
+            ],
+            "description": "Enable or disable a \"New Request\" notification to the client."
           },
           "message": {
             "type": [
               "null",
               "string"
             ],
-            "maxLength": 5000
+            "maxLength": 5000,
+            "description": "Include a message for client.\n\nMessage is shown to the client before they begin the first step. It is also included in an email notification, if sent.\n"
           },
           "reminder": {
             "type": "boolean",
-            "default": false
+            "default": false,
+            "description": "Enable or disable email reminders.\n\nWhen enabled, the client is sent a reminder email every 2 days until all steps have been completed, the record expires or is archived.\n"
           }
         }
       },

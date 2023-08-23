@@ -5459,7 +5459,7 @@
     "/templates/records": {
       "get": {
         "summary": "List all record templates",
-        "description": "List all record templates.",
+        "description": "<p style=\"color: red;\"><strong>Coming soon:</strong> List all record templates will be available soon.</p>\n\nList all record templates returns a paginated list of record templates associated with the team.\n",
         "operationId": "get-templates-records",
         "security": [
           {

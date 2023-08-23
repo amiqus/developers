@@ -1,6 +1,9 @@
 get:
   summary: List all record templates
-  description: List all record templates.
+  description: |
+      <p style="color: red;"><strong>Coming soon:</strong> List all record templates will be available soon.</p>
+
+      List all record templates returns a paginated list of record templates associated with the team.
   operationId: get-templates-records
   security:
     - personal_token: []

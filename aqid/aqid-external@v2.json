@@ -12,20 +12,7 @@
   },
   "servers": [
     {
-      "url": "https://amiqusid.test/api/v2",
-      "description": "Local"
-    },
-    {
-      "url": "https://id.amiqus.co/api/v2",
-      "description": "Production"
-    },
-    {
-      "url": "https://stage.aqid.co/api/v2",
-      "description": "Stage"
-    },
-    {
-      "url": "https://amiqusid.test/api",
-      "description": "Local v1"
+      "url": "https://id.amiqus.co/api/v2"
     }
   ],
   "tags": [

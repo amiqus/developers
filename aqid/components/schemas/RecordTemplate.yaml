@@ -22,6 +22,8 @@ properties:
   presets:
     title: Record Template Presets
     type: object
+    description: |
+      <p style="color: red;"><strong>Warning:</strong> The <code>presets</code> property is currently unavailable.<p>
     allOf:
       - $ref: ./RecordSettings.yaml
       - properties:

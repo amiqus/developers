@@ -5446,7 +5446,7 @@
     "/templates/records": {
       "get": {
         "summary": "List all record templates",
-        "description": "<p style=\"color: red;\"><strong>Coming soon:</strong> List all record templates will be available soon.</p>\n\nList all record templates returns a paginated list of record templates associated with the team.\n",
+        "description": "<p style=\"color: red;\"><strong>Note:</strong> The List all record templates endpoint is partially implemented. Some properties are temporarily unavailable.</p>\n\nList all record templates returns a paginated list of record templates associated with the team.\n",
         "operationId": "get-templates-records",
         "security": [
           {
@@ -11257,6 +11257,7 @@
           "presets": {
             "title": "Record Template Presets",
             "type": "object",
+            "description": "<p style=\"color: red;\"><strong>Warning:</strong> The <code>presets</code> property is currently unavailable.<p>\n",
             "allOf": [
               {
                 "$ref": "#/components/schemas/RecordSettings"

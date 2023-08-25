@@ -1,7 +1,7 @@
 get:
   summary: List all record templates
   description: |
-      <p style="color: red;"><strong>Coming soon:</strong> List all record templates will be available soon.</p>
+      <p style="color: red;"><strong>Note:</strong> The List all record templates endpoint is partially implemented. Some properties are temporarily unavailable.</p>
 
       List all record templates returns a paginated list of record templates associated with the team.
   operationId: get-templates-records

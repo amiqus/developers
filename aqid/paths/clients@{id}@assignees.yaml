@@ -148,6 +148,9 @@ patch:
             $ref: ./clients@{id}@assignees.yaml#/get/responses/200/content/application~1json/schema
           example:
             $ref: ../examples/clients.id.assignees.patch.200.json
+    '201':
+      description: Created
+      $ref: ./clients@{id}@assignees.yaml#/get/responses/200
     '401':
       $ref: ../components/schemas/Errors/401.yaml
     '404':

@@ -1629,6 +1629,10 @@
               }
             }
           },
+          "201": {
+            "description": "Created",
+            "$ref": "#/components/responses/200"
+          },
           "401": {
             "$ref": "#/components/responses/401"
           },

@@ -63,7 +63,7 @@ function verifySignature(
     string $webhookSignature
 ): void
 {
-    $decodedSignature = base64_decode($$webhookSignature);
+    $decodedSignature = base64_decode($webhookSignature);
     $expectedSignature = hash_hmac('sha256', $payloadBody, $sharedSecret, true);
     if (!hash_equals($decodedSignature, $expectedSignature)) {
         throw new InvalidArgumentException('Webhook signature is invalid');

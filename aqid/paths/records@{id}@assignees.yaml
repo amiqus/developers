@@ -1,5 +1,6 @@
 parameters:
-- $ref: ../components/parameters/resourceId.yaml
+  - $ref: ../components/parameters/resourceId.yaml
+    description: Unique record identifier.
 get:
   summary: List all assignees for a record
   description: List all assignees for a record.
@@ -41,6 +42,18 @@ get:
                               $ref: ../components/schemas/User.yaml
           example:
             $ref: ../examples/records.id.assignees.get.200.json
+    '401':
+        $ref: ../components/schemas/Errors/401.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                default: Record not found
 post:
   summary: Set assignees for a record
   description: Set the assignees for a record according to the exact values provided in the request, overwriting any existing assignees. To add additional assignees, refer to **[Update assignees for a record](#tag/Record-Assignees/operation/patch-records-id-assignees)**.
@@ -67,8 +80,10 @@ post:
                 properties:
                   user:
                     type: integer
+                    description: The unique identifier of the user to be assigned to the record.
                   type:
                     type: string
+                    description: The type of assignee to be assigned to the record.
         example:
           $ref: ../examples/records.id.assignees.post.json
   responses:
@@ -80,6 +95,20 @@ post:
             $ref: ./records@{id}@assignees.yaml#/get/responses/200/content/application~1json/schema
           example:
             $ref: ../examples/records.id.assignees.get.200.json
+    '401':
+      $ref: ../components/schemas/Errors/401.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                default: Record not found
+    '422':
+      $ref: ../components/schemas/Errors/422.yaml
 patch:
   summary: Update assignees for a record
   description: Add one or more assignees to a record, merging them with existing assignees.
@@ -104,6 +133,10 @@ patch:
                 properties:
                   user:
                     type: integer
+                    description: The unique identifier of the user to be assigned to the record.
+                  type:
+                    type: string
+                    description: The type of assignee to be assigned to the record.
         example:
           $ref: ../examples/records.id.assignees.patch.json
   responses:
@@ -118,6 +151,20 @@ patch:
     '201':
       description: Created
       $ref: ./records@{id}@assignees.yaml#/get/responses/200
+    '401':
+      $ref: ../components/schemas/Errors/401.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                default: Record not found
+    '422':
+      $ref: ../components/schemas/Errors/422.yaml
 delete:
   summary: Delete assignees for a record
   description: Remove all assignees from a record.
@@ -133,3 +180,15 @@ delete:
   responses:
     '204':
       description: No Content
+    '401':
+      $ref: ../components/schemas/Errors/401.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                default: Record not found

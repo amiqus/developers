@@ -4542,7 +4542,8 @@
     "/records/{id}/assignees": {
       "parameters": [
         {
-          "$ref": "#/components/parameters/resourceId"
+          "$ref": "#/components/parameters/resourceId",
+          "description": "Unique record identifier."
         }
       ],
       "get": {
@@ -4656,6 +4657,25 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Record not found"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -4694,10 +4714,12 @@
                       "additionalProperties": false,
                       "properties": {
                         "user": {
-                          "type": "integer"
+                          "type": "integer",
+                          "description": "The unique identifier of the user to be assigned to the record."
                         },
                         "type": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "The type of assignee to be assigned to the record."
                         }
                       }
                     }
@@ -4768,6 +4790,28 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Record not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
           }
         }
       },
@@ -4802,7 +4846,12 @@
                       ],
                       "properties": {
                         "user": {
-                          "type": "integer"
+                          "type": "integer",
+                          "description": "The unique identifier of the user to be assigned to the record."
+                        },
+                        "type": {
+                          "type": "string",
+                          "description": "The type of assignee to be assigned to the record."
                         }
                       }
                     }
@@ -4888,6 +4937,28 @@
           "201": {
             "description": "Created",
             "$ref": "#/components/responses/200"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Record not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
           }
         }
       },
@@ -4914,6 +4985,25 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Record not found"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -4921,7 +5011,7 @@
     "/records/{recordId}/assignees/{assigneeId}": {
       "delete": {
         "summary": "Delete assignee for a record",
-        "description": "Remove a single assignee from a record.",
+        "description": "Remove a single assignee from a record.\n\nTo list all of a record's assignees, see **[List all assignees for a record](#tag/Record-Assignees/operation/get-records-id-assignees)**.\n",
         "operationId": "delete-records-recordId-assignees-assigneeId",
         "security": [
           {
@@ -4940,7 +5030,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "description": "Unique record identifier."
             }
           },
           {
@@ -4948,7 +5039,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "description": "Unique assignee identifier."
             }
           }
         ],
@@ -4960,6 +5052,28 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "Record not found",
+                        "Assignee not found"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }

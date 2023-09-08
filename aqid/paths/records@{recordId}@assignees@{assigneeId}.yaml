@@ -1,6 +1,9 @@
 delete:
   summary: Delete assignee for a record
-  description: Remove a single assignee from a record.
+  description: |
+    Remove a single assignee from a record.
+
+    To list all of a record's assignees, see **[List all assignees for a record](#tag/Record-Assignees/operation/get-records-id-assignees)**.
   operationId: delete-records-recordId-assignees-assigneeId
   security:
     - personal_token: []
@@ -13,14 +16,30 @@ delete:
       required: true
       schema:
         type: integer
+        description: Unique record identifier.
     - name: assigneeId
       in: path
       required: true
       schema:
         type: integer
+        description: Unique assignee identifier.
   requestBody:
     content:
       application/json: {}
   responses:
     '204':
       description: No Content
+    '401':
+      $ref: ../components/schemas/Errors/401.yaml
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                enum:
+                  - Record not found
+                  - Assignee not found

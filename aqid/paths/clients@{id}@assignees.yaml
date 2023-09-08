@@ -167,7 +167,10 @@ patch:
       $ref: ../components/schemas/Errors/422.yaml
 delete:
   summary: Delete assignees for a client
-  description: Remove all assignees from a client.
+  description: |
+    Remove all assignees from a client.
+
+    To delete a single client assignee, see **[Delete an assignee for a client](#tag/Client-Assignees/operation/delete-clients-clientId-assignees-assigneeId)**.
   operationId: delete-clients-id-assignees
   security:
     - personal_token: []

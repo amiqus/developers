@@ -1659,7 +1659,7 @@
       },
       "delete": {
         "summary": "Delete assignees for a client",
-        "description": "Remove all assignees from a client.",
+        "description": "Remove all assignees from a client.\n\nTo delete a single client assignee, see **[Delete an assignee for a client](#tag/Client-Assignees/operation/delete-clients-clientId-assignees-assigneeId)**.\n",
         "operationId": "delete-clients-id-assignees",
         "security": [
           {
@@ -1706,7 +1706,7 @@
     "/clients/{clientId}/assignees/{assigneeId}": {
       "delete": {
         "summary": "Delete an assignee for a client",
-        "description": "Remove a single assignee from a client.",
+        "description": "Remove an assignee from a client.\n\nTo delete all client assignees, see **[Delete assignees for a client](#tag/Client-Assignees/operation/delete-clients-id-assignees)**.\n",
         "operationId": "delete-clients-clientId-assignees-assigneeId",
         "security": [
           {

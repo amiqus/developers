@@ -2964,6 +2964,7 @@
                 "type": "string",
                 "enum": [
                   "photo_id",
+                  "reference",
                   "banking_information",
                   "requested",
                   "sent",
@@ -2971,7 +2972,7 @@
                 ]
               }
             },
-            "description": "Some sources can be filtered by type:\n\n- **check**:\n   - `photo_id`\n   - `banking_information`\n- **record_document**\n  - `requested`, `sent`, `returned`\n\nNote that to filter by source type, the `source` parameter must also be provided.\n"
+            "description": "Some sources can be filtered by type:\n\n- **check**:\n   - `photo_id`\n   - `reference`\n   - `banking_information`\n- **record_document**\n  - `requested`, `sent`, `returned`\n\nNote that to filter by source type, the `source` parameter must also be provided.\n"
           }
         ],
         "responses": {

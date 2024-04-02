@@ -2939,6 +2939,7 @@
           },
           {
             "name": "source",
+            "description": "**Note:** `form` is deprecated, use `client_form` instead\n",
             "in": "query",
             "explode": false,
             "schema": {
@@ -2948,6 +2949,7 @@
                 "enum": [
                   "check",
                   "client",
+                  "client_form",
                   "form",
                   "record_document"
                 ]
@@ -2972,7 +2974,7 @@
                 ]
               }
             },
-            "description": "Some sources can be filtered by type:\n\n- **check**:\n   - `photo_id`\n   - `reference`\n   - `banking_information`\n- **record_document**\n  - `requested`, `sent`, `returned`\n\nNote that to filter by source type, the `source` parameter must also be provided.\n"
+            "description": "Some sources can be filtered by type:\n\n- **check**:\n   - `photo_id`\n   - `reference`\n   - `banking_information`\n- **record_document**\n  - `requested`, `sent`, `returned`\n\n**Note:** to filter by source type, the `source` parameter must also be provided.\n"
           }
         ],
         "responses": {
@@ -11895,7 +11897,7 @@
                     "enum": [
                       "check",
                       "client",
-                      "form",
+                      "client_form",
                       "record_document"
                     ]
                   }

@@ -1,6 +1,0 @@
-title: Form
-type: object
-properties:
-  type:
-    enum:
-      - form

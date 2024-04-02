@@ -1,9 +1,0 @@
-{
-    "object": "record_status",
-    "id": 983434,
-    "status": "pending",
-    "email": "marty@example.com",
-    "client": 73845,
-    "created_at": "2022-05-22T08:22:12Z",
-    "updated_at": "2022-05-22T08:22:12Z"
-}

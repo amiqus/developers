@@ -1,6 +1,0 @@
-{
-    "url": "https://example.org/incoming/webhooks/amiqus",
-    "events": [
-        "client.*"
-    ]
-}

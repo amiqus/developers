@@ -1,7 +1,0 @@
-title: Check
-type: object
-properties:
-  provider:
-    type: string
-    readOnly: true
-    x-internal: true

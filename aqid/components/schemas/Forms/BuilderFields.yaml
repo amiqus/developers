@@ -1,9 +1,0 @@
-anyOf:
-  - $ref: ./Fields/Section.yaml
-  - $ref: ./Fields/Heading.yaml
-  - $ref: ./Fields/Paragraph.yaml
-  - $ref: ./Fields/ShortAnswer.yaml
-  - $ref: ./Fields/LongAnswer.yaml
-  - $ref: ./Fields/SingleChoice.yaml
-  - $ref: ./Fields/MultipleChoice.yaml
-  - $ref: ./Fields/DocumentTemplate.yaml

@@ -1,6 +1,0 @@
-title: Document Transfer
-type: object
-properties:
-  type:
-    enum:
-      - document.transfer

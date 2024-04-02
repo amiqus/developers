@@ -1,3 +1,0 @@
-allOf:
-  - $ref: ../LongAnswer.yaml
-  - $ref: ./Input.yaml

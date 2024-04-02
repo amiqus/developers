@@ -1,3 +1,0 @@
-allOf:
-  - $ref: ../SingleChoice.yaml
-  - $ref: ./Input.yaml

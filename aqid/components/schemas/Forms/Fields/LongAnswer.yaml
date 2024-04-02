@@ -1,9 +1,0 @@
-title: Long Answer
-allOf:
-  - $ref: ../Input.yaml
-  - type: object
-    properties:
-      type:
-        type: string
-        enum:
-          - textarea

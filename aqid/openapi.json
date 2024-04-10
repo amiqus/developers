@@ -2938,6 +2938,31 @@
             }
           },
           {
+            "name": "sort_by",
+            "in": "query",
+            "description": "Sort results by file name, date of upload or file expiry date. Results returned in ID order by default.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "name",
+                "created_at",
+                "expires_at"
+              ]
+            }
+          },
+          {
+            "name": "order_by",
+            "in": "query",
+            "description": "Order results in ascending or descending order. Results returned in ascending order by default.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            }
+          },
+          {
             "name": "source",
             "description": "**Note:** `form` is deprecated, use `client_form` instead\n",
             "in": "query",

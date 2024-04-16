@@ -3602,9 +3602,7 @@
                     "properties": {
                       "status": {
                         "type": "string",
-                        "enum": [
-                          "accepted"
-                        ]
+                        "const": "accepted"
                       },
                       "correction": {
                         "type": "object",
@@ -3632,9 +3630,7 @@
                     "properties": {
                       "status": {
                         "type": "string",
-                        "enum": [
-                          "rejected"
-                        ]
+                        "const": "rejected"
                       }
                     }
                   }
@@ -8407,9 +8403,7 @@
           "object": {
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "user"
-            ]
+            "const": "user"
           },
           "id": {
             "type": "integer",
@@ -8455,9 +8449,7 @@
         "properties": {
           "object": {
             "type": "string",
-            "enum": [
-              "paginated_list"
-            ]
+            "const": "paginated_list"
           },
           "data": {
             "type": "array"
@@ -8524,9 +8516,7 @@
           "object": {
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "team"
-            ]
+            "const": "team"
           },
           "id": {
             "type": "integer",
@@ -8598,9 +8588,7 @@
           "object": {
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "team_member"
-            ]
+            "const": "team_member"
           },
           "id": {
             "type": "integer",
@@ -8641,9 +8629,7 @@
           "object": {
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "name"
-            ]
+            "const": "name"
           },
           "title": {
             "type": [
@@ -8710,9 +8696,7 @@
           "object": {
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "client"
-            ]
+            "const": "client"
           },
           "id": {
             "type": "integer",
@@ -8800,9 +8784,7 @@
           "object": {
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "address"
-            ]
+            "const": "address"
           },
           "unit": {
             "type": [
@@ -9135,9 +9117,7 @@
           "object": {
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "assignee"
-            ]
+            "const": "assignee"
           },
           "id": {
             "type": "integer",
@@ -9160,9 +9140,7 @@
             "properties": {
               "type": {
                 "type": "string",
-                "enum": [
-                  "user"
-                ]
+                "const": "user"
               }
             }
           }
@@ -9205,9 +9183,7 @@
           "object": {
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "organisation"
-            ]
+            "const": "organisation"
           },
           "id": {
             "type": "integer",
@@ -9421,9 +9397,7 @@
         "properties": {
           "object": {
             "type": "string",
-            "enum": [
-              "step"
-            ],
+            "const": "step",
             "readOnly": true
           },
           "id": {
@@ -9450,9 +9424,7 @@
             "properties": {
               "type": {
                 "type": "string",
-                "enum": [
-                  "check.credit"
-                ]
+                "const": "check.credit"
               }
             }
           }
@@ -9478,9 +9450,7 @@
         "properties": {
           "object": {
             "type": "string",
-            "enum": [
-              "check"
-            ]
+            "const": "check"
           },
           "id": {
             "type": "integer",
@@ -9561,9 +9531,7 @@
             "properties": {
               "type": {
                 "type": "string",
-                "enum": [
-                  "check.credit"
-                ]
+                "const": "check.credit"
               }
             }
           }
@@ -9580,9 +9548,7 @@
             "properties": {
               "type": {
                 "type": "string",
-                "enum": [
-                  "check.criminal_record"
-                ]
+                "const": "check.criminal_record"
               }
             }
           }
@@ -9605,9 +9571,7 @@
                 "properties": {
                   "region": {
                     "type": "string",
-                    "enum": [
-                      "scotland"
-                    ]
+                    "const": "scotland"
                   },
                   "enable_payment": {
                     "title": "Pass on fee",
@@ -9625,15 +9589,11 @@
                 "properties": {
                   "region": {
                     "type": "string",
-                    "enum": [
-                      "england"
-                    ]
+                    "const": "england"
                   },
                   "type": {
                     "type": "string",
-                    "enum": [
-                      "basic"
-                    ]
+                    "const": "basic"
                   },
                   "enable_payment": {
                     "title": "Pass on fee",
@@ -9651,15 +9611,11 @@
                 "properties": {
                   "region": {
                     "type": "string",
-                    "enum": [
-                      "england"
-                    ]
+                    "const": "england"
                   },
                   "type": {
                     "type": "string",
-                    "enum": [
-                      "standard"
-                    ]
+                    "const": "standard"
                   },
                   "free_volunteer": {
                     "title": "Reduced rate COVID-19 application",
@@ -9684,15 +9640,11 @@
                 "properties": {
                   "region": {
                     "type": "string",
-                    "enum": [
-                      "england"
-                    ]
+                    "const": "england"
                   },
                   "type": {
                     "type": "string",
-                    "enum": [
-                      "enhanced"
-                    ]
+                    "const": "enhanced"
                   },
                   "free_volunteer": {
                     "title": "Reduced rate COVID-19 application",
@@ -9723,9 +9675,7 @@
             "properties": {
               "type": {
                 "type": "string",
-                "enum": [
-                  "check.dummy"
-                ]
+                "const": "check.dummy"
               }
             }
           }
@@ -9800,9 +9750,7 @@
             "properties": {
               "type": {
                 "type": "string",
-                "enum": [
-                  "check.thorntons_onboarding"
-                ]
+                "const": "check.thorntons_onboarding"
               }
             }
           }
@@ -9819,9 +9767,7 @@
             "properties": {
               "type": {
                 "type": "string",
-                "enum": [
-                  "check.hscni_access_ni"
-                ]
+                "const": "check.hscni_access_ni"
               }
             }
           }
@@ -9845,9 +9791,7 @@
                 "properties": {
                   "type": {
                     "type": "string",
-                    "enum": [
-                      "standard"
-                    ]
+                    "const": "standard"
                   },
                   "pin_number": {
                     "type": "string",
@@ -9862,9 +9806,7 @@
                 "properties": {
                   "type": {
                     "type": "string",
-                    "enum": [
-                      "enhanced"
-                    ]
+                    "const": "enhanced"
                   },
                   "pin_number": {
                     "type": "string",
@@ -9879,9 +9821,7 @@
                 "properties": {
                   "type": {
                     "type": "string",
-                    "enum": [
-                      "enhanced_barring"
-                    ]
+                    "const": "enhanced_barring"
                   },
                   "barring_adults": {
                     "title": "Adults",
@@ -9918,9 +9858,7 @@
             "properties": {
               "type": {
                 "type": "string",
-                "enum": [
-                  "check.identity"
-                ]
+                "const": "check.identity"
               }
             }
           }
@@ -9937,9 +9875,7 @@
             "properties": {
               "type": {
                 "type": "string",
-                "enum": [
-                  "check.identity"
-                ]
+                "const": "check.identity"
               }
             }
           }
@@ -9956,9 +9892,7 @@
             "properties": {
               "type": {
                 "type": "string",
-                "enum": [
-                  "check.nhs_esr"
-                ]
+                "const": "check.nhs_esr"
               }
             }
           }
@@ -10035,9 +9969,7 @@
                 "properties": {
                   "report_type": {
                     "type": "string",
-                    "enum": [
-                      "standard"
-                    ]
+                    "const": "standard"
                   },
                   "face": {
                     "type": "boolean",
@@ -10107,9 +10039,7 @@
                 "properties": {
                   "report_type": {
                     "type": "string",
-                    "enum": [
-                      "biometric"
-                    ]
+                    "const": "biometric"
                   },
                   "issuing_countries": {
                     "description": "Accept documents issued by only these countries.",
@@ -10148,9 +10078,7 @@
             "properties": {
               "type": {
                 "type": "string",
-                "enum": [
-                  "check.employment_referencing"
-                ]
+                "const": "check.employment_referencing"
               }
             }
           }
@@ -10217,9 +10145,7 @@
                   {
                     "properties": {
                       "type": {
-                        "enum": [
-                          "standard"
-                        ]
+                        "const": "standard"
                       }
                     }
                   }
@@ -10234,9 +10160,7 @@
                   {
                     "properties": {
                       "type": {
-                        "enum": [
-                          "automated_references"
-                        ]
+                        "const": "automated_references"
                       },
                       "review_references": {
                         "type": "boolean",
@@ -10269,9 +10193,7 @@
             "properties": {
               "type": {
                 "type": "string",
-                "enum": [
-                  "check.reference"
-                ]
+                "const": "check.reference"
               }
             }
           }
@@ -10310,9 +10232,7 @@
             "properties": {
               "type": {
                 "type": "string",
-                "enum": [
-                  "check.banking_information"
-                ]
+                "const": "check.banking_information"
               }
             }
           }
@@ -10366,9 +10286,7 @@
             "properties": {
               "type": {
                 "type": "string",
-                "enum": [
-                  "check.video"
-                ]
+                "const": "check.video"
               }
             }
           }
@@ -10385,9 +10303,7 @@
             "properties": {
               "type": {
                 "type": "string",
-                "enum": [
-                  "check.watchlist"
-                ]
+                "const": "check.watchlist"
               }
             }
           }
@@ -10434,9 +10350,7 @@
         "type": "object",
         "properties": {
           "type": {
-            "enum": [
-              "document.request"
-            ]
+            "const": "document.request"
           }
         }
       },
@@ -10463,9 +10377,7 @@
           "object": {
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "attachment"
-            ]
+            "const": "attachment"
           },
           "id": {
             "type": "integer",
@@ -10516,9 +10428,7 @@
           "object": {
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "record_document"
-            ]
+            "const": "record_document"
           },
           "id": {
             "type": "integer",
@@ -10653,9 +10563,7 @@
         "type": "object",
         "properties": {
           "type": {
-            "enum": [
-              "document.transfer"
-            ]
+            "const": "document.transfer"
           }
         }
       },
@@ -10690,9 +10598,7 @@
         "type": "object",
         "properties": {
           "type": {
-            "enum": [
-              "form"
-            ]
+            "const": "form"
           }
         }
       },
@@ -10704,9 +10610,7 @@
           "object": {
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "client_form"
-            ]
+            "const": "client_form"
           },
           "id": {
             "type": "integer",
@@ -11214,9 +11118,7 @@
           "object": {
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "record"
-            ]
+            "const": "record"
           },
           "id": {
             "type": "integer",
@@ -11311,9 +11213,7 @@
         "properties": {
           "type": {
             "type": "string",
-            "enum": [
-              "bold"
-            ]
+            "const": "bold"
           }
         }
       },
@@ -11327,9 +11227,7 @@
         "properties": {
           "type": {
             "type": "string",
-            "enum": [
-              "link"
-            ]
+            "const": "link"
           },
           "attrs": {
             "type": "object",
@@ -11366,9 +11264,7 @@
             "properties": {
               "type": {
                 "type": "string",
-                "enum": [
-                  "text"
-                ]
+                "const": "text"
               },
               "text": {
                 "type": "string"
@@ -11386,9 +11282,7 @@
             "properties": {
               "type": {
                 "type": "string",
-                "enum": [
-                  "text"
-                ]
+                "const": "text"
               },
               "marks": {
                 "type": "array",
@@ -11421,9 +11315,7 @@
         "properties": {
           "type": {
             "type": "string",
-            "enum": [
-              "paragraph"
-            ]
+            "const": "paragraph"
           },
           "content": {
             "type": "array",
@@ -11454,9 +11346,7 @@
         "properties": {
           "type": {
             "type": "string",
-            "enum": [
-              "listItem"
-            ]
+            "const": "listItem"
           },
           "content": {
             "type": "array",
@@ -11481,9 +11371,7 @@
         "properties": {
           "type": {
             "type": "string",
-            "enum": [
-              "bulletList"
-            ]
+            "const": "bulletList"
           },
           "content": {
             "type": "array",
@@ -11509,9 +11397,7 @@
         "properties": {
           "type": {
             "type": "string",
-            "enum": [
-              "orderedList"
-            ]
+            "const": "orderedList"
           },
           "attrs": {
             "type": "object",
@@ -11547,9 +11433,7 @@
         "properties": {
           "type": {
             "type": "string",
-            "enum": [
-              "doc"
-            ]
+            "const": "doc"
           },
           "content": {
             "type": "array",
@@ -11590,9 +11474,7 @@
             "properties": {
               "type": {
                 "type": "string",
-                "enum": [
-                  "section"
-                ]
+                "const": "section"
               },
               "label": {
                 "type": "string"
@@ -11644,9 +11526,7 @@
             "properties": {
               "type": {
                 "type": "string",
-                "enum": [
-                  "heading"
-                ]
+                "const": "heading"
               },
               "label": {
                 "type": "string"
@@ -11672,9 +11552,7 @@
             "properties": {
               "type": {
                 "type": "string",
-                "enum": [
-                  "rich_text"
-                ]
+                "const": "rich_text"
               },
               "json_content": {
                 "allOf": [
@@ -11752,9 +11630,7 @@
             "properties": {
               "type": {
                 "type": "string",
-                "enum": [
-                  "text"
-                ]
+                "const": "text"
               }
             }
           }
@@ -11795,9 +11671,7 @@
             "properties": {
               "type": {
                 "type": "string",
-                "enum": [
-                  "textarea"
-                ]
+                "const": "textarea"
               }
             }
           }
@@ -11879,9 +11753,7 @@
             "properties": {
               "type": {
                 "type": "string",
-                "enum": [
-                  "radio"
-                ]
+                "const": "radio"
               },
               "label": {
                 "$ref": "#/components/schemas/Choice"
@@ -11911,9 +11783,7 @@
             "properties": {
               "type": {
                 "type": "string",
-                "enum": [
-                  "checkbox"
-                ]
+                "const": "checkbox"
               },
               "label": {
                 "$ref": "#/components/schemas/Choice"
@@ -11960,9 +11830,7 @@
         "properties": {
           "type": {
             "type": "string",
-            "enum": [
-              "document"
-            ]
+            "const": "document"
           },
           "label": {
             "type": "string"
@@ -12046,9 +11914,7 @@
           "object": {
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "client_file"
-            ]
+            "const": "client_file"
           },
           "id": {
             "type": "integer",
@@ -12181,9 +12047,7 @@
           "object": {
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "client_correction"
-            ]
+            "const": "client_correction"
           },
           "id": {
             "type": "integer",
@@ -12643,9 +12507,7 @@
           "object": {
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "document"
-            ]
+            "const": "document"
           },
           "id": {
             "type": "integer",
@@ -12698,9 +12560,7 @@
           "object": {
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "email_template"
-            ]
+            "const": "email_template"
           },
           "id": {
             "type": "integer",
@@ -12743,9 +12603,7 @@
           "object": {
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "document_template"
-            ]
+            "const": "document_template"
           },
           "id": {
             "type": "integer",
@@ -12783,9 +12641,7 @@
         "properties": {
           "object": {
             "type": "string",
-            "enum": [
-              "preset_step"
-            ],
+            "const": "preset_step",
             "readOnly": true
           },
           "type": {
@@ -12842,9 +12698,7 @@
         "properties": {
           "object": {
             "type": "string",
-            "enum": [
-              "invalid_preset_step"
-            ]
+            "const": "invalid_preset_step"
           },
           "type": {
             "$ref": "#/components/schemas/StepTypes"
@@ -13185,9 +13039,7 @@
           "object": {
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "record_template"
-            ]
+            "const": "record_template"
           },
           "id": {
             "type": "integer",
@@ -13273,9 +13125,7 @@
           "object": {
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "webhook"
-            ]
+            "const": "webhook"
           },
           "id": {
             "type": "integer",
@@ -13360,9 +13210,7 @@
           },
           "method": {
             "type": "string",
-            "enum": [
-              "POST"
-            ]
+            "const": "POST"
           },
           "headers": {
             "type": "object",
@@ -13378,9 +13226,7 @@
               },
               "Content-Type": {
                 "type": "string",
-                "enum": [
-                  "application/json"
-                ]
+                "const": "application/json"
               },
               "X-AQID-Signature": {
                 "type": "string"
@@ -13463,9 +13309,7 @@
           "object": {
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "webhook_delivery"
-            ]
+            "const": "webhook_delivery"
           },
           "id": {
             "type": "integer",
@@ -13507,9 +13351,7 @@
         "properties": {
           "type": {
             "type": "string",
-            "enum": [
-              "document"
-            ]
+            "const": "document"
           },
           "template_id": {
             "type": "integer"
@@ -13587,9 +13429,7 @@
           "object": {
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "form_template"
-            ]
+            "const": "form_template"
           },
           "id": {
             "type": "integer",
@@ -13664,9 +13504,7 @@
         "properties": {
           "object": {
             "type": "string",
-            "enum": [
-              "available_step"
-            ],
+            "const": "available_step",
             "readOnly": true
           },
           "type": {
@@ -13942,9 +13780,7 @@
         "properties": {
           "object": {
             "type": "string",
-            "enum": [
-              "validated_steps"
-            ]
+            "const": "validated_steps"
           },
           "steps": {
             "type": "array",
@@ -13953,9 +13789,7 @@
               "properties": {
                 "object": {
                   "type": "string",
-                  "enum": [
-                    "validated_step"
-                  ]
+                  "const": "validated_step"
                 },
                 "type": {
                   "$ref": "#/components/schemas/StepTypes"
@@ -13976,9 +13810,7 @@
           "object": {
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "sdk_token"
-            ]
+            "const": "sdk_token"
           },
           "token": {
             "type": "string",

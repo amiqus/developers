@@ -279,9 +279,7 @@
           "object": {
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "record_status"
-            ]
+            "const": "record_status"
           },
           "id": {
             "type": "integer",
@@ -318,9 +316,7 @@
           "object": {
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "address"
-            ]
+            "const": "address"
           },
           "unit": {
             "type": [

@@ -394,6 +394,9 @@
                 }
               }
             }
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           }
         }
       }
@@ -893,6 +896,9 @@
           "401": {
             "$ref": "#/components/responses/401"
           },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
           "422": {
             "$ref": "#/components/responses/422"
           }
@@ -983,6 +989,9 @@
           },
           "401": {
             "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           },
           "404": {
             "description": "Not Found",
@@ -1116,6 +1125,9 @@
           "401": {
             "$ref": "#/components/responses/401"
           },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
           "404": {
             "description": "Not Found",
             "content": {
@@ -1155,6 +1167,9 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           }
         }
       }
@@ -1207,6 +1222,9 @@
           },
           "401": {
             "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           },
           "404": {
             "description": "Not Found",
@@ -1286,6 +1304,9 @@
           },
           "401": {
             "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           },
           "404": {
             "description": "Not Found",
@@ -1431,6 +1452,9 @@
           "401": {
             "$ref": "#/components/responses/401"
           },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
           "404": {
             "description": "Not Found",
             "content": {
@@ -1563,6 +1587,9 @@
           },
           "401": {
             "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           },
           "404": {
             "description": "Not Found",
@@ -1711,6 +1738,9 @@
           "401": {
             "$ref": "#/components/responses/401"
           },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
           "404": {
             "description": "Not Found",
             "content": {
@@ -1758,6 +1788,9 @@
           },
           "401": {
             "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           },
           "404": {
             "description": "Not Found",
@@ -1825,6 +1858,9 @@
           },
           "401": {
             "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           },
           "404": {
             "description": "Not Found",
@@ -1964,6 +2000,9 @@
           "401": {
             "$ref": "#/components/responses/401"
           },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
           "404": {
             "description": "Not Found",
             "content": {
@@ -2069,6 +2108,9 @@
                 }
               }
             }
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           },
           "404": {
             "description": "Not Found",
@@ -2180,6 +2222,9 @@
           "401": {
             "$ref": "#/components/responses/401"
           },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
           "404": {
             "description": "Not Found",
             "content": {
@@ -2219,6 +2264,9 @@
           },
           "401": {
             "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           },
           "404": {
             "description": "Not Found",
@@ -2281,6 +2329,9 @@
           },
           "401": {
             "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           },
           "404": {
             "description": "Not Found",
@@ -2529,6 +2580,9 @@
                 }
               }
             }
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           }
         }
       }
@@ -2706,6 +2760,9 @@
                 }
               }
             }
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           }
         }
       }
@@ -2751,6 +2808,9 @@
                 }
               }
             }
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           }
         }
       }
@@ -2896,6 +2956,9 @@
                 }
               }
             }
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           }
         }
       }
@@ -3177,6 +3240,9 @@
                 }
               }
             }
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           }
         }
       }
@@ -3879,6 +3945,9 @@
           "401": {
             "$ref": "#/components/responses/401"
           },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
           "422": {
             "$ref": "#/components/responses/422"
           }
@@ -3930,6 +3999,9 @@
           },
           "401": {
             "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           },
           "404": {
             "description": "Not Found",
@@ -4014,6 +4086,9 @@
           },
           "401": {
             "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           },
           "404": {
             "description": "Not Found",
@@ -4363,6 +4438,9 @@
           "401": {
             "$ref": "#/components/responses/401"
           },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
           "422": {
             "$ref": "#/components/responses/422"
           }
@@ -4609,6 +4687,9 @@
           "401": {
             "$ref": "#/components/responses/401"
           },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
           "404": {
             "description": "Not Found",
             "content": {
@@ -4758,6 +4839,9 @@
           "401": {
             "$ref": "#/components/responses/401"
           },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
           "404": {
             "description": "Not Found",
             "content": {
@@ -4828,6 +4912,9 @@
                 }
               }
             }
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           }
         }
       }
@@ -4884,6 +4971,9 @@
           "401": {
             "$ref": "#/components/responses/401"
           },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
           "404": {
             "description": "Not Found",
             "content": {
@@ -4938,6 +5028,9 @@
                 }
               }
             }
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           }
         }
       }
@@ -5092,6 +5185,9 @@
                 }
               }
             }
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           }
         }
       }
@@ -5825,6 +5921,9 @@
           "401": {
             "$ref": "#/components/responses/401"
           },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
           "404": {
             "description": "Not Found",
             "content": {
@@ -5891,6 +5990,9 @@
           },
           "401": {
             "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           },
           "404": {
             "description": "Not Found",
@@ -6211,6 +6313,9 @@
                 }
               }
             }
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           }
         }
       }
@@ -6566,6 +6671,9 @@
                 }
               }
             }
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           }
         }
       }
@@ -6677,6 +6785,9 @@
           },
           "401": {
             "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           }
         }
       },
@@ -6755,6 +6866,9 @@
           "401": {
             "$ref": "#/components/responses/401"
           },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
           "422": {
             "$ref": "#/components/responses/422"
           }
@@ -6810,6 +6924,9 @@
           },
           "401": {
             "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           },
           "404": {
             "description": "Not Found",
@@ -6911,6 +7028,9 @@
           "401": {
             "$ref": "#/components/responses/401"
           },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
           "404": {
             "description": "Not Found",
             "content": {
@@ -6950,6 +7070,9 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           },
           "404": {
             "description": "Not Found",
@@ -7088,6 +7211,9 @@
                 }
               }
             }
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           },
           "404": {
             "description": "Not Found",
@@ -7239,6 +7365,9 @@
                 }
               }
             }
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           }
         }
       },
@@ -7487,6 +7616,9 @@
                 }
               }
             }
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           }
         }
       }
@@ -7582,6 +7714,9 @@
                 }
               }
             }
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           }
         }
       },
@@ -7740,6 +7875,9 @@
                 }
               }
             }
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           }
         }
       },
@@ -7761,6 +7899,9 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           }
         }
       }
@@ -8060,6 +8201,9 @@
                 }
               }
             }
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           }
         }
       }
@@ -8120,6 +8264,9 @@
                 }
               }
             }
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           },
           "413": {
             "description": "Request Entity Too Large",

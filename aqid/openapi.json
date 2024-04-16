@@ -3,7 +3,7 @@
   "info": {
     "title": "Amiqus ID REST API",
     "version": "2.0",
-    "description": "Amiqus ID API reference.\n\n🚧 Please note this documentation is beta and is subject to change without notice.\n\n[Changelog](/aqid/changelog.html)\n",
+    "description": "Amiqus ID API reference.\n\n[Changelog](/aqid/changelog.html)\n",
     "contact": {
       "email": "developers@amiqus.co",
       "name": "Amiqus Engineering",

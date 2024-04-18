@@ -44,6 +44,15 @@
       "name": "Client Organisations"
     },
     {
+      "name": "Cases"
+    },
+    {
+      "name": "Case Items"
+    },
+    {
+      "name": "Case Assignees"
+    },
+    {
       "name": "Steps"
     },
     {
@@ -66,6 +75,9 @@
     },
     {
       "name": "Other Resources"
+    },
+    {
+      "name": "Aggregates"
     }
   ],
   "paths": {
@@ -8329,13 +8341,821 @@
         }
       }
     },
+    "/cases": {
+      "get": {
+        "summary": "List all cases",
+        "description": "List all cases.\n\n_Cases may not be enabled for all teams._\n",
+        "operationId": "get-cases",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Cases"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "name",
+                "reference",
+                "client.name.first_name",
+                "client.name.last_name",
+                "created_at",
+                "updated_at",
+                "archived_at"
+              ],
+              "description": "Sort results by name, reference, client name or date. Results returned in created_at order by default."
+            }
+          },
+          {
+            "name": "order_by",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "description": "Order results in ascending or descending order. Results returned in ascending order by default."
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "client",
+                  "items",
+                  "assignees"
+                ]
+              }
+            }
+          },
+          {
+            "name": "status",
+            "description": "Filter cases by their current status.",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/ClientCaseStatus"
+            }
+          },
+          {
+            "name": "visibility",
+            "description": "Filter cases by their current visibility. Both \"active\" and \"archived\" cases are returnd by default.",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "active",
+                "archived"
+              ]
+            }
+          },
+          {
+            "name": "created_by",
+            "description": "Filter cases created by team member user ID",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "assigned_to",
+            "description": "Filter cases assigned to a team member user ID",
+            "in": "query",
+            "schema": {
+              "oneOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ],
+                  "description": "Filter unassigned cases"
+                }
+              ]
+            }
+          },
+          {
+            "name": "client",
+            "description": "Filter cases by associated client ID",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "client_visibility",
+            "description": "Filter cases by the visibility of their associated client. By default cases are returned for both active and archived clients.",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "active",
+                "archived"
+              ]
+            }
+          },
+          {
+            "name": "reference",
+            "description": "Filter cases by reference",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "search",
+            "description": "Search for cases by case name and client name (first, middle and last). Search is case-insensitive and fuzzy.",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/PaginatedList"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "items": {
+                            "$ref": "#/components/schemas/ClientCase"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "default": {
+                    "summary": "Default",
+                    "value": {
+                      "object": "paginated_list",
+                      "data": [
+                        {
+                          "object": "case",
+                          "id": 8723,
+                          "name": "Full-time onboarding",
+                          "reference": "AQFT123",
+                          "status": "pending",
+                          "client": 73845,
+                          "items": [
+                            587,
+                            698
+                          ],
+                          "assignees": [
+                            187,
+                            947
+                          ],
+                          "created_at": "2022-05-22T08:22:12Z",
+                          "updated_at": "2022-05-22T08:22:12Z",
+                          "archived_at": null
+                        }
+                      ],
+                      "total": 1,
+                      "count": 1,
+                      "limit": 100,
+                      "current_page": 1,
+                      "total_pages": 1,
+                      "links": null
+                    }
+                  },
+                  "client_expanded": {
+                    "summary": "Client expanded",
+                    "value": {
+                      "object": "paginated_list",
+                      "data": [
+                        {
+                          "object": "case",
+                          "id": 8723,
+                          "name": "Full-time onboarding",
+                          "reference": "AQFT123",
+                          "status": "pending",
+                          "client": {
+                            "object": "client",
+                            "id": 73845,
+                            "status": "pending",
+                            "name": {
+                              "object": "name",
+                              "title": "mr",
+                              "other_title": null,
+                              "first_name": "Martin",
+                              "middle_name": "Seamus",
+                              "last_name": "McFly",
+                              "name": "Martin McFly",
+                              "full_name": "Martin Seamus McFly",
+                              "complete_name": "Mr Martin Seamus McFly"
+                            },
+                            "email": "marty@example.com",
+                            "landline": null,
+                            "mobile": null,
+                            "dob": null,
+                            "reference": null,
+                            "is_deletable": true,
+                            "created_at": "2022-05-21T14:15:22Z",
+                            "updated_at": "2022-05-21T14:15:22Z",
+                            "archived_at": null
+                          },
+                          "items": [
+                            587,
+                            698
+                          ],
+                          "assignees": [
+                            187,
+                            947
+                          ],
+                          "created_at": "2022-05-22T08:22:12Z",
+                          "updated_at": "2022-05-22T08:22:12Z",
+                          "archived_at": null
+                        }
+                      ],
+                      "total": 1,
+                      "count": 1,
+                      "limit": 100,
+                      "current_page": 1,
+                      "total_pages": 1,
+                      "links": null
+                    }
+                  },
+                  "items_expanded": {
+                    "summary": "Items expanded",
+                    "value": {
+                      "object": "paginated_list",
+                      "data": [
+                        {
+                          "object": "case",
+                          "id": 8723,
+                          "name": "Full-time onboarding",
+                          "reference": "AQFT123",
+                          "status": "pending",
+                          "client": 73845,
+                          "items": [
+                            {
+                              "object": "case_item",
+                              "id": 587,
+                              "entity": {
+                                "id": 7845,
+                                "type": "record"
+                              },
+                              "created_at": "2022-05-22T08:22:12Z",
+                              "updated_at": "2022-05-22T08:22:12Z"
+                            },
+                            {
+                              "object": "case_item",
+                              "id": 698,
+                              "entity": {
+                                "id": 4587,
+                                "type": "record"
+                              },
+                              "created_at": "2022-05-22T08:22:12Z",
+                              "updated_at": "2022-05-22T08:22:12Z"
+                            }
+                          ],
+                          "assignees": [
+                            187,
+                            947
+                          ],
+                          "created_at": "2022-05-22T08:22:12Z",
+                          "updated_at": "2022-05-22T08:22:12Z",
+                          "archived_at": null
+                        }
+                      ],
+                      "total": 1,
+                      "count": 1,
+                      "limit": 100,
+                      "current_page": 1,
+                      "total_pages": 1,
+                      "links": null
+                    }
+                  },
+                  "assignees_expanded": {
+                    "summary": "Assignees expanded",
+                    "value": {
+                      "object": "paginated_list",
+                      "data": [
+                        {
+                          "object": "case",
+                          "id": 8723,
+                          "name": "Full-time onboarding",
+                          "reference": "AQFT123",
+                          "status": "pending",
+                          "client": 73845,
+                          "items": [
+                            587,
+                            698
+                          ],
+                          "assignees": {
+                            "object": "list",
+                            "data": [
+                              {
+                                "object": "team_member",
+                                "id": 187,
+                                "name": "Ross Green",
+                                "email": "ross.green@example.com",
+                                "role": "member"
+                              },
+                              {
+                                "object": "team_member",
+                                "id": 947,
+                                "name": "Wayne Murray",
+                                "email": "wayne.murray@example.com",
+                                "role": "read-only"
+                              }
+                            ],
+                            "total": 2,
+                            "count": 2,
+                            "limit": 10,
+                            "has_more": false,
+                            "url": "https://id.amiqus.co/api/v2/cases/8723/assignees"
+                          },
+                          "created_at": "2022-05-22T08:22:12Z",
+                          "updated_at": "2022-05-22T08:22:12Z",
+                          "archived_at": null
+                        }
+                      ],
+                      "total": 1,
+                      "count": 1,
+                      "limit": 100,
+                      "current_page": 1,
+                      "total_pages": 1,
+                      "links": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a case",
+        "description": "Create a case.\n\n_Cases may not be enabled for all teams._\n",
+        "operationId": "post-cases",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Cases"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "client"
+                ],
+                "properties": {
+                  "client": {
+                    "type": "integer",
+                    "description": "The unique client identifier."
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "The case name."
+                  },
+                  "reference": {
+                    "type": "string",
+                    "description": "The case reference."
+                  }
+                }
+              },
+              "example": {
+                "client": 7832,
+                "name": "Full-time onboarding",
+                "reference": "AQFT123"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientCase"
+                },
+                "example": {
+                  "object": "case",
+                  "id": 8723,
+                  "name": "Full-time onboarding",
+                  "reference": "AQFT123",
+                  "status": "pending",
+                  "client": 7832,
+                  "items": null,
+                  "assignees": null,
+                  "created_at": "2022-05-22T08:22:12Z",
+                  "updated_at": "2022-05-22T08:22:12Z",
+                  "archived_at": null
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          }
+        }
+      }
+    },
     "/cases/{id}": {
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId",
           "description": "The unique case identifier."
         }
-      ]
+      ],
+      "get": {
+        "summary": "Retrieve a case",
+        "description": "Retrieve a case.\n\n_Cases may not be enabled for all teams._\n",
+        "operationId": "get-cases-id",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Cases"
+        ],
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "client",
+                  "items",
+                  "assignees"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientCase"
+                },
+                "examples": {
+                  "default": {
+                    "summary": "Default",
+                    "value": {
+                      "object": "case",
+                      "id": 8723,
+                      "name": "Full-time onboarding",
+                      "reference": "AQFT123",
+                      "status": "pending",
+                      "client": 73845,
+                      "items": [
+                        587,
+                        698
+                      ],
+                      "assignees": [
+                        187,
+                        947
+                      ],
+                      "created_at": "2022-05-22T08:22:12Z",
+                      "updated_at": "2022-05-22T08:22:12Z",
+                      "archived_at": null
+                    }
+                  },
+                  "client_expanded": {
+                    "summary": "Client expanded",
+                    "value": {
+                      "object": "case",
+                      "id": 8723,
+                      "name": "Full-time onboarding",
+                      "reference": "AQFT123",
+                      "status": "pending",
+                      "client": {
+                        "object": "client",
+                        "id": 73845,
+                        "status": "pending",
+                        "name": {
+                          "object": "name",
+                          "title": "mr",
+                          "other_title": null,
+                          "first_name": "Martin",
+                          "middle_name": "Seamus",
+                          "last_name": "McFly",
+                          "name": "Martin McFly",
+                          "full_name": "Martin Seamus McFly",
+                          "complete_name": "Mr Martin Seamus McFly"
+                        },
+                        "email": "marty@example.com",
+                        "landline": null,
+                        "mobile": null,
+                        "dob": null,
+                        "reference": null,
+                        "is_deletable": true,
+                        "created_at": "2022-05-21T14:15:22Z",
+                        "updated_at": "2022-05-21T14:15:22Z",
+                        "archived_at": null
+                      },
+                      "items": [
+                        587,
+                        698
+                      ],
+                      "assignees": [
+                        187,
+                        947
+                      ],
+                      "created_at": "2022-05-22T08:22:12Z",
+                      "updated_at": "2022-05-22T08:22:12Z",
+                      "archived_at": null
+                    }
+                  },
+                  "items_expanded": {
+                    "summary": "Items expanded",
+                    "value": {
+                      "object": "case",
+                      "id": 8723,
+                      "name": "Full-time onboarding",
+                      "reference": "AQFT123",
+                      "status": "pending",
+                      "client": 73845,
+                      "items": [
+                        {
+                          "object": "case_item",
+                          "id": 587,
+                          "entity": {
+                            "id": 7845,
+                            "type": "record"
+                          },
+                          "created_at": "2022-05-22T08:22:12Z",
+                          "updated_at": "2022-05-22T08:22:12Z"
+                        },
+                        {
+                          "object": "case_item",
+                          "id": 698,
+                          "entity": {
+                            "id": 4587,
+                            "type": "record"
+                          },
+                          "created_at": "2022-05-22T08:22:12Z",
+                          "updated_at": "2022-05-22T08:22:12Z"
+                        }
+                      ],
+                      "assignees": [
+                        187,
+                        947
+                      ],
+                      "created_at": "2022-05-22T08:22:12Z",
+                      "updated_at": "2022-05-22T08:22:12Z",
+                      "archived_at": null
+                    }
+                  },
+                  "assignees_expanded": {
+                    "summary": "Assignees expanded",
+                    "value": {
+                      "object": "case",
+                      "id": 8723,
+                      "name": "Full-time onboarding",
+                      "reference": "AQFT123",
+                      "status": "pending",
+                      "client": 73845,
+                      "items": [
+                        587,
+                        698
+                      ],
+                      "assignees": {
+                        "object": "list",
+                        "data": [
+                          {
+                            "object": "team_member",
+                            "id": 187,
+                            "name": "Ross Green",
+                            "email": "ross.green@example.com",
+                            "role": "member"
+                          },
+                          {
+                            "object": "team_member",
+                            "id": 947,
+                            "name": "Wayne Murray",
+                            "email": "wayne.murray@example.com",
+                            "role": "read-only"
+                          }
+                        ],
+                        "total": 2,
+                        "count": 2,
+                        "limit": 10,
+                        "has_more": false,
+                        "url": "https://id.amiqus.co/api/v2/cases/8723/assignees"
+                      },
+                      "created_at": "2022-05-22T08:22:12Z",
+                      "updated_at": "2022-05-22T08:22:12Z",
+                      "archived_at": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Case not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update a case",
+        "description": "Update the details of a case.\n\n_Cases may not be enabled for all teams._\n",
+        "operationId": "patch-cases-id",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Cases"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "minProperties": 1,
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The case name."
+                  },
+                  "reference": {
+                    "type": [
+                      "null",
+                      "string"
+                    ],
+                    "description": "The case reference."
+                  },
+                  "is_archived": {
+                    "type": "boolean",
+                    "description": "Allows toggling of archived state."
+                  }
+                }
+              },
+              "examples": {
+                "basic": {
+                  "summary": "Basic",
+                  "description": "Update the case name and reference.",
+                  "value": {
+                    "name": "Part-time onboarding",
+                    "reference": "AQPT123"
+                  }
+                },
+                "archive": {
+                  "summary": "Archive",
+                  "description": "Archive the case.",
+                  "value": {
+                    "is_archived": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientCase"
+                },
+                "example": {
+                  "object": "case",
+                  "id": 8723,
+                  "name": "Part-time onboarding",
+                  "reference": "AQPT123",
+                  "status": "pending",
+                  "client": 7832,
+                  "items": [
+                    587,
+                    698
+                  ],
+                  "assignees": [
+                    187,
+                    947
+                  ],
+                  "created_at": "2022-05-22T08:22:12Z",
+                  "updated_at": "2022-05-22T08:22:12Z",
+                  "archived_at": null
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Case not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          }
+        }
+      }
     },
     "/cases/{id}/items": {
       "parameters": [
@@ -8343,7 +9163,331 @@
           "$ref": "#/components/parameters/resourceId",
           "description": "The unique case identifier."
         }
-      ]
+      ],
+      "get": {
+        "summary": "List all case items",
+        "description": "Returns a paginated list of all case items.\n\n_Cases may not be enabled for all teams._\n",
+        "operationId": "get-cases-id-items",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Case Items"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "entity"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/PaginatedList"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "items": {
+                            "$ref": "#/components/schemas/ClientCaseItem"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "default": {
+                    "summary": "Default",
+                    "value": {
+                      "object": "paginated_list",
+                      "data": [
+                        {
+                          "object": "case_item",
+                          "id": 578,
+                          "entity": {
+                            "id": 73845,
+                            "type": "record"
+                          },
+                          "created_at": "2022-05-21T12:15:31Z",
+                          "updated_at": "2022-05-21T12:15:31Z"
+                        }
+                      ],
+                      "total": 1,
+                      "count": 1,
+                      "limit": 100,
+                      "current_page": 1,
+                      "total_pages": 1,
+                      "links": null
+                    }
+                  },
+                  "entity_expanded": {
+                    "summary": "Entity expanded",
+                    "value": {
+                      "object": "paginated_list",
+                      "data": [
+                        {
+                          "object": "case_item",
+                          "id": 578,
+                          "entity": {
+                            "object": "record",
+                            "id": 983434,
+                            "status": "pending",
+                            "perform_url": "https://id.amiqus.co/i/0vz32B9CZpO1yLsKPdy9q",
+                            "email": "marty@example.com",
+                            "client": 73845,
+                            "steps": [
+                              {
+                                "object": "step",
+                                "id": 2,
+                                "type": "check.photo_id",
+                                "preferences": {
+                                  "report_type": "standard",
+                                  "face": true,
+                                  "liveness": true,
+                                  "facial_similarity": false,
+                                  "live_document": false,
+                                  "docs": [
+                                    "passport",
+                                    "driving_licence",
+                                    "national_id"
+                                  ]
+                                },
+                                "check": 82342,
+                                "cost": 1,
+                                "completed_at": null
+                              },
+                              {
+                                "object": "step",
+                                "id": 3,
+                                "type": "document.request",
+                                "preferences": {
+                                  "title": "Utility bill",
+                                  "instructions": "A utility bill dated within the last three months."
+                                },
+                                "document": 23123,
+                                "cost": 0,
+                                "completed_at": null
+                              },
+                              {
+                                "object": "step",
+                                "id": 4,
+                                "type": "form",
+                                "form": "4bd9bfca-e61d-4a68-99b3-ca61a02f650f",
+                                "cost": 0,
+                                "completed_at": null
+                              }
+                            ],
+                            "has_reminders": true,
+                            "created_at": "2022-05-22T08:22:12Z",
+                            "updated_at": "2022-05-22T08:22:12Z",
+                            "expired_at": "2022-06-01T08:22:12Z",
+                            "archived_at": null
+                          },
+                          "created_at": "2022-05-21T12:15:31Z",
+                          "updated_at": "2022-05-21T12:15:31Z"
+                        }
+                      ],
+                      "total": 1,
+                      "count": 1,
+                      "limit": 100,
+                      "current_page": 1,
+                      "total_pages": 1,
+                      "links": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Case not found."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update items for a case",
+        "description": "Add one or more items to a case, merging them with existing items. Only newly added items are returned.\n\n_Cases may not be enabled for all teams._\n",
+        "operationId": "patch-cases-id-items",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Case Items"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 100,
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "type"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "description": "The unique identifier of the item to be added to the case."
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "record"
+                      ],
+                      "description": "The type of item to be added to the case."
+                    }
+                  }
+                }
+              },
+              "example": [
+                {
+                  "id": 983434,
+                  "type": "record"
+                }
+              ]
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/List"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "items": {
+                            "$ref": "#/components/schemas/ClientCaseItem"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "example": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "object": "case_item",
+                      "id": 578,
+                      "entity": {
+                        "id": 983434,
+                        "type": "record"
+                      },
+                      "created_at": "2022-05-22T08:22:12Z",
+                      "updated_at": "2022-05-22T08:22:12Z"
+                    }
+                  ],
+                  "total": 1,
+                  "count": 1,
+                  "limit": 100,
+                  "has_more": false
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Case not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          }
+        }
+      }
     },
     "/cases/{id}/reviews": {
       "parameters": [
@@ -8351,7 +9495,235 @@
           "$ref": "#/components/parameters/resourceId",
           "description": "The unique case identifier."
         }
-      ]
+      ],
+      "get": {
+        "summary": "List all reviews for a case",
+        "description": "Returns a paginated list of reviews for a single case.\n\n_Cases may not be enabled for all teams._\n",
+        "operationId": "get-cases-id-reviews",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Cases"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "reviewed_by"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/PaginatedList"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "items": {
+                            "$ref": "#/components/schemas/ClientCaseReview"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "default": {
+                    "summary": "Default",
+                    "value": {
+                      "object": "paginated_list",
+                      "data": [
+                        {
+                          "object": "case_review",
+                          "id": 2698,
+                          "reviewed_by": 7832,
+                          "status": "approved",
+                          "from_status": "pending",
+                          "created_at": "2022-05-22T08:22:12Z",
+                          "updated_at": "2022-05-22T08:22:12Z"
+                        }
+                      ],
+                      "total": 1,
+                      "count": 1,
+                      "limit": 100,
+                      "current_page": 1,
+                      "total_pages": 1,
+                      "links": null
+                    }
+                  },
+                  "reviewed_by_expanded": {
+                    "summary": "Reviewed by expanded",
+                    "value": {
+                      "object": "paginated_list",
+                      "data": [
+                        {
+                          "object": "case_review",
+                          "id": 2698,
+                          "reviewed_by": {
+                            "object": "team_member",
+                            "id": 7832,
+                            "name": "Lorraine Baines",
+                            "email": "lorraine@example.com",
+                            "role": "member"
+                          },
+                          "status": "approved",
+                          "from_status": "pending",
+                          "created_at": "2022-05-22T08:22:12Z",
+                          "updated_at": "2022-05-22T08:22:12Z"
+                        }
+                      ],
+                      "total": 1,
+                      "count": 1,
+                      "limit": 100,
+                      "current_page": 1,
+                      "total_pages": 1,
+                      "links": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Case not found."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a case review",
+        "description": "Review a case and update its status\n\n_Cases may not be enabled for all teams._\n",
+        "operationId": "post-cases-id-reviews",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Cases"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "status"
+                ],
+                "$ref": "#/components/schemas/ClientCaseReview"
+              },
+              "example": {
+                "status": "approved"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientCaseReview"
+                },
+                "example": {
+                  "object": "case_review",
+                  "id": 2698,
+                  "reviewed_by": 7832,
+                  "status": "approved",
+                  "from_status": "pending",
+                  "created_at": "2022-05-22T08:22:12Z",
+                  "updated_at": "2022-05-22T08:22:12Z"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Case not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          }
+        }
+      }
     },
     "/cases/{id}/assignees": {
       "parameters": [
@@ -8359,7 +9731,142 @@
           "$ref": "#/components/parameters/resourceId",
           "description": "Unique case identifier"
         }
-      ]
+      ],
+      "get": {
+        "summary": "List all assignees for a case",
+        "description": "Returns a paginated list of the case assignees.\n\n_Cases may not be enabled for all teams._\n",
+        "operationId": "get-cases-id-assignees",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Case Assignees"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/PaginatedList"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "items": {
+                            "allOf": [
+                              {
+                                "$ref": "#/components/schemas/Assignee"
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "type": {
+                                    "enum": [
+                                      "team_member"
+                                    ]
+                                  },
+                                  "team_member": {
+                                    "$ref": "#/components/schemas/TeamMember"
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "example": {
+                  "object": "paginated_list",
+                  "data": [
+                    {
+                      "object": "assignee",
+                      "id": 34535,
+                      "type": "team_member",
+                      "team_member": {
+                        "object": "team_member",
+                        "id": 121,
+                        "name": "Lorraine Baines",
+                        "email": "lorraine@example.com",
+                        "role": "member"
+                      }
+                    },
+                    {
+                      "object": "assignee",
+                      "id": 34538,
+                      "type": "team_member",
+                      "team_member": {
+                        "object": "team_member",
+                        "id": 472,
+                        "name": "Dennis Jones",
+                        "email": "dennis@example.com",
+                        "role": "member"
+                      }
+                    }
+                  ],
+                  "total": 2,
+                  "count": 2,
+                  "limit": 100,
+                  "current_page": 1,
+                  "total_pages": 1,
+                  "links": null
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Case not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     },
     "/records/{recordId}/steps/{stepId}/reviews": {
       "parameters": [
@@ -8382,6 +9889,110 @@
           }
         }
       ]
+    },
+    "/aggregates/case-status": {
+      "get": {
+        "summary": "Case status",
+        "description": "Get an aggregate of case statuses.\n\n_Cases may not be enabled for all teams._\n",
+        "operationId": "get-aggregates-case-status",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Aggregates"
+        ],
+        "parameters": [
+          {
+            "name": "assigned_to",
+            "description": "Filter cases assigned to a team member ID",
+            "in": "query",
+            "schema": {
+              "oneOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean",
+                  "const": false,
+                  "description": "Filter unassigned cases"
+                }
+              ]
+            }
+          },
+          {
+            "name": "start_date",
+            "description": "Filter case statuses updated on or after a given date",
+            "allowReserved": true,
+            "example": "2024-01-02T12:00:00Z",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "end_date",
+            "description": "Filter case statuses updated on or before a given date",
+            "allowReserved": true,
+            "example": "2024-03-21T14:00:00Z",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ClientCaseStatusAggregate"
+                    }
+                  ]
+                },
+                "examples": {
+                  "default": {
+                    "summary": "Default",
+                    "value": {
+                      "object": "case_status_aggregate",
+                      "aggregates": [
+                        {
+                          "status": "pending",
+                          "count": 23
+                        },
+                        {
+                          "status": "on_hold",
+                          "count": 0
+                        },
+                        {
+                          "status": "approved",
+                          "count": 59
+                        },
+                        {
+                          "status": "rejected",
+                          "count": 5
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -13821,6 +15432,302 @@
             "type": "integer",
             "description": "The SDK Token is scoped for this individual Record only.",
             "writeOnly": true
+          }
+        }
+      },
+      "ClientCaseStatus": {
+        "title": "Case Status",
+        "type": "string",
+        "enum": [
+          "pending",
+          "on_hold",
+          "approved",
+          "rejected"
+        ],
+        "description": "The overall status of the case.\n\n- `pending`: Active, awaiting approval or rejection.\n- `on_hold`: Inactive, on hold.\n- `approved`: Completed and approved.\n- `rejected`: Completed and rejected.\n"
+      },
+      "ClientCaseItem": {
+        "title": "Case Item",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "object": {
+            "type": "string",
+            "readOnly": true,
+            "const": "case_item"
+          },
+          "id": {
+            "type": "integer",
+            "readOnly": true,
+            "description": "The unique case item identifier."
+          },
+          "entity": {
+            "x-expandable": true,
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "The unique entity identifier."
+                  },
+                  "type": {
+                    "type": "string",
+                    "const": "record",
+                    "description": "The entity type."
+                  }
+                }
+              },
+              {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/Record"
+                  }
+                ]
+              }
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "description": "Date and time the case item was added to the case."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "description": "Date and time the case item's details were last updated."
+          }
+        }
+      },
+      "List": {
+        "title": "List",
+        "type": "object",
+        "properties": {
+          "object": {
+            "type": "string",
+            "const": "list"
+          },
+          "data": {
+            "type": "array"
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "maximum": 100,
+            "minimum": 1
+          },
+          "has_more": {
+            "type": "boolean"
+          },
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "ClientCase": {
+        "title": "Case",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "object": {
+            "type": "string",
+            "readOnly": true,
+            "const": "case"
+          },
+          "id": {
+            "type": "integer",
+            "readOnly": true,
+            "description": "The unique case identifier."
+          },
+          "name": {
+            "type": "string",
+            "description": "The case name."
+          },
+          "reference": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The case reference."
+          },
+          "status": {
+            "$ref": "#/components/schemas/ClientCaseStatus"
+          },
+          "client": {
+            "readOnly": true,
+            "x-expandable": true,
+            "oneOf": [
+              {
+                "type": "integer",
+                "description": "The unique client identifier."
+              },
+              {
+                "$ref": "#/components/schemas/Client"
+              }
+            ]
+          },
+          "items": {
+            "readOnly": true,
+            "x-expandable": true,
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "description": "The unique case item identifier."
+                }
+              },
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ClientCaseItem"
+                }
+              }
+            ]
+          },
+          "assignees": {
+            "readOnly": true,
+            "x-expandable": true,
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "description": "The unique assignee identifier."
+                }
+              },
+              {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/List"
+                  },
+                  {
+                    "properties": {
+                      "data": {
+                        "items": {
+                          "$ref": "#/components/schemas/TeamMember"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "description": "Date and time the case was created."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "description": "Date and time the case's details were last updated."
+          },
+          "archived_at": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time",
+            "readOnly": true,
+            "description": "Date and time the case was archived."
+          }
+        }
+      },
+      "ClientCaseReview": {
+        "title": "Case Review",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "object": {
+            "type": "string",
+            "readOnly": true,
+            "const": "case_review"
+          },
+          "id": {
+            "type": "integer",
+            "readOnly": true,
+            "description": "The unique case review identifier."
+          },
+          "reviewed_by": {
+            "readOnly": true,
+            "x-expandable": true,
+            "oneOf": [
+              {
+                "type": "integer",
+                "description": "The unique team member identifier."
+              },
+              {
+                "$ref": "#/components/schemas/TeamMember"
+              }
+            ]
+          },
+          "status": {
+            "$ref": "#/components/schemas/ClientCaseStatus"
+          },
+          "from_status": {
+            "readOnly": true,
+            "$ref": "#/components/schemas/ClientCaseStatus",
+            "description": "The previous status of the case review."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "description": "Date and time the case review was added."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "description": "Date and time the case review details were last updated."
+          }
+        }
+      },
+      "ClientCaseStatusAggregate": {
+        "title": "Case status aggregate",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "object": {
+            "type": "string",
+            "const": "case_status_aggregate"
+          },
+          "aggregates": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "$ref": "#/components/schemas/ClientCaseStatus"
+                },
+                "count": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            }
           }
         }
       }

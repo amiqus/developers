@@ -2033,10 +2033,10 @@
           }
         }
       },
-      "patch": {
-        "summary": "Update organisations for a client",
-        "description": "Add the client to one or more organisations, merging them with existing organisation memberships.\n\nTo update an organisation's basic details, refer to **[Update an organisation](#tag/Organisations/operation/patch-organisations-id)**.\n",
-        "operationId": "patch-clients-id-organisations",
+      "post": {
+        "summary": "Add organisations for a client",
+        "description": "Add the client to one or more organisations, merging them with existing organisation memberships.\n\nExisting organisation memberships are not included in the response. Only newly added organisation memberships will be returned.\n\nTo update an organisation's basic details, refer to **[Update an organisation](#tag/Organisations/operation/patch-organisations-id)**.\n",
+        "operationId": "post-clients-id-organisations",
         "security": [
           {
             "personal_token": []
@@ -2060,20 +2060,21 @@
                 }
               },
               "example": [
+                3970,
                 4117
               ]
             }
           }
         },
         "responses": {
-          "200": {
-            "description": "OK",
+          "201": {
+            "description": "Created",
             "content": {
               "application/json": {
                 "schema": {
                   "allOf": [
                     {
-                      "$ref": "#/components/schemas/PaginatedList"
+                      "$ref": "#/components/schemas/List"
                     },
                     {
                       "type": "object",
@@ -2087,39 +2088,69 @@
                     }
                   ]
                 },
-                "example": {
-                  "object": "paginated_list",
-                  "data": [
-                    {
-                      "object": "organisation",
-                      "id": 3970,
-                      "name": "Probert Publishing",
-                      "company_number": "SF12188",
-                      "jurisdiction": "gb",
-                      "created_at": "2022-03-15T21:43:16Z",
-                      "updated_at": "2022-03-15T21:43:16Z",
-                      "archived_at": null
-                    },
-                    {
-                      "object": "organisation",
-                      "id": 4117,
-                      "name": "CusCo",
-                      "company_number": "11249",
-                      "jurisdiction": "us_ca",
-                      "created_at": "2022-03-20T13:12:41Z",
-                      "updated_at": "2022-03-20T13:12:41Z",
-                      "archived_at": null
+                "examples": {
+                  "4117 pre-exists": {
+                    "description": "Membership to 4117 already existed before the request.",
+                    "value": {
+                      "object": "list",
+                      "data": [
+                        {
+                          "object": "organisation",
+                          "id": 3970,
+                          "name": "Probert Publishing",
+                          "company_number": "SF12188",
+                          "jurisdiction": "gb",
+                          "created_at": "2022-03-15T21:43:16Z",
+                          "updated_at": "2022-03-15T21:43:16Z",
+                          "archived_at": null
+                        }
+                      ],
+                      "total": 1,
+                      "count": 1,
+                      "limit": 100,
+                      "has_more": false,
+                      "url": null
                     }
-                  ],
-                  "total": 2,
-                  "count": 2,
-                  "limit": 100,
-                  "current_page": 1,
-                  "total_pages": 1,
-                  "links": null
+                  },
+                  "new": {
+                    "description": "Membership to 3970 and 4117 did not exist before the request.",
+                    "value": {
+                      "object": "list",
+                      "data": [
+                        {
+                          "object": "organisation",
+                          "id": 3970,
+                          "name": "Probert Publishing",
+                          "company_number": "SF12188",
+                          "jurisdiction": "gb",
+                          "created_at": "2022-03-15T21:43:16Z",
+                          "updated_at": "2022-03-15T21:43:16Z",
+                          "archived_at": null
+                        },
+                        {
+                          "object": "organisation",
+                          "id": 4117,
+                          "name": "CusCo",
+                          "company_number": "11249",
+                          "jurisdiction": "us_ca",
+                          "created_at": "2022-03-20T13:12:41Z",
+                          "updated_at": "2022-03-20T13:12:41Z",
+                          "archived_at": null
+                        }
+                      ],
+                      "total": 2,
+                      "count": 2,
+                      "limit": 100,
+                      "has_more": false,
+                      "url": null
+                    }
+                  }
                 }
               }
             }
+          },
+          "204": {
+            "description": "No Content"
           },
           "403": {
             "$ref": "#/components/responses/403"
@@ -2176,14 +2207,14 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "OK",
+          "201": {
+            "description": "Created",
             "content": {
               "application/json": {
                 "schema": {
                   "allOf": [
                     {
-                      "$ref": "#/components/schemas/PaginatedList"
+                      "$ref": "#/components/schemas/List"
                     },
                     {
                       "type": "object",
@@ -2198,7 +2229,7 @@
                   ]
                 },
                 "example": {
-                  "object": "paginated_list",
+                  "object": "list",
                   "data": [
                     {
                       "object": "organisation",
@@ -2224,12 +2255,14 @@
                   "total": 2,
                   "count": 2,
                   "limit": 100,
-                  "current_page": 1,
-                  "total_pages": 1,
-                  "links": null
+                  "has_more": false,
+                  "url": null
                 }
               }
             }
+          },
+          "204": {
+            "description": "No Content"
           },
           "401": {
             "$ref": "#/components/responses/401"
@@ -10985,6 +11018,41 @@
           }
         }
       },
+      "List": {
+        "title": "List",
+        "type": "object",
+        "properties": {
+          "object": {
+            "type": "string",
+            "const": "list"
+          },
+          "data": {
+            "type": "array"
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "maximum": 100,
+            "minimum": 1
+          },
+          "has_more": {
+            "type": "boolean"
+          },
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
       "RecordStatus": {
         "type": "string",
         "enum": [
@@ -15498,41 +15566,6 @@
             "format": "date-time",
             "readOnly": true,
             "description": "Date and time the case item's details were last updated."
-          }
-        }
-      },
-      "List": {
-        "title": "List",
-        "type": "object",
-        "properties": {
-          "object": {
-            "type": "string",
-            "const": "list"
-          },
-          "data": {
-            "type": "array"
-          },
-          "total": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "count": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "limit": {
-            "type": "integer",
-            "maximum": 100,
-            "minimum": 1
-          },
-          "has_more": {
-            "type": "boolean"
-          },
-          "url": {
-            "type": [
-              "string",
-              "null"
-            ]
           }
         }
       },

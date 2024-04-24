@@ -9486,7 +9486,8 @@
                   "total": 1,
                   "count": 1,
                   "limit": 100,
-                  "has_more": false
+                  "has_more": false,
+                  "url": null
                 }
               }
             }
@@ -10090,6 +10091,7 @@
       "PaginatedList": {
         "title": "Paginated List",
         "type": "object",
+        "additionalProperties": false,
         "properties": {
           "object": {
             "type": "string",
@@ -11021,6 +11023,7 @@
       "List": {
         "title": "List",
         "type": "object",
+        "additionalProperties": false,
         "properties": {
           "object": {
             "type": "string",

@@ -8463,7 +8463,7 @@
           },
           {
             "name": "visibility",
-            "description": "Filter cases by their current visibility. Both \"active\" and \"archived\" cases are returnd by default.",
+            "description": "Filter cases by their current visibility. Both \"active\" and \"archived\" cases are returned by default.",
             "in": "query",
             "schema": {
               "type": "string",
@@ -9978,6 +9978,18 @@
             "schema": {
               "type": "string",
               "format": "date-time"
+            }
+          },
+          {
+            "name": "visibility",
+            "description": "Filter cases by their current visibility. Both \"active\" and \"archived\" cases are returned by default.",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "active",
+                "archived"
+              ]
             }
           }
         ],

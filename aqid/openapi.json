@@ -2109,7 +2109,7 @@
                       "count": 1,
                       "limit": 100,
                       "has_more": false,
-                      "url": null
+                      "url": "https://id.amiqus.co/api/v2/clients/73845/organisations"
                     }
                   },
                   "new": {
@@ -2142,7 +2142,7 @@
                       "count": 2,
                       "limit": 100,
                       "has_more": false,
-                      "url": null
+                      "url": "https://id.amiqus.co/api/v2/clients/73845/organisations"
                     }
                   }
                 }
@@ -2256,7 +2256,7 @@
                   "count": 2,
                   "limit": 100,
                   "has_more": false,
-                  "url": null
+                  "url": "https://id.amiqus.co/api/v2/clients/73845/organisations"
                 }
               }
             }
@@ -9487,7 +9487,7 @@
                   "count": 1,
                   "limit": 100,
                   "has_more": false,
-                  "url": null
+                  "url": "https://id.amiqus.co/api/v2/cases/8723/items"
                 }
               }
             }
@@ -11061,10 +11061,7 @@
             "type": "boolean"
           },
           "url": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           }
         }
       },

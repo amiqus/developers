@@ -110,7 +110,7 @@
     "/me": {
       "get": {
         "summary": "Retrieve user account",
-        "description": "Retrieve details of the current user's account.\n\nAccess tokens are scoped to a single user account and team _(if they are a member of more than one)_. This endpoint can be used to determine which user the access token was issued for.\n\nTo retrieve details of the user's role within their current team, refer to **[Retrieve team membership](#tag/Your-Team/operation/get-team-me)**.\n",
+        "description": "Retrieve details of the current user's account.\n\nAccess tokens are scoped to a single user account and team _(if they are a member of more than one)_. This endpoint can be used to determine which user the access token was issued for.\n\nTo retrieve details of the user's role within their current team, refer to **[Retrieve team membership](#operation/get-team-me)**.\n",
         "operationId": "get-me",
         "security": [
           {
@@ -210,7 +210,7 @@
     "/me/teams": {
       "get": {
         "summary": "List all my teams",
-        "description": "List all teams the current user is a member of.\n\nA user can be a member of multiple teams. To retrieve details of the team the access token is scoped to, refer to **[Retrieve current team](#tag/Your-Team/operation/get-team)**.\n",
+        "description": "List all teams the current user is a member of.\n\nA user can be a member of multiple teams. To retrieve details of the team the access token is scoped to, refer to **[Retrieve current team](#operation/get-team)**.\n",
         "operationId": "get-me-teams",
         "security": [
           {
@@ -416,7 +416,7 @@
     "/team/me": {
       "get": {
         "summary": "Retrieve team membership",
-        "description": "Retrieve membership details for the user's current team.\n\nTo retrieve the user's basic details, refer to **[Retrieve user account](#tag/User-Account/operation/get-me)**.\n",
+        "description": "Retrieve membership details for the user's current team.\n\nTo retrieve the user's basic details, refer to **[Retrieve user account](#operation/get-me)**.\n",
         "operationId": "get-team-me",
         "security": [
           {
@@ -544,7 +544,7 @@
     "/clients": {
       "get": {
         "summary": "List all clients",
-        "description": "Returns a paginated list of clients.\n\nTo retrieve a client, refer to **[Retrieve a client](#tag/Clients/operation/get-clients-id)**.\n",
+        "description": "Returns a paginated list of clients.\n\nTo retrieve a client, refer to **[Retrieve a client](#operation/get-clients-id)**.\n",
         "operationId": "get-clients",
         "security": [
           {
@@ -1025,7 +1025,7 @@
       },
       "patch": {
         "summary": "Update a client",
-        "description": "Update the details of a client.\n\nTo add or update a client's address, refer to **[Replace an address for a client](#tag/Clients/operation/put-clients-id-address)**.\n",
+        "description": "Update the details of a client.\n\nTo add or update a client's address, refer to **[Replace an address for a client](#operation/put-clients-id-address)**.\n",
         "operationId": "patch-clients-id",
         "security": [
           {
@@ -1487,7 +1487,7 @@
       },
       "post": {
         "summary": "Set assignees for a client",
-        "description": "Set the assignees for a client according to the exact values provided in the request, overwriting any existing assignees. To add additional assignees, refer to **[Update assignees for a client](#tag/Client-Assignees/operation/patch-clients-id-assignees)**.",
+        "description": "Set the assignees for a client according to the exact values provided in the request, overwriting any existing assignees. To add additional assignees, refer to **[Update assignees for a client](#operation/patch-clients-id-assignees)**.",
         "operationId": "post-clients-id-assignees",
         "security": [
           {
@@ -1776,7 +1776,7 @@
       },
       "delete": {
         "summary": "Delete assignees for a client",
-        "description": "Remove all assignees from a client.\n\nTo delete a single client assignee, see **[Delete an assignee for a client](#tag/Client-Assignees/operation/delete-clients-clientId-assignees-assigneeId)**.\n",
+        "description": "Remove all assignees from a client.\n\nTo delete a single client assignee, see **[Delete an assignee for a client](#operation/delete-clients-clientId-assignees-assigneeId)**.\n",
         "operationId": "delete-clients-id-assignees",
         "security": [
           {
@@ -1826,7 +1826,7 @@
     "/clients/{clientId}/assignees/{assigneeId}": {
       "delete": {
         "summary": "Delete an assignee for a client",
-        "description": "Remove an assignee from a client.\n\nTo delete all client assignees, see **[Delete assignees for a client](#tag/Client-Assignees/operation/delete-clients-id-assignees)**.\n",
+        "description": "Remove an assignee from a client.\n\nTo delete all client assignees, see **[Delete assignees for a client](#operation/delete-clients-id-assignees)**.\n",
         "operationId": "delete-clients-clientId-assignees-assigneeId",
         "security": [
           {
@@ -1905,7 +1905,7 @@
       ],
       "get": {
         "summary": "List all organisations for a client",
-        "description": "Returns a paginated list of a client's organisation memberships. When an organisation is archived all clients associated with the organisation will be removed.\n\nTo retrieve organisations for the team, refer to **[List all organisations](#tag/Organisations/operation/get-organisations)**.\n",
+        "description": "Returns a paginated list of a client's organisation memberships. When an organisation is archived all clients associated with the organisation will be removed.\n\nTo retrieve organisations for the team, refer to **[List all organisations](#operation/get-organisations)**.\n",
         "operationId": "get-clients-id-organisations",
         "security": [
           {
@@ -2035,7 +2035,7 @@
       },
       "post": {
         "summary": "Add organisations for a client",
-        "description": "Add the client to one or more organisations, merging them with existing organisation memberships.\n\nExisting organisation memberships are not included in the response. Only newly added organisation memberships will be returned.\n\nTo update an organisation's basic details, refer to **[Update an organisation](#tag/Organisations/operation/patch-organisations-id)**.\n",
+        "description": "Add the client to one or more organisations, merging them with existing organisation memberships.\n\nExisting organisation memberships are not included in the response. Only newly added organisation memberships will be returned.\n\nTo update an organisation's basic details, refer to **[Update an organisation](#operation/patch-organisations-id)**.\n",
         "operationId": "post-clients-id-organisations",
         "security": [
           {
@@ -3797,7 +3797,7 @@
     "/organisations": {
       "get": {
         "summary": "List all organisations",
-        "description": "Returns a paginated list of the team's organisations.\n\nTo retrieve a specific client's organisations, refer to **[List all organisations for a client](#tag/Client-Organisations/operation/get-clients-id-organisations)**.\n",
+        "description": "Returns a paginated list of the team's organisations.\n\nTo retrieve a specific client's organisations, refer to **[List all organisations for a client](#operation/get-clients-id-organisations)**.\n",
         "operationId": "get-organisations",
         "security": [
           {
@@ -4064,7 +4064,7 @@
       },
       "patch": {
         "summary": "Update an organisation",
-        "description": "Update the details of an organisation.\n\nTo add clients to or remove clients from the organisation, refer to **[Update organisations for a client](#tag/Client-Organisations/operation/patch-clients-id-organisations)**.\n",
+        "description": "Update the details of an organisation.\n\nTo add clients to or remove clients from the organisation, refer to **[Update organisations for a client](#operation/patch-clients-id-organisations)**.\n",
         "operationId": "patch-organisations-id",
         "security": [
           {
@@ -4536,7 +4536,7 @@
                           },
                           "template": {
                             "type": "integer",
-                            "description": "Create a record using an existing [record template ID](#tag/Templates/operation/get-templates-records).\n"
+                            "description": "Create a record using an existing [record template ID](#operation/get-templates-records).\n"
                           },
                           "assignees": {
                             "type": "boolean",
@@ -4913,7 +4913,7 @@
       ],
       "post": {
         "summary": "Archive a record",
-        "description": "Archive a record.\n\nThis operation is deprecated and will be removed in future versions. To archive a record, please refer to **[Update a record](#tag/Records/operation/patch-records-id)**.\n",
+        "description": "Archive a record.\n\nThis operation is deprecated and will be removed in future versions. To archive a record, please refer to **[Update a record](#operation/patch-records-id)**.\n",
         "operationId": "post-records-id-archive",
         "security": [
           {
@@ -5654,7 +5654,7 @@
       },
       "post": {
         "summary": "Set assignees for a record",
-        "description": "Set the assignees for a record according to the exact values provided in the request, overwriting any existing assignees. To add additional assignees, refer to **[Update assignees for a record](#tag/Record-Assignees/operation/patch-records-id-assignees)**.",
+        "description": "Set the assignees for a record according to the exact values provided in the request, overwriting any existing assignees. To add additional assignees, refer to **[Update assignees for a record](#operation/patch-records-id-assignees)**.",
         "operationId": "post-records-id-assignees",
         "security": [
           {
@@ -5987,7 +5987,7 @@
     "/records/{recordId}/assignees/{assigneeId}": {
       "delete": {
         "summary": "Delete assignee for a record",
-        "description": "Remove a single assignee from a record.\n\nTo list all of a record's assignees, see **[List all assignees for a record](#tag/Record-Assignees/operation/get-records-id-assignees)**.\n",
+        "description": "Remove a single assignee from a record.\n\nTo list all of a record's assignees, see **[List all assignees for a record](#operation/get-records-id-assignees)**.\n",
         "operationId": "delete-records-recordId-assignees-assigneeId",
         "security": [
           {
@@ -6722,7 +6722,7 @@
     "/webhooks": {
       "get": {
         "summary": "List all webhooks",
-        "description": "Returns a paginated list of webhooks.\n\nTo retrieve a webhook, refer to **[Retrieve a webhook](#tag/Webhooks/operation/get-webhooks-id)**.\n",
+        "description": "Returns a paginated list of webhooks.\n\nTo retrieve a webhook, refer to **[Retrieve a webhook](#operation/get-webhooks-id)**.\n",
         "operationId": "get-webhooks",
         "security": [
           {

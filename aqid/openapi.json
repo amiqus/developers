@@ -8374,6 +8374,29 @@
         }
       }
     },
+    "/checks/{checkId}/employment/activities/{activityUuid}/evidence": {
+      "parameters": [
+        {
+          "name": "checkId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "description": "Unique check identifier."
+          }
+        },
+        {
+          "name": "activityUuid",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Unique employment activity identifier."
+          }
+        }
+      ]
+    },
     "/cases": {
       "get": {
         "summary": "List all cases",

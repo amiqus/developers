@@ -3290,6 +3290,119 @@
             "$ref": "#/components/responses/403"
           }
         }
+      },
+      "post": {
+        "summary": "Create a file for a client",
+        "description": "Create a file for a client.",
+        "operationId": "post-clients-id-files",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Client Files"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "attachment": {
+                    "type": "integer",
+                    "description": "The unique identifier of an attachment\n\nTo create an attachment, refer to the **[Create an attachment](#tag/Other-Resources/operation/post-attachments)**.\n"
+                  },
+                  "name": {
+                    "$ref": "#/components/schemas/name"
+                  },
+                  "expires_at": {
+                    "$ref": "#/components/schemas/expires_at"
+                  }
+                },
+                "required": [
+                  "attachment"
+                ]
+              },
+              "example": {
+                "attachment": 31782,
+                "name": "NDA-final",
+                "expires_at": "2025-01-01T23:59:59Z"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientFile"
+                },
+                "examples": {
+                  "external": {
+                    "value": {
+                      "object": "client_file",
+                      "id": 31788,
+                      "type": "internal",
+                      "source": {
+                        "id": 31788,
+                        "type": "client"
+                      },
+                      "name": "NDA-final",
+                      "attachment": {
+                        "object": "attachment",
+                        "id": 31782,
+                        "name": "73db4d13-6c1b-40b1-94fc-2cf6d7ac22d2.pdf",
+                        "original": "NDA-final.pdf",
+                        "type": "application/pdf",
+                        "size": 16053,
+                        "av_status": "clean",
+                        "created_at": "2019-08-24T14:15:22Z",
+                        "updated_at": "2019-08-24T14:15:22Z"
+                      },
+                      "created_by": {
+                        "id": 121,
+                        "type": "team_member"
+                      },
+                      "expires_at": "2025-01-01T23:59:59Z",
+                      "created_at": "2019-08-24T14:15:22Z",
+                      "updated_at": "2019-08-24T14:15:22Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Client not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          }
+        }
       }
     },
     "/clients/{clientId}/files/{fileId}/download": {
@@ -13636,6 +13749,7 @@
           },
           "type": {
             "type": "string",
+            "readOnly": true,
             "enum": [
               "internal",
               "sent",
@@ -13702,12 +13816,16 @@
             ]
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "minimum": 1,
+            "maximum": 255
           },
           "attachment": {
-            "$ref": "#/components/schemas/Attachment"
+            "$ref": "#/components/schemas/Attachment",
+            "readOnly": true
           },
           "created_by": {
+            "readOnly": true,
             "x-expandable": true,
             "oneOf": [
               {
@@ -13733,14 +13851,6 @@
               }
             ]
           },
-          "expires_at": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "format": "date-time",
-            "description": "The date and time an uploaded file expires."
-          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -13750,8 +13860,29 @@
             "type": "string",
             "format": "date-time",
             "readOnly": true
+          },
+          "expires_at": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time",
+            "description": "The date and time an uploaded file expires."
           }
         }
+      },
+      "name": {
+        "type": "string",
+        "minimum": 1,
+        "maximum": 255
+      },
+      "expires_at": {
+        "type": [
+          "null",
+          "string"
+        ],
+        "format": "date-time",
+        "description": "The date and time an uploaded file expires."
       },
       "ClientCorrection": {
         "title": "Client Correction",

@@ -1398,19 +1398,7 @@
                       "properties": {
                         "data": {
                           "items": {
-                            "allOf": [
-                              {
-                                "$ref": "#/components/schemas/User-2"
-                              },
-                              {
-                                "type": "object",
-                                "properties": {
-                                  "user": {
-                                    "$ref": "#/components/schemas/User"
-                                  }
-                                }
-                              }
-                            ]
+                            "$ref": "#/components/schemas/TeamMember-2"
                           }
                         }
                       }
@@ -1423,31 +1411,25 @@
                     {
                       "object": "assignee",
                       "id": 34535,
-                      "type": "user",
-                      "user": {
-                        "object": "user",
+                      "type": "team_member",
+                      "team_member": {
+                        "object": "team_member",
                         "id": 121,
                         "name": "Lorraine Baines",
                         "email": "lorraine@example.com",
-                        "is_verified": true,
-                        "is_disabled": false,
-                        "created_at": "2019-08-24T14:15:22Z",
-                        "updated_at": "2019-08-24T14:15:22Z"
+                        "role": "owner"
                       }
                     },
                     {
                       "object": "assignee",
                       "id": 34538,
-                      "type": "user",
-                      "user": {
-                        "object": "user",
+                      "type": "team_member",
+                      "team_member": {
+                        "object": "team_member",
                         "id": 472,
                         "name": "Dennis Jones",
                         "email": "dennis@example.com",
-                        "is_verified": true,
-                        "is_disabled": false,
-                        "created_at": "2019-08-25T11:11:07Z",
-                        "updated_at": "2019-08-25T11:11:07Z"
+                        "role": "member"
                       }
                     }
                   ],
@@ -1486,8 +1468,8 @@
         }
       },
       "post": {
-        "summary": "Set assignees for a client",
-        "description": "Set the assignees for a client according to the exact values provided in the request, overwriting any existing assignees. To add additional assignees, refer to **[Update assignees for a client](#operation/patch-clients-id-assignees)**.",
+        "summary": "Add assignees to a client",
+        "description": "Add one or more assignees to a client, merging them with existing assignees.\n\nTo replace assignees, refer to **[Replace assignees for a client](#operation/put-clients-id-assignees)**.\n",
         "operationId": "post-clients-id-assignees",
         "security": [
           {
@@ -1506,25 +1488,27 @@
               "schema": {
                 "type": "array",
                 "minItems": 1,
+                "maxItems": 100,
                 "items": {
                   "allOf": [
                     {
-                      "$ref": "#/components/schemas/User-2"
+                      "$ref": "#/components/schemas/Assignee"
                     },
                     {
                       "type": "object",
                       "required": [
                         "type",
-                        "user"
+                        "team_member"
                       ],
                       "additionalProperties": false,
                       "properties": {
-                        "user": {
+                        "team_member": {
                           "type": "integer",
-                          "description": "The unique identifier of the user to be assigned to the client."
+                          "description": "The unique identifier of the team member to be assigned to the client."
                         },
                         "type": {
                           "type": "string",
+                          "const": "team_member",
                           "description": "The type of assignee to be assigned to the client."
                         }
                       }
@@ -1534,12 +1518,12 @@
               },
               "example": [
                 {
-                  "type": "user",
-                  "user": 121
+                  "type": "team_member",
+                  "team_member": 121
                 },
                 {
-                  "type": "user",
-                  "user": 472
+                  "type": "team_member",
+                  "team_member": 472
                 }
               ]
             }
@@ -1551,51 +1535,74 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/schema"
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/List"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "total": {
+                          "minimum": 1
+                        },
+                        "count": {
+                          "minimum": 1,
+                          "maximum": 100
+                        },
+                        "limit": {
+                          "minimum": 100,
+                          "const": 100
+                        },
+                        "data": {
+                          "minItems": 1,
+                          "maxItems": 100,
+                          "items": {
+                            "$ref": "#/components/schemas/TeamMember-2"
+                          }
+                        }
+                      }
+                    }
+                  ]
                 },
                 "example": {
-                  "object": "paginated_list",
+                  "object": "list",
                   "data": [
                     {
                       "object": "assignee",
                       "id": 34535,
-                      "type": "user",
-                      "user": {
-                        "object": "user",
+                      "type": "team_member",
+                      "team_member": {
+                        "object": "team_member",
                         "id": 121,
                         "name": "Lorraine Baines",
                         "email": "lorraine@example.com",
-                        "is_verified": true,
-                        "is_disabled": false,
-                        "created_at": "2019-08-24T14:15:22Z",
-                        "updated_at": "2019-08-24T14:15:22Z"
+                        "role": "owner"
                       }
                     },
                     {
                       "object": "assignee",
                       "id": 34538,
-                      "type": "user",
-                      "user": {
-                        "object": "user",
+                      "type": "team_member",
+                      "team_member": {
+                        "object": "team_member",
                         "id": 472,
                         "name": "Dennis Jones",
                         "email": "dennis@example.com",
-                        "is_verified": true,
-                        "is_disabled": false,
-                        "created_at": "2019-08-25T11:11:07Z",
-                        "updated_at": "2019-08-25T11:11:07Z"
+                        "role": "member"
                       }
                     }
                   ],
                   "total": 2,
                   "count": 2,
                   "limit": 100,
-                  "current_page": 1,
-                  "total_pages": 1,
-                  "links": null
+                  "has_more": false,
+                  "url": "https://id.amiqus.co/api/v2/clients/4672/assignees"
                 }
               }
             }
+          },
+          "204": {
+            "description": "No Content"
           },
           "401": {
             "$ref": "#/components/responses/401"
@@ -1624,10 +1631,10 @@
           }
         }
       },
-      "patch": {
-        "summary": "Update assignees for a client",
-        "description": "Add one or more assignees to a client, merging them with existing assignees.",
-        "operationId": "patch-clients-id-assignees",
+      "put": {
+        "summary": "Replace assignees for a client",
+        "description": "Replace all existing assignees for a client.\n\nTo add additional assignees without replacing existing, refer to **[Add assignees for a client](#operation/post-clients-id-assignees)**.\n",
+        "operationId": "put-clients-id-assignees",
         "security": [
           {
             "personal_token": []
@@ -1645,21 +1652,27 @@
               "schema": {
                 "type": "array",
                 "minItems": 1,
+                "maxItems": 100,
                 "items": {
-                  "anyOf": [
+                  "allOf": [
                     {
-                      "$ref": "#/components/schemas/User-2",
+                      "$ref": "#/components/schemas/Assignee"
+                    },
+                    {
+                      "type": "object",
                       "required": [
                         "type",
-                        "user"
+                        "team_member"
                       ],
+                      "additionalProperties": false,
                       "properties": {
-                        "user": {
+                        "team_member": {
                           "type": "integer",
-                          "description": "The unique identifier of the user to be assigned to the client."
+                          "description": "The unique identifier of the team member to be assigned to the client."
                         },
                         "type": {
                           "type": "string",
+                          "const": "team_member",
                           "description": "The type of assignee to be assigned to the client."
                         }
                       }
@@ -1669,89 +1682,94 @@
               },
               "example": [
                 {
-                  "type": "user",
-                  "user": 523
+                  "type": "team_member",
+                  "team_member": 121
+                },
+                {
+                  "type": "team_member",
+                  "team_member": 523
                 }
               ]
             }
           }
         },
         "responses": {
-          "200": {
-            "description": "OK",
+          "201": {
+            "description": "Created",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/schema"
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/List"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "total": {
+                          "minimum": 1
+                        },
+                        "count": {
+                          "minimum": 1,
+                          "maximum": 100
+                        },
+                        "limit": {
+                          "minimum": 100,
+                          "const": 100
+                        },
+                        "data": {
+                          "minItems": 1,
+                          "maxItems": 100,
+                          "items": {
+                            "$ref": "#/components/schemas/TeamMember-2"
+                          }
+                        }
+                      }
+                    }
+                  ]
                 },
                 "example": {
-                  "object": "paginated_list",
+                  "object": "list",
                   "data": [
                     {
                       "object": "assignee",
                       "id": 34535,
-                      "type": "user",
-                      "user": {
-                        "object": "user",
+                      "type": "team_member",
+                      "team_member": {
+                        "object": "team_member",
                         "id": 121,
                         "name": "Lorraine Baines",
                         "email": "lorraine@example.com",
-                        "is_verified": true,
-                        "is_disabled": false,
-                        "created_at": "2019-08-24T14:15:22Z",
-                        "updated_at": "2019-08-24T14:15:22Z"
-                      }
-                    },
-                    {
-                      "object": "assignee",
-                      "id": 34538,
-                      "type": "user",
-                      "user": {
-                        "object": "user",
-                        "id": 472,
-                        "name": "Dennis Jones",
-                        "email": "dennis@example.com",
-                        "is_verified": true,
-                        "is_disabled": false,
-                        "created_at": "2019-08-25T11:11:07Z",
-                        "updated_at": "2019-08-25T11:11:07Z"
+                        "role": "member"
                       }
                     },
                     {
                       "object": "assignee",
                       "id": 34541,
-                      "type": "user",
-                      "user": {
-                        "object": "user",
+                      "type": "team_member",
+                      "team_member": {
+                        "object": "team_member",
                         "id": 523,
                         "name": "Clara Clayton",
                         "email": "clara@example.com",
-                        "is_verified": true,
-                        "is_disabled": false,
-                        "created_at": "2019-08-25T13:54:32Z",
-                        "updated_at": "2019-08-25T13:54:32Z"
+                        "role": "member"
                       }
                     }
                   ],
-                  "total": 3,
-                  "count": 3,
+                  "total": 2,
+                  "count": 2,
                   "limit": 100,
-                  "current_page": 1,
-                  "total_pages": 1,
-                  "links": null
+                  "has_more": false,
+                  "url": "https://id.amiqus.co/api/v2/clients/4672/assignees"
                 }
               }
             }
           },
-          "201": {
-            "description": "Created",
-            "$ref": "#/components/responses/200"
+          "204": {
+            "description": "No Content"
           },
           "401": {
             "$ref": "#/components/responses/401"
-          },
-          "403": {
-            "$ref": "#/components/responses/403"
           },
           "404": {
             "description": "Not Found",
@@ -5681,19 +5699,7 @@
                       "properties": {
                         "data": {
                           "items": {
-                            "allOf": [
-                              {
-                                "$ref": "#/components/schemas/User-2"
-                              },
-                              {
-                                "type": "object",
-                                "properties": {
-                                  "user": {
-                                    "$ref": "#/components/schemas/User"
-                                  }
-                                }
-                              }
-                            ]
+                            "$ref": "#/components/schemas/TeamMember-2"
                           }
                         }
                       }
@@ -5706,31 +5712,25 @@
                     {
                       "object": "assignee",
                       "id": 34535,
-                      "type": "user",
-                      "user": {
-                        "object": "user",
+                      "type": "team_member",
+                      "team_member": {
+                        "object": "team_member",
                         "id": 121,
                         "name": "Lorraine Baines",
                         "email": "lorraine@example.com",
-                        "is_verified": true,
-                        "is_disabled": false,
-                        "created_at": "2019-08-24T14:15:22Z",
-                        "updated_at": "2019-08-24T14:15:22Z"
+                        "role": "owner"
                       }
                     },
                     {
                       "object": "assignee",
                       "id": 34538,
-                      "type": "user",
-                      "user": {
-                        "object": "user",
+                      "type": "team_member",
+                      "team_member": {
+                        "object": "team_member",
                         "id": 472,
                         "name": "Dennis Jones",
                         "email": "dennis@example.com",
-                        "is_verified": true,
-                        "is_disabled": false,
-                        "created_at": "2019-08-25T11:11:07Z",
-                        "updated_at": "2019-08-25T11:11:07Z"
+                        "role": "member"
                       }
                     }
                   ],
@@ -5766,8 +5766,8 @@
         }
       },
       "post": {
-        "summary": "Set assignees for a record",
-        "description": "Set the assignees for a record according to the exact values provided in the request, overwriting any existing assignees. To add additional assignees, refer to **[Update assignees for a record](#operation/patch-records-id-assignees)**.",
+        "summary": "Add assignees to a record",
+        "description": "Add one or more assignees to a record, merging them with existing assignees.\n\nTo replace assignees, refer to **[Replace assignees for a record](#operation/put-records-id-assignees)**.\n",
         "operationId": "post-records-id-assignees",
         "security": [
           {
@@ -5786,25 +5786,27 @@
               "schema": {
                 "type": "array",
                 "minItems": 1,
+                "maxItems": 100,
                 "items": {
                   "allOf": [
                     {
-                      "$ref": "#/components/schemas/User-2"
+                      "$ref": "#/components/schemas/Assignee"
                     },
                     {
                       "type": "object",
                       "required": [
                         "type",
-                        "user"
+                        "team_member"
                       ],
                       "additionalProperties": false,
                       "properties": {
-                        "user": {
+                        "team_member": {
                           "type": "integer",
-                          "description": "The unique identifier of the user to be assigned to the record."
+                          "description": "The unique identifier of the team member to be assigned to the record."
                         },
                         "type": {
                           "type": "string",
+                          "const": "team_member",
                           "description": "The type of assignee to be assigned to the record."
                         }
                       }
@@ -5814,12 +5816,12 @@
               },
               "example": [
                 {
-                  "type": "user",
-                  "user": 121
+                  "type": "team_member",
+                  "team_member": 121
                 },
                 {
-                  "type": "user",
-                  "user": 472
+                  "type": "team_member",
+                  "team_member": 472
                 }
               ]
             }
@@ -5831,51 +5833,74 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/schema"
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/List"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "total": {
+                          "minimum": 1
+                        },
+                        "count": {
+                          "minimum": 1,
+                          "maximum": 100
+                        },
+                        "limit": {
+                          "minimum": 100,
+                          "const": 100
+                        },
+                        "data": {
+                          "minItems": 1,
+                          "maxItems": 100,
+                          "items": {
+                            "$ref": "#/components/schemas/TeamMember-2"
+                          }
+                        }
+                      }
+                    }
+                  ]
                 },
                 "example": {
-                  "object": "paginated_list",
+                  "object": "list",
                   "data": [
                     {
                       "object": "assignee",
                       "id": 34535,
-                      "type": "user",
-                      "user": {
-                        "object": "user",
+                      "type": "team_member",
+                      "team_member": {
+                        "object": "team_member",
                         "id": 121,
                         "name": "Lorraine Baines",
                         "email": "lorraine@example.com",
-                        "is_verified": true,
-                        "is_disabled": false,
-                        "created_at": "2019-08-24T14:15:22Z",
-                        "updated_at": "2019-08-24T14:15:22Z"
+                        "role": "owner"
                       }
                     },
                     {
                       "object": "assignee",
                       "id": 34538,
-                      "type": "user",
-                      "user": {
-                        "object": "user",
+                      "type": "team_member",
+                      "team_member": {
+                        "object": "team_member",
                         "id": 472,
                         "name": "Dennis Jones",
                         "email": "dennis@example.com",
-                        "is_verified": true,
-                        "is_disabled": false,
-                        "created_at": "2019-08-25T11:11:07Z",
-                        "updated_at": "2019-08-25T11:11:07Z"
+                        "role": "member"
                       }
                     }
                   ],
                   "total": 2,
                   "count": 2,
                   "limit": 100,
-                  "current_page": 1,
-                  "total_pages": 1,
-                  "links": null
+                  "has_more": false,
+                  "url": "https://id.amiqus.co/api/v2/records/87249/assignees"
                 }
               }
             }
+          },
+          "204": {
+            "description": "No Content"
           },
           "401": {
             "$ref": "#/components/responses/401"
@@ -5901,10 +5926,10 @@
           }
         }
       },
-      "patch": {
-        "summary": "Update assignees for a record",
-        "description": "Add one or more assignees to a record, merging them with existing assignees.",
-        "operationId": "patch-records-id-assignees",
+      "put": {
+        "summary": "Replace assignees for a record",
+        "description": "Replacing all existing assignees for a record.\n\nTo add additional assignees, refer to **[Add assignees for a record](#operation/post-records-id-assignees)**.\n",
+        "operationId": "put-records-id-assignees",
         "security": [
           {
             "personal_token": []
@@ -5922,21 +5947,27 @@
               "schema": {
                 "type": "array",
                 "minItems": 1,
+                "maxItems": 100,
                 "items": {
-                  "anyOf": [
+                  "allOf": [
                     {
-                      "$ref": "#/components/schemas/User-2",
+                      "$ref": "#/components/schemas/Assignee"
+                    },
+                    {
+                      "type": "object",
                       "required": [
                         "type",
-                        "user"
+                        "team_member"
                       ],
+                      "additionalProperties": false,
                       "properties": {
-                        "user": {
+                        "team_member": {
                           "type": "integer",
-                          "description": "The unique identifier of the user to be assigned to the record."
+                          "description": "The unique identifier of the team member to be assigned to the record."
                         },
                         "type": {
                           "type": "string",
+                          "const": "team_member",
                           "description": "The type of assignee to be assigned to the record."
                         }
                       }
@@ -5946,83 +5977,91 @@
               },
               "example": [
                 {
-                  "type": "user",
-                  "user": 523
+                  "type": "team_member",
+                  "team_member": 121
+                },
+                {
+                  "type": "team_member",
+                  "team_member": 523
                 }
               ]
             }
           }
         },
         "responses": {
-          "200": {
-            "description": "OK",
+          "201": {
+            "description": "Created",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/schema"
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/List"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "total": {
+                          "minimum": 1
+                        },
+                        "count": {
+                          "minimum": 1,
+                          "maximum": 100
+                        },
+                        "limit": {
+                          "minimum": 100,
+                          "const": 100
+                        },
+                        "data": {
+                          "minItems": 1,
+                          "maxItems": 100,
+                          "items": {
+                            "$ref": "#/components/schemas/TeamMember-2"
+                          }
+                        }
+                      }
+                    }
+                  ]
                 },
                 "example": {
-                  "object": "paginated_list",
+                  "object": "list",
                   "data": [
                     {
                       "object": "assignee",
                       "id": 34535,
-                      "type": "user",
-                      "user": {
-                        "object": "user",
+                      "type": "team_member",
+                      "team_member": {
+                        "object": "team_member",
                         "id": 121,
                         "name": "Lorraine Baines",
                         "email": "lorraine@example.com",
-                        "is_verified": true,
-                        "is_disabled": false,
-                        "created_at": "2019-08-24T14:15:22Z",
-                        "updated_at": "2019-08-24T14:15:22Z"
-                      }
-                    },
-                    {
-                      "object": "assignee",
-                      "id": 34538,
-                      "type": "user",
-                      "user": {
-                        "object": "user",
-                        "id": 472,
-                        "name": "Dennis Jones",
-                        "email": "dennis@example.com",
-                        "is_verified": true,
-                        "is_disabled": false,
-                        "created_at": "2019-08-25T11:11:07Z",
-                        "updated_at": "2019-08-25T11:11:07Z"
+                        "role": "owner"
                       }
                     },
                     {
                       "object": "assignee",
                       "id": 34541,
-                      "type": "user",
-                      "user": {
-                        "object": "user",
+                      "type": "team_member",
+                      "team_member": {
+                        "object": "team_member",
                         "id": 523,
                         "name": "Clara Clayton",
                         "email": "clara@example.com",
-                        "is_verified": true,
-                        "is_disabled": false,
-                        "created_at": "2019-08-25T13:54:32Z",
-                        "updated_at": "2019-08-25T13:54:32Z"
+                        "role": "owner"
                       }
                     }
                   ],
-                  "total": 3,
-                  "count": 3,
+                  "total": 2,
+                  "count": 2,
                   "limit": 100,
-                  "current_page": 1,
-                  "total_pages": 1,
-                  "links": null
+                  "has_more": false,
+                  "url": "https://id.amiqus.co/api/v2/records/87249/assignees"
                 }
               }
             }
           },
-          "201": {
-            "description": "Created",
-            "$ref": "#/components/responses/200"
+          "204": {
+            "description": "No Content"
           },
           "401": {
             "$ref": "#/components/responses/401"
@@ -10923,8 +10962,8 @@
           }
         }
       },
-      "User-2": {
-        "title": "User Assignee",
+      "TeamMember-2": {
+        "title": "Team Member Assignee",
         "allOf": [
           {
             "$ref": "#/components/schemas/Assignee"
@@ -10934,40 +10973,48 @@
             "properties": {
               "type": {
                 "type": "string",
-                "const": "user"
+                "const": "team_member"
+              },
+              "team_member": {
+                "type": "object",
+                "$ref": "#/components/schemas/TeamMember"
               }
             }
           }
         ]
       },
-      "schema": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/PaginatedList"
+      "List": {
+        "title": "List",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "object": {
+            "type": "string",
+            "const": "list"
           },
-          {
-            "type": "object",
-            "properties": {
-              "data": {
-                "items": {
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/User-2"
-                    },
-                    {
-                      "type": "object",
-                      "properties": {
-                        "user": {
-                          "$ref": "#/components/schemas/User"
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            }
+          "data": {
+            "type": "array"
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "maximum": 100,
+            "minimum": 1
+          },
+          "has_more": {
+            "type": "boolean"
+          },
+          "url": {
+            "type": "string"
           }
-        ]
+        }
       },
       "Organisation": {
         "title": "Organisation",
@@ -11165,39 +11212,6 @@
             "format": "date-time",
             "readOnly": true,
             "description": "Date and time the organisation was archived."
-          }
-        }
-      },
-      "List": {
-        "title": "List",
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "object": {
-            "type": "string",
-            "const": "list"
-          },
-          "data": {
-            "type": "array"
-          },
-          "total": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "count": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "limit": {
-            "type": "integer",
-            "maximum": 100,
-            "minimum": 1
-          },
-          "has_more": {
-            "type": "boolean"
-          },
-          "url": {
-            "type": "string"
           }
         }
       },
@@ -15957,83 +15971,6 @@
       }
     },
     "responses": {
-      "200": {
-        "description": "OK",
-        "content": {
-          "application/json": {
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/components/schemas/PaginatedList"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "items": {
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/User-2"
-                          },
-                          {
-                            "type": "object",
-                            "properties": {
-                              "user": {
-                                "$ref": "#/components/schemas/User"
-                              }
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  }
-                }
-              ]
-            },
-            "example": {
-              "object": "paginated_list",
-              "data": [
-                {
-                  "object": "assignee",
-                  "id": 34535,
-                  "type": "user",
-                  "user": {
-                    "object": "user",
-                    "id": 121,
-                    "name": "Lorraine Baines",
-                    "email": "lorraine@example.com",
-                    "is_verified": true,
-                    "is_disabled": false,
-                    "created_at": "2019-08-24T14:15:22Z",
-                    "updated_at": "2019-08-24T14:15:22Z"
-                  }
-                },
-                {
-                  "object": "assignee",
-                  "id": 34538,
-                  "type": "user",
-                  "user": {
-                    "object": "user",
-                    "id": 472,
-                    "name": "Dennis Jones",
-                    "email": "dennis@example.com",
-                    "is_verified": true,
-                    "is_disabled": false,
-                    "created_at": "2019-08-25T11:11:07Z",
-                    "updated_at": "2019-08-25T11:11:07Z"
-                  }
-                }
-              ],
-              "total": 2,
-              "count": 2,
-              "limit": 100,
-              "current_page": 1,
-              "total_pages": 1,
-              "links": null
-            }
-          }
-        }
-      },
       "401": {
         "description": "Unauthorized",
         "content": {

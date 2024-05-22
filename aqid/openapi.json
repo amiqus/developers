@@ -3122,13 +3122,14 @@
                   "photo_id",
                   "reference",
                   "banking_information",
+                  "employment_referencing",
                   "requested",
                   "sent",
                   "returned"
                 ]
               }
             },
-            "description": "Some sources can be filtered by type:\n\n- **check**:\n   - `photo_id`\n   - `reference`\n   - `banking_information`\n- **record_document**\n  - `requested`, `sent`, `returned`\n\n**Note:** to filter by source type, the `source` parameter must also be provided.\n"
+            "description": "Some sources can be filtered by type:\n\n- **check**:\n   - `photo_id`\n   - `reference`\n   - `banking_information`\n   - `employment_referencing`\n- **record_document**\n  - `requested`, `sent`, `returned`\n\n**Note:** to filter by source type, the `source` parameter must also be provided.\n"
           },
           {
             "name": "search",

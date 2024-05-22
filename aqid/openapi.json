@@ -74,6 +74,9 @@
       "name": "Forms"
     },
     {
+      "name": "Attachments"
+    },
+    {
       "name": "Other Resources"
     },
     {
@@ -8415,7 +8418,7 @@
           }
         ],
         "tags": [
-          "Other Resources"
+          "Attachments"
         ],
         "requestBody": {
           "content": {
@@ -8473,6 +8476,54 @@
           },
           "422": {
             "$ref": "#/components/responses/422"
+          }
+        }
+      }
+    },
+    "/attachments/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/resourceId",
+          "description": "The unique attachment identifier."
+        }
+      ],
+      "delete": {
+        "summary": "Delete an attachment",
+        "description": "Delete an attachment\n\nOnly unassigned attachment can be deleted.\n",
+        "operationId": "delete-attachments-id",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Attachments"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Attachment not found"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }

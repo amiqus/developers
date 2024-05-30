@@ -1472,7 +1472,7 @@
       },
       "post": {
         "summary": "Add assignees to a client",
-        "description": "Add one or more assignees to a client, merging them with existing assignees.\n\nTo replace assignees, refer to **[Replace assignees for a client](#operation/put-clients-id-assignees)**.\n",
+        "description": "Add one or more assignees to a client, merging them with existing assignees.\n\nExisting assignees to the client are not included in the response. Only added assignees to the client will be returned.\n\nTo replace assignees, refer to **[Replace assignees for a client](#operation/put-clients-id-assignees)**.\n",
         "operationId": "post-clients-id-assignees",
         "security": [
           {
@@ -1534,7 +1534,7 @@
         },
         "responses": {
           "201": {
-            "description": "Created",
+            "description": "Created (one or more assignees to the client have been added)",
             "content": {
               "application/json": {
                 "schema": {
@@ -1605,7 +1605,7 @@
             }
           },
           "204": {
-            "description": "No Content"
+            "description": "No Content (no new assignees to the client have been added)"
           },
           "401": {
             "$ref": "#/components/responses/401"
@@ -1636,7 +1636,7 @@
       },
       "put": {
         "summary": "Replace assignees for a client",
-        "description": "Replace all existing assignees for a client.\n\nTo add additional assignees without replacing existing, refer to **[Add assignees for a client](#operation/post-clients-id-assignees)**.\n",
+        "description": "Replace all existing assignees for a client.\n\nExisting assignees to the client that are included in the request will be part of the updated assignees to the client but they will not be shown in the response. Only added assignees will be returned.\n\nTo add additional assignees without replacing existing, refer to **[Add assignees for a client](#operation/post-clients-id-assignees)**.\n",
         "operationId": "put-clients-id-assignees",
         "security": [
           {
@@ -1698,7 +1698,7 @@
         },
         "responses": {
           "201": {
-            "description": "Created",
+            "description": "Created (one or more assignees to the client have been replaced)",
             "content": {
               "application/json": {
                 "schema": {
@@ -1769,7 +1769,7 @@
             }
           },
           "204": {
-            "description": "No Content"
+            "description": "No Content (assignees to the client have been successfully deleted or there are no changes)"
           },
           "401": {
             "$ref": "#/components/responses/401"
@@ -2059,7 +2059,7 @@
       },
       "post": {
         "summary": "Add organisations for a client",
-        "description": "Add the client to one or more organisations, merging them with existing organisation memberships.\n\nExisting organisation memberships are not included in the response. Only newly added organisation memberships will be returned.\n\nTo update an organisation's basic details, refer to **[Update an organisation](#operation/patch-organisations-id)**.\n",
+        "description": "Add the client to one or more organisations, merging them with existing organisation memberships. Existing organisation memberships are not included in the response. Only added organisation memberships will be returned.\n\nTo replace organisations, refer to **[Replace organisations for a client](#operation/put-clients-id-organisations)**.\n\nTo update an organisation's basic details, refer to **[Update an organisation](#operation/patch-organisations-id)**.\n",
         "operationId": "post-clients-id-organisations",
         "security": [
           {
@@ -2092,7 +2092,7 @@
         },
         "responses": {
           "201": {
-            "description": "Created",
+            "description": "Created (one or more organisations to the client have been added)",
             "content": {
               "application/json": {
                 "schema": {
@@ -2174,7 +2174,7 @@
             }
           },
           "204": {
-            "description": "No Content"
+            "description": "No Content (no new organisations to the client have been added)"
           },
           "403": {
             "$ref": "#/components/responses/403"
@@ -2199,7 +2199,7 @@
       },
       "put": {
         "summary": "Replace organisations for a client",
-        "description": "Replaces a client's organisation memberships.",
+        "description": "Replaces a client's organisation memberships. Existing organisation memberships that are included in the request will be part of the updated organisation memberships, but they will not be shown in the response. Only added organisations will be returned.\n\nTo add additional organisations without replacing existing, refer to **[Add organisations for a client](#operation/post-clients-id-organisations)**.\n",
         "operationId": "put-clients-id-organisations",
         "security": [
           {
@@ -2232,7 +2232,7 @@
         },
         "responses": {
           "201": {
-            "description": "Created",
+            "description": "Created (one or more organisations to the client have been replaced)",
             "content": {
               "application/json": {
                 "schema": {
@@ -2286,7 +2286,7 @@
             }
           },
           "204": {
-            "description": "No Content"
+            "description": "No Content (organisations to the client have been successfully deleted or there are no changes)"
           },
           "401": {
             "$ref": "#/components/responses/401"
@@ -5777,7 +5777,7 @@
       },
       "post": {
         "summary": "Add assignees to a record",
-        "description": "Add one or more assignees to a record, merging them with existing assignees.\n\nTo replace assignees, refer to **[Replace assignees for a record](#operation/put-records-id-assignees)**.\n",
+        "description": "Add one or more assignees to a record, merging them with existing assignees.\n\nExisting assignees to the record are not included in the response. Only added assignees to the record will be returned.\n\nTo replace assignees, refer to **[Replace assignees for a record](#operation/put-records-id-assignees)**.\n",
         "operationId": "post-records-id-assignees",
         "security": [
           {
@@ -5839,7 +5839,7 @@
         },
         "responses": {
           "201": {
-            "description": "Created",
+            "description": "Created (one or more assignees to the record have been added)",
             "content": {
               "application/json": {
                 "schema": {
@@ -5910,7 +5910,7 @@
             }
           },
           "204": {
-            "description": "No Content"
+            "description": "No Content (assignees to the record have been successfully deleted or there are no changes)"
           },
           "401": {
             "$ref": "#/components/responses/401"
@@ -5941,7 +5941,7 @@
       },
       "put": {
         "summary": "Replace assignees for a record",
-        "description": "Replacing all existing assignees for a record.\n\nTo add additional assignees, refer to **[Add assignees for a record](#operation/post-records-id-assignees)**.\n",
+        "description": "Replacing all existing assignees for a record.\n\nExisting assignees to the record that are included in the request will be part of the updated assignees to the record but they will not be shown in the response. Only added assignees will be returned.\n\nTo add additional assignees, refer to **[Add assignees for a record](#operation/post-records-id-assignees)**.\n",
         "operationId": "put-records-id-assignees",
         "security": [
           {
@@ -6003,7 +6003,7 @@
         },
         "responses": {
           "201": {
-            "description": "Created",
+            "description": "Created (one or more assignees to the record have been replaced)",
             "content": {
               "application/json": {
                 "schema": {
@@ -6074,7 +6074,7 @@
             }
           },
           "204": {
-            "description": "No Content"
+            "description": "No Content (no new assignees to the record have been replaced)"
           },
           "401": {
             "$ref": "#/components/responses/401"

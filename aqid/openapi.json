@@ -1630,7 +1630,19 @@
             }
           },
           "422": {
-            "$ref": "#/components/responses/422"
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/schema"
+                },
+                "example": {
+                  "errors": [
+                    "The submitted value must be an array of assignee objects"
+                  ]
+                }
+              }
+            }
           }
         }
       },
@@ -1794,7 +1806,19 @@
             }
           },
           "422": {
-            "$ref": "#/components/responses/422"
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/schema"
+                },
+                "example": {
+                  "errors": [
+                    "The submitted value must be an array of assignee objects"
+                  ]
+                }
+              }
+            }
           }
         }
       },
@@ -2194,6 +2218,21 @@
                 }
               }
             }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/schema"
+                },
+                "example": {
+                  "errors": [
+                    "At least one organisation is required"
+                  ]
+                }
+              }
+            }
           }
         }
       },
@@ -2306,6 +2345,21 @@
                       "default": "Client not found"
                     }
                   }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/schema"
+                },
+                "example": {
+                  "errors": [
+                    "At least one organisation is required"
+                  ]
                 }
               }
             }
@@ -5935,7 +5989,19 @@
             }
           },
           "422": {
-            "$ref": "#/components/responses/422"
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/schema"
+                },
+                "example": {
+                  "errors": [
+                    "The submitted value must be an array of assignee objects"
+                  ]
+                }
+              }
+            }
           }
         }
       },
@@ -6099,7 +6165,19 @@
             }
           },
           "422": {
-            "$ref": "#/components/responses/422"
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/schema"
+                },
+                "example": {
+                  "errors": [
+                    "The submitted value must be an array of assignee objects"
+                  ]
+                }
+              }
+            }
           }
         }
       },
@@ -11076,6 +11154,17 @@
             "type": "boolean"
           },
           "url": {
+            "type": "string"
+          }
+        }
+      },
+      "schema": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "array",
+          "minItems": 1,
+          "description": "Each property may contain more than one validation error\n\nThe property name references to the property's dot-notated path within the request body:\n\n**Request body**\n```json\n{\n  \"fields\": {\n    \"type\": false\n  }\n}\n```\n\n**Response**\n```json\n{\n  \"fields.type\": ['Value must be a string']\n}\n```\n",
+          "items": {
             "type": "string"
           }
         }

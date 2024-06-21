@@ -10625,7 +10625,8 @@
               "lady",
               "prof",
               "other"
-            ]
+            ],
+            "maxLength": 20
           },
           "other_title": {
             "type": [
@@ -10635,16 +10636,19 @@
             "description": "Required if `title: \"other\"`\n"
           },
           "first_name": {
-            "type": "string"
+            "type": "string",
+            "maxLength": 255
           },
           "middle_name": {
             "type": [
               "null",
               "string"
-            ]
+            ],
+            "maxLength": 255
           },
           "last_name": {
-            "type": "string"
+            "type": "string",
+            "maxLength": 255
           },
           "name": {
             "type": "string",

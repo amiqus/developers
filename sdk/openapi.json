@@ -83,6 +83,133 @@
         }
       }
     },
+    "/steps": {
+      "get": {
+        "summary": "List all steps",
+        "description": "List all steps on record.",
+        "operationId": "get-steps",
+        "security": [
+          {
+            "sdk_token": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number for pagination",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of items per page",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 25
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/PaginatedList"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "description": "List of all steps for this record",
+                          "minItems": 1,
+                          "items": {
+                            "$ref": "#/components/schemas/Step"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "example": {
+                  "object": "paginated_list",
+                  "data": [
+                    {
+                      "object": "step",
+                      "id": 2,
+                      "type": "check.photo_id",
+                      "completed_at": "2022-05-23T08:30:10Z"
+                    },
+                    {
+                      "object": "step",
+                      "id": 3,
+                      "type": "document.request",
+                      "completed_at": "2022-05-23T08:32:21Z"
+                    },
+                    {
+                      "object": "step",
+                      "id": 4,
+                      "type": "form",
+                      "completed_at": "2022-05-25T10:10:14Z"
+                    }
+                  ],
+                  "total": 3,
+                  "count": 3,
+                  "limit": 100,
+                  "current_page": 1,
+                  "total_pages": 1,
+                  "links": null
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Unauthenticated"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    },
     "/steps/{id}": {
       "post": {
         "summary": "Submit a step",
@@ -252,133 +379,6 @@
           }
         }
       }
-    },
-    "/steps": {
-      "get": {
-        "summary": "List all steps",
-        "description": "List all steps on record.",
-        "operationId": "get-steps",
-        "security": [
-          {
-            "sdk_token": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "page",
-            "in": "query",
-            "description": "Page number for pagination",
-            "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "default": 1
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "Number of items per page",
-            "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 100,
-              "default": 25
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/PaginatedList"
-                    },
-                    {
-                      "type": "object",
-                      "properties": {
-                        "data": {
-                          "type": "array",
-                          "description": "List of all steps for this record",
-                          "minItems": 1,
-                          "items": {
-                            "$ref": "#/components/schemas/Step"
-                          }
-                        }
-                      }
-                    }
-                  ]
-                },
-                "example": {
-                  "object": "paginated_list",
-                  "data": [
-                    {
-                      "object": "step",
-                      "id": 2,
-                      "type": "check.photo_id",
-                      "completed_at": "2022-05-23T08:30:10Z"
-                    },
-                    {
-                      "object": "step",
-                      "id": 3,
-                      "type": "document.request",
-                      "completed_at": "2022-05-23T08:32:21Z"
-                    },
-                    {
-                      "object": "step",
-                      "id": 4,
-                      "type": "form",
-                      "completed_at": "2022-05-25T10:10:14Z"
-                    }
-                  ],
-                  "total": 3,
-                  "count": 3,
-                  "limit": 100,
-                  "current_page": 1,
-                  "total_pages": 1,
-                  "links": null
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string",
-                      "default": "Unauthenticated"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Service Unavailable"
-          }
-        }
-      }
     }
   },
   "components": {
@@ -432,6 +432,119 @@
             "type": "string",
             "format": "date-time",
             "readOnly": true
+          }
+        }
+      },
+      "PaginatedList": {
+        "title": "Paginated List",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "object": {
+            "type": "string",
+            "const": "paginated_list"
+          },
+          "data": {
+            "type": "array"
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "maximum": 100,
+            "minimum": 1
+          },
+          "current_page": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "total_pages": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "links": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "title": "Pagination links",
+                "type": "object",
+                "required": [
+                  "next",
+                  "previous"
+                ],
+                "properties": {
+                  "next": {
+                    "type": [
+                      "null",
+                      "string"
+                    ],
+                    "format": "url"
+                  },
+                  "previous": {
+                    "type": [
+                      "null",
+                      "string"
+                    ],
+                    "format": "url"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "StepTypes": {
+        "type": "string",
+        "enum": [
+          "check.credit",
+          "check.criminal_record",
+          "check.dummy",
+          "check.hscni_access_ni",
+          "check.identity",
+          "check.nhs_esr",
+          "check.banking_information",
+          "check.photo_id",
+          "check.employment_referencing",
+          "check.reference",
+          "check.thorntons_onboarding",
+          "check.video",
+          "check.watchlist",
+          "document.request",
+          "document.transfer",
+          "form"
+        ]
+      },
+      "Step": {
+        "title": "Step",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "object": {
+            "type": "string",
+            "const": "step"
+          },
+          "id": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Unique step identifier"
+          },
+          "type": {
+            "$ref": "#/components/schemas/StepTypes"
+          },
+          "completed_at": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
           }
         }
       },
@@ -874,119 +987,6 @@
           "postcode": {
             "type": "string",
             "description": "An arbitrary piece of information that will be displayed on the check results."
-          }
-        }
-      },
-      "PaginatedList": {
-        "title": "Paginated List",
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "object": {
-            "type": "string",
-            "const": "paginated_list"
-          },
-          "data": {
-            "type": "array"
-          },
-          "total": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "count": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "limit": {
-            "type": "integer",
-            "maximum": 100,
-            "minimum": 1
-          },
-          "current_page": {
-            "type": "integer",
-            "minimum": 1
-          },
-          "total_pages": {
-            "type": "integer",
-            "minimum": 1
-          },
-          "links": {
-            "oneOf": [
-              {
-                "type": "null"
-              },
-              {
-                "title": "Pagination links",
-                "type": "object",
-                "required": [
-                  "next",
-                  "previous"
-                ],
-                "properties": {
-                  "next": {
-                    "type": [
-                      "null",
-                      "string"
-                    ],
-                    "format": "url"
-                  },
-                  "previous": {
-                    "type": [
-                      "null",
-                      "string"
-                    ],
-                    "format": "url"
-                  }
-                }
-              }
-            ]
-          }
-        }
-      },
-      "StepTypes": {
-        "type": "string",
-        "enum": [
-          "check.credit",
-          "check.criminal_record",
-          "check.dummy",
-          "check.hscni_access_ni",
-          "check.identity",
-          "check.nhs_esr",
-          "check.banking_information",
-          "check.photo_id",
-          "check.employment_referencing",
-          "check.reference",
-          "check.thorntons_onboarding",
-          "check.video",
-          "check.watchlist",
-          "document.request",
-          "document.transfer",
-          "form"
-        ]
-      },
-      "Step": {
-        "title": "Step",
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "object": {
-            "type": "string",
-            "const": "step"
-          },
-          "id": {
-            "type": "integer",
-            "minimum": 1,
-            "description": "Unique step identifier"
-          },
-          "type": {
-            "$ref": "#/components/schemas/StepTypes"
-          },
-          "completed_at": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "format": "date-time"
           }
         }
       }

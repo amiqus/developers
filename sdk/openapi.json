@@ -240,6 +240,9 @@
                   },
                   {
                     "$ref": "#/components/schemas/Dummy"
+                  },
+                  {
+                    "$ref": "#/components/schemas/PhotoId"
                   }
                 ]
               },
@@ -376,6 +379,114 @@
           },
           "503": {
             "description": "Service Unavailable"
+          }
+        }
+      }
+    },
+    "/providers/onfido/token": {
+      "post": {
+        "summary": "Create an Onfido SDK token",
+        "description": "Create an Onfido SDK token for use with a Photo ID check step (**standard report type only**). An Onfido SDK token allows you to embed an [iOS, Android or React Native Onfido SDK](https://documentation.onfido.com/sdk/) into your application. **Onfido SDK tokens cannot be used with the Onfido Web SDK.**\n\nOnfido SDK tokens can only be used for the Photo ID check step that the Amiqus SDK token is scoped for and are valid for 90 minutes. Tokens are only valid for use with standard Photo ID report type, the biometric report type is not currently supported.\n\nAfter uploading supporting documentation using the Onfido SDK, use [Submit a step](#operation/post-steps-id) to submit the Photo ID check step.\n",
+        "operationId": "post-providers-onfido-token",
+        "tags": [
+          "Other Resources"
+        ],
+        "security": [
+          {
+            "sdk_token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "bundle_id"
+                ],
+                "properties": {
+                  "bundle_id": {
+                    "type": "string",
+                    "description": "The bundle ID (for Android \"application ID\") that was set up during application development. For iOS, this is usually in the form `com.your-company.app-name`. Make sure to use a valid `bundle_id` or you'll receive a 401 error from Onfido.\n"
+                  }
+                }
+              },
+              "example": {
+                "bundle_id": "com.your-company.app-name"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "An object containing basic configuration for the initialisation of the React Native, iOS or Android SDK. The values can be overridden or omitted to better suit your application's integration.\n",
+                  "type": "object",
+                  "properties": {
+                    "sdkToken": {
+                      "type": "string",
+                      "description": "The SDK token scoped to the Record's Photo ID check step. Onfido SDK tokens are valid for 90 minutes.\n"
+                    },
+                    "flowSteps": {
+                      "type": "object",
+                      "properties": {
+                        "welcome": {
+                          "type": "boolean"
+                        },
+                        "captureDocument": {
+                          "type": "boolean"
+                        },
+                        "captureFace": {
+                          "description": "`null` when \"facial similarity\" option has not been enabled for the Photo ID check step.\n",
+                          "type": [
+                            "null",
+                            "object"
+                          ],
+                          "properties": {
+                            "type": {
+                              "description": "Type is `MOTION` when motion liveness has been enabled (default), otherwise `PHOTO`.\n",
+                              "type": "string",
+                              "enum": [
+                                "MOTION",
+                                "PHOTO"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "sdkToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjQ5OTEzNzYwMCwiZXhwIjo0OTkxMzc2NjAsIm1hcnR5IjoiU291bmRzIHByZXR0eSBoZWF2eS4iLCJkb2MiOiJXZWlnaHQgaGFzIG5vdGhpbmcgdG8gZG8gd2l0aCBpdC4iLCLwn5GLIjoiVGhpcyBpcyBub3QgYSB2YWxpZCBTREsgVG9rZW4uIn0.j2jAeX_MpagkS7qvBjF9uYYIawP_uvEPqnftEW9wDe8",
+                  "flowSteps": {
+                    "welcome": false,
+                    "captureDocument": true,
+                    "captureFace": {
+                      "type": "MOTION"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
           }
         }
       }
@@ -989,6 +1100,20 @@
             "description": "An arbitrary piece of information that will be displayed on the check results."
           }
         }
+      },
+      "PhotoId": {
+        "title": "Photo ID",
+        "type": "null",
+        "description": "_The Photo ID check step type does not require a request body._\n\nBefore a Photo ID check step can be submitted, supporting photo ID documentation must first be uploaded using the Onfido SDK. See [Create an Onfido SDK token](#operation/post-providers-onfido-token) for further details.\n\nOnly Photo ID checks configured with the **standard report type** can be submitted using this operation. Checks configured with the biometric report type must be completed using a web browser and Amiqus mobile app.\n"
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Description of the error."
+          }
+        }
       }
     },
     "securitySchemes": {
@@ -997,6 +1122,95 @@
         "scheme": "bearer",
         "bearerFormat": "JWT",
         "description": "Bearer JWT authentication."
+      }
+    },
+    "responses": {
+      "401": {
+        "description": "Unauthorized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "error": "Unauthenticated."
+            }
+          }
+        }
+      },
+      "403": {
+        "description": "Forbidden",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "Description of the error."
+                }
+              }
+            },
+            "example": {
+              "message": "This action is unauthorized."
+            }
+          }
+        }
+      },
+      "422": {
+        "description": "Unprocessable Content",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "array",
+                "minItems": 1,
+                "description": "Each property may contain more than one validation error\n\nThe property name references to the property's dot-notated path within the request body:\n\n**Request body**\n```json\n{\n  \"fields\": {\n    \"type\": false\n  }\n}\n```\n\n**Response**\n```json\n{\n  \"fields.type\": ['Value must be a string']\n}\n```\n",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "example": {
+              "errors": [
+                "At least one property is required"
+              ]
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "Description of the error."
+                }
+              }
+            }
+          }
+        }
+      },
+      "503": {
+        "description": "Service Unavailable",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "Service Unavailable"
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

@@ -8531,7 +8531,7 @@
                   "attachment": {
                     "type": "string",
                     "format": "binary",
-                    "description": "Supported file types: pdf, docx, doc, xlsx, xls, csv, jpg, png, tiff, zip.\n\nFile size limit: 100MB.\n"
+                    "description": "Supported file types: pdf, docx, doc, xlsx, xls, csv, txt, jpg, png, tiff, zip.\n\nFile size limit: 100MB.\n"
                   }
                 }
               }

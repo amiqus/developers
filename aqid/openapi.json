@@ -10635,14 +10635,14 @@
               "lady",
               "prof",
               "other"
-            ],
-            "maxLength": 20
+            ]
           },
           "other_title": {
             "type": [
               "null",
               "string"
             ],
+            "maxLength": 20,
             "description": "Required if `title: \"other\"`\n"
           },
           "first_name": {

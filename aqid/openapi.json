@@ -11455,6 +11455,100 @@
           }
         ]
       },
+      "Record": {
+        "title": "Record",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "object": {
+            "type": "string",
+            "readOnly": true,
+            "const": "record"
+          },
+          "id": {
+            "type": "integer",
+            "readOnly": true,
+            "description": "The unique record identifier."
+          },
+          "status": {
+            "$ref": "#/components/schemas/RecordStatus",
+            "description": "The overall status of the record.\n\nStatus is determined by the combined states of a record's steps, expiry and review:\n- `pending`: Active without any completed steps\n- `started`: Active with at least one completed step\n- `complete`: All steps completed\n- `incomplete`: Expired with at least one completed step\n- `waiting`: At least one check step is awaiting results\n- `failed`: _Deprecated_\n- `empty`: Expired without any completed steps\n- `paused`: At least one paused check step\n- `amendments`: Pending record amendment approval or rejection\n- `reviewed`: Record marked as having been reviewed\n"
+          },
+          "perform_url": {
+            "description": "The unique URL to complete the record steps in a browser.",
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "url"
+              },
+              {
+                "type": "boolean",
+                "enum": [
+                  false
+                ],
+                "description": "Value is `false` when none of the steps are available for submission due to completion, expiry or for any other reason."
+              }
+            ],
+            "readOnly": true
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Contact email address for this record.\n\nNew request and reminder emails (if enabled) and completion receipts are sent to this email address. It is a snapshot of the client email address taken at the time the record was created or re-sent.\n"
+          },
+          "client": {
+            "readOnly": true,
+            "x-expandable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Client"
+              },
+              {
+                "type": "integer",
+                "description": "Unique client identifier."
+              }
+            ]
+          },
+          "steps": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/RecordSteps"
+            },
+            "description": "List of complete and incomplete steps."
+          },
+          "has_reminders": {
+            "type": "boolean",
+            "description": "Denotes the presence/absence of email reminders."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "description": "Date and time the record was created."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "description": "Date and time the record's details were last updated or a step was completed."
+          },
+          "expired_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time that the record will expire."
+          },
+          "archived_at": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time",
+            "readOnly": true,
+            "description": "Date and time the record was archived."
+          }
+        }
+      },
       "CheckStatus": {
         "type": "string",
         "enum": [
@@ -11470,7 +11564,6 @@
       "Check-2": {
         "title": "Check",
         "type": "object",
-        "description": "@incomplete",
         "additionalProperties": false,
         "properties": {
           "object": {
@@ -11482,11 +11575,32 @@
             "readOnly": true
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "banking_information",
+              "credit",
+              "criminal_record",
+              "dummy",
+              "hscni_access_ni",
+              "identity",
+              "nhs_esr",
+              "photo_id",
+              "reference",
+              "thorntons_onboarding",
+              "video"
+            ]
           },
           "record": {
             "readOnly": true,
-            "type": "integer"
+            "x-expandable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Record"
+              },
+              {
+                "type": "integer"
+              }
+            ]
           },
           "status": {
             "$ref": "#/components/schemas/CheckStatus"
@@ -13134,100 +13248,6 @@
             ]
           }
         ]
-      },
-      "Record": {
-        "title": "Record",
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "object": {
-            "type": "string",
-            "readOnly": true,
-            "const": "record"
-          },
-          "id": {
-            "type": "integer",
-            "readOnly": true,
-            "description": "The unique record identifier."
-          },
-          "status": {
-            "$ref": "#/components/schemas/RecordStatus",
-            "description": "The overall status of the record.\n\nStatus is determined by the combined states of a record's steps, expiry and review:\n- `pending`: Active without any completed steps\n- `started`: Active with at least one completed step\n- `complete`: All steps completed\n- `incomplete`: Expired with at least one completed step\n- `waiting`: At least one check step is awaiting results\n- `failed`: _Deprecated_\n- `empty`: Expired without any completed steps\n- `paused`: At least one paused check step\n- `amendments`: Pending record amendment approval or rejection\n- `reviewed`: Record marked as having been reviewed\n"
-          },
-          "perform_url": {
-            "description": "The unique URL to complete the record steps in a browser.",
-            "oneOf": [
-              {
-                "type": "string",
-                "format": "url"
-              },
-              {
-                "type": "boolean",
-                "enum": [
-                  false
-                ],
-                "description": "Value is `false` when none of the steps are available for submission due to completion, expiry or for any other reason."
-              }
-            ],
-            "readOnly": true
-          },
-          "email": {
-            "type": "string",
-            "format": "email",
-            "description": "Contact email address for this record.\n\nNew request and reminder emails (if enabled) and completion receipts are sent to this email address. It is a snapshot of the client email address taken at the time the record was created or re-sent.\n"
-          },
-          "client": {
-            "readOnly": true,
-            "x-expandable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Client"
-              },
-              {
-                "type": "integer",
-                "description": "Unique client identifier."
-              }
-            ]
-          },
-          "steps": {
-            "type": "array",
-            "minItems": 1,
-            "items": {
-              "$ref": "#/components/schemas/RecordSteps"
-            },
-            "description": "List of complete and incomplete steps."
-          },
-          "has_reminders": {
-            "type": "boolean",
-            "description": "Denotes the presence/absence of email reminders."
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time",
-            "readOnly": true,
-            "description": "Date and time the record was created."
-          },
-          "updated_at": {
-            "type": "string",
-            "format": "date-time",
-            "readOnly": true,
-            "description": "Date and time the record's details were last updated or a step was completed."
-          },
-          "expired_at": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Date and time that the record will expire."
-          },
-          "archived_at": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "format": "date-time",
-            "readOnly": true,
-            "description": "Date and time the record was archived."
-          }
-        }
       },
       "Bold": {
         "title": "Bold",

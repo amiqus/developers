@@ -3043,7 +3043,9 @@
                               "passport",
                               "driving_licence",
                               "national_id"
-                            ]
+                            ],
+                            "issuing_countries": null,
+                            "right_to_work": null
                           },
                           "check": 82342,
                           "cost": 1,
@@ -4546,7 +4548,9 @@
                               "passport",
                               "driving_licence",
                               "national_id"
-                            ]
+                            ],
+                            "issuing_countries": null,
+                            "right_to_work": null
                           },
                           "check": 82342,
                           "cost": 1,
@@ -4640,7 +4644,9 @@
                           "passport",
                           "driving_licence",
                           "national_id"
-                        ]
+                        ],
+                        "issuing_countries": null,
+                        "right_to_work": null
                       },
                       "check": 82342,
                       "cost": 1,
@@ -4889,7 +4895,9 @@
                           "passport",
                           "driving_licence",
                           "national_id"
-                        ]
+                        ],
+                        "issuing_countries": null,
+                        "right_to_work": null
                       },
                       "check": 82342,
                       "cost": 1,
@@ -5041,7 +5049,9 @@
                           "passport",
                           "driving_licence",
                           "national_id"
-                        ]
+                        ],
+                        "issuing_countries": null,
+                        "right_to_work": null
                       },
                       "check": 82342,
                       "cost": 1,
@@ -5390,7 +5400,9 @@
                           "passport",
                           "driving_licence",
                           "national_id"
-                        ]
+                        ],
+                        "issuing_countries": null,
+                        "right_to_work": null
                       },
                       "check": 82342,
                       "cost": 1,
@@ -6894,7 +6906,9 @@
                                 "passport",
                                 "driving_licence",
                                 "national_id"
-                              ]
+                              ],
+                              "issuing_countries": null,
+                              "right_to_work": null
                             }
                           },
                           {
@@ -8385,7 +8399,9 @@
                           "live_document": true,
                           "docs": [
                             "passport"
-                          ]
+                          ],
+                          "issuing_countries": null,
+                          "right_to_work": "GBR"
                         }
                       },
                       {
@@ -9658,7 +9674,9 @@
                                     "passport",
                                     "driving_licence",
                                     "national_id"
-                                  ]
+                                  ],
+                                  "issuing_countries": null,
+                                  "right_to_work": null
                                 },
                                 "check": 82342,
                                 "cost": 1,
@@ -12090,6 +12108,19 @@
           }
         ]
       },
+      "RightToWorkOptions": {
+        "oneOf": [
+          {
+            "type": "string",
+            "enum": [
+              "GBR"
+            ]
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
       "Onfido-2": {
         "type": "object",
         "required": [
@@ -12166,6 +12197,10 @@
                         "type": "null"
                       }
                     ]
+                  },
+                  "right_to_work": {
+                    "$ref": "#/components/schemas/RightToWorkOptions",
+                    "description": "For right to work in the UK (`GBR`), the `docs` property must include a `passport`.\n"
                   }
                 }
               },
@@ -12199,6 +12234,9 @@
                         "type": "null"
                       }
                     ]
+                  },
+                  "right_to_work": {
+                    "$ref": "#/components/schemas/RightToWorkOptions"
                   }
                 }
               }

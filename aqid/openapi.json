@@ -4622,62 +4622,112 @@
                 "schema": {
                   "$ref": "#/components/schemas/Record"
                 },
-                "example": {
-                  "object": "record",
-                  "id": 983434,
-                  "status": "pending",
-                  "perform_url": "https://id.amiqus.co/i/0vz32B9CZpO1yLsKPdy9q",
-                  "email": "marty@example.com",
-                  "client": 73845,
-                  "steps": [
-                    {
-                      "object": "step",
-                      "id": 2,
-                      "type": "check.photo_id",
-                      "preferences": {
-                        "report_type": "standard",
-                        "face": true,
-                        "liveness": true,
-                        "facial_similarity": false,
-                        "live_document": false,
-                        "docs": [
-                          "passport",
-                          "driving_licence",
-                          "national_id"
-                        ],
-                        "issuing_countries": null,
-                        "right_to_work": null
-                      },
-                      "check": 82342,
-                      "cost": 1,
-                      "completed_at": null
-                    },
-                    {
-                      "object": "step",
-                      "id": 3,
-                      "type": "document.request",
-                      "preferences": {
-                        "title": "Utility bill",
-                        "instructions": "A utility bill dated within the last three months."
-                      },
-                      "document": 23123,
-                      "cost": 0,
-                      "completed_at": null
-                    },
-                    {
-                      "object": "step",
-                      "id": 4,
-                      "type": "form",
-                      "form": "4bd9bfca-e61d-4a68-99b3-ca61a02f650f",
-                      "cost": 0,
-                      "completed_at": null
+                "examples": {
+                  "simple": {
+                    "summary": "Single step",
+                    "value": {
+                      "object": "record",
+                      "id": 983434,
+                      "status": "pending",
+                      "perform_url": "https://id.amiqus.co/i/NzJXeGzUYAQxaF1G80NB",
+                      "email": "marty@example.com",
+                      "client": 7832,
+                      "steps": [
+                        {
+                          "object": "step",
+                          "id": 2,
+                          "type": "check.photo_id",
+                          "preferences": {
+                            "report_type": "standard",
+                            "face": false,
+                            "liveness": false,
+                            "facial_similarity": false,
+                            "live_document": false,
+                            "docs": [
+                              "passport",
+                              "driving_licence"
+                            ],
+                            "issuing_countries": null,
+                            "right_to_work": null
+                          },
+                          "check": 82342,
+                          "cost": 1,
+                          "completed_at": null
+                        }
+                      ],
+                      "has_reminders": true,
+                      "created_at": "2022-05-22T08:22:12Z",
+                      "updated_at": "2022-05-22T08:22:12Z",
+                      "expired_at": "2022-06-01T08:22:12Z",
+                      "archived_at": null
                     }
-                  ],
-                  "has_reminders": true,
-                  "created_at": "2022-05-22T08:22:12Z",
-                  "updated_at": "2022-05-22T08:22:12Z",
-                  "expired_at": "2022-06-01T08:22:12Z",
-                  "archived_at": null
+                  },
+                  "advanced": {
+                    "summary": "Multiple steps",
+                    "value": {
+                      "object": "record",
+                      "id": 983434,
+                      "status": "pending",
+                      "perform_url": "https://id.amiqus.co/i/KKyraextnvOkGumVbGK6",
+                      "email": "marty@example.com",
+                      "client": 73845,
+                      "steps": [
+                        {
+                          "object": "step",
+                          "id": 2,
+                          "type": "check.photo_id",
+                          "preferences": {
+                            "report_type": "biometric",
+                            "issuing_countries": null,
+                            "allow_fallback": false,
+                            "right_to_work": null
+                          },
+                          "check": 82342,
+                          "cost": 2,
+                          "completed_at": null
+                        },
+                        {
+                          "object": "step",
+                          "id": 3,
+                          "type": "check.criminal_record",
+                          "preferences": {
+                            "region": "england",
+                            "type": "standard",
+                            "free_volunteer": false,
+                            "enable_payment": false
+                          },
+                          "check": 82343,
+                          "cost": 16,
+                          "completed_at": null
+                        },
+                        {
+                          "object": "step",
+                          "id": 4,
+                          "type": "document.request",
+                          "preferences": {
+                            "title": "Utility bill",
+                            "instructions": "A utility bill dated within the last three months."
+                          },
+                          "document": 15478,
+                          "cost": 0,
+                          "completed_at": null
+                        },
+                        {
+                          "object": "step",
+                          "id": 5,
+                          "type": "form",
+                          "form": "f11b16cd-a03c-4c7e-a151-14b5e1463846",
+                          "cost": 0,
+                          "completed_at": null
+                        }
+                      ],
+                      "has_reminders": true,
+                      "created_at": "2022-05-22T08:22:12Z",
+                      "updated_at": "2022-05-22T08:22:12Z",
+                      "expired_at": "2022-06-01T08:22:12Z",
+                      "archived_at": null
+                    }
+                  }
                 }
               }
             }
@@ -12234,6 +12284,11 @@
                         "type": "null"
                       }
                     ]
+                  },
+                  "allow_fallback": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "If the person does not have a passport with a working NFC chip, allow them to continue to verify their other ID document."
                   },
                   "right_to_work": {
                     "$ref": "#/components/schemas/RightToWorkOptions"

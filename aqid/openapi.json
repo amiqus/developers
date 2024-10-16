@@ -3565,39 +3565,10 @@
             }
           },
           "410": {
-            "description": "Gone",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string",
-                      "default": "File scan detected a virus"
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/410-attachment"
           },
           "423": {
-            "description": "Locked",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string",
-                      "enum": [
-                        "File scan is not yet complete",
-                        "File scan could not be completed"
-                      ]
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/423-attachment"
           }
         }
       }
@@ -16319,6 +16290,41 @@
               "errors": [
                 "At least one property is required"
               ]
+            }
+          }
+        }
+      },
+      "410-attachment": {
+        "description": "Gone",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "default": "File scan detected a virus"
+                }
+              }
+            }
+          }
+        }
+      },
+      "423-attachment": {
+        "description": "Locked",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "enum": [
+                    "File scan is not yet complete",
+                    "File scan could not be completed"
+                  ]
+                }
+              }
             }
           }
         }

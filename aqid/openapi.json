@@ -3160,39 +3160,31 @@
             "name": "source",
             "description": "**Note:** `form` is deprecated, use `client_form` instead\n",
             "in": "query",
-            "explode": false,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "enum": [
-                  "check",
-                  "client",
-                  "client_form",
-                  "form",
-                  "record_document"
-                ]
-              }
+              "type": "string",
+              "enum": [
+                "check",
+                "client",
+                "client_form",
+                "form",
+                "record_document"
+              ]
             }
           },
           {
             "name": "source_type",
             "in": "query",
-            "explode": false,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "enum": [
-                  "photo_id",
-                  "reference",
-                  "banking_information",
-                  "employment_referencing",
-                  "requested",
-                  "sent",
-                  "returned"
-                ]
-              }
+              "type": "string",
+              "enum": [
+                "photo_id",
+                "reference",
+                "banking_information",
+                "employment_referencing",
+                "requested",
+                "sent",
+                "returned"
+              ]
             },
             "description": "Some sources can be filtered by type:\n\n- **check**:\n   - `photo_id`\n   - `reference`\n   - `banking_information`\n   - `employment_referencing`\n- **record_document**\n  - `requested`, `sent`, `returned`\n\n**Note:** to filter by source type, the `source` parameter must also be provided.\n"
           },

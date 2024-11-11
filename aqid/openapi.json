@@ -12535,6 +12535,16 @@
                     "description": "Disable ongoing monitoring."
                   }
                 ]
+              },
+              "search_profile": {
+                "type": "string",
+                "description": "Specifies the search profile to use for the watchlist check.\n\n**PEPs, sanctions and adverse media : +1 additional credit**\\\n**PEPs and sanctions and only : +1 additional credit**\n",
+                "enum": [
+                  "sanctions",
+                  "peps_sanctions",
+                  "peps_sanctions_media"
+                ],
+                "default": "peps_sanctions_media"
               }
             }
           }

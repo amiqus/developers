@@ -3951,6 +3951,200 @@
         }
       }
     },
+    "/credits": {
+      "get": {
+        "summary": "List all credit history",
+        "description": "Return a list of credit usage history",
+        "operationId": "get-credits",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Your Team"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "created_at"
+              ],
+              "description": "Sort results by specified item. Results returned in created order by default."
+            }
+          },
+          {
+            "name": "order_by",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "description": "Order results in ascending or descending order. Results returned in ascending order by default."
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "Expand the causer property to include details about the event that caused the credit history entry.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "causer"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/PaginatedList"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "items": {
+                            "$ref": "#/components/schemas/CreditHistory"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "default": {
+                    "summary": "Default",
+                    "value": {
+                      "object": "paginated_list",
+                      "data": [
+                        {
+                          "object": "credit_history",
+                          "id": 1,
+                          "credits": 244,
+                          "reason": "Monthly topup",
+                          "created_at": "2024-09-18T12:42:23Z",
+                          "causer": {
+                            "id": 72343,
+                            "type": "user"
+                          }
+                        },
+                        {
+                          "object": "credit_history",
+                          "id": 2,
+                          "credits": -1,
+                          "reason": null,
+                          "created_at": "2024-09-23T12:56:39Z",
+                          "causer": {
+                            "id": 1,
+                            "type": "check"
+                          }
+                        }
+                      ],
+                      "total": 2,
+                      "count": 2,
+                      "limit": 100,
+                      "current_page": 1,
+                      "total_pages": 1,
+                      "links": null
+                    }
+                  },
+                  "causer_expanded": {
+                    "summary": "Causer expanded",
+                    "value": {
+                      "object": "paginated_list",
+                      "data": [
+                        {
+                          "object": "credit_history",
+                          "id": 1,
+                          "credits": 244,
+                          "reason": "Monthly topup",
+                          "created_at": "2024-09-18T12:42:23Z",
+                          "causer": {
+                            "id": 72343,
+                            "type": "user"
+                          }
+                        },
+                        {
+                          "object": "credit_history",
+                          "id": 2,
+                          "credits": -1,
+                          "reason": null,
+                          "created_at": "2024-09-23T12:56:39Z",
+                          "causer": {
+                            "object": "check",
+                            "id": 82342,
+                            "type": "identity",
+                            "record": 983434,
+                            "status": "pending",
+                            "allow_replay": true,
+                            "allow_cancel": true,
+                            "requires_consent": true,
+                            "created_at": "2022-05-22T08:22:12Z",
+                            "updated_at": "2022-05-22T08:22:12Z"
+                          }
+                        }
+                      ],
+                      "total": 2,
+                      "count": 2,
+                      "limit": 100,
+                      "current_page": 1,
+                      "total_pages": 1,
+                      "links": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "503": {
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    },
     "/labels/{id}": {
       "parameters": [
         {
@@ -14254,6 +14448,64 @@
           }
         }
       },
+      "CreditHistory": {
+        "title": "CreditHistory",
+        "type": "object",
+        "properties": {
+          "object": {
+            "type": "string",
+            "readOnly": true,
+            "const": "credit_history"
+          },
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "credits": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "reason": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "readOnly": true
+          },
+          "causer": {
+            "readOnly": true,
+            "x-expandable": true,
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "user",
+                      "check"
+                    ]
+                  }
+                }
+              },
+              {
+                "$ref": "#/components/schemas/Check-2"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          }
+        }
+      },
       "RecordSettings": {
         "title": "Record Settings",
         "type": "object",
@@ -16292,6 +16544,22 @@
               "errors": [
                 "At least one property is required"
               ]
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "Description of the error."
+                }
+              }
             }
           }
         }

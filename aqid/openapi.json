@@ -6746,7 +6746,7 @@
                       "properties": {
                         "data": {
                           "items": {
-                            "$ref": "#/components/schemas/Document-3"
+                            "$ref": "#/components/schemas/Document-5"
                           }
                         }
                       }
@@ -11786,6 +11786,1499 @@
           "paused"
         ]
       },
+      "BreakdownResult": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "description": "The overall result of the properties checked in this breakdown. Where no result is returned the value will be `null`. Where an invalid value is returned the default is `consider`.",
+            "oneOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "clear",
+                  "consider"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "SubBreakdownResult": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "description": "The result of the individual sub-breakdown property. Where no result is returned the value will be `null`. Where an invalid value is returned the default is `consider`.",
+            "oneOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "clear",
+                  "consider"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "DocumentType": {
+        "oneOf": [
+          {
+            "type": "string",
+            "enum": [
+              "passport",
+              "driving_licence",
+              "national_identity_card",
+              "immigration_status_document",
+              "indigenous_card",
+              "municipality_identity_card",
+              "national_health_insurance_card",
+              "passport_card",
+              "private_operators_card",
+              "proof_of_citizenship",
+              "residence_permit",
+              "service_id_card",
+              "tax_id",
+              "visa",
+              "voter_id",
+              "work_permit",
+              "other"
+            ]
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "DocumentNfcData": {
+        "title": "NFC Document",
+        "type": "object",
+        "properties": {
+          "document_type": {
+            "$ref": "#/components/schemas/DocumentType"
+          },
+          "first_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "last_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "full_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "date_of_birth": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "gender": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "male",
+                  "female"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "document_number": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "personal_number": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "nationality": {
+            "description": "ISO 3166 alpha-3 country code.",
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "place_of_birth": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "issuing_authority": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "issuing_country": {
+            "description": "ISO 3166 alpha-3 country code.",
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "issuing_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "date_of_expiry": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "mrz_line_1": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "mrz_line_2": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "DocumentData": {
+        "title": "Document",
+        "type": "object",
+        "properties": {
+          "document_type": {
+            "x-exclude-audience": "wallet",
+            "$ref": "#/components/schemas/DocumentType"
+          },
+          "first_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "last_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "middle_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "date_of_birth": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "gender": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "male",
+                  "female"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "document_numbers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "document_number",
+                    "personal_number",
+                    "other"
+                  ]
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "issuing_authority": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "issuing_country": {
+            "description": "ISO 3166 alpha-3 country code.",
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "issuing_state": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "issuing_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "date_of_expiry": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "mrz_line1": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "mrz_line2": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "mrz_line3": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "nationality": {
+            "description": "ISO 3166 alpha-3 country code.",
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "place_of_birth": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "nfc": {
+            "description": "If a document's NFC chip was scanned for this report, the data extracted from it will be included here.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DocumentNfcData"
+              },
+              {
+                "type": "null",
+                "description": "The document either didn't have NFC or its NFC chip was not scanned."
+              }
+            ]
+          }
+        }
+      },
+      "Document": {
+        "title": "Document",
+        "properties": {
+          "type": {
+            "const": "document"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "processing",
+              "complete"
+            ]
+          },
+          "result": {
+            "type": "string",
+            "enum": [
+              "clear",
+              "consider",
+              "suspected",
+              "rejected"
+            ],
+            "description": "* `clear` - All verifications pass. There are no indications the document is fraudulent.\n* `consider` - Some verifications did not pass. Doesn't necessarily point to a suspected document (for example, expired document).\n* `suspected` - Document shows signs of suspect fraud.\n* `rejected` - Unable to process the document image, or the document isn't supported. Also if the age of the applicant is too low.\n"
+          },
+          "breakdown": {
+            "description": "A detailed breakdown of the report's verifications used to determine the overall result.",
+            "properties": {
+              "age_validation": {
+                "description": "Whether the age calculated from the document's date of birth is greater than or equal to the minimum accepted age. The minimum accepted age is 16 years.",
+                "anyOf": [
+                  {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/BreakdownResult"
+                      },
+                      {
+                        "properties": {
+                          "breakdown": {
+                            "anyOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "minimum_accepted_age": {
+                                    "description": "Whether the minimum accepted age was met.",
+                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                  }
+                                }
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "null",
+                    "description": "Age validation was not checked."
+                  }
+                ]
+              },
+              "compromised_document": {
+                "description": "Whether the image of the document has been previously flagged as compromised.",
+                "anyOf": [
+                  {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/BreakdownResult"
+                      },
+                      {
+                        "properties": {
+                          "breakdown": {
+                            "anyOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "document_database": {
+                                    "description": "Whether the document is known to be compromised.",
+                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                  },
+                                  "repeat_attempts": {
+                                    "description": "Whether the document has been reused in a suspicious way.",
+                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                  }
+                                }
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "null",
+                    "description": "Compromised document was not checked."
+                  }
+                ]
+              },
+              "data_comparison": {
+                "description": "Whether the data provided by the client matches the data extracted from the document.",
+                "anyOf": [
+                  {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/BreakdownResult"
+                      },
+                      {
+                        "properties": {
+                          "breakdown": {
+                            "anyOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "first_name": {
+                                    "description": "Whether the client's first name matched the value extracted from the document.",
+                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                  },
+                                  "last_name": {
+                                    "description": "Whether the client's last name matched the value extracted from the document.",
+                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                  },
+                                  "date_of_birth": {
+                                    "description": "Whether the client's date of birth matched the value extracted from the document.\n\nIf the document didn't contain a date of birth, no comparison was made and the result is `null`.\n",
+                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                  }
+                                }
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "null",
+                    "description": "Data comparison was not checked."
+                  }
+                ]
+              },
+              "data_consistency": {
+                "description": "Whether data represented in multiple places on the document is consistent. For example, between MRZ lines and OCR extracted text on passports.\n\nIf a document's NFC chip is scanned, data consistency is not checked so property value is `null`.\n",
+                "anyOf": [
+                  {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/BreakdownResult"
+                      },
+                      {
+                        "properties": {
+                          "breakdown": {
+                            "description": "Where a breakdown property result is `null`, the field wasn't present in at least two places on the document.",
+                            "anyOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "issuing_country": {
+                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                  },
+                                  "document_numbers": {
+                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                  },
+                                  "nationality": {
+                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                  },
+                                  "gender": {
+                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                  },
+                                  "document_type": {
+                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                  },
+                                  "date_of_expiry": {
+                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                  },
+                                  "date_of_birth": {
+                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                  },
+                                  "last_name": {
+                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                  },
+                                  "first_name": {
+                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                  }
+                                }
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "null",
+                    "description": "Data consistency was not checked."
+                  }
+                ]
+              },
+              "data_validation": {
+                "description": "Whether the format and length of the fields are correct for that document type.",
+                "anyOf": [
+                  {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/BreakdownResult"
+                      },
+                      {
+                        "properties": {
+                          "breakdown": {
+                            "anyOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "mrz": {
+                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                  },
+                                  "document_expiration": {
+                                    "description": "Whether the document has expired.",
+                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                  },
+                                  "expiry_date": {
+                                    "description": "Whether the format of the expiry date is invalid.",
+                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                  },
+                                  "date_of_birth": {
+                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                  },
+                                  "gender": {
+                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                  },
+                                  "document_numbers": {
+                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                  }
+                                }
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "null",
+                    "description": "Data validation was not checked."
+                  }
+                ]
+              },
+              "image_integrity": {
+                "description": "Whether the document was of sufficient quality to perform validation.\n\nIf a document's NFC chip is scanned, image integrity is not checked so property value is `null`.\n",
+                "anyOf": [
+                  {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/BreakdownResult"
+                      },
+                      {
+                        "properties": {
+                          "breakdown": {
+                            "anyOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "supported_document": {
+                                    "description": "Whether the submitted document is a supported type.",
+                                    "type": "object",
+                                    "properties": {
+                                      "result": {
+                                        "type": "string",
+                                        "enum": [
+                                          "clear",
+                                          "unidentified"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "image_quality": {
+                                    "description": "Whether the image of the document's data points and features were clear.\n\nA `consider` result means that parts of the image were obscured, unclear, damaged or missing.\n\nAn `unidentified` result means that not enough quality is present in the image to be processed.\n",
+                                    "type": "object",
+                                    "properties": {
+                                      "result": {
+                                        "type": "string",
+                                        "enum": [
+                                          "clear",
+                                          "consider",
+                                          "unidentified"
+                                        ]
+                                      },
+                                      "properties": {
+                                        "anyOf": [
+                                          {
+                                            "type": "object",
+                                            "properties": {
+                                              "dark_photo": {
+                                                "$ref": "#/components/schemas/SubBreakdownResult"
+                                              },
+                                              "glare_on_photo": {
+                                                "$ref": "#/components/schemas/SubBreakdownResult"
+                                              },
+                                              "blurred_photo": {
+                                                "$ref": "#/components/schemas/SubBreakdownResult"
+                                              },
+                                              "covered_photo": {
+                                                "$ref": "#/components/schemas/SubBreakdownResult"
+                                              },
+                                              "other_photo_issue": {
+                                                "$ref": "#/components/schemas/SubBreakdownResult"
+                                              },
+                                              "damaged_document": {
+                                                "$ref": "#/components/schemas/SubBreakdownResult"
+                                              },
+                                              "incorrect_side": {
+                                                "$ref": "#/components/schemas/SubBreakdownResult"
+                                              },
+                                              "cut_off_document": {
+                                                "$ref": "#/components/schemas/SubBreakdownResult"
+                                              },
+                                              "no_document_in_image": {
+                                                "$ref": "#/components/schemas/SubBreakdownResult"
+                                              },
+                                              "two_documents_uploaded": {
+                                                "$ref": "#/components/schemas/SubBreakdownResult"
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "type": "null"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "colour_picture": {
+                                    "description": "Whether the document image was in colour. Black and white images are flagged with a `consider` result.",
+                                    "type": "object",
+                                    "properties": {
+                                      "result": {
+                                        "anyOf": [
+                                          {
+                                            "type": "string",
+                                            "enum": [
+                                              "clear",
+                                              "consider"
+                                            ]
+                                          },
+                                          {
+                                            "type": "null"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "conclusive_document_quality": {
+                                    "description": "Is the document of sufficient quality to perform a fraud inspection. A `consider` result means that we cannot positively say the document is fraudulent or not.",
+                                    "type": "object",
+                                    "properties": {
+                                      "result": {
+                                        "anyOf": [
+                                          {
+                                            "type": "string",
+                                            "enum": [
+                                              "clear",
+                                              "consider"
+                                            ]
+                                          },
+                                          {
+                                            "type": "null"
+                                          }
+                                        ]
+                                      },
+                                      "properties": {
+                                        "anyOf": [
+                                          {
+                                            "type": "object",
+                                            "properties": {
+                                              "watermarks_digital_text_overlay": {
+                                                "$ref": "#/components/schemas/SubBreakdownResult"
+                                              },
+                                              "punctured_document": {
+                                                "$ref": "#/components/schemas/SubBreakdownResult"
+                                              },
+                                              "obscured_security_features": {
+                                                "$ref": "#/components/schemas/SubBreakdownResult"
+                                              },
+                                              "obscured_data_points": {
+                                                "$ref": "#/components/schemas/SubBreakdownResult"
+                                              },
+                                              "missing_back": {
+                                                "$ref": "#/components/schemas/SubBreakdownResult"
+                                              },
+                                              "digital_document": {
+                                                "$ref": "#/components/schemas/SubBreakdownResult"
+                                              },
+                                              "corner_removed": {
+                                                "$ref": "#/components/schemas/SubBreakdownResult"
+                                              },
+                                              "abnormal_document_features": {
+                                                "$ref": "#/components/schemas/SubBreakdownResult"
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "type": "null"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "null",
+                    "description": "Image integrity was not checked."
+                  }
+                ]
+              },
+              "issuing_authority": {
+                "description": "Whether data on the document matches the issuing authority data.\n\nIf a document's NFC chip is not scanned the property value is `null`.\n",
+                "anyOf": [
+                  {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/BreakdownResult"
+                      },
+                      {
+                        "properties": {
+                          "breakdown": {
+                            "anyOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "nfc_passive_authentication": {
+                                    "description": "Whether the document NFC chip is original or cloned.",
+                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                  },
+                                  "nfc_active_authentication": {
+                                    "description": "Whether the document NFC chip data has been tampered with.",
+                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                  }
+                                }
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "null",
+                    "description": "Issuing authority was not checked."
+                  }
+                ]
+              },
+              "police_record": {
+                "description": "Whether the document has been identified as lost, stolen or otherwise compromised. Applies to all UK documents or any document that has been reported stolen in the UK.",
+                "anyOf": [
+                  {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/BreakdownResult"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "null",
+                    "description": "Police record was not checked."
+                  }
+                ]
+              },
+              "visual_authenticity": {
+                "description": "Whether visual (non-textual) elements are correct for this specific document type.\n\nIf a document's NFC chip is scanned, data consistency is not checked so property value is `null`.\n",
+                "anyOf": [
+                  {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/BreakdownResult"
+                      },
+                      {
+                        "properties": {
+                          "breakdown": {
+                            "anyOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "face_detection": {
+                                    "description": "No face was detected on the document.",
+                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                  },
+                                  "digital_tampering": {
+                                    "description": "Indication of digital tampering in the image (for example, name was altered).",
+                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                  },
+                                  "original_document_present": {
+                                    "description": "The document was not present when the photo was taken. For example, a photo of an image of a document or a photo of a digital screen.",
+                                    "allOf": [
+                                      {
+                                        "$ref": "#/components/schemas/BreakdownResult"
+                                      },
+                                      {
+                                        "properties": {
+                                          "properties": {
+                                            "anyOf": [
+                                              {
+                                                "type": "object",
+                                                "properties": {
+                                                  "screenshot": {
+                                                    "description": "Image is a digital screenshot.",
+                                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                                  },
+                                                  "document_on_printed_paper": {
+                                                    "description": "Image is a photo of a printed image of a document.",
+                                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                                  },
+                                                  "photo_of_screen": {
+                                                    "description": "Image is a photo of a digital screen.",
+                                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                                  },
+                                                  "scan": {
+                                                    "description": "Image of document was captured using a scanner (not a photo of a document).",
+                                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                                  }
+                                                }
+                                              },
+                                              {
+                                                "type": "null"
+                                              }
+                                            ]
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "picture_face_integrity": {
+                                    "description": "The pictures of the person identified on the document show signs of tampering or alteration. In most cases this will focus on the primary picture yet it may also apply to the secondary and tertiary pictures when documents contain them.",
+                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                  },
+                                  "security_features": {
+                                    "description": "Security features expected on the document are missing or are incorrect.",
+                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                  },
+                                  "fonts": {
+                                    "description": "Fonts on the document don't match the expected ones.",
+                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                  },
+                                  "template": {
+                                    "description": "The document doesn't match the expected template for the document type and country it is from.",
+                                    "$ref": "#/components/schemas/SubBreakdownResult"
+                                  }
+                                }
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "null",
+                    "description": "Visual authenticity was not checked."
+                  }
+                ]
+              }
+            }
+          },
+          "document_data": {
+            "description": "Data extracted from the document.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DocumentData"
+              },
+              {
+                "type": "null",
+                "description": "No data could be extracted from the document."
+              }
+            ]
+          }
+        }
+      },
+      "FacialSimilarityMotion": {
+        "title": "Facial Similarity Motion",
+        "properties": {
+          "type": {
+            "const": "facial_similarity_motion"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "processing",
+              "complete"
+            ]
+          },
+          "result": {
+            "type": "string",
+            "enum": [
+              "clear",
+              "consider"
+            ],
+            "description": "* `clear` - All verifications pass.\n* `consider` - Some verifications did not pass.\n"
+          },
+          "breakdown": {
+            "description": "A detailed breakdown of the report's verifications used to determine the overall result.",
+            "properties": {
+              "face_comparison": {
+                "description": "Whether the face in the document matches the face in the motion capture.",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/BreakdownResult"
+                  },
+                  {
+                    "properties": {
+                      "breakdown": {
+                        "type": "object",
+                        "properties": {
+                          "face_match": {
+                            "description": "Comparison between face in document and motion capture was sufficient.",
+                            "allOf": [
+                              {
+                                "$ref": "#/components/schemas/SubBreakdownResult"
+                              },
+                              {
+                                "properties": {
+                                  "properties": {
+                                    "anyOf": [
+                                      {
+                                        "type": "object",
+                                        "properties": {
+                                          "score": {
+                                            "type": "number",
+                                            "format": "float",
+                                            "description": "Similarity between face in document and motion capture, where 1 is a perfect match.",
+                                            "minimum": 0,
+                                            "maximum": 1
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "type": "null"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              "image_integrity": {
+                "description": "Whether the quality and integrity of the uploaded files were sufficient to perform a face comparison.",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/BreakdownResult"
+                  },
+                  {
+                    "properties": {
+                      "breakdown": {
+                        "type": "object",
+                        "properties": {
+                          "face_detected": {
+                            "description": "A single face of good enough quality was found in both the document image and the motion capture.",
+                            "allOf": [
+                              {
+                                "$ref": "#/components/schemas/SubBreakdownResult"
+                              }
+                            ]
+                          },
+                          "source_integrity": {
+                            "description": "Whether the motion capture is trustworthy, e.g. not from a fake webcam.",
+                            "allOf": [
+                              {
+                                "$ref": "#/components/schemas/SubBreakdownResult"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              "visual_authenticity": {
+                "description": "Whether the person in the motion capture is real and that actions were performed live.",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/BreakdownResult"
+                  },
+                  {
+                    "properties": {
+                      "breakdown": {
+                        "type": "object",
+                        "properties": {
+                          "liveness_detected": {
+                            "description": "Whether the liveness actions were correctly executed by the data subject.",
+                            "allOf": [
+                              {
+                                "$ref": "#/components/schemas/SubBreakdownResult"
+                              }
+                            ]
+                          },
+                          "spoofing_detection": {
+                            "description": "Whether the motion capture is not a spoof, e.g. video of a digital screen.",
+                            "allOf": [
+                              {
+                                "$ref": "#/components/schemas/SubBreakdownResult"
+                              },
+                              {
+                                "properties": {
+                                  "properties": {
+                                    "anyOf": [
+                                      {
+                                        "type": "object",
+                                        "properties": {
+                                          "score": {
+                                            "type": "number",
+                                            "format": "float",
+                                            "description": "Probability motion capture is genuine, where 1 is highest confidence it is genuine.",
+                                            "minimum": 0,
+                                            "maximum": 1
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "type": "null"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "FacialSimilarityPhoto": {
+        "title": "Facial Similarity Photo",
+        "properties": {
+          "type": {
+            "const": "facial_similarity_photo"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "processing",
+              "complete"
+            ]
+          },
+          "result": {
+            "type": "string",
+            "enum": [
+              "clear",
+              "consider"
+            ],
+            "description": "* `clear` - All verifications pass.\n* `consider` - Some verifications did not pass.\n"
+          },
+          "breakdown": {
+            "description": "A detailed breakdown of the report's verifications used to determine the overall result.",
+            "properties": {
+              "face_comparison": {
+                "description": "Whether the face in the document matches the face in the photo.",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/BreakdownResult"
+                  },
+                  {
+                    "properties": {
+                      "breakdown": {
+                        "type": "object",
+                        "properties": {
+                          "face_match": {
+                            "description": "Comparison between face in document and photo was sufficient.",
+                            "allOf": [
+                              {
+                                "$ref": "#/components/schemas/SubBreakdownResult"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              "image_integrity": {
+                "description": "Whether the quality and integrity of the uploaded files were sufficient to perform a face comparison.",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/BreakdownResult"
+                  },
+                  {
+                    "properties": {
+                      "breakdown": {
+                        "type": "object",
+                        "properties": {
+                          "face_detected": {
+                            "description": "A single face of good enough quality was found in both the document image and the photo.",
+                            "allOf": [
+                              {
+                                "$ref": "#/components/schemas/SubBreakdownResult"
+                              }
+                            ]
+                          },
+                          "source_integrity": {
+                            "description": "Whether the photo is trustworthy, e.g. not digitally manipulated, from a fake webcam, an old photo.",
+                            "allOf": [
+                              {
+                                "$ref": "#/components/schemas/SubBreakdownResult"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              "visual_authenticity": {
+                "description": "Whether the person in the photo appears to be real.",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/BreakdownResult"
+                  },
+                  {
+                    "properties": {
+                      "breakdown": {
+                        "type": "object",
+                        "properties": {
+                          "spoofing_detection": {
+                            "description": "Whether the photo is not a spoof, e.g. photo of a digital screen or printed photo.",
+                            "allOf": [
+                              {
+                                "$ref": "#/components/schemas/SubBreakdownResult"
+                              },
+                              {
+                                "properties": {
+                                  "properties": {
+                                    "anyOf": [
+                                      {
+                                        "type": "object",
+                                        "properties": {
+                                          "score": {
+                                            "type": "number",
+                                            "format": "float",
+                                            "description": "Probability photo is genuine, where 1 is highest confidence it is genuine.",
+                                            "minimum": 0,
+                                            "maximum": 1
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "type": "null"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Attachment": {
+        "title": "Attachment",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "object": {
+            "type": "string",
+            "readOnly": true,
+            "const": "attachment"
+          },
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "name": {
+            "type": "string",
+            "readOnly": true
+          },
+          "original": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "readOnly": true
+          },
+          "size": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "av_status": {
+            "type": "string",
+            "readOnly": true,
+            "enum": [
+              "pending",
+              "clean",
+              "infected",
+              "error"
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          }
+        }
+      },
+      "Document-2": {
+        "title": "Document",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "document"
+          },
+          "attachment": {
+            "$ref": "#/components/schemas/Attachment"
+          },
+          "document_type": {
+            "$ref": "#/components/schemas/DocumentType"
+          },
+          "side": {
+            "description": "For documents with more than one side, e.g. UK DVLA driving licence.\n\nSome documents with only one side may still include a \"front\" value, e.g. UK passport.\n",
+            "oneOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "front",
+                  "back"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "issuing_country": {
+            "description": "ISO 3166 alpha-3 country code.",
+            "oneOf": [
+              {
+                "type": "string",
+                "maxLength": 3,
+                "minLength": 3
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "has_nfc": {
+            "type": "boolean",
+            "description": "If the document has an NFC chip and its chip was scanned."
+          }
+        }
+      },
+      "Person": {
+        "title": "Person",
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "photo",
+              "motion_capture"
+            ]
+          },
+          "attachment": {
+            "$ref": "#/components/schemas/Attachment"
+          }
+        }
+      },
+      "Response": {
+        "type": "object",
+        "properties": {
+          "object": {
+            "type": "string",
+            "const": "check_response.photo_id"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "processing",
+              "complete"
+            ]
+          },
+          "result": {
+            "type": "string",
+            "enum": [
+              "clear",
+              "consider"
+            ],
+            "description": "* `clear` - All reports returned clear.\n* `consider` - At least one report contains a consider result.\n"
+          },
+          "reports": {
+            "description": "The reports performed for this Photo ID check.",
+            "anyOf": [
+              {
+                "title": "Completed Reports",
+                "type": "array",
+                "items": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/Document"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FacialSimilarityMotion"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FacialSimilarityPhoto"
+                    },
+                    {
+                      "title": "Other",
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "other",
+                          "description": "This report type is not yet available from the API."
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "null",
+                "description": "The reports for this check have not yet been processed."
+              }
+            ]
+          },
+          "media": {
+            "anyOf": [
+              {
+                "type": "array",
+                "title": "Uploaded Media",
+                "items": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/Document-2"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Person"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "CheckResponse": {
+        "title": "Check Response",
+        "anyOf": [
+          {
+            "title": "Photo ID",
+            "$ref": "#/components/schemas/Response"
+          },
+          {
+            "title": "Other",
+            "type": "object",
+            "properties": {
+              "object": {
+                "type": "string",
+                "enum": [
+                  "check_response.other"
+                ],
+                "description": "The response for this check type is not yet available from the API."
+              }
+            }
+          }
+        ]
+      },
       "Check-2": {
         "title": "Check",
         "type": "object",
@@ -11829,6 +13322,27 @@
           },
           "status": {
             "$ref": "#/components/schemas/CheckStatus"
+          },
+          "response": {
+            "readOnly": true,
+            "x-expandable": true,
+            "description": "🚧 Check responses are still in beta. Available data may be incomplete or differ from the specification. Contact developers@amiqus.co to report inconsistencies.\n",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/CheckResponse"
+              },
+              {
+                "type": "boolean",
+                "enum": [
+                  true
+                ],
+                "description": "Value is `true` when there is an expandable response available."
+              },
+              {
+                "type": "null",
+                "description": "Value is `null` when there is no expandable response available.\n"
+              }
+            ]
           },
           "allow_replay": {
             "type": "boolean"
@@ -12768,57 +14282,6 @@
           }
         }
       },
-      "Attachment": {
-        "title": "Attachment",
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "object": {
-            "type": "string",
-            "readOnly": true,
-            "const": "attachment"
-          },
-          "id": {
-            "type": "integer",
-            "readOnly": true
-          },
-          "name": {
-            "type": "string",
-            "readOnly": true
-          },
-          "original": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string",
-            "readOnly": true
-          },
-          "size": {
-            "type": "integer",
-            "readOnly": true
-          },
-          "av_status": {
-            "type": "string",
-            "readOnly": true,
-            "enum": [
-              "pending",
-              "clean",
-              "infected",
-              "error"
-            ]
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time",
-            "readOnly": true
-          },
-          "updated_at": {
-            "type": "string",
-            "format": "date-time",
-            "readOnly": true
-          }
-        }
-      },
       "RecordDocument": {
         "title": "RecordDocument",
         "type": "object",
@@ -13072,7 +14535,7 @@
                 "type": "null"
               },
               {
-                "$ref": "#/components/schemas/Document"
+                "$ref": "#/components/schemas/Document-3"
               }
             ]
           },
@@ -13728,7 +15191,7 @@
           }
         }
       },
-      "Document": {
+      "Document-3": {
         "title": "TipTap Document",
         "type": "object",
         "required": [
@@ -13862,7 +15325,7 @@
               "json_content": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Document"
+                    "$ref": "#/components/schemas/Document-3"
                   }
                 ]
               }
@@ -14145,7 +15608,7 @@
           }
         }
       },
-      "Document-2": {
+      "Document-4": {
         "title": "Document",
         "allOf": [
           {
@@ -14207,7 +15670,7 @@
             "$ref": "#/components/schemas/MultipleChoice-2"
           },
           {
-            "$ref": "#/components/schemas/Document-2"
+            "$ref": "#/components/schemas/Document-4"
           }
         ]
       },
@@ -14880,7 +16343,7 @@
           }
         ]
       },
-      "Document-3": {
+      "Document-5": {
         "title": "Document",
         "type": "object",
         "additionalProperties": false,
@@ -15838,7 +17301,7 @@
                 "type": "null"
               },
               {
-                "$ref": "#/components/schemas/Document"
+                "$ref": "#/components/schemas/Document-3"
               }
             ]
           },

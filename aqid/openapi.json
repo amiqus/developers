@@ -5931,6 +5931,403 @@
         }
       }
     },
+    "/checks/{id}": {
+      "get": {
+        "summary": "Retrieve a check",
+        "description": "Retrieve a check.",
+        "operationId": "get-checks-id",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Records"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/resourceId",
+            "description": "Unique check identifier"
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "record",
+                  "response"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Check-2"
+                },
+                "examples": {
+                  "pending": {
+                    "summary": "Pending",
+                    "description": "A check that has not yet been completed.",
+                    "value": {
+                      "object": "check",
+                      "id": 82342,
+                      "type": "identity",
+                      "record": 983434,
+                      "status": "pending",
+                      "response": null,
+                      "allow_replay": true,
+                      "allow_cancel": true,
+                      "requires_consent": true,
+                      "created_at": "2022-05-22T08:22:12Z",
+                      "updated_at": "2022-05-22T08:22:12Z"
+                    }
+                  },
+                  "photo_id": {
+                    "summary": "Photo ID",
+                    "description": "Expanded response: Photo ID check type\n",
+                    "value": {
+                      "object": "check",
+                      "id": 82342,
+                      "type": "identity",
+                      "record": 983434,
+                      "status": "accepted",
+                      "response": {
+                        "object": "check_response.photo_id",
+                        "status": "complete",
+                        "result": "clear",
+                        "reports": [
+                          {
+                            "type": "document",
+                            "status": "complete",
+                            "result": "clear",
+                            "breakdown": {
+                              "age_validation": {
+                                "result": "clear",
+                                "breakdown": {
+                                  "minimum_accepted_age": {
+                                    "result": "clear"
+                                  }
+                                }
+                              },
+                              "compromised_document": {
+                                "result": "clear",
+                                "breakdown": {
+                                  "document_database": {
+                                    "result": "clear"
+                                  },
+                                  "repeat_attempts": {
+                                    "result": "clear"
+                                  }
+                                }
+                              },
+                              "data_comparison": {
+                                "result": "clear",
+                                "breakdown": {
+                                  "first_name": {
+                                    "result": "clear"
+                                  },
+                                  "last_name": {
+                                    "result": "clear"
+                                  },
+                                  "date_of_birth": {
+                                    "result": "clear"
+                                  }
+                                }
+                              },
+                              "data_consistency": {
+                                "result": "clear",
+                                "breakdown": {
+                                  "issuing_country": {
+                                    "result": "clear"
+                                  },
+                                  "document_numbers": {
+                                    "result": "clear"
+                                  },
+                                  "nationality": {
+                                    "result": "clear"
+                                  },
+                                  "gender": {
+                                    "result": "clear"
+                                  },
+                                  "document_type": {
+                                    "result": "clear"
+                                  },
+                                  "date_of_expiry": {
+                                    "result": "clear"
+                                  },
+                                  "date_of_birth": {
+                                    "result": "clear"
+                                  },
+                                  "last_name": {
+                                    "result": "clear"
+                                  },
+                                  "first_name": {
+                                    "result": "clear"
+                                  }
+                                }
+                              },
+                              "data_validation": {
+                                "result": "clear",
+                                "breakdown": {
+                                  "mrz": {
+                                    "result": "clear"
+                                  },
+                                  "document_expiration": {
+                                    "result": "clear"
+                                  },
+                                  "expiry_date": {
+                                    "result": "clear"
+                                  },
+                                  "date_of_birth": {
+                                    "result": "clear"
+                                  },
+                                  "gender": {
+                                    "result": "clear"
+                                  },
+                                  "document_numbers": {
+                                    "result": "clear"
+                                  }
+                                }
+                              },
+                              "image_integrity": {
+                                "result": "clear",
+                                "breakdown": {
+                                  "supported_document": {
+                                    "result": "clear"
+                                  }
+                                },
+                                "image_quality": {
+                                  "result": "clear",
+                                  "properties": {
+                                    "glare_on_photo": {
+                                      "result": "clear"
+                                    },
+                                    "blurred_photo": {
+                                      "result": "clear"
+                                    },
+                                    "covered_photo": {
+                                      "result": "clear"
+                                    },
+                                    "other_photo_issue": {
+                                      "result": "clear"
+                                    },
+                                    "incorrect_side": {
+                                      "result": "clear"
+                                    },
+                                    "cut_off_document": {
+                                      "result": "clear"
+                                    },
+                                    "no_document_in_image": {
+                                      "result": "clear"
+                                    },
+                                    "two_documents_uploaded": {
+                                      "result": "clear"
+                                    }
+                                  },
+                                  "colour_picture": {
+                                    "result": "clear"
+                                  },
+                                  "conclusive_document_quality": {
+                                    "result": "clear",
+                                    "properties": {
+                                      "watermarks_digital_text_overlay": {
+                                        "result": "clear"
+                                      },
+                                      "punctured_document": {
+                                        "result": "clear"
+                                      },
+                                      "obscured_security_features": {
+                                        "result": "clear"
+                                      },
+                                      "obscured_data_points": {
+                                        "result": "clear"
+                                      },
+                                      "missing_back": {
+                                        "result": "clear"
+                                      },
+                                      "digital_document": {
+                                        "result": "clear"
+                                      },
+                                      "corner_removed": {
+                                        "result": "clear"
+                                      },
+                                      "abnormal_document_features": {
+                                        "result": "clear"
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "issuing_authority": {
+                                "result": "clear",
+                                "breakdown": {
+                                  "nfc_passive_authentication": {
+                                    "result": "clear"
+                                  },
+                                  "nfc_active_authentication": {
+                                    "result": "clear"
+                                  }
+                                }
+                              },
+                              "police_record": {
+                                "result": "clear"
+                              },
+                              "visual_authenticity": {
+                                "result": "clear",
+                                "breakdown": {
+                                  "face_detection": {
+                                    "result": "clear"
+                                  },
+                                  "digital_tampering": {
+                                    "result": "clear"
+                                  },
+                                  "original_document_present": {
+                                    "result": "clear",
+                                    "properties": {
+                                      "screenshot": {
+                                        "result": "clear"
+                                      },
+                                      "document_on_printed_paper": {
+                                        "result": "clear"
+                                      },
+                                      "photo_of_screen": {
+                                        "result": "clear"
+                                      },
+                                      "scan": {
+                                        "result": "clear"
+                                      }
+                                    }
+                                  },
+                                  "picture_face_integrity": {
+                                    "result": "clear"
+                                  },
+                                  "security_features": {
+                                    "result": "clear"
+                                  },
+                                  "fonts": {
+                                    "result": "clear"
+                                  },
+                                  "template": {
+                                    "result": "clear"
+                                  }
+                                }
+                              }
+                            },
+                            "document_data": {
+                              "document_type": "passport",
+                              "first_name": "MARTIN",
+                              "last_name": "MCFLY",
+                              "middle_name": null,
+                              "date_of_birth": "1968-06-12",
+                              "gender": "male",
+                              "document_numbers": [
+                                {
+                                  "type": "document_number",
+                                  "value": "112233445"
+                                }
+                              ],
+                              "issuing_authority": null,
+                              "issuing_country": "GBR",
+                              "issuing_state": null,
+                              "issuing_date": "2019-08-24",
+                              "date_of_expiry": "2039-07-01",
+                              "mrz_line1": "P<GBRMMCFLY<<<<<MARTIN<<<<<<<<<<<<<<<<<<<<<<",
+                              "mrz_line2": "1122334459GBR6806121M3907019<<<<<<<<<<<<<<01",
+                              "mrz_line3": null,
+                              "nationality": "GBR",
+                              "place_of_birth": "EDINBURGH",
+                              "nfc": null
+                            }
+                          }
+                        ],
+                        "media": [
+                          {
+                            "type": "document",
+                            "attachment": {
+                              "object": "attachment",
+                              "id": 31785,
+                              "name": "14592310-706e-4bae-9171-83db2fa9d0fb.jpg",
+                              "original": "passport.jpg",
+                              "type": "image/jpeg",
+                              "size": 16053,
+                              "av_status": "clean",
+                              "created_at": "2022-05-22T08:22:12Z",
+                              "updated_at": "2022-05-22T08:22:12Z"
+                            },
+                            "document_type": "passport",
+                            "side": "front",
+                            "issuing_country": "GBR",
+                            "has_nfc": false
+                          }
+                        ]
+                      },
+                      "allow_replay": true,
+                      "allow_cancel": true,
+                      "requires_consent": true,
+                      "created_at": "2022-05-22T08:22:12Z",
+                      "updated_at": "2022-05-22T08:22:12Z"
+                    }
+                  },
+                  "other": {
+                    "summary": "Expanded response: Unavailable check type\n",
+                    "description": "A check type with an expanded response that is not yet available from the API.",
+                    "value": {
+                      "object": "check",
+                      "id": 82342,
+                      "type": "identity",
+                      "record": 983434,
+                      "status": "accepted",
+                      "response": {
+                        "object": "check_response.other"
+                      },
+                      "allow_replay": true,
+                      "allow_cancel": true,
+                      "requires_consent": true,
+                      "created_at": "2022-05-22T08:22:12Z",
+                      "updated_at": "2022-05-22T08:22:12Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Check not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/records/{id}/assignees": {
       "parameters": [
         {

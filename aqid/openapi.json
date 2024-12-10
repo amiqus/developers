@@ -9256,6 +9256,95 @@
         }
       }
     },
+    "/attachments/{id}/redact": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/resourceId",
+          "description": "The unique attachment identifier."
+        }
+      ],
+      "put": {
+        "summary": "Redact an attachment",
+        "description": "Replace an attachment with a generic \"This file has been removed due to a data deletion request\" .png image. The file name will be updated to append \"redacted\" and other information retained.\n\nOnly attachments uploaded as part of a completed document request or a form are eligible for redaction.\n",
+        "operationId": "put-attachments-id",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Attachments"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Attachment"
+                },
+                "examples": {
+                  "default": {
+                    "summary": "Default",
+                    "value": {
+                      "object": "attachment",
+                      "id": 31782,
+                      "name": "14592310-706e-4bae-9171-83db2fa9d0fb.pdf",
+                      "original": "NDAredacted.pdf-redacted.png",
+                      "type": "image/png",
+                      "size": 5645,
+                      "av_status": "clean",
+                      "created_at": "2023-01-13T11:54:24Z",
+                      "updated_at": "2023-01-14T11:54:24Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Attachment not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/schema"
+                },
+                "example": {
+                  "errors": [
+                    "Attachment {id} cannot be redacted"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/sdk_token": {
       "post": {
         "summary": "Create an SDK token",

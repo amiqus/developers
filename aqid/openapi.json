@@ -17445,7 +17445,8 @@
           "record.finished",
           "record.reviewed",
           "record.unreviewed",
-          "record.updated"
+          "record.updated",
+          "watchlist.updated"
         ]
       },
       "Webhook": {
@@ -17527,6 +17528,7 @@
           "record.reviewed",
           "record.unreviewed",
           "record.updated",
+          "watchlist.updated",
           "ping"
         ]
       },

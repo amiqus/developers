@@ -9498,10 +9498,29 @@
           },
           {
             "name": "status",
-            "description": "Filter cases by their current status.",
+            "description": "Filter cases by their current status.\n\n**Note:** `pending` is deprecated.\n",
             "in": "query",
+            "explode": false,
             "schema": {
-              "$ref": "#/components/schemas/ClientCaseStatus"
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ClientCaseStatus"
+              }
+            },
+            "examples": {
+              "one": {
+                "value": [
+                  "approved"
+                ],
+                "summary": "Filter by a single status."
+              },
+              "multiple": {
+                "value": [
+                  "approved",
+                  "rejected"
+                ],
+                "summary": "Filter by multiple statuses."
+              }
             }
           },
           {
@@ -9867,7 +9886,7 @@
                   "id": 8723,
                   "name": "Full-time onboarding",
                   "reference": "AQFT123",
-                  "status": "pending",
+                  "status": "action_required",
                   "client": 7832,
                   "items": null,
                   "assignees": null,
@@ -18161,11 +18180,14 @@
         "type": "string",
         "enum": [
           "pending",
-          "on_hold",
+          "awaiting_response",
+          "action_required",
+          "reviewed_pending_decision",
           "approved",
-          "rejected"
+          "rejected",
+          "on_hold"
         ],
-        "description": "The overall status of the case.\n\n- `pending`: Active, awaiting approval or rejection.\n- `on_hold`: Inactive, on hold.\n- `approved`: Completed and approved.\n- `rejected`: Completed and rejected.\n"
+        "description": "The overall status of the case.\n\n- `pending`:  _Deprecated_\n- `awaiting_response`: Awaiting response from client, provider, or external party.\n- `action_required`: Awaiting team member action to progress the case.\n- `reviewed_pending_decision`: Pending final approval or rejection.\n- `approved`: Completed and approved.\n- `rejected`: Completed and rejected.\n- `on_hold`: Inactive, on hold.\n"
       },
       "ClientCaseItem": {
         "title": "Case Item",

@@ -726,6 +726,7 @@
                       "reference": null,
                       "national_insurance_number": null,
                       "is_deletable": true,
+                      "deletion_date": "2026-01-14",
                       "created_at": "2022-05-21T14:15:22Z",
                       "updated_at": "2022-05-21T14:15:22Z",
                       "archived_at": null
@@ -752,6 +753,7 @@
                       "reference": null,
                       "national_insurance_number": "QQ345678Z",
                       "is_deletable": true,
+                      "deletion_date": "2025-09-11",
                       "created_at": "2022-05-21T14:22:01Z",
                       "updated_at": "2022-05-21T14:22:01Z",
                       "archived_at": null
@@ -778,6 +780,7 @@
                       "reference": null,
                       "national_insurance_number": "QQ123456C",
                       "is_deletable": true,
+                      "deletion_date": "2026-12-21",
                       "created_at": "2022-05-21T14:29:59Z",
                       "updated_at": "2022-05-21T14:29:59Z",
                       "archived_at": null
@@ -905,6 +908,7 @@
                   "reference": null,
                   "national_insurance_number": "QQ123456C",
                   "is_deletable": true,
+                  "deletion_date": "2026-01-14",
                   "created_at": "2022-05-21T14:15:22Z",
                   "updated_at": "2022-05-21T14:15:22Z",
                   "archived_at": null
@@ -1000,6 +1004,7 @@
                   "reference": null,
                   "national_insurance_number": "QQ123456C",
                   "is_deletable": true,
+                  "deletion_date": "2026-01-14",
                   "created_at": "2022-05-21T14:15:22Z",
                   "updated_at": "2022-05-21T14:15:22Z",
                   "archived_at": null
@@ -1136,6 +1141,7 @@
                   "reference": null,
                   "national_insurance_number": "QQ123456C",
                   "is_deletable": true,
+                  "deletion_date": "2026-01-14",
                   "created_at": "2022-05-21T14:15:22Z",
                   "updated_at": "2022-09-22T17:02:13Z",
                   "archived_at": null
@@ -3345,6 +3351,7 @@
                             "reference": null,
                             "national_insurance_number": null,
                             "is_deletable": true,
+                            "deletion_date": "2026-01-14",
                             "created_at": "2022-05-21T14:15:22Z",
                             "updated_at": "2022-05-21T14:15:22Z",
                             "archived_at": null
@@ -3712,6 +3719,7 @@
                         "reference": null,
                         "national_insurance_number": null,
                         "is_deletable": true,
+                        "deletion_date": "2026-01-14",
                         "created_at": "2022-05-21T14:15:22Z",
                         "updated_at": "2022-05-21T14:15:22Z",
                         "archived_at": null
@@ -9688,6 +9696,7 @@
                             "reference": null,
                             "national_insurance_number": null,
                             "is_deletable": true,
+                            "deletion_date": "2026-01-14",
                             "created_at": "2022-05-21T14:15:22Z",
                             "updated_at": "2022-05-21T14:15:22Z",
                             "archived_at": null
@@ -10010,6 +10019,7 @@
                         "reference": null,
                         "national_insurance_number": null,
                         "is_deletable": true,
+                        "deletion_date": "2026-01-14",
                         "created_at": "2022-05-21T14:15:22Z",
                         "updated_at": "2022-05-21T14:15:22Z",
                         "archived_at": null
@@ -11488,6 +11498,14 @@
             "type": "boolean",
             "readOnly": true,
             "description": "Indicates if the client can be deleted."
+          },
+          "deletion_date": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date",
+            "description": "Date by which the client should be manually deleted from Amiqus."
           },
           "created_at": {
             "type": "string",

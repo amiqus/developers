@@ -9273,7 +9273,7 @@
       ],
       "put": {
         "summary": "Redact an attachment",
-        "description": "Replace an attachment with a generic \"This file has been removed due to a data deletion request\" .png image. The file name will be updated to append \"redacted\" and other information retained.\n\nOnly attachments that are of type `record_document` or uploaded as part of a form are eligible for redaction.\n",
+        "description": "Replace an attachment with a generic \"This file has been removed due to a data deletion request\" .png image. The file name will be updated to append \"redacted\" and other information retained.\n\nOnly attachments uploaded as part of a completed document request or a form are eligible for redaction.\n",
         "operationId": "put-attachments-id",
         "security": [
           {
@@ -16332,15 +16332,6 @@
             ],
             "format": "date-time",
             "description": "The date and time an uploaded file expires."
-          },
-          "redacted_at": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "format": "date-time",
-            "readOnly": true,
-            "description": "The date and time the file was redacted by the user.\nPlease note that not all files can be redacted.\nFor example a file that is part of a check.\n"
           }
         }
       },

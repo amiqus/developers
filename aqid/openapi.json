@@ -5547,15 +5547,12 @@
             "schema": {
               "type": "array",
               "items": {
-                "allOf": [
-                  {
-                    "type": "string",
-                    "enum": [
-                      "check",
-                      "form",
-                      "document"
-                    ]
-                  }
+                "type": "string",
+                "enum": [
+                  "check",
+                  "form",
+                  "document",
+                  "review"
                 ]
               }
             },
@@ -10998,7 +10995,320 @@
             "description": "The unique record step identifier."
           }
         }
-      ]
+      ],
+      "get": {
+        "summary": "List all reviews for a record step",
+        "description": "List all reviews for a record step.",
+        "operationId": "get-records-recordId-steps-stepId-reviews",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Records"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "created_at",
+                "updated_at"
+              ]
+            },
+            "description": "Sort results by date. Results returned based on the `created_at` timestamp by default"
+          },
+          {
+            "name": "order_by",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "description": "Order results in ascending or descending order. Results returned in ascending order by default"
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "reviewed_by"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/PaginatedList"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "items": {
+                            "$ref": "#/components/schemas/StepReview"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "default": {
+                    "summary": "Default",
+                    "value": {
+                      "object": "paginated_list",
+                      "data": [
+                        {
+                          "object": "step_review",
+                          "id": 2698,
+                          "reviewed_by": 7832,
+                          "status": "approved",
+                          "from_status": "pending",
+                          "message": "All documents checked and reviewed",
+                          "created_at": "2023-01-22T08:22:12Z",
+                          "updated_at": "2023-01-22T08:22:12Z"
+                        }
+                      ],
+                      "total": 1,
+                      "count": 1,
+                      "limit": 100,
+                      "current_page": 1,
+                      "total_pages": 1,
+                      "links": null
+                    }
+                  },
+                  "reviewed_by_expanded": {
+                    "summary": "Reviewed by expanded",
+                    "value": {
+                      "object": "paginated_list",
+                      "data": [
+                        {
+                          "object": "step_review",
+                          "id": 2698,
+                          "reviewed_by": {
+                            "object": "team_member",
+                            "id": 472,
+                            "name": "Dennis Jones",
+                            "email": "dennis@example.com",
+                            "role": "member"
+                          },
+                          "status": "approved",
+                          "from_status": "pending",
+                          "message": "All documents checked and reviewed",
+                          "created_at": "2023-01-22T08:22:12Z",
+                          "updated_at": "2023-01-22T08:22:12Z"
+                        }
+                      ],
+                      "total": 1,
+                      "count": 1,
+                      "limit": 100,
+                      "current_page": 1,
+                      "total_pages": 1,
+                      "links": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "Record not found",
+                        "Record step not found"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a review for a record step",
+        "description": "Create a review for a record step.",
+        "operationId": "post-records-recordId-steps-stepId-reviews",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Records"
+        ],
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "reviewed_by"
+                ]
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "status"
+                ],
+                "properties": {
+                  "status": {
+                    "$ref": "#/components/schemas/StepReviewStatus"
+                  },
+                  "message": {
+                    "type": "string",
+                    "description": "Required if `status: rejected`\n",
+                    "minLength": 1,
+                    "maxLength": 1000
+                  }
+                }
+              },
+              "example": {
+                "status": "approved",
+                "message": "All documents checked and reviewed"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StepReview"
+                },
+                "examples": {
+                  "default": {
+                    "summary": "Default",
+                    "value": {
+                      "object": "step_review",
+                      "id": 2698,
+                      "reviewed_by": 7832,
+                      "status": "approved",
+                      "from_status": "pending",
+                      "message": "All documents checked and reviewed",
+                      "created_at": "2023-01-22T08:22:12Z",
+                      "updated_at": "2023-01-22T08:22:12Z"
+                    }
+                  },
+                  "reviewed_by_expanded": {
+                    "summary": "Reviewed by expanded",
+                    "value": {
+                      "object": "step_review",
+                      "id": 2698,
+                      "reviewed_by": {
+                        "object": "team_member",
+                        "id": 7832,
+                        "name": "Dennis Jones",
+                        "email": "dennis@example.com",
+                        "role": "member"
+                      },
+                      "status": "approved",
+                      "from_status": "pending",
+                      "message": "All documents checked and reviewed",
+                      "created_at": "2023-01-22T08:22:12Z",
+                      "updated_at": "2023-01-22T08:22:12Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "Record not found",
+                        "Record step not found"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          }
+        }
+      }
     },
     "/aggregates/case-status": {
       "get": {
@@ -13903,9 +14213,103 @@
           }
         }
       },
+      "StepReviewStatus": {
+        "title": "Step Review Status",
+        "type": "string",
+        "enum": [
+          "pending",
+          "approved",
+          "rejected"
+        ],
+        "description": "The review status of a record's step.\n\n- `pending`: Awaiting approval or rejection.\n- `approved`: Reviewed and authorised.\n- `rejected`: Reviewed and dismissed.\n"
+      },
+      "StepReview": {
+        "title": "Step Review",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "object": {
+            "type": "string",
+            "readOnly": true,
+            "const": "step_review"
+          },
+          "id": {
+            "type": "integer",
+            "readOnly": true,
+            "description": "The unique step review identifier."
+          },
+          "reviewed_by": {
+            "readOnly": true,
+            "x-expandable": true,
+            "oneOf": [
+              {
+                "type": "integer",
+                "description": "The unique team member identifier."
+              },
+              {
+                "$ref": "#/components/schemas/TeamMember"
+              }
+            ]
+          },
+          "status": {
+            "$ref": "#/components/schemas/StepReviewStatus"
+          },
+          "from_status": {
+            "readOnly": true,
+            "$ref": "#/components/schemas/StepReviewStatus",
+            "description": "The previous status of the review."
+          },
+          "message": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "minLength": 1,
+            "maxLength": 1000,
+            "description": "An optional message attached to the review."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "description": "Date and time the review was added."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "description": "Date and time the review details were last updated."
+          }
+        }
+      },
       "Metadata": {
         "type": "object",
         "properties": {
+          "review": {
+            "readOnly": true,
+            "x-expandable": true,
+            "description": "Return the most recent step review, if any.\n\nTo retrieve all step reviews, refer to the **[List all reviews for a record step](#operation/get-records-recordId-steps-stepId-reviews)**.\n",
+            "oneOf": [
+              {
+                "type": "null",
+                "description": "A `null` value indicates that the step is pending review."
+              },
+              {
+                "type": "boolean",
+                "enum": [
+                  false
+                ],
+                "description": "The value is `false` when a step can not be reviewed."
+              },
+              {
+                "type": "integer",
+                "description": "The unique step review identifier."
+              },
+              {
+                "$ref": "#/components/schemas/StepReview"
+              }
+            ]
+          },
           "cost": {
             "type": "integer",
             "minimum": 0,

@@ -15177,7 +15177,8 @@
                 "enum": [
                   "sanctions",
                   "peps_sanctions",
-                  "peps_sanctions_media"
+                  "peps_sanctions_media",
+                  "peps_sanctions_media_extended"
                 ],
                 "default": "peps_sanctions_media"
               }

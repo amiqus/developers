@@ -15471,6 +15471,7 @@
             "type": "array",
             "description": "The first field must always be a Section. Any Fields not present in a Section are omitted.",
             "minItems": 2,
+            "maxItems": 200,
             "items": {
               "$ref": "#/components/schemas/CollectorFields"
             }
@@ -18248,6 +18249,7 @@
             "type": "array",
             "description": "The first field must always be a Section. Any Fields not present in a Section are omitted.",
             "minItems": 2,
+            "maxItems": 200,
             "items": {
               "$ref": "#/components/schemas/BuilderFields"
             }

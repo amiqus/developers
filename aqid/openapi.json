@@ -628,6 +628,20 @@
             }
           },
           {
+            "name": "deletion_date",
+            "description": "Filter clients by deletion date. All values, including `not_set`, are returned by default.",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "upcoming",
+                "today",
+                "overdue",
+                "not_set"
+              ]
+            }
+          },
+          {
             "name": "sort_by",
             "in": "query",
             "schema": {
@@ -635,6 +649,7 @@
               "enum": [
                 "name.first_name",
                 "name.last_name",
+                "deletion_date",
                 "created_at",
                 "updated_at",
                 "archived_at"

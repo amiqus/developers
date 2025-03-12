@@ -11440,6 +11440,14 @@
           }
         }
       }
+    },
+    "/integrations/types/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/resourceId",
+          "description": "The unique integrations type identifier."
+        }
+      ]
     }
   },
   "components": {

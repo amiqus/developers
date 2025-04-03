@@ -15171,7 +15171,7 @@
               "silent": {
                 "type": "boolean",
                 "default": true,
-                "description": "When `false` this person will be asked to agree before the check is run, otherwise they will not be notified.\n\n_Setting this preference may not be available for all teams._\n"
+                "description": "When `false` this person will be asked to confirm their details and agree before the check is run, otherwise they will not be notified.\nIf this check is used in a request with other check types then this setting will be ignored as all other\nchecks require details confirmation.\n\n_Setting this preference may not be available for all teams._\n"
               },
               "monitor": {
                 "description": "Continually monitor changes to the check results for one or three years.",

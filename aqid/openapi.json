@@ -3096,7 +3096,9 @@
                       "client": 73845,
                       "created_at": "2022-05-22T08:22:12Z",
                       "updated_at": "2022-05-22T08:22:12Z",
-                      "archived_at": null
+                      "archived_at": null,
+                      "is_declaration_required": false,
+                      "declaration_confirmed_at": null
                     }
                   ],
                   "total": 1,
@@ -4761,7 +4763,9 @@
                       "created_at": "2022-05-22T08:22:12Z",
                       "updated_at": "2022-05-22T08:22:12Z",
                       "expired_at": "2022-06-01T08:22:12Z",
-                      "archived_at": null
+                      "archived_at": null,
+                      "is_declaration_required": false,
+                      "declaration_confirmed_at": null
                     }
                   ],
                   "total": 1,
@@ -4839,7 +4843,9 @@
                       "created_at": "2022-05-22T08:22:12Z",
                       "updated_at": "2022-05-22T08:22:12Z",
                       "expired_at": "2022-06-01T08:22:12Z",
-                      "archived_at": null
+                      "archived_at": null,
+                      "is_declaration_required": false,
+                      "declaration_confirmed_at": null
                     }
                   },
                   "advanced": {
@@ -4905,7 +4911,9 @@
                       "created_at": "2022-05-22T08:22:12Z",
                       "updated_at": "2022-05-22T08:22:12Z",
                       "expired_at": "2022-06-01T08:22:12Z",
-                      "archived_at": null
+                      "archived_at": null,
+                      "is_declaration_required": false,
+                      "declaration_confirmed_at": null
                     }
                   }
                 }
@@ -5040,7 +5048,8 @@
                     ],
                     "notification": "email",
                     "message": "Please complete the following request to begin onboarding with Fusion Industries.",
-                    "reminder": true
+                    "reminder": true,
+                    "is_declaration_required": true
                   }
                 },
                 "template": {
@@ -5158,7 +5167,9 @@
                   "created_at": "2022-05-22T08:22:12Z",
                   "updated_at": "2022-05-22T08:22:12Z",
                   "expired_at": "2022-06-01T08:22:12Z",
-                  "archived_at": null
+                  "archived_at": null,
+                  "is_declaration_required": false,
+                  "declaration_confirmed_at": null
                 }
               }
             }
@@ -5312,7 +5323,9 @@
                   "created_at": "2022-05-22T08:22:12Z",
                   "updated_at": "2022-05-22T08:22:12Z",
                   "expired_at": "2022-05-25T08:22:12Z",
-                  "archived_at": "2023-09-15T13:03:11Z"
+                  "archived_at": "2023-09-15T13:03:11Z",
+                  "is_declaration_required": false,
+                  "declaration_confirmed_at": null
                 }
               }
             }
@@ -7545,7 +7558,8 @@
                         ],
                         "notification": "email",
                         "message": "Modi praesentium incidunt optio corrupti. Error sunt et atque ut qui facere ipsa sed. Illo ut voluptas numquam sapiente.\nInventore est nisi animi et consequatur iure deserunt quam reiciendis. Dolor eligendi tempora id aut quos temporibus asperiores omnis necessitatibus. Vel vel nihil autem alias dignissimos.\nQuia dolores et sequi est rem. Neque at debitis facere ullam ut eligendi distinctio cumque itaque. Eum dignissimos ea. Reiciendis corporis hic sunt cupiditate dolor est. Saepe et qui unde earum et eum est. Qui architecto maxime ab aut dolor voluptatum qui sed consequatur.",
-                        "reminder": true
+                        "reminder": true,
+                        "is_declaration_required": false
                       },
                       "is_enabled": true,
                       "created_at": "2022-08-13T14:12:53Z",
@@ -7585,6 +7599,7 @@
                         "notification": "email",
                         "message": "Welcome to the team, please complete the onboarding steps.",
                         "reminder": false,
+                        "is_declaration_required": true,
                         "assignees": [
                           623,
                           626
@@ -10441,7 +10456,9 @@
                             "created_at": "2022-05-22T08:22:12Z",
                             "updated_at": "2022-05-22T08:22:12Z",
                             "expired_at": "2022-06-01T08:22:12Z",
-                            "archived_at": null
+                            "archived_at": null,
+                            "is_declaration_required": false,
+                            "declaration_confirmed_at": null
                           },
                           "created_at": "2022-05-21T12:15:31Z",
                           "updated_at": "2022-05-21T12:15:31Z"
@@ -12627,6 +12644,20 @@
             "format": "date-time",
             "readOnly": true,
             "description": "Date and time the record was archived."
+          },
+          "is_declaration_required": {
+            "type": "boolean",
+            "default": false,
+            "description": "Denotes the presence/absence of a team's custom declaration in a record. Available where feature enabled on team only."
+          },
+          "declaration_confirmed_at": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time",
+            "readOnly": true,
+            "description": "Date and time the declaration was accepted. Available where feature enabled on team only."
           }
         }
       },
@@ -16972,6 +17003,11 @@
             "type": "boolean",
             "default": false,
             "description": "Enable or disable email reminders.\n\nWhen enabled, the client is sent a reminder email every 2 days until all steps have been completed, the record expires or is archived.\n"
+          },
+          "is_declaration_required": {
+            "type": "boolean",
+            "default": false,
+            "description": "Denotes the presence/absence of a team's custom declaration in a record. Available where feature enabled on team only."
           }
         }
       },

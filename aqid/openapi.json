@@ -3094,6 +3094,17 @@
                         }
                       ],
                       "client": 73845,
+                      "name": {
+                        "object": "name",
+                        "title": "mr",
+                        "other_title": null,
+                        "first_name": "Martin",
+                        "middle_name": "Seamus",
+                        "last_name": "McFly",
+                        "name": "Martin McFly",
+                        "full_name": "Martin Seamus McFly",
+                        "complete_name": "Mr Martin Seamus McFly"
+                      },
                       "created_at": "2022-05-22T08:22:12Z",
                       "updated_at": "2022-05-22T08:22:12Z",
                       "archived_at": null,
@@ -4712,6 +4723,17 @@
                       "perform_url": "https://id.amiqus.co/i/0vz32B9CZpO1yLsKPdy9q",
                       "email": "marty@example.com",
                       "client": 73845,
+                      "name": {
+                        "object": "name",
+                        "title": "mr",
+                        "other_title": null,
+                        "first_name": "Martin",
+                        "middle_name": "Seamus",
+                        "last_name": "McFly",
+                        "name": "Martin McFly",
+                        "full_name": "Martin Seamus McFly",
+                        "complete_name": "Mr Martin Seamus McFly"
+                      },
                       "steps": [
                         {
                           "object": "step",
@@ -4813,6 +4835,17 @@
                       "perform_url": "https://id.amiqus.co/i/NzJXeGzUYAQxaF1G80NB",
                       "email": "marty@example.com",
                       "client": 7832,
+                      "name": {
+                        "object": "name",
+                        "title": "mr",
+                        "other_title": null,
+                        "first_name": "Martin",
+                        "middle_name": "Seamus",
+                        "last_name": "McFly",
+                        "name": "Martin McFly",
+                        "full_name": "Martin Seamus McFly",
+                        "complete_name": "Mr Martin Seamus McFly"
+                      },
                       "steps": [
                         {
                           "object": "step",
@@ -4854,6 +4887,17 @@
                       "perform_url": "https://id.amiqus.co/i/KKyraextnvOkGumVbGK6",
                       "email": "marty@example.com",
                       "client": 73845,
+                      "name": {
+                        "object": "name",
+                        "title": "mr",
+                        "other_title": null,
+                        "first_name": "Martin",
+                        "middle_name": "Seamus",
+                        "last_name": "McFly",
+                        "name": "Martin McFly",
+                        "full_name": "Martin Seamus McFly",
+                        "complete_name": "Mr Martin Seamus McFly"
+                      },
                       "steps": [
                         {
                           "object": "step",
@@ -5116,6 +5160,17 @@
                   "perform_url": "https://id.amiqus.co/i/0vz32B9CZpO1yLsKPdy9q",
                   "email": "marty@example.com",
                   "client": 73845,
+                  "name": {
+                    "object": "name",
+                    "title": "mr",
+                    "other_title": null,
+                    "first_name": "Martin",
+                    "middle_name": "Seamus",
+                    "last_name": "McFly",
+                    "name": "Martin McFly",
+                    "full_name": "Martin Seamus McFly",
+                    "complete_name": "Mr Martin Seamus McFly"
+                  },
                   "steps": [
                     {
                       "object": "step",
@@ -5272,6 +5327,17 @@
                   "perform_url": "https://id.amiqus.co/i/0vz32B9CZpO1yLsKPdy9q",
                   "email": "marty@example.com",
                   "client": 73845,
+                  "name": {
+                    "object": "name",
+                    "title": "mr",
+                    "other_title": null,
+                    "first_name": "Martin",
+                    "middle_name": "Seamus",
+                    "last_name": "McFly",
+                    "name": "Martin McFly",
+                    "full_name": "Martin Seamus McFly",
+                    "complete_name": "Mr Martin Seamus McFly"
+                  },
                   "steps": [
                     {
                       "object": "step",
@@ -10405,6 +10471,17 @@
                             "perform_url": "https://id.amiqus.co/i/0vz32B9CZpO1yLsKPdy9q",
                             "email": "marty@example.com",
                             "client": 73845,
+                            "name": {
+                              "object": "name",
+                              "title": "mr",
+                              "other_title": null,
+                              "first_name": "Martin",
+                              "middle_name": "Seamus",
+                              "last_name": "McFly",
+                              "name": "Martin McFly",
+                              "full_name": "Martin Seamus McFly",
+                              "complete_name": "Mr Martin Seamus McFly"
+                            },
                             "steps": [
                               {
                                 "object": "step",
@@ -12603,6 +12680,10 @@
                 "description": "Unique client identifier."
               }
             ]
+          },
+          "name": {
+            "$ref": "#/components/schemas/Name",
+            "description": "The client's names.\n\nThis is a snapshot taken at the time the record was created, therefore it might not match the clients current\nname if it has since been changed.\n"
           },
           "steps": {
             "type": "array",
@@ -15190,6 +15271,15 @@
           }
         ]
       },
+      "SearchProfile": {
+        "type": "string",
+        "enum": [
+          "sanctions",
+          "peps_sanctions",
+          "peps_sanctions_media",
+          "peps_sanctions_media_extended"
+        ]
+      },
       "Watchlist-2": {
         "type": "object",
         "properties": {
@@ -15223,14 +15313,8 @@
                 ]
               },
               "search_profile": {
-                "type": "string",
+                "$ref": "#/components/schemas/SearchProfile",
                 "description": "Specifies the search profile to use for the watchlist check.\n\n**PEPs, sanctions and adverse media : +1 additional credit**\\\n**PEPs and sanctions and only : +1 additional credit**\n",
-                "enum": [
-                  "sanctions",
-                  "peps_sanctions",
-                  "peps_sanctions_media",
-                  "peps_sanctions_media_extended"
-                ],
                 "default": "peps_sanctions_media"
               }
             }

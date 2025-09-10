@@ -19196,5 +19196,59 @@
         }
       }
     }
-  }
+  },
+  "x-tagGroups": [
+    {
+      "name": "Accounts & Access",
+      "tags": [
+        "User Account",
+        "Your Team",
+        "Teams"
+      ]
+    },
+    {
+      "name": "Clients",
+      "tags": [
+        "Clients",
+        "Client Assignees",
+        "Client Files",
+        "Client Organisations",
+        "Forms"
+      ]
+    },
+    {
+      "name": "Records & Steps",
+      "tags": [
+        "Records",
+        "Record Assignees",
+        "Steps"
+      ]
+    },
+    {
+      "name": "Cases & Reviews",
+      "tags": [
+        "Cases",
+        "Case Items",
+        "Case Assignees"
+      ]
+    },
+    {
+      "name": "Documents & Templates",
+      "tags": [
+        "Documents",
+        "Templates",
+        "Attachments"
+      ]
+    },
+    {
+      "name": "Other",
+      "tags": [
+        "Organisations",
+        "Webhooks",
+        "Aggregates",
+        "Service Status",
+        "Other Resources"
+      ]
+    }
+  ]
 }

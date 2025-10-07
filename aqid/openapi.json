@@ -15316,6 +15316,11 @@
                 "$ref": "#/components/schemas/SearchProfile",
                 "description": "Specifies the search profile to use for the watchlist check.\n\n**PEPs, sanctions and adverse media : +1 additional credit**\\\n**PEPs and sanctions and only : +1 additional credit**\n",
                 "default": "peps_sanctions_media"
+              },
+              "all_entity_types": {
+                "type": "boolean",
+                "default": false,
+                "description": "Include results for organisations, vessels, aircraft and other non-individual entities.\nThis will broaden the search and may return more results.\n"
               }
             }
           }

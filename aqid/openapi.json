@@ -3284,6 +3284,7 @@
                             "email": "lorraine@example.com",
                             "role": "owner"
                           },
+                          "is_deletable": true,
                           "expires_at": "2027-08-24T23:59:59Z",
                           "created_at": "2019-08-24T14:15:22Z",
                           "updated_at": "2019-08-24T14:15:22Z"
@@ -3330,6 +3331,7 @@
                             "email": "dennis@example.com",
                             "role": "member"
                           },
+                          "is_deletable": false,
                           "expires_at": "2027-08-24T23:59:59Z",
                           "created_at": "2020-03-11T12:43:55Z",
                           "updated_at": "2020-03-11T12:43:55Z"
@@ -3381,6 +3383,7 @@
                             "updated_at": "2022-05-21T14:15:22Z",
                             "archived_at": null
                           },
+                          "is_deletable": false,
                           "expires_at": null,
                           "created_at": "2020-03-12T06:31:46Z",
                           "updated_at": "2020-03-12T06:31:46Z"
@@ -3480,6 +3483,7 @@
                         "id": 121,
                         "type": "team_member"
                       },
+                      "is_deletable": true,
                       "expires_at": "2025-01-01T23:59:59Z",
                       "created_at": "2019-08-24T14:15:22Z",
                       "updated_at": "2019-08-24T14:15:22Z"
@@ -16861,6 +16865,19 @@
               }
             ]
           },
+          "is_deletable": {
+            "type": "boolean",
+            "readOnly": true,
+            "description": "Indicates whether the client file can be deleted."
+          },
+          "expires_at": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time",
+            "description": "The date and time an uploaded file expires."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -16870,14 +16887,6 @@
             "type": "string",
             "format": "date-time",
             "readOnly": true
-          },
-          "expires_at": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "format": "date-time",
-            "description": "The date and time an uploaded file expires."
           },
           "redacted_at": {
             "type": [

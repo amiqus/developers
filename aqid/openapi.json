@@ -3521,6 +3521,74 @@
         }
       }
     },
+    "/clients/{clientId}/files/{fileId}": {
+      "delete": {
+        "summary": "Delete a file for a client",
+        "description": "Delete a file for a client.",
+        "operationId": "delete-clients-clientId-files-fileId",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Client Files"
+        ],
+        "parameters": [
+          {
+            "name": "clientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "Unique client identifier."
+            }
+          },
+          {
+            "name": "fileId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "Unique file identifier."
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "Client not found",
+                        "File not found"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/clients/{clientId}/files/{fileId}/download": {
       "get": {
         "summary": "Download a file for a client",

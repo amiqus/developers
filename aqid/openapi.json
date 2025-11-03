@@ -3198,6 +3198,7 @@
                 "client",
                 "client_form",
                 "form",
+                "client_document",
                 "record_document"
               ]
             }
@@ -3422,29 +3423,72 @@
           "Client Files"
         ],
         "requestBody": {
+          "description": "- **Basic** creates a new client file from an uploaded attachment.\n- **Document template** creates a new `requested` Client Document for a document template.\n",
           "content": {
             "application/json": {
               "schema": {
-                "properties": {
-                  "attachment": {
-                    "type": "integer",
-                    "description": "The unique identifier of an attachment\n\nTo create an attachment, refer to the **[Create an attachment](#tag/Other-Resources/operation/post-attachments)**.\n"
+                "oneOf": [
+                  {
+                    "title": "Basic",
+                    "type": "object",
+                    "required": [
+                      "attachment"
+                    ],
+                    "properties": {
+                      "attachment": {
+                        "type": "integer",
+                        "description": "The unique identifier of an attachment.\n\nTo create an attachment, refer to the **[Create an attachment](#operation/post-attachments)**.\n"
+                      },
+                      "name": {
+                        "$ref": "#/components/schemas/name"
+                      },
+                      "expires_at": {
+                        "$ref": "#/components/schemas/expires_at"
+                      }
+                    }
                   },
-                  "name": {
-                    "$ref": "#/components/schemas/name"
-                  },
-                  "expires_at": {
-                    "$ref": "#/components/schemas/expires_at"
+                  {
+                    "title": "Document template",
+                    "type": "object",
+                    "required": [
+                      "attachment",
+                      "template"
+                    ],
+                    "properties": {
+                      "attachment": {
+                        "type": "integer",
+                        "description": "The unique identifier of an attachment.\n\nTo create an attachment, refer to the **[Create an attachment](#operation/post-attachments)**.\n"
+                      },
+                      "template": {
+                        "type": "integer",
+                        "description": "The unique identifier of a document template.\n\nCreate a client file for an existing [document template](#operation/get-templates-documents).\n"
+                      },
+                      "name": {
+                        "$ref": "#/components/schemas/name"
+                      },
+                      "expires_at": {
+                        "$ref": "#/components/schemas/expires_at"
+                      }
+                    }
                   }
-                },
-                "required": [
-                  "attachment"
                 ]
               },
-              "example": {
-                "attachment": 31782,
-                "name": "NDA-final",
-                "expires_at": "2025-01-01T23:59:59Z"
+              "examples": {
+                "manual": {
+                  "summary": "Manual",
+                  "value": {
+                    "attachment": 31782,
+                    "name": "NDA-final",
+                    "expires_at": "2025-01-01T23:59:59Z"
+                  }
+                },
+                "requested": {
+                  "summary": "Requested",
+                  "value": {
+                    "attachment": 104,
+                    "template": 15478
+                  }
+                }
               }
             }
           }
@@ -16815,6 +16859,59 @@
           }
         ]
       },
+      "ClientDocument": {
+        "title": "Client Document",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "object": {
+            "type": "string",
+            "readOnly": true,
+            "const": "client_document"
+          },
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "client": {
+            "readOnly": true,
+            "x-expandable": true,
+            "oneOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "$ref": "#/components/schemas/Client"
+              }
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "config": {
+            "readOnly": true,
+            "type": "object",
+            "required": [
+              "instructions"
+            ],
+            "properties": {
+              "instructions": {
+                "type": "string"
+              }
+            }
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          }
+        }
+      },
       "ClientFile": {
         "title": "Client File",
         "type": "object",
@@ -16854,6 +16951,7 @@
                       "check",
                       "client",
                       "client_form",
+                      "client_document",
                       "record_document"
                     ]
                   }
@@ -16891,6 +16989,9 @@
               },
               {
                 "$ref": "#/components/schemas/ClientForm"
+              },
+              {
+                "$ref": "#/components/schemas/ClientDocument"
               },
               {
                 "$ref": "#/components/schemas/RecordDocument"

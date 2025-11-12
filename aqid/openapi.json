@@ -8365,11 +8365,11 @@
         }
       }
     },
-    "/forms": {
+    "/form-templates": {
       "get": {
-        "summary": "List all forms",
-        "description": "List all forms.",
-        "operationId": "get-forms",
+        "summary": "List all form templates",
+        "description": "List all form templates.",
+        "operationId": "get-form-templates",
         "security": [
           {
             "personal_token": []
@@ -8379,7 +8379,7 @@
           }
         ],
         "tags": [
-          "Forms"
+          "Templates"
         ],
         "parameters": [
           {
@@ -8503,9 +8503,9 @@
         }
       },
       "post": {
-        "summary": "Create a form",
-        "description": "Create a form.",
-        "operationId": "post-forms",
+        "summary": "Create a form template",
+        "description": "Create a form template.",
+        "operationId": "post-form-templates",
         "security": [
           {
             "personal_token": []
@@ -8515,7 +8515,7 @@
           }
         ],
         "tags": [
-          "Forms"
+          "Templates"
         ],
         "requestBody": {
           "content": {
@@ -8754,7 +8754,7 @@
         }
       }
     },
-    "/forms/{reference}": {
+    "/form-templates/{reference}": {
       "parameters": [
         {
           "name": "reference",
@@ -8767,9 +8767,9 @@
         }
       ],
       "get": {
-        "summary": "Retrieve a form",
-        "description": "Retrieve a form.",
-        "operationId": "get-forms-id",
+        "summary": "Retrieve a form template",
+        "description": "Retrieve a form template.",
+        "operationId": "get-form-templates-id",
         "security": [
           {
             "personal_token": []
@@ -8779,7 +8779,7 @@
           }
         ],
         "tags": [
-          "Forms"
+          "Templates"
         ],
         "responses": {
           "200": {
@@ -8852,9 +8852,9 @@
         }
       },
       "patch": {
-        "summary": "Update a form",
-        "description": "Update a form.",
-        "operationId": "patch-forms-id",
+        "summary": "Update a form template",
+        "description": "Update a form template.",
+        "operationId": "patch-form-templates-id",
         "security": [
           {
             "personal_token": []
@@ -8864,7 +8864,7 @@
           }
         ],
         "tags": [
-          "Forms"
+          "Templates"
         ],
         "requestBody": {
           "content": {
@@ -9013,9 +9013,9 @@
         }
       },
       "delete": {
-        "summary": "Delete a form",
-        "description": "Delete a form.",
-        "operationId": "delete-forms-id",
+        "summary": "Delete a form template",
+        "description": "Delete a form template.",
+        "operationId": "delete-form-templates-id",
         "security": [
           {
             "personal_token": []
@@ -9025,7 +9025,7 @@
           }
         ],
         "tags": [
-          "Forms"
+          "Templates"
         ],
         "responses": {
           "204": {
@@ -19399,8 +19399,7 @@
         "Clients",
         "Client Assignees",
         "Client Files",
-        "Client Organisations",
-        "Forms"
+        "Client Organisations"
       ]
     },
     {

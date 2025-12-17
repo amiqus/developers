@@ -74,6 +74,9 @@
       "name": "Forms"
     },
     {
+      "name": "Files"
+    },
+    {
       "name": "Attachments"
     },
     {
@@ -7805,6 +7808,231 @@
           },
           "403": {
             "$ref": "#/components/responses/403"
+          }
+        }
+      }
+    },
+    "/files": {
+      "get": {
+        "summary": "List all files",
+        "description": "List all files.",
+        "operationId": "get-files",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Files"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/page"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "description": "Sort results by file name, date of upload or file expiry date. Results returned in ID order by default.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "created_at",
+                "updated_at",
+                "expires_at"
+              ]
+            }
+          },
+          {
+            "$ref": "#/components/parameters/order_by"
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "source",
+                  "created_by"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/PaginatedList"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "items": {
+                            "$ref": "#/components/schemas/File"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "default": {
+                    "summary": "Default",
+                    "value": {
+                      "object": "paginated_list",
+                      "data": [
+                        {
+                          "object": "file",
+                          "id": 31788,
+                          "type": "internal",
+                          "source": {
+                            "id": 31788,
+                            "type": "client"
+                          },
+                          "name": "73db4d13-6c1b-40b1-94fc-2cf6d7ac22d2.pdf",
+                          "attachment": {
+                            "object": "attachment",
+                            "id": 31782,
+                            "name": "73db4d13-6c1b-40b1-94fc-2cf6d7ac22d2.pdf",
+                            "original": "NDA-final.pdf",
+                            "type": "application/pdf",
+                            "size": 16053,
+                            "av_status": "clean",
+                            "created_at": "2019-08-24T14:15:22Z",
+                            "updated_at": "2019-08-24T14:15:22Z"
+                          },
+                          "created_by": {
+                            "id": 121,
+                            "type": "team_member"
+                          },
+                          "is_deletable": true,
+                          "expires_at": "2027-08-24T23:59:59Z",
+                          "created_at": "2019-08-24T14:15:22Z",
+                          "updated_at": "2019-08-24T14:15:22Z",
+                          "redacted_at": null
+                        },
+                        {
+                          "object": "file",
+                          "id": 31431,
+                          "type": "sent",
+                          "source": {
+                            "id": 133144,
+                            "type": "record_document"
+                          },
+                          "name": "186a4641-337a-4a1f-86ba-0bc6d81a3ed4.pdf",
+                          "attachment": {
+                            "object": "attachment",
+                            "id": 31431,
+                            "name": "186a4641-337a-4a1f-86ba-0bc6d81a3ed4.pdf",
+                            "original": "NDA-final.pdf",
+                            "type": "application/pdf",
+                            "size": 265434,
+                            "av_status": "clean",
+                            "created_at": "2020-03-11T12:43:55Z",
+                            "updated_at": "2020-03-11T12:43:55Z"
+                          },
+                          "created_by": {
+                            "id": 472,
+                            "type": "team_member"
+                          },
+                          "is_deletable": false,
+                          "expires_at": "2027-08-24T23:59:59Z",
+                          "created_at": "2020-03-11T12:43:55Z",
+                          "updated_at": "2020-03-11T12:43:55Z",
+                          "redacted_at": "2025-11-03T10:43:22Z"
+                        },
+                        {
+                          "object": "file",
+                          "id": 31432,
+                          "type": "received",
+                          "source": {
+                            "id": 133145,
+                            "type": "record_document"
+                          },
+                          "name": "cd349cd8-28e9-4e71-bc46-e99726b7b914.pdf",
+                          "attachment": {
+                            "object": "attachment",
+                            "id": 31432,
+                            "name": "cd349cd8-28e9-4e71-bc46-e99726b7b914.pdf",
+                            "original": "NDA-final(signed).pdf",
+                            "type": "application/pdf",
+                            "size": 278311,
+                            "av_status": "clean",
+                            "created_at": "2020-03-12T06:31:46Z",
+                            "updated_at": "2020-03-12T06:31:46Z"
+                          },
+                          "created_by": {
+                            "id": 73823,
+                            "type": "client"
+                          },
+                          "is_deletable": false,
+                          "expires_at": null,
+                          "created_at": "2020-03-12T06:31:46Z",
+                          "updated_at": "2020-03-12T06:31:46Z",
+                          "redacted_at": null
+                        },
+                        {
+                          "object": "file",
+                          "id": 32332,
+                          "type": "received",
+                          "source": {
+                            "id": 167,
+                            "type": "client_document"
+                          },
+                          "name": "name-change.pdf",
+                          "attachment": {
+                            "object": "attachment",
+                            "id": 32332,
+                            "name": "72302f7e-f01c-3311-90f4-577d431de56be.pdf",
+                            "original": "name-change.pdf",
+                            "type": "application/pdf",
+                            "size": 278311,
+                            "av_status": "clean",
+                            "created_at": "2021-06-12T12:31:46Z",
+                            "updated_at": "2021-06-12T12:31:46Z"
+                          },
+                          "created_by": {
+                            "id": 421,
+                            "type": "team_member"
+                          },
+                          "is_deletable": true,
+                          "expires_at": null,
+                          "created_at": "2021-06-12T12:31:46Z",
+                          "updated_at": "2021-06-12T12:31:46Z",
+                          "redacted_at": null
+                        }
+                      ],
+                      "total": 4,
+                      "count": 4,
+                      "limit": 25,
+                      "current_page": 1,
+                      "total_pages": 1,
+                      "links": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
           }
         }
       }
@@ -18455,6 +18683,162 @@
           }
         }
       },
+      "File": {
+        "title": "File",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "object": {
+            "type": "string",
+            "readOnly": true,
+            "const": "file"
+          },
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "type": {
+            "type": "string",
+            "readOnly": true,
+            "enum": [
+              "internal",
+              "sent",
+              "received"
+            ]
+          },
+          "source": {
+            "readOnly": true,
+            "x-expandable": true,
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "check",
+                      "client",
+                      "client_form",
+                      "client_document",
+                      "record_document"
+                    ]
+                  }
+                }
+              },
+              {
+                "$ref": "#/components/schemas/Check-2"
+              },
+              {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Client"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "oneOf": [
+                          {
+                            "type": "null"
+                          },
+                          {
+                            "type": "string",
+                            "enum": [
+                              "pending",
+                              "approved",
+                              "rejected"
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "$ref": "#/components/schemas/ClientForm"
+              },
+              {
+                "$ref": "#/components/schemas/ClientDocument"
+              },
+              {
+                "$ref": "#/components/schemas/RecordDocument"
+              }
+            ]
+          },
+          "name": {
+            "type": "string",
+            "minimum": 1,
+            "maximum": 255
+          },
+          "attachment": {
+            "$ref": "#/components/schemas/Attachment",
+            "readOnly": true
+          },
+          "created_by": {
+            "readOnly": true,
+            "x-expandable": true,
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "client",
+                      "team_member"
+                    ]
+                  }
+                }
+              },
+              {
+                "$ref": "#/components/schemas/Client"
+              },
+              {
+                "$ref": "#/components/schemas/TeamMember"
+              }
+            ]
+          },
+          "is_deletable": {
+            "type": "boolean",
+            "readOnly": true,
+            "description": "Indicates whether the client file can be deleted."
+          },
+          "expires_at": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time",
+            "description": "The date and time an uploaded file expires."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "redacted_at": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time",
+            "readOnly": true,
+            "description": "The date and time the file was redacted by the user.\nPlease note that not all files can be redacted.\nFor example a file that is part of a check.\n"
+          }
+        }
+      },
       "WebhookSubscribeEvents": {
         "type": "string",
         "enum": [
@@ -19802,6 +20186,7 @@
     {
       "name": "Other",
       "tags": [
+        "Files",
         "Forms",
         "Organisations",
         "Webhooks",

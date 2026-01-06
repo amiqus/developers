@@ -11686,6 +11686,74 @@
         }
       }
     },
+    "/cases/{caseId}/items/{itemId}": {
+      "delete": {
+        "summary": "Remove item from a case",
+        "description": "Remove a single item from a case.\n\nTo list all of a case's items, see **[List all items for a case](#operation/get-cases-id-items)**.\n\n_Cases may not be enabled for all teams._\n",
+        "operationId": "delete-cases-caseId-items-itemId",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Case Items"
+        ],
+        "parameters": [
+          {
+            "name": "caseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "The unique case identifier."
+            }
+          },
+          {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "The unique case item identifier."
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "Case not found",
+                        "Case item not found"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/records/{recordId}/steps/{stepId}/reviews": {
       "parameters": [
         {

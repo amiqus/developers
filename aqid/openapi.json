@@ -4874,7 +4874,8 @@
                               "national_id"
                             ],
                             "issuing_countries": null,
-                            "right_to_work": null
+                            "right_to_work": null,
+                            "right_to_rent": null
                           },
                           "check": 82342,
                           "cost": 1,
@@ -4985,7 +4986,8 @@
                               "driving_licence"
                             ],
                             "issuing_countries": null,
-                            "right_to_work": null
+                            "right_to_work": null,
+                            "right_to_rent": null
                           },
                           "check": 82342,
                           "cost": 1,
@@ -5030,7 +5032,8 @@
                             "report_type": "biometric",
                             "issuing_countries": null,
                             "allow_fallback": false,
-                            "right_to_work": null
+                            "right_to_work": null,
+                            "right_to_rent": null
                           },
                           "check": 82342,
                           "cost": 2,
@@ -5311,7 +5314,8 @@
                           "national_id"
                         ],
                         "issuing_countries": null,
-                        "right_to_work": null
+                        "right_to_work": null,
+                        "right_to_rent": null
                       },
                       "check": 82342,
                       "cost": 1,
@@ -5478,7 +5482,8 @@
                           "national_id"
                         ],
                         "issuing_countries": null,
-                        "right_to_work": null
+                        "right_to_work": null,
+                        "right_to_rent": null
                       },
                       "check": 82342,
                       "cost": 1,
@@ -5828,7 +5833,8 @@
                           "national_id"
                         ],
                         "issuing_countries": null,
-                        "right_to_work": null
+                        "right_to_work": null,
+                        "right_to_rent": null
                       },
                       "check": 82342,
                       "cost": 1,
@@ -7731,7 +7737,8 @@
                                 "national_id"
                               ],
                               "issuing_countries": null,
-                              "right_to_work": null
+                              "right_to_work": null,
+                              "right_to_rent": null
                             }
                           },
                           {
@@ -11104,7 +11111,8 @@
                                     "national_id"
                                   ],
                                   "issuing_countries": null,
-                                  "right_to_work": null
+                                  "right_to_work": null,
+                                  "right_to_rent": null
                                 },
                                 "check": 82342,
                                 "cost": 1,
@@ -15574,6 +15582,19 @@
           }
         ]
       },
+      "RightToRentOptions": {
+        "oneOf": [
+          {
+            "type": "string",
+            "enum": [
+              "GBR"
+            ]
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
       "Onfido-2": {
         "type": "object",
         "required": [
@@ -15654,6 +15675,10 @@
                   "right_to_work": {
                     "$ref": "#/components/schemas/RightToWorkOptions",
                     "description": "For right to work in the UK (`GBR`), the `docs` property must include a `passport`.\n"
+                  },
+                  "right_to_rent": {
+                    "$ref": "#/components/schemas/RightToRentOptions",
+                    "description": "For right to rent in the UK (`GBR`), the `docs` property must include a `passport`.\n"
                   }
                 }
               },
@@ -15695,6 +15720,9 @@
                   },
                   "right_to_work": {
                     "$ref": "#/components/schemas/RightToWorkOptions"
+                  },
+                  "right_to_rent": {
+                    "$ref": "#/components/schemas/RightToRentOptions"
                   }
                 }
               }

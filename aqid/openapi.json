@@ -15933,6 +15933,10 @@
                     "description": "Do not retrieve transactions for each connected account."
                   }
                 ]
+              },
+              "custom_form_template_id": {
+                "type": "integer",
+                "description": "Collect custom form answers as part of this check before connecting accounts.\n\nMust be a valid custom form template ID.\n"
               }
             }
           }

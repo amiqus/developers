@@ -386,7 +386,7 @@
     "/providers/onfido/token": {
       "post": {
         "summary": "Create an Onfido SDK token",
-        "description": "Create an Onfido SDK token for use with a Photo ID check step (**standard report type only**). An Onfido SDK token allows you to embed an [iOS, Android or React Native Onfido SDK](https://documentation.onfido.com/sdk/) into your application. **Onfido SDK tokens cannot be used with the Onfido Web SDK.**\n\nOnfido SDK tokens can only be used for the Photo ID check step that the Amiqus SDK token is scoped for and are valid for 90 minutes. Tokens are only valid for use with standard Photo ID report type, the biometric report type is not currently supported.\n\nAfter uploading supporting documentation using the Onfido SDK, use [Submit a step](#operation/post-steps-id) to submit the Photo ID check step.\n",
+        "description": "Create an Onfido SDK token for use with a Photo ID check step. An Onfido SDK token allows you to embed an [iOS, Android or React Native Onfido SDK](https://documentation.identity.entrust.com/sdk/) into your application. **Onfido SDK tokens cannot be used with the Onfido Web SDK.**\n\nOnfido SDK tokens can only be used for the Photo ID check step that the Amiqus SDK token is scoped for and are valid for 90 minutes.\n\nAfter uploading supporting documentation using the Onfido SDK, use [Submit a step](#operation/post-steps-id) to submit the Photo ID check step.\n\n**Note:** Onfido Classic is deprecated. If your team has [Onfido Studio](https://documentation.identity.entrust.com/getting-started/workflow-studio-product/) enabled the response object will contain a `workflowRunId` property which should be used to initialise the React Native Onfido SDK in place of `flowSteps`.\n",
         "operationId": "post-providers-onfido-token",
         "tags": [
           "Other Resources"
@@ -423,50 +423,81 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "An object containing basic configuration for the initialisation of the React Native, iOS or Android SDK. The values can be overridden or omitted to better suit your application's integration.\n",
-                  "type": "object",
-                  "properties": {
-                    "sdkToken": {
-                      "type": "string",
-                      "description": "The SDK token scoped to the Record's Photo ID check step. Onfido SDK tokens are valid for 90 minutes.\n"
-                    },
-                    "flowSteps": {
-                      "type": "object",
+                  "oneOf": [
+                    {
+                      "title": "Onfido Classic",
+                      "deprecated": true,
                       "properties": {
-                        "welcome": {
-                          "type": "boolean"
+                        "sdkToken": {
+                          "type": "string",
+                          "description": "The SDK token scoped to the Record's Photo ID check step. Onfido SDK tokens are valid for 90 minutes.\n"
                         },
-                        "captureDocument": {
-                          "type": "boolean"
-                        },
-                        "captureFace": {
-                          "description": "`null` when \"facial similarity\" option has not been enabled for the Photo ID check step.\n",
-                          "type": [
-                            "null",
-                            "object"
-                          ],
+                        "flowSteps": {
+                          "type": "object",
+                          "description": "An object containing basic configuration for the initialisation of the React Native, iOS or Android SDK. The values can be overridden or omitted to better suit your application's integration.\n",
                           "properties": {
-                            "type": {
-                              "description": "Type is `MOTION` when motion liveness has been enabled (default), otherwise `PHOTO`.\n",
-                              "type": "string",
-                              "enum": [
-                                "MOTION",
-                                "PHOTO"
-                              ]
+                            "welcome": {
+                              "type": "boolean"
+                            },
+                            "captureDocument": {
+                              "type": "boolean"
+                            },
+                            "captureFace": {
+                              "description": "`null` when \"facial similarity\" option has not been enabled for the Photo ID check step.\n",
+                              "type": [
+                                "null",
+                                "object"
+                              ],
+                              "properties": {
+                                "type": {
+                                  "description": "Type is `MOTION` when motion liveness has been enabled (default), otherwise `PHOTO`.\n",
+                                  "type": "string",
+                                  "enum": [
+                                    "MOTION",
+                                    "PHOTO"
+                                  ]
+                                }
+                              }
                             }
                           }
                         }
                       }
+                    },
+                    {
+                      "title": "Onfido Studio",
+                      "properties": {
+                        "sdkToken": {
+                          "type": "string",
+                          "description": "The SDK token scoped to the Record's Photo ID check step. Onfido SDK tokens are valid for 90 minutes.\n"
+                        },
+                        "workflowRunId": {
+                          "type": "string",
+                          "format": "uuid",
+                          "description": "The workflow run ID associated with the `sdkToken`.\n"
+                        }
+                      }
                     }
-                  }
+                  ]
                 },
-                "example": {
-                  "sdkToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjQ5OTEzNzYwMCwiZXhwIjo0OTkxMzc2NjAsIm1hcnR5IjoiU291bmRzIHByZXR0eSBoZWF2eS4iLCJkb2MiOiJXZWlnaHQgaGFzIG5vdGhpbmcgdG8gZG8gd2l0aCBpdC4iLCLwn5GLIjoiVGhpcyBpcyBub3QgYSB2YWxpZCBTREsgVG9rZW4uIn0.j2jAeX_MpagkS7qvBjF9uYYIawP_uvEPqnftEW9wDe8",
-                  "flowSteps": {
-                    "welcome": false,
-                    "captureDocument": true,
-                    "captureFace": {
-                      "type": "MOTION"
+                "examples": {
+                  "classic": {
+                    "summary": "Onfido Classic",
+                    "value": {
+                      "sdkToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjQ5OTEzNzYwMCwiZXhwIjo0OTkxMzc2NjAsIm1hcnR5IjoiU291bmRzIHByZXR0eSBoZWF2eS4iLCJkb2MiOiJXZWlnaHQgaGFzIG5vdGhpbmcgdG8gZG8gd2l0aCBpdC4iLCLwn5GLIjoiVGhpcyBpcyBub3QgYSB2YWxpZCBTREsgVG9rZW4uIn0.j2jAeX_MpagkS7qvBjF9uYYIawP_uvEPqnftEW9wDe8",
+                      "flowSteps": {
+                        "welcome": false,
+                        "captureDocument": true,
+                        "captureFace": {
+                          "type": "MOTION"
+                        }
+                      }
+                    }
+                  },
+                  "studio": {
+                    "summary": "Onfido Studio",
+                    "value": {
+                      "sdkToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjQ5OTEzNzYwMCwiZXhwIjo0OTkxMzc2NjAsIm1hcnR5IjoiU291bmRzIHByZXR0eSBoZWF2eS4iLCJkb2MiOiJXZWlnaHQgaGFzIG5vdGhpbmcgdG8gZG8gd2l0aCBpdC4iLCLwn5GLIjoiVGhpcyBpcyBub3QgYSB2YWxpZCBTREsgVG9rZW4uIn0.j2jAeX_MpagkS7qvBjF9uYYIawP_uvEPqnftEW9wDe8",
+                      "workflowRunId": "26bf7e7d-d67c-4ab5-929f-5954a064e491"
                     }
                   }
                 }

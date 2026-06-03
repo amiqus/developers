@@ -386,7 +386,7 @@
     "/providers/onfido/token": {
       "post": {
         "summary": "Create an Onfido SDK token",
-        "description": "Create an Onfido SDK token for use with a Photo ID check step. An Onfido SDK token allows you to embed an [iOS, Android or React Native Onfido SDK](https://documentation.identity.entrust.com/sdk/) into your application. **Onfido SDK tokens cannot be used with the Onfido Web SDK.**\n\nOnfido SDK tokens can only be used for the Photo ID check step that the Amiqus SDK token is scoped for and are valid for 90 minutes.\n\nAfter uploading supporting documentation using the Onfido SDK, use [Submit a step](#operation/post-steps-id) to submit the Photo ID check step.\n\n**Note:** Onfido Classic is deprecated. If your team has [Onfido Studio](https://documentation.identity.entrust.com/getting-started/workflow-studio-product/) enabled the response object will contain a `workflowRunId` property which should be used to initialise the React Native Onfido SDK in place of `flowSteps`.\n",
+        "description": "Create an Onfido SDK token for use with a Photo ID check step (**standard report type only**). An Onfido SDK token allows you to embed a [Web, iOS, Android, React Native, or Flutter Onfido SDK](https://documentation.identity.entrust.com/sdk/) into your application.\n\nOnfido SDK tokens can only be used for the Photo ID check step that the Amiqus SDK token is scoped for and are valid for 90 minutes.\n\nAfter uploading supporting documentation using the Onfido SDK, use [Submit a step](#operation/post-steps-id) to submit the Photo ID check step.\n\n**Note:** Onfido Classic is deprecated. If your team has [Onfido Studio](https://documentation.identity.entrust.com/getting-started/workflow-studio-product/) enabled the response object will contain a `workflowRunId` property which should be used to initialise the React Native Onfido SDK in place of `flowSteps`.\n",
         "operationId": "post-providers-onfido-token",
         "tags": [
           "Other Resources"
@@ -401,13 +401,10 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "bundle_id"
-                ],
                 "properties": {
                   "bundle_id": {
                     "type": "string",
-                    "description": "The bundle ID (for Android \"application ID\") that was set up during application development. For iOS, this is usually in the form `com.your-company.app-name`. Make sure to use a valid `bundle_id` or you'll receive a 401 error from Onfido.\n"
+                    "description": "The bundle ID (for Android \"application ID\") that was set up during application development. For iOS, this is usually in the form `com.your-company.app-name`. Make sure to use a valid `bundle_id` or you'll receive a 401 error from Onfido.\n\nIf no bundle ID is provided, a [web SDK](https://documentation.identity.entrust.com/sdk/web/) token will be issued.\n"
                   }
                 }
               },
@@ -428,6 +425,14 @@
                       "title": "Onfido Classic",
                       "deprecated": true,
                       "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "mobile",
+                            "web"
+                          ],
+                          "description": "The platform the SDK token is valid for.\n"
+                        },
                         "sdkToken": {
                           "type": "string",
                           "description": "The SDK token scoped to the Record's Photo ID check step. Onfido SDK tokens are valid for 90 minutes.\n"
@@ -466,6 +471,14 @@
                     {
                       "title": "Onfido Studio",
                       "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "mobile",
+                            "web"
+                          ],
+                          "description": "The platform the SDK token is valid for.\n"
+                        },
                         "sdkToken": {
                           "type": "string",
                           "description": "The SDK token scoped to the Record's Photo ID check step. Onfido SDK tokens are valid for 90 minutes.\n"
@@ -483,6 +496,7 @@
                   "classic": {
                     "summary": "Onfido Classic",
                     "value": {
+                      "type": "mobile",
                       "sdkToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjQ5OTEzNzYwMCwiZXhwIjo0OTkxMzc2NjAsIm1hcnR5IjoiU291bmRzIHByZXR0eSBoZWF2eS4iLCJkb2MiOiJXZWlnaHQgaGFzIG5vdGhpbmcgdG8gZG8gd2l0aCBpdC4iLCLwn5GLIjoiVGhpcyBpcyBub3QgYSB2YWxpZCBTREsgVG9rZW4uIn0.j2jAeX_MpagkS7qvBjF9uYYIawP_uvEPqnftEW9wDe8",
                       "flowSteps": {
                         "welcome": false,
@@ -496,6 +510,7 @@
                   "studio": {
                     "summary": "Onfido Studio",
                     "value": {
+                      "type": "web",
                       "sdkToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjQ5OTEzNzYwMCwiZXhwIjo0OTkxMzc2NjAsIm1hcnR5IjoiU291bmRzIHByZXR0eSBoZWF2eS4iLCJkb2MiOiJXZWlnaHQgaGFzIG5vdGhpbmcgdG8gZG8gd2l0aCBpdC4iLCLwn5GLIjoiVGhpcyBpcyBub3QgYSB2YWxpZCBTREsgVG9rZW4uIn0.j2jAeX_MpagkS7qvBjF9uYYIawP_uvEPqnftEW9wDe8",
                       "workflowRunId": "26bf7e7d-d67c-4ab5-929f-5954a064e491"
                     }

@@ -14743,8 +14743,16 @@
               "pending",
               "clean",
               "infected",
-              "error"
-            ]
+              "error",
+              "unsupported"
+            ],
+            "x-enumDescriptions": {
+              "pending": "Awaiting scanning",
+              "clean": "No virus detected",
+              "infected": "Virus detected",
+              "error": "Failed to scan",
+              "unsupported": "File could not be scanned due to password protection or encryption"
+            }
           },
           "created_at": {
             "type": "string",

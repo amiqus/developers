@@ -15756,7 +15756,7 @@
           }
         ]
       },
-      "EmploymentReferencingCommon": {
+      "Common": {
         "type": "object",
         "properties": {
           "type": {
@@ -15795,6 +15795,16 @@
           }
         }
       },
+      "VerificationMethod": {
+        "title": "Verification Method",
+        "type": "string",
+        "enum": [
+          "instant_and_manual"
+        ],
+        "x-enumDescriptions": {
+          "instant_and_manual": "Combines instant digital verification with manual references."
+        }
+      },
       "EmploymentReferencing-2": {
         "type": "object",
         "required": [
@@ -15812,12 +15822,23 @@
                 "title": "Standard",
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/EmploymentReferencingCommon"
+                    "$ref": "#/components/schemas/Common"
                   },
                   {
                     "properties": {
                       "type": {
                         "const": "standard"
+                      },
+                      "verification_method": {
+                        "description": "Controls the verification method used to confirm employment. When `null` or not set, defaults to manual references only.",
+                        "oneOf": [
+                          {
+                            "type": "null"
+                          },
+                          {
+                            "$ref": "#/components/schemas/VerificationMethod"
+                          }
+                        ]
                       }
                     }
                   }
@@ -15827,12 +15848,23 @@
                 "title": "Automated",
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/EmploymentReferencingCommon"
+                    "$ref": "#/components/schemas/Common"
                   },
                   {
                     "properties": {
                       "type": {
                         "const": "automated_references"
+                      },
+                      "verification_method": {
+                        "description": "Controls the verification method used to confirm employment. When `null` or not set, defaults to manual references only.",
+                        "oneOf": [
+                          {
+                            "type": "null"
+                          },
+                          {
+                            "$ref": "#/components/schemas/VerificationMethod"
+                          }
+                        ]
                       },
                       "review_references": {
                         "type": "boolean",
@@ -15845,6 +15877,22 @@
                         ],
                         "format": "uuid",
                         "description": "Add a form reference UUID to include a form to collect more details from referees.\n"
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "title": "Instant verification",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Common"
+                  },
+                  {
+                    "properties": {
+                      "type": {
+                        "const": "instant_verification",
+                        "description": "Verifies exclusively through instant digital verification."
                       }
                     }
                   }

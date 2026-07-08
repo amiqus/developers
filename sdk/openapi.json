@@ -213,7 +213,7 @@
     "/steps/{id}": {
       "post": {
         "summary": "Submit a step",
-        "description": "Submit a step.",
+        "description": "Submit a step.\n\n**Photo ID steps:** Before a Photo ID check step can be submitted, supporting photo ID documentation must first be uploaded using the Onfido SDK. See [Create an Onfido SDK token](#operation/post-providers-onfido-token) for further details.\n\nOnly Photo ID checks configured with the **standard report type** can be submitted using this operation. Checks configured with the biometric report type must be completed using a web browser and Amiqus mobile app.\n",
         "operationId": "post-steps-id",
         "security": [
           {
@@ -274,6 +274,12 @@
                   "value": {
                     "state": "accepted",
                     "postcode": "EH12 5HD"
+                  }
+                },
+                "photo_id": {
+                  "summary": "Photo ID with share code",
+                  "value": {
+                    "share_code": "W9X6GY2S2"
                   }
                 }
               }
@@ -1149,8 +1155,13 @@
       },
       "PhotoId": {
         "title": "Photo ID",
-        "type": "null",
-        "description": "_The Photo ID check step type does not require a request body._\n\nBefore a Photo ID check step can be submitted, supporting photo ID documentation must first be uploaded using the Onfido SDK. See [Create an Onfido SDK token](#operation/post-providers-onfido-token) for further details.\n\nOnly Photo ID checks configured with the **standard report type** can be submitted using this operation. Checks configured with the biometric report type must be completed using a web browser and Amiqus mobile app.\n"
+        "type": "object",
+        "properties": {
+          "share_code": {
+            "type": "string",
+            "description": "An optional share code used for right to work and rent in the UK checks where the applicant does not have a British or Irish passport."
+          }
+        }
       },
       "Error": {
         "type": "object",

@@ -4811,6 +4811,13 @@
         }
       }
     },
+    "/organisations/records/{id}/download": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/resourceId"
+        }
+      ]
+    },
     "/records": {
       "get": {
         "summary": "List all records",
@@ -5857,8 +5864,14 @@
               }
             }
           },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
           "403": {
             "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
           }
         }
       }
@@ -20386,6 +20399,19 @@
           }
         }
       },
+      "404": {
+        "description": "Not Found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "error": "Not Found."
+            }
+          }
+        }
+      },
       "422": {
         "description": "Unprocessable Content",
         "content": {
@@ -20528,7 +20554,8 @@
       "tags": [
         "Records",
         "Record Assignees",
-        "Steps"
+        "Steps",
+        "Organisation Records"
       ]
     },
     {

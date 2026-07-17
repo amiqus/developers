@@ -4895,10 +4895,22 @@
           },
           {
             "name": "status",
-            "description": "Filter records by their current status.\n\n**Note:** `failed` is deprecated.\n",
+            "description": "Filter records by their current status.\n",
             "in": "query",
             "schema": {
-              "$ref": "#/components/schemas/RecordStatus"
+              "$ref": "#/components/schemas/RecordStatus",
+              "x-enumDescriptions": {
+                "pending": "Active without any completed steps",
+                "started": "Active with at least one completed step",
+                "complete": "All steps completed",
+                "incomplete": "Expired with at least one completed step",
+                "waiting": "At least one check step is awaiting results",
+                "failed": "_Deprecated_",
+                "empty": "Expired without any completed steps",
+                "paused": "At least one paused check step",
+                "amendments": "Pending record amendment approval or rejection",
+                "reviewed": "Record marked as having been reviewed"
+              }
             }
           },
           {
@@ -13467,7 +13479,8 @@
           "paused",
           "amendments",
           "reviewed"
-        ]
+        ],
+        "description": "The overall status of the record.\n\nStatus is determined by the combined states of a record's steps, expiry and review.\n"
       },
       "Step": {
         "type": "object",
@@ -13527,7 +13540,18 @@
           },
           "status": {
             "$ref": "#/components/schemas/RecordStatus",
-            "description": "The overall status of the record.\n\nStatus is determined by the combined states of a record's steps, expiry and review:\n- `pending`: Active without any completed steps\n- `started`: Active with at least one completed step\n- `complete`: All steps completed\n- `incomplete`: Expired with at least one completed step\n- `waiting`: At least one check step is awaiting results\n- `failed`: _Deprecated_\n- `empty`: Expired without any completed steps\n- `paused`: At least one paused check step\n- `amendments`: Pending record amendment approval or rejection\n- `reviewed`: Record marked as having been reviewed\n"
+            "x-enumDescriptions": {
+              "pending": "Active without any completed steps",
+              "started": "Active with at least one completed step",
+              "complete": "All steps completed",
+              "incomplete": "Expired with at least one completed step",
+              "waiting": "At least one check step is awaiting results",
+              "failed": "_Deprecated_",
+              "empty": "Expired without any completed steps",
+              "paused": "At least one paused check step",
+              "amendments": "Pending record amendment approval or rejection",
+              "reviewed": "Record marked as having been reviewed"
+            }
           },
           "perform_url": {
             "description": "The unique URL to complete the record steps in a browser.",

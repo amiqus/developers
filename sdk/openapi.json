@@ -559,7 +559,8 @@
           "paused",
           "amendments",
           "reviewed"
-        ]
+        ],
+        "description": "The overall status of the record.\n\nStatus is determined by the combined states of a record's steps, expiry and review.\n"
       },
       "RecordStatus-2": {
         "title": "Record Status",

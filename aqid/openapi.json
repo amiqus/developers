@@ -17465,12 +17465,6 @@
         "properties": {
           "flag": {
             "type": "boolean"
-          },
-          "value": {
-            "type": [
-              "null",
-              "string"
-            ]
           }
         }
       },
@@ -17481,6 +17475,17 @@
           },
           {
             "$ref": "#/components/schemas/Input-2"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              }
+            }
           }
         ]
       },
@@ -17508,6 +17513,17 @@
           },
           {
             "$ref": "#/components/schemas/Input-2"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              }
+            }
           }
         ]
       },
@@ -17593,6 +17609,17 @@
           },
           {
             "$ref": "#/components/schemas/Input-2"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              }
+            }
           }
         ]
       },

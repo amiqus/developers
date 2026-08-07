@@ -68,6 +68,11 @@ body {
     align-items: center;
     background: #fff;
     border-bottom: 1px solid #f4f4f4;
+    /* Positioned so the z-index below applies at all — without this the header
+       is static, its stacking order is DOM order, and the hydration overlay in
+       _layouts/redoc.hbs (z-index 999) would cover the nav links even though
+       they work before hydration. No offsets, so the layout is unchanged. */
+    position: relative;
     top: 0;
     left: 0;
     width: 100%;

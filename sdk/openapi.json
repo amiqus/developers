@@ -80,7 +80,25 @@
           "503": {
             "description": "Service Unavailable"
           }
-        }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell + Curl",
+            "source": "curl --request GET \\\n  --url https://id.amiqus.co/sdk/v1/status \\\n  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'"
+          },
+          {
+            "lang": "Node + Request",
+            "source": "const request = require('request');\n\nconst options = {\n  method: 'GET',\n  url: 'https://id.amiqus.co/sdk/v1/status',\n  headers: {Authorization: 'Bearer REPLACE_BEARER_TOKEN'}\n};\n\nrequest(options, function (error, response, body) {\n  if (error) throw new Error(error);\n\n  console.log(body);\n});\n"
+          },
+          {
+            "lang": "Javascript + Xhr",
+            "source": "const data = null;\n\nconst xhr = new XMLHttpRequest();\nxhr.withCredentials = true;\n\nxhr.addEventListener(\"readystatechange\", function () {\n  if (this.readyState === this.DONE) {\n    console.log(this.responseText);\n  }\n});\n\nxhr.open(\"GET\", \"https://id.amiqus.co/sdk/v1/status\");\nxhr.setRequestHeader(\"Authorization\", \"Bearer REPLACE_BEARER_TOKEN\");\n\nxhr.send(data);"
+          },
+          {
+            "lang": "Php + Http2",
+            "source": "<?php\n\n$client = new http\\Client;\n$request = new http\\Client\\Request;\n\n$request->setRequestUrl('https://id.amiqus.co/sdk/v1/status');\n$request->setRequestMethod('GET');\n$request->setHeaders([\n  'Authorization' => 'Bearer REPLACE_BEARER_TOKEN'\n]);\n\n$client->enqueue($request)->send();\n$response = $client->getResponse();\n\necho $response->getBody();"
+          }
+        ]
       }
     },
     "/steps": {
@@ -207,7 +225,25 @@
           "503": {
             "description": "Service Unavailable"
           }
-        }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell + Curl",
+            "source": "curl --request GET \\\n  --url 'https://id.amiqus.co/sdk/v1/steps?page=INTEGER_VALUE&limit=INTEGER_VALUE' \\\n  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'"
+          },
+          {
+            "lang": "Node + Request",
+            "source": "const request = require('request');\n\nconst options = {\n  method: 'GET',\n  url: 'https://id.amiqus.co/sdk/v1/steps',\n  qs: {page: 'INTEGER_VALUE', limit: 'INTEGER_VALUE'},\n  headers: {Authorization: 'Bearer REPLACE_BEARER_TOKEN'}\n};\n\nrequest(options, function (error, response, body) {\n  if (error) throw new Error(error);\n\n  console.log(body);\n});\n"
+          },
+          {
+            "lang": "Javascript + Xhr",
+            "source": "const data = null;\n\nconst xhr = new XMLHttpRequest();\nxhr.withCredentials = true;\n\nxhr.addEventListener(\"readystatechange\", function () {\n  if (this.readyState === this.DONE) {\n    console.log(this.responseText);\n  }\n});\n\nxhr.open(\"GET\", \"https://id.amiqus.co/sdk/v1/steps?page=INTEGER_VALUE&limit=INTEGER_VALUE\");\nxhr.setRequestHeader(\"Authorization\", \"Bearer REPLACE_BEARER_TOKEN\");\n\nxhr.send(data);"
+          },
+          {
+            "lang": "Php + Http2",
+            "source": "<?php\n\n$client = new http\\Client;\n$request = new http\\Client\\Request;\n\n$request->setRequestUrl('https://id.amiqus.co/sdk/v1/steps');\n$request->setRequestMethod('GET');\n$request->setQuery(new http\\QueryString([\n  'page' => 'INTEGER_VALUE',\n  'limit' => 'INTEGER_VALUE'\n]));\n\n$request->setHeaders([\n  'Authorization' => 'Bearer REPLACE_BEARER_TOKEN'\n]);\n\n$client->enqueue($request)->send();\n$response = $client->getResponse();\n\necho $response->getBody();"
+          }
+        ]
       }
     },
     "/steps/{id}": {
@@ -386,7 +422,25 @@
           "503": {
             "description": "Service Unavailable"
           }
-        }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell + Curl",
+            "source": "curl --request POST \\\n  --url https://id.amiqus.co/sdk/v1/steps/%7Bid%7D \\\n  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \\\n  --header 'content-type: application/json' \\\n  --data '{\"title\":\"string\",\"dob\":\"2019-08-24\",\"address_history\":[{\"address\":{\"unit\":\"string\",\"house_name\":\"string\",\"house_number\":\"string\",\"street_name\":\"string\",\"second_street\":\"string\",\"district\":\"string\",\"city\":null,\"province\":null,\"postcode\":null,\"country\":\"AF\"},\"start\":\"2019-08-24\"}],\"privacy_policy\":true}'"
+          },
+          {
+            "lang": "Node + Request",
+            "source": "const request = require('request');\n\nconst options = {\n  method: 'POST',\n  url: 'https://id.amiqus.co/sdk/v1/steps/%7Bid%7D',\n  headers: {\n    Authorization: 'Bearer REPLACE_BEARER_TOKEN',\n    'content-type': 'application/json'\n  },\n  body: {\n    title: 'string',\n    dob: '2019-08-24',\n    address_history: [\n      {\n        address: {\n          unit: 'string',\n          house_name: 'string',\n          house_number: 'string',\n          street_name: 'string',\n          second_street: 'string',\n          district: 'string',\n          city: null,\n          province: null,\n          postcode: null,\n          country: 'AF'\n        },\n        start: '2019-08-24'\n      }\n    ],\n    privacy_policy: true\n  },\n  json: true\n};\n\nrequest(options, function (error, response, body) {\n  if (error) throw new Error(error);\n\n  console.log(body);\n});\n"
+          },
+          {
+            "lang": "Javascript + Xhr",
+            "source": "const data = JSON.stringify({\n  \"title\": \"string\",\n  \"dob\": \"2019-08-24\",\n  \"address_history\": [\n    {\n      \"address\": {\n        \"unit\": \"string\",\n        \"house_name\": \"string\",\n        \"house_number\": \"string\",\n        \"street_name\": \"string\",\n        \"second_street\": \"string\",\n        \"district\": \"string\",\n        \"city\": null,\n        \"province\": null,\n        \"postcode\": null,\n        \"country\": \"AF\"\n      },\n      \"start\": \"2019-08-24\"\n    }\n  ],\n  \"privacy_policy\": true\n});\n\nconst xhr = new XMLHttpRequest();\nxhr.withCredentials = true;\n\nxhr.addEventListener(\"readystatechange\", function () {\n  if (this.readyState === this.DONE) {\n    console.log(this.responseText);\n  }\n});\n\nxhr.open(\"POST\", \"https://id.amiqus.co/sdk/v1/steps/%7Bid%7D\");\nxhr.setRequestHeader(\"Authorization\", \"Bearer REPLACE_BEARER_TOKEN\");\nxhr.setRequestHeader(\"content-type\", \"application/json\");\n\nxhr.send(data);"
+          },
+          {
+            "lang": "Php + Http2",
+            "source": "<?php\n\n$client = new http\\Client;\n$request = new http\\Client\\Request;\n\n$body = new http\\Message\\Body;\n$body->append('{\"title\":\"string\",\"dob\":\"2019-08-24\",\"address_history\":[{\"address\":{\"unit\":\"string\",\"house_name\":\"string\",\"house_number\":\"string\",\"street_name\":\"string\",\"second_street\":\"string\",\"district\":\"string\",\"city\":null,\"province\":null,\"postcode\":null,\"country\":\"AF\"},\"start\":\"2019-08-24\"}],\"privacy_policy\":true}');\n\n$request->setRequestUrl('https://id.amiqus.co/sdk/v1/steps/%7Bid%7D');\n$request->setRequestMethod('POST');\n$request->setBody($body);\n\n$request->setHeaders([\n  'Authorization' => 'Bearer REPLACE_BEARER_TOKEN',\n  'content-type' => 'application/json'\n]);\n\n$client->enqueue($request)->send();\n$response = $client->getResponse();\n\necho $response->getBody();"
+          }
+        ]
       }
     },
     "/providers/onfido/token": {
@@ -540,7 +594,25 @@
           "503": {
             "$ref": "#/components/responses/503"
           }
-        }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell + Curl",
+            "source": "curl --request POST \\\n  --url https://id.amiqus.co/sdk/v1/providers/onfido/token \\\n  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \\\n  --header 'content-type: application/json' \\\n  --data '{\"bundle_id\":\"string\"}'"
+          },
+          {
+            "lang": "Node + Request",
+            "source": "const request = require('request');\n\nconst options = {\n  method: 'POST',\n  url: 'https://id.amiqus.co/sdk/v1/providers/onfido/token',\n  headers: {\n    Authorization: 'Bearer REPLACE_BEARER_TOKEN',\n    'content-type': 'application/json'\n  },\n  body: {bundle_id: 'string'},\n  json: true\n};\n\nrequest(options, function (error, response, body) {\n  if (error) throw new Error(error);\n\n  console.log(body);\n});\n"
+          },
+          {
+            "lang": "Javascript + Xhr",
+            "source": "const data = JSON.stringify({\n  \"bundle_id\": \"string\"\n});\n\nconst xhr = new XMLHttpRequest();\nxhr.withCredentials = true;\n\nxhr.addEventListener(\"readystatechange\", function () {\n  if (this.readyState === this.DONE) {\n    console.log(this.responseText);\n  }\n});\n\nxhr.open(\"POST\", \"https://id.amiqus.co/sdk/v1/providers/onfido/token\");\nxhr.setRequestHeader(\"Authorization\", \"Bearer REPLACE_BEARER_TOKEN\");\nxhr.setRequestHeader(\"content-type\", \"application/json\");\n\nxhr.send(data);"
+          },
+          {
+            "lang": "Php + Http2",
+            "source": "<?php\n\n$client = new http\\Client;\n$request = new http\\Client\\Request;\n\n$body = new http\\Message\\Body;\n$body->append('{\"bundle_id\":\"string\"}');\n\n$request->setRequestUrl('https://id.amiqus.co/sdk/v1/providers/onfido/token');\n$request->setRequestMethod('POST');\n$request->setBody($body);\n\n$request->setHeaders([\n  'Authorization' => 'Bearer REPLACE_BEARER_TOKEN',\n  'content-type' => 'application/json'\n]);\n\n$client->enqueue($request)->send();\n$response = $client->getResponse();\n\necho $response->getBody();"
+          }
+        ]
       }
     }
   },

@@ -66,8 +66,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #fff;
-    border-bottom: 1px solid #f4f4f4;
+    background: var(--amiqus-nav-bg, #ffffff);
+    border-bottom: 1px solid var(--amiqus-nav-border, #e5e7eb);
     /* Positioned so the z-index below applies at all — without this the header
        is static, its stacking order is DOM order, and the hydration overlay in
        _layouts/redoc.hbs (z-index 999) would cover the nav links even though
@@ -76,9 +76,11 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 68px;
+    height: var(--amiqus-nav-height, 64px);
     z-index: 1000;
+    font-family: var(--amiqus-font-family, 'Source Sans 3', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif);
 }
+
 #main-container {
     position:relative;
     min-height: 100%;
@@ -96,31 +98,245 @@ body {
     display: flex;
 }
 
-.navigation a {
-    text-decoration: none;
-    display: block;
-    padding: .5em;
-    color: #038a00;
-    margin-right:10px;
+.nav-dropdown {
+    position: relative;
 }
 
-.navigation a:hover {
-    background: #fafbfc;
+.nav-dropdown__trigger {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: .5em 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--amiqus-nav-text, #333333);
+    font-family: var(--amiqus-font-family, 'Source Sans 3', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif);
+    background: none;
+    border: none;
+    cursor: pointer;
+    user-select: none;
+    transition: color .25s;
+}
+
+.nav-dropdown:hover .nav-dropdown__trigger,
+.nav-dropdown.is-open .nav-dropdown__trigger,
+.nav-dropdown__trigger.is-active {
+    color: var(--amiqus-brand, #00ad09);
+}
+
+.nav-dropdown__chevron {
+    flex-shrink: 0;
+}
+
+.nav-dropdown__menu {
+    list-style: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 180px;
+    margin: 0;
+    padding: 12px;
+    background: var(--amiqus-nav-bg, #ffffff);
+    border: 1px solid var(--amiqus-nav-border, #e5e7eb);
+    border-radius: 12px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.08);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition: opacity .15s ease, visibility .15s ease, transform .15s ease;
+}
+
+.nav-dropdown:hover .nav-dropdown__menu,
+.nav-dropdown.is-open .nav-dropdown__menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.nav-dropdown__menu a {
+    display: block;
+    border-radius: 6px;
+    padding: 0 12px;
+    line-height: 32px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--amiqus-nav-text, #333333);
+    font-family: var(--amiqus-font-family, 'Source Sans 3', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color .25s, color .25s;
+}
+
+.nav-dropdown__menu a:hover,
+.nav-dropdown__menu a:focus-visible {
+    color: var(--amiqus-brand, #00ad09);
+    background-color: var(--amiqus-menu-hover-bg, rgba(142, 150, 170, 0.14));
+}
+
+.nav-dropdown__menu a.is-active {
+    color: var(--amiqus-brand, #00ad09);
+}
+
+.nav-hamburger {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 100%;
+    margin-right: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.nav-hamburger__box {
+    position: relative;
+    width: 16px;
+    height: 14px;
+}
+
+.nav-hamburger__line {
+    position: absolute;
+    left: 0;
+    width: 16px;
+    height: 2px;
+    background-color: var(--amiqus-nav-text, #333333);
+    transition: transform .25s, top .25s, opacity .25s;
+}
+
+.nav-hamburger__line--top {
+    top: 0;
+}
+
+.nav-hamburger__line--middle {
+    top: 6px;
+}
+
+.nav-hamburger__line--bottom {
+    top: 12px;
+}
+
+.nav-hamburger.is-active .nav-hamburger__line--top {
+    top: 6px;
+    transform: rotate(45deg);
+}
+
+.nav-hamburger.is-active .nav-hamburger__line--middle {
+    opacity: 0;
+}
+
+.nav-hamburger.is-active .nav-hamburger__line--bottom {
+    top: 6px;
+    transform: rotate(-45deg);
+}
+
+.nav-screen {
+    position: fixed;
+    top: var(--amiqus-nav-height, 64px);
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+    padding: 16px 24px;
+    background: var(--amiqus-nav-bg, #ffffff);
+    overflow-y: auto;
+}
+
+.nav-screen__group-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 12px 0 11px;
+    background: none;
+    border: none;
+    border-bottom: 1px solid var(--amiqus-nav-border, #e5e7eb);
+    font-size: 14px;
+    font-weight: 500;
+    font-family: var(--amiqus-font-family, 'Source Sans 3', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif);
+    color: var(--amiqus-nav-text, #333333);
+    cursor: pointer;
+}
+
+.nav-screen__group.is-open .nav-screen__group-button {
+    color: var(--amiqus-brand, #00ad09);
+}
+
+.nav-screen__group-icon {
+    flex-shrink: 0;
+    transition: transform .25s;
+}
+
+.nav-screen__group.is-open .nav-screen__group-icon {
+    transform: rotate(45deg);
+}
+
+.nav-screen__menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .25s ease;
+}
+
+/* max-height rather than height:auto so the reveal can be transitioned. The
+   ceiling only has to exceed the real height of the list — it is not a layout
+   value — and the panel itself scrolls, so extra links cannot be clipped. */
+.nav-screen__group.is-open .nav-screen__menu {
+    max-height: 60vh;
+}
+
+.nav-screen__menu a {
+    display: block;
+    margin-left: 12px;
+    line-height: 32px;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: var(--amiqus-font-family, 'Source Sans 3', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif);
+    color: var(--amiqus-nav-text, #333333);
+    text-decoration: none;
+    transition: color .25s;
+}
+
+.nav-screen__menu a:hover,
+.nav-screen__menu a:focus-visible,
+.nav-screen__menu a.is-active {
+    color: var(--amiqus-brand, #00ad09);
+}
+
+@media (max-width: 767px) {
+    .nav-dropdown {
+        display: none;
+    }
+
+    .nav-hamburger {
+        display: flex;
+    }
+
+    /* The panel below is fixed and offset by the header's height, so the header
+       has to stay put — otherwise scrolling the reference first, then opening
+       the panel, leaves a strip of content showing above it and scrolls the
+       hamburger itself out of reach. Sticky only here: on desktop there is no
+       panel, and pinning the header would overlap Redoc's own sidebar. */
+    .nav-container {
+        position: sticky;
+    }
+}
+
+/* Belt and braces with the resize handler in _layouts/redoc.hbs: neither the
+   hamburger nor the panel belongs above the breakpoint. */
+@media (min-width: 768px) {
+    .nav-screen {
+        display: none;
+    }
 }
 
 /* *********** media queries *********** */
 @media all and (max-width: 990px) {
-    .flex-container {
-        flex-direction: column;
-    }
-
     .logo {
         margin: 0;
-    }
-
-    .navigation  {
-        width: 100%;
-        justify-content: space-around;
     }
 }
 
@@ -130,22 +346,6 @@ body {
 
     .logo {
         margin: .25em 0;
-        align-self: left; /* align the logo to the left side of 'flex-container' */
-    }
-
-    .navigation {
-        flex-direction: column;
-    }
-
-    .navigation a {
-        text-align: center;
-        padding: 10px;
-        border-top: 1px solid rgba(255,255,255,0.3);
-        border-bottom: 1px solid rgba(0,0,0,0.1);
-    }
-
-    .navigation li:last-of-type a {
-        border-bottom: none;
     }
 }
 

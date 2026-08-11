@@ -6,6 +6,7 @@
     <title>Amiqus ID REST API</title>
     <link rel="icon" type="image/svg+xml" sizes="32x32" href="/assets/images/badge--amiqus.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/assets/css/tokens.css" rel="stylesheet" />
     <link href="/assets/css/reference.css" rel="stylesheet" />
     <!--
         The overlay's styles are inline rather than in reference.css so that
@@ -532,7 +533,7 @@ data-styled.g137[id="sc-lhsSio"]{content:"iOkeQy,"}/*!sc*/
 .SikXG path{fill:#333333;}/*!sc*/
 data-styled.g138[id="sc-enPhjR"]{content:"SikXG,"}/*!sc*/
 </style>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Roboto:wght@300;400;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -542,10 +543,44 @@ data-styled.g138[id="sc-enPhjR"]{content:"SikXG,"}/*!sc*/
             <img src="/assets/images/logos/amiqus-full.png" alt="Amiqus Logo" width="200" />
         </a>
         <ul class="navigation">
-            <li><a href="/aqid/api-reference.html">API Reference</a></li>
-            <li><a href="/sdk/sdk-api-reference.html">SDK API Reference</a></li>
-            <li><a href="/guides/getting-started.html">Guides</a></li>
+            <li class="nav-dropdown">
+                <button type="button" class="nav-dropdown__trigger" aria-haspopup="true" aria-expanded="false" aria-controls="nav-dropdown-menu">
+                    Amiqus API
+                    <svg class="nav-dropdown__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+                        <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <ul class="nav-dropdown__menu" id="nav-dropdown-menu">
+                <li><a href="/aqid/api-reference.html">API Reference</a></li>
+                <li><a href="/sdk/sdk-api-reference.html">SDK API Reference</a></li>
+                <li><a href="/guides/getting-started.html">Guides</a></li>
+                <li><a href="/aqid/changelog.html">Changelog</a></li>
+                </ul>
+            </li>
         </ul>
+        <button type="button" class="nav-hamburger" aria-label="mobile navigation" aria-expanded="false" aria-controls="nav-screen">
+            <span class="nav-hamburger__box">
+                <span class="nav-hamburger__line nav-hamburger__line--top"></span>
+                <span class="nav-hamburger__line nav-hamburger__line--middle"></span>
+                <span class="nav-hamburger__line nav-hamburger__line--bottom"></span>
+            </span>
+        </button>
+    </div>
+    <div class="nav-screen" id="nav-screen" hidden>
+        <div class="nav-screen__group">
+            <button type="button" class="nav-screen__group-button" aria-expanded="false" aria-controls="nav-screen-menu">
+                <span>Amiqus API</span>
+                <svg class="nav-screen__group-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                    <path d="M6 1V11M1 6H11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+            </button>
+            <ul class="nav-screen__menu" id="nav-screen-menu">
+                <li><a href="/aqid/api-reference.html">API Reference</a></li>
+                <li><a href="/sdk/sdk-api-reference.html">SDK API Reference</a></li>
+                <li><a href="/guides/getting-started.html">Guides</a></li>
+                <li><a href="/aqid/changelog.html">Changelog</a></li>
+            </ul>
+        </div>
     </div>
     <!--
         `redocly build-docs` prerenders the reference, so the markup below paints
@@ -2221,6 +2256,98 @@ The value is not formatted (e.g. title case), and appears as written.</p>
             // hydration — or a tab left in the background, where idle callbacks
             // are not run — leave the overlay covering the page.
             window.setTimeout(dismiss, 15000);
+        })();
+    </script>
+    <script>
+        // Everything the nav needs once it has painted: active-link highlighting,
+        // the desktop dropdown, the mobile panel, and the panel's collapsible
+        // group. One block because they act on the same handful of elements.
+        (function () {
+            var dropdown = document.querySelector('.nav-dropdown');
+            var trigger = document.querySelector('.nav-dropdown__trigger');
+            var hamburger = document.querySelector('.nav-hamburger');
+            var navScreen = document.getElementById('nav-screen');
+            var group = document.querySelector('.nav-screen__group');
+            var groupButton = document.querySelector('.nav-screen__group-button');
+
+            // The links are written with an explicit `.html`, but VitePress can
+            // serve the same page without it, so compare with the extension (and
+            // any index/trailing slash) normalised away rather than exactly.
+            function normalisePath(path) {
+                return path.replace(/\.html$/, '').replace(/\/index$/, '').replace(/\/$/, '');
+            }
+
+            var currentPath = normalisePath(window.location.pathname);
+            var matched = false;
+
+            document.querySelectorAll('.nav-dropdown__menu a, .nav-screen__menu a').forEach(function (link) {
+                var linkPath = normalisePath(new URL(link.href, window.location.origin).pathname);
+
+                if (linkPath === currentPath) {
+                    link.classList.add('is-active');
+                    matched = true;
+                }
+            });
+
+            if (matched && trigger) {
+                trigger.classList.add('is-active');
+            }
+
+            // The dropdown also opens on hover (see reference.css), but hover
+            // alone strands touch devices wide enough to still show it — a tablet
+            // has no hover and no hamburger. This click toggle is the accessible
+            // path: it works on tap, Enter and Space, and keeps aria-expanded honest.
+            if (dropdown && trigger) {
+                var setDropdownOpen = function (isOpen) {
+                    dropdown.classList.toggle('is-open', isOpen);
+                    trigger.setAttribute('aria-expanded', String(isOpen));
+                };
+
+                trigger.addEventListener('click', function () {
+                    setDropdownOpen(!dropdown.classList.contains('is-open'));
+                });
+
+                document.addEventListener('click', function (event) {
+                    if (!dropdown.contains(event.target)) {
+                        setDropdownOpen(false);
+                    }
+                });
+
+                document.addEventListener('keydown', function (event) {
+                    if (event.key === 'Escape' && dropdown.classList.contains('is-open')) {
+                        setDropdownOpen(false);
+                        trigger.focus();
+                    }
+                });
+            }
+
+            if (hamburger && navScreen) {
+                var setScreenOpen = function (isOpen) {
+                    hamburger.classList.toggle('is-active', isOpen);
+                    hamburger.setAttribute('aria-expanded', String(isOpen));
+                    navScreen.hidden = !isOpen;
+                    document.body.style.overflow = isOpen ? 'hidden' : '';
+                };
+
+                hamburger.addEventListener('click', function () {
+                    setScreenOpen(hamburger.getAttribute('aria-expanded') !== 'true');
+                });
+
+                // The hamburger is hidden above the breakpoint, so a rotation or
+                // resize while the panel is open would otherwise leave it covering
+                // the page — with the body scroll still locked and no way to close.
+                window.addEventListener('resize', function () {
+                    if (window.innerWidth >= 768) {
+                        setScreenOpen(false);
+                    }
+                });
+            }
+
+            if (group && groupButton) {
+                groupButton.addEventListener('click', function () {
+                    groupButton.setAttribute('aria-expanded', String(group.classList.toggle('is-open')));
+                });
+            }
         })();
     </script>
 </body>

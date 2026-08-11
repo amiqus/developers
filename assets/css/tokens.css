@@ -1,0 +1,19 @@
+/**
+ * Shared design tokens for the top-of-page navigation. Consumed by both the
+ * VitePress theme (docs/.vitepress/theme/style.css) and the static Redoc
+ * reference pages (docs/public/assets/css/reference.css, linked from
+ * _layouts/redoc.hbs). Change a value here once and both navs stay in sync.
+ *
+ * Light-mode only, by design: the Redoc reference pages keep their original,
+ * non-dark-mode appearance. Do not add a dark-mode override block here.
+ */
+:root {
+    --amiqus-brand: #00ad09;
+    --amiqus-brand-hover: #018a00;
+    --amiqus-font-family: 'Source Sans 3', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+    --amiqus-nav-height: 64px;
+    --amiqus-nav-bg: #ffffff;
+    --amiqus-nav-border: #e5e7eb;
+    --amiqus-nav-text: #333333;
+    --amiqus-menu-hover-bg: rgba(142, 150, 170, 0.14);
+}

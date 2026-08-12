@@ -62,6 +62,9 @@
       "name": "Organisations"
     },
     {
+      "name": "Organisation Clients"
+    },
+    {
       "name": "Documents"
     },
     {
@@ -1109,19 +1112,19 @@
         "x-codeSamples": [
           {
             "lang": "Shell + Curl",
-            "source": "curl --request POST \\\n  --url https://id.amiqus.co/api/v2/clients \\\n  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \\\n  --header 'content-type: application/json' \\\n  --data '{\"status\":null,\"name\":{\"title\":\"miss\",\"other_title\":null,\"first_name\":\"string\",\"middle_name\":null,\"last_name\":\"string\"},\"email\":\"user@example.com\",\"landline\":null,\"mobile\":null,\"dob\":null,\"reference\":null,\"deletion_date\":null}'"
+            "source": "curl --request POST \\\n  --url https://id.amiqus.co/api/v2/clients \\\n  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \\\n  --header 'content-type: application/json' \\\n  --data '{\"status\":\"pending\",\"name\":{\"title\":\"miss\",\"other_title\":null,\"first_name\":\"string\",\"middle_name\":null,\"last_name\":\"string\"},\"email\":\"user@example.com\",\"landline\":null,\"mobile\":null,\"dob\":null,\"reference\":null,\"deletion_date\":null}'"
           },
           {
             "lang": "Node + Request",
-            "source": "const request = require('request');\n\nconst options = {\n  method: 'POST',\n  url: 'https://id.amiqus.co/api/v2/clients',\n  headers: {\n    Authorization: 'Bearer REPLACE_BEARER_TOKEN',\n    'content-type': 'application/json'\n  },\n  body: {\n    status: null,\n    name: {\n      title: 'miss',\n      other_title: null,\n      first_name: 'string',\n      middle_name: null,\n      last_name: 'string'\n    },\n    email: 'user@example.com',\n    landline: null,\n    mobile: null,\n    dob: null,\n    reference: null,\n    deletion_date: null\n  },\n  json: true\n};\n\nrequest(options, function (error, response, body) {\n  if (error) throw new Error(error);\n\n  console.log(body);\n});\n"
+            "source": "const request = require('request');\n\nconst options = {\n  method: 'POST',\n  url: 'https://id.amiqus.co/api/v2/clients',\n  headers: {\n    Authorization: 'Bearer REPLACE_BEARER_TOKEN',\n    'content-type': 'application/json'\n  },\n  body: {\n    status: 'pending',\n    name: {\n      title: 'miss',\n      other_title: null,\n      first_name: 'string',\n      middle_name: null,\n      last_name: 'string'\n    },\n    email: 'user@example.com',\n    landline: null,\n    mobile: null,\n    dob: null,\n    reference: null,\n    deletion_date: null\n  },\n  json: true\n};\n\nrequest(options, function (error, response, body) {\n  if (error) throw new Error(error);\n\n  console.log(body);\n});\n"
           },
           {
             "lang": "Javascript + Xhr",
-            "source": "const data = JSON.stringify({\n  \"status\": null,\n  \"name\": {\n    \"title\": \"miss\",\n    \"other_title\": null,\n    \"first_name\": \"string\",\n    \"middle_name\": null,\n    \"last_name\": \"string\"\n  },\n  \"email\": \"user@example.com\",\n  \"landline\": null,\n  \"mobile\": null,\n  \"dob\": null,\n  \"reference\": null,\n  \"deletion_date\": null\n});\n\nconst xhr = new XMLHttpRequest();\nxhr.withCredentials = true;\n\nxhr.addEventListener(\"readystatechange\", function () {\n  if (this.readyState === this.DONE) {\n    console.log(this.responseText);\n  }\n});\n\nxhr.open(\"POST\", \"https://id.amiqus.co/api/v2/clients\");\nxhr.setRequestHeader(\"Authorization\", \"Bearer REPLACE_BEARER_TOKEN\");\nxhr.setRequestHeader(\"content-type\", \"application/json\");\n\nxhr.send(data);"
+            "source": "const data = JSON.stringify({\n  \"status\": \"pending\",\n  \"name\": {\n    \"title\": \"miss\",\n    \"other_title\": null,\n    \"first_name\": \"string\",\n    \"middle_name\": null,\n    \"last_name\": \"string\"\n  },\n  \"email\": \"user@example.com\",\n  \"landline\": null,\n  \"mobile\": null,\n  \"dob\": null,\n  \"reference\": null,\n  \"deletion_date\": null\n});\n\nconst xhr = new XMLHttpRequest();\nxhr.withCredentials = true;\n\nxhr.addEventListener(\"readystatechange\", function () {\n  if (this.readyState === this.DONE) {\n    console.log(this.responseText);\n  }\n});\n\nxhr.open(\"POST\", \"https://id.amiqus.co/api/v2/clients\");\nxhr.setRequestHeader(\"Authorization\", \"Bearer REPLACE_BEARER_TOKEN\");\nxhr.setRequestHeader(\"content-type\", \"application/json\");\n\nxhr.send(data);"
           },
           {
             "lang": "Php + Http2",
-            "source": "<?php\n\n$client = new http\\Client;\n$request = new http\\Client\\Request;\n\n$body = new http\\Message\\Body;\n$body->append('{\"status\":null,\"name\":{\"title\":\"miss\",\"other_title\":null,\"first_name\":\"string\",\"middle_name\":null,\"last_name\":\"string\"},\"email\":\"user@example.com\",\"landline\":null,\"mobile\":null,\"dob\":null,\"reference\":null,\"deletion_date\":null}');\n\n$request->setRequestUrl('https://id.amiqus.co/api/v2/clients');\n$request->setRequestMethod('POST');\n$request->setBody($body);\n\n$request->setHeaders([\n  'Authorization' => 'Bearer REPLACE_BEARER_TOKEN',\n  'content-type' => 'application/json'\n]);\n\n$client->enqueue($request)->send();\n$response = $client->getResponse();\n\necho $response->getBody();"
+            "source": "<?php\n\n$client = new http\\Client;\n$request = new http\\Client\\Request;\n\n$body = new http\\Message\\Body;\n$body->append('{\"status\":\"pending\",\"name\":{\"title\":\"miss\",\"other_title\":null,\"first_name\":\"string\",\"middle_name\":null,\"last_name\":\"string\"},\"email\":\"user@example.com\",\"landline\":null,\"mobile\":null,\"dob\":null,\"reference\":null,\"deletion_date\":null}');\n\n$request->setRequestUrl('https://id.amiqus.co/api/v2/clients');\n$request->setRequestMethod('POST');\n$request->setBody($body);\n\n$request->setHeaders([\n  'Authorization' => 'Bearer REPLACE_BEARER_TOKEN',\n  'content-type' => 'application/json'\n]);\n\n$client->enqueue($request)->send();\n$response = $client->getResponse();\n\necho $response->getBody();"
           }
         ]
       }
@@ -5527,6 +5530,187 @@
           {
             "lang": "Php + Http2",
             "source": "<?php\n\n$client = new http\\Client;\n$request = new http\\Client\\Request;\n\n$body = new http\\Message\\Body;\n$body->append('{\"status\":\"pending\",\"name\":\"string\",\"company_number\":null,\"jurisdiction\":null,\"reference\":null,\"address\":{},\"incorporated_at\":null}');\n\n$request->setRequestUrl('https://id.amiqus.co/api/v2/organisations/%7Bid%7D');\n$request->setRequestMethod('PATCH');\n$request->setBody($body);\n\n$request->setHeaders([\n  'Authorization' => 'Bearer REPLACE_BEARER_TOKEN',\n  'content-type' => 'application/json'\n]);\n\n$client->enqueue($request)->send();\n$response = $client->getResponse();\n\necho $response->getBody();"
+          }
+        ]
+      }
+    },
+    "/organisations/{id}/clients": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/resourceId",
+          "description": "Unique organisation identifier."
+        }
+      ],
+      "get": {
+        "summary": "List all clients for an organisation",
+        "description": "Returns a paginated list of the clients belonging to an organisation. Clients will be returned in the order they were created, most recent first. An empty list is returned when the organisation has no clients. When a client is archived all organisations associated with the client will continue to be attached.\n\nTo retrieve clients for the team, refer to **[List all clients](#operation/get-clients)**.\n",
+        "operationId": "get-organisations-id-clients",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Organisation Clients"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/page"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/PaginatedList"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "items": {
+                            "$ref": "#/components/schemas/Client"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "default": {
+                    "summary": "Clients returned",
+                    "value": {
+                      "object": "paginated_list",
+                      "data": [
+                        {
+                          "object": "client",
+                          "id": 73845,
+                          "status": "pending",
+                          "name": {
+                            "object": "name",
+                            "title": "mr",
+                            "other_title": null,
+                            "first_name": "Martin",
+                            "middle_name": "Seamus",
+                            "last_name": "McFly",
+                            "name": "Martin McFly",
+                            "full_name": "Martin Seamus McFly",
+                            "complete_name": "Mr Martin Seamus McFly"
+                          },
+                          "email": "marty@example.com",
+                          "landline": null,
+                          "mobile": null,
+                          "dob": null,
+                          "reference": null,
+                          "national_insurance_number": null,
+                          "is_deletable": true,
+                          "deletion_date": "2026-01-14",
+                          "created_at": "2022-05-21T14:15:22Z",
+                          "updated_at": "2022-05-21T14:15:22Z",
+                          "archived_at": null
+                        },
+                        {
+                          "object": "client",
+                          "id": 73841,
+                          "status": null,
+                          "name": {
+                            "object": "name",
+                            "title": "miss",
+                            "other_title": null,
+                            "first_name": "Jennifer",
+                            "middle_name": "Jane",
+                            "last_name": "Parker",
+                            "name": "Jennifer Parker",
+                            "full_name": "Jennifer Jane Parker",
+                            "complete_name": "Miss Jennifer Jane Parker"
+                          },
+                          "email": "jennifer@example.com",
+                          "landline": null,
+                          "mobile": null,
+                          "dob": "1967-10-29",
+                          "reference": null,
+                          "national_insurance_number": "QQ345678Z",
+                          "is_deletable": true,
+                          "deletion_date": "2025-09-11",
+                          "created_at": "2022-05-21T14:22:01Z",
+                          "updated_at": "2022-05-21T14:22:01Z",
+                          "archived_at": null
+                        }
+                      ],
+                      "total": 2,
+                      "count": 2,
+                      "limit": 25,
+                      "current_page": 1,
+                      "total_pages": 1,
+                      "links": null
+                    }
+                  },
+                  "no_clients_returned": {
+                    "summary": "No clients returned",
+                    "value": {
+                      "object": "paginated_list",
+                      "data": [],
+                      "total": 0,
+                      "count": 0,
+                      "limit": 25,
+                      "current_page": 1,
+                      "total_pages": 1,
+                      "links": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Organisation not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell + Curl",
+            "source": "curl --request GET \\\n  --url 'https://id.amiqus.co/api/v2/organisations/%7Bid%7D/clients?page=INTEGER_VALUE&limit=INTEGER_VALUE' \\\n  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'"
+          },
+          {
+            "lang": "Node + Request",
+            "source": "const request = require('request');\n\nconst options = {\n  method: 'GET',\n  url: 'https://id.amiqus.co/api/v2/organisations/%7Bid%7D/clients',\n  qs: {page: 'INTEGER_VALUE', limit: 'INTEGER_VALUE'},\n  headers: {Authorization: 'Bearer REPLACE_BEARER_TOKEN'}\n};\n\nrequest(options, function (error, response, body) {\n  if (error) throw new Error(error);\n\n  console.log(body);\n});\n"
+          },
+          {
+            "lang": "Javascript + Xhr",
+            "source": "const data = null;\n\nconst xhr = new XMLHttpRequest();\nxhr.withCredentials = true;\n\nxhr.addEventListener(\"readystatechange\", function () {\n  if (this.readyState === this.DONE) {\n    console.log(this.responseText);\n  }\n});\n\nxhr.open(\"GET\", \"https://id.amiqus.co/api/v2/organisations/%7Bid%7D/clients?page=INTEGER_VALUE&limit=INTEGER_VALUE\");\nxhr.setRequestHeader(\"Authorization\", \"Bearer REPLACE_BEARER_TOKEN\");\n\nxhr.send(data);"
+          },
+          {
+            "lang": "Php + Http2",
+            "source": "<?php\n\n$client = new http\\Client;\n$request = new http\\Client\\Request;\n\n$request->setRequestUrl('https://id.amiqus.co/api/v2/organisations/%7Bid%7D/clients');\n$request->setRequestMethod('GET');\n$request->setQuery(new http\\QueryString([\n  'page' => 'INTEGER_VALUE',\n  'limit' => 'INTEGER_VALUE'\n]));\n\n$request->setHeaders([\n  'Authorization' => 'Bearer REPLACE_BEARER_TOKEN'\n]);\n\n$client->enqueue($request)->send();\n$response = $client->getResponse();\n\necho $response->getBody();"
           }
         ]
       }
@@ -14395,6 +14579,17 @@
               "null",
               "string"
             ],
+            "enum": [
+              "pending",
+              "approved",
+              "rejected",
+              null
+            ],
+            "x-enumDescriptions": {
+              "pending": "Awaiting a decision from a team member.",
+              "approved": "A team member has approved the client based on the outcome of their checks.",
+              "rejected": "A team member has rejected the client based on the outcome of their checks."
+            },
             "description": "A status can be set to signify a decision has been made by a team member on the outcome of the client's checks."
           },
           "name": {
@@ -22276,6 +22471,13 @@
       ]
     },
     {
+      "name": "Organisations",
+      "tags": [
+        "Organisations",
+        "Organisation Clients"
+      ]
+    },
+    {
       "name": "Records & Steps",
       "tags": [
         "Records",
@@ -22305,7 +22507,6 @@
       "tags": [
         "Files",
         "Forms",
-        "Organisations",
         "Webhooks",
         "Aggregates",
         "Service Status",

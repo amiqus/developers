@@ -19131,7 +19131,7 @@
             "type": "integer",
             "description": "Maximum number of days between activities before an explanation is required.\n",
             "minimum": 7,
-            "maximum": 91,
+            "maximum": 182,
             "multipleOf": 7
           },
           "supporting_evidence": {

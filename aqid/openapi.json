@@ -65,6 +65,9 @@
       "name": "Organisation Clients"
     },
     {
+      "name": "Organisation Assignees"
+    },
+    {
       "name": "Documents"
     },
     {
@@ -6046,6 +6049,681 @@
           {
             "lang": "Php + Http2",
             "source": "<?php\n\n$client = new http\\Client;\n$request = new http\\Client\\Request;\n\n$body = new http\\Message\\Body;\n$body->append('{\"status\":\"pending\",\"name\":\"string\",\"company_number\":null,\"jurisdiction\":null,\"reference\":null,\"address\":{},\"incorporated_at\":null}');\n\n$request->setRequestUrl('https://id.amiqus.co/api/v2/organisations/%7Bid%7D');\n$request->setRequestMethod('PATCH');\n$request->setBody($body);\n\n$request->setHeaders([\n  'Authorization' => 'Bearer REPLACE_BEARER_TOKEN',\n  'content-type' => 'application/json'\n]);\n\n$client->enqueue($request)->send();\n$response = $client->getResponse();\n\necho $response->getBody();"
+          }
+        ]
+      }
+    },
+    "/organisations/{id}/assignees": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/resourceId",
+          "description": "Unique organisation identifier."
+        }
+      ],
+      "get": {
+        "summary": "List all assignees for an organisation",
+        "description": "List all assignees for an organisation.",
+        "operationId": "get-organisations-id-assignees",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Organisation Assignees"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/page"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/PaginatedList"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "items": {
+                            "$ref": "#/components/schemas/TeamMember-2"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "example": {
+                  "object": "paginated_list",
+                  "data": [
+                    {
+                      "object": "assignee",
+                      "id": 34535,
+                      "type": "team_member",
+                      "team_member": {
+                        "object": "team_member",
+                        "id": 121,
+                        "name": "Lorraine Baines",
+                        "email": "lorraine@example.com",
+                        "role": "owner"
+                      }
+                    },
+                    {
+                      "object": "assignee",
+                      "id": 34538,
+                      "type": "team_member",
+                      "team_member": {
+                        "object": "team_member",
+                        "id": 472,
+                        "name": "Dennis Jones",
+                        "email": "dennis@example.com",
+                        "role": "member"
+                      }
+                    }
+                  ],
+                  "total": 2,
+                  "count": 2,
+                  "limit": 100,
+                  "current_page": 1,
+                  "total_pages": 1,
+                  "links": null
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Organisation not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell + Curl",
+            "source": "curl --request GET \\\n  --url 'https://id.amiqus.co/api/v2/organisations/%7Bid%7D/assignees?page=INTEGER_VALUE&limit=INTEGER_VALUE' \\\n  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'"
+          },
+          {
+            "lang": "Node + Request",
+            "source": "const request = require('request');\n\nconst options = {\n  method: 'GET',\n  url: 'https://id.amiqus.co/api/v2/organisations/%7Bid%7D/assignees',\n  qs: {page: 'INTEGER_VALUE', limit: 'INTEGER_VALUE'},\n  headers: {Authorization: 'Bearer REPLACE_BEARER_TOKEN'}\n};\n\nrequest(options, function (error, response, body) {\n  if (error) throw new Error(error);\n\n  console.log(body);\n});\n"
+          },
+          {
+            "lang": "Javascript + Xhr",
+            "source": "const data = null;\n\nconst xhr = new XMLHttpRequest();\nxhr.withCredentials = true;\n\nxhr.addEventListener(\"readystatechange\", function () {\n  if (this.readyState === this.DONE) {\n    console.log(this.responseText);\n  }\n});\n\nxhr.open(\"GET\", \"https://id.amiqus.co/api/v2/organisations/%7Bid%7D/assignees?page=INTEGER_VALUE&limit=INTEGER_VALUE\");\nxhr.setRequestHeader(\"Authorization\", \"Bearer REPLACE_BEARER_TOKEN\");\n\nxhr.send(data);"
+          },
+          {
+            "lang": "Php + Http2",
+            "source": "<?php\n\n$client = new http\\Client;\n$request = new http\\Client\\Request;\n\n$request->setRequestUrl('https://id.amiqus.co/api/v2/organisations/%7Bid%7D/assignees');\n$request->setRequestMethod('GET');\n$request->setQuery(new http\\QueryString([\n  'page' => 'INTEGER_VALUE',\n  'limit' => 'INTEGER_VALUE'\n]));\n\n$request->setHeaders([\n  'Authorization' => 'Bearer REPLACE_BEARER_TOKEN'\n]);\n\n$client->enqueue($request)->send();\n$response = $client->getResponse();\n\necho $response->getBody();"
+          }
+        ]
+      },
+      "post": {
+        "summary": "Add assignees to an organisation",
+        "description": "Add one or more assignees to an organisation, merging them with existing assignees.\n\nExisting assignees to the organisation are not included in the response. Only added assignees to the organisation will be returned.\n\nTo replace assignees, refer to **[Replace assignees for an organisation](#operation/put-organisations-id-assignees)**.\n",
+        "operationId": "post-organisations-id-assignees",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Organisation Assignees"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 100,
+                "items": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Assignee"
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "type",
+                        "team_member"
+                      ],
+                      "additionalProperties": false,
+                      "properties": {
+                        "team_member": {
+                          "type": "integer",
+                          "description": "The unique identifier of the team member to be assigned to the organisation."
+                        },
+                        "type": {
+                          "type": "string",
+                          "const": "team_member",
+                          "description": "The type of assignee to be assigned to the organisation."
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "example": [
+                {
+                  "type": "team_member",
+                  "team_member": 121
+                },
+                {
+                  "type": "team_member",
+                  "team_member": 472
+                }
+              ]
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created (one or more assignees to the organisation have been added)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/List"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "total": {
+                          "minimum": 1
+                        },
+                        "count": {
+                          "minimum": 1,
+                          "maximum": 100
+                        },
+                        "limit": {
+                          "minimum": 100,
+                          "const": 100
+                        },
+                        "data": {
+                          "minItems": 1,
+                          "maxItems": 100,
+                          "items": {
+                            "$ref": "#/components/schemas/TeamMember-2"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "example": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "object": "assignee",
+                      "id": 34535,
+                      "type": "team_member",
+                      "team_member": {
+                        "object": "team_member",
+                        "id": 121,
+                        "name": "Lorraine Baines",
+                        "email": "lorraine@example.com",
+                        "role": "owner"
+                      }
+                    },
+                    {
+                      "object": "assignee",
+                      "id": 34538,
+                      "type": "team_member",
+                      "team_member": {
+                        "object": "team_member",
+                        "id": 472,
+                        "name": "Dennis Jones",
+                        "email": "dennis@example.com",
+                        "role": "member"
+                      }
+                    }
+                  ],
+                  "total": 2,
+                  "count": 2,
+                  "limit": 100,
+                  "has_more": false,
+                  "url": "https://id.amiqus.co/api/v2/organisations/87249/assignees"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content (no new assignees to the organisation have been added)"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Organisation not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/schema"
+                },
+                "example": {
+                  "errors": [
+                    "The submitted value must be an array of assignee objects"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell + Curl",
+            "source": "curl --request POST \\\n  --url https://id.amiqus.co/api/v2/organisations/%7Bid%7D/assignees \\\n  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \\\n  --header 'content-type: application/json' \\\n  --data '[{\"type\":\"team_member\",\"team_member\":0}]'"
+          },
+          {
+            "lang": "Node + Request",
+            "source": "const request = require('request');\n\nconst options = {\n  method: 'POST',\n  url: 'https://id.amiqus.co/api/v2/organisations/%7Bid%7D/assignees',\n  headers: {\n    Authorization: 'Bearer REPLACE_BEARER_TOKEN',\n    'content-type': 'application/json'\n  },\n  body: [{type: 'team_member', team_member: 0}],\n  json: true\n};\n\nrequest(options, function (error, response, body) {\n  if (error) throw new Error(error);\n\n  console.log(body);\n});\n"
+          },
+          {
+            "lang": "Javascript + Xhr",
+            "source": "const data = JSON.stringify([\n  {\n    \"type\": \"team_member\",\n    \"team_member\": 0\n  }\n]);\n\nconst xhr = new XMLHttpRequest();\nxhr.withCredentials = true;\n\nxhr.addEventListener(\"readystatechange\", function () {\n  if (this.readyState === this.DONE) {\n    console.log(this.responseText);\n  }\n});\n\nxhr.open(\"POST\", \"https://id.amiqus.co/api/v2/organisations/%7Bid%7D/assignees\");\nxhr.setRequestHeader(\"Authorization\", \"Bearer REPLACE_BEARER_TOKEN\");\nxhr.setRequestHeader(\"content-type\", \"application/json\");\n\nxhr.send(data);"
+          },
+          {
+            "lang": "Php + Http2",
+            "source": "<?php\n\n$client = new http\\Client;\n$request = new http\\Client\\Request;\n\n$body = new http\\Message\\Body;\n$body->append('[{\"type\":\"team_member\",\"team_member\":0}]');\n\n$request->setRequestUrl('https://id.amiqus.co/api/v2/organisations/%7Bid%7D/assignees');\n$request->setRequestMethod('POST');\n$request->setBody($body);\n\n$request->setHeaders([\n  'Authorization' => 'Bearer REPLACE_BEARER_TOKEN',\n  'content-type' => 'application/json'\n]);\n\n$client->enqueue($request)->send();\n$response = $client->getResponse();\n\necho $response->getBody();"
+          }
+        ]
+      },
+      "put": {
+        "summary": "Replace assignees for an organisation",
+        "description": "Replacing all existing assignees for an organisation.\n\nExisting assignees to the organisation that are included in the request will be part of the updated assignees to the\norganisation but they will not be shown in the response. Only added assignees will be returned.\n\nTo add additional assignees without replacing the existing ones, refer to **[Add assignees for an organisation](#operation/post-organisations-id-assignees)**.\n",
+        "operationId": "put-organisations-id-assignees",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Organisation Assignees"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 100,
+                "items": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Assignee"
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "type",
+                        "team_member"
+                      ],
+                      "additionalProperties": false,
+                      "properties": {
+                        "team_member": {
+                          "type": "integer",
+                          "description": "The unique identifier of the team member to be assigned to the organisation."
+                        },
+                        "type": {
+                          "type": "string",
+                          "const": "team_member",
+                          "description": "The type of assignee to be assigned to the organisation."
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "example": [
+                {
+                  "type": "team_member",
+                  "team_member": 121
+                },
+                {
+                  "type": "team_member",
+                  "team_member": 523
+                }
+              ]
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created (one or more assignees to the organisation have been replaced)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/List"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "total": {
+                          "minimum": 1
+                        },
+                        "count": {
+                          "minimum": 1,
+                          "maximum": 100
+                        },
+                        "limit": {
+                          "minimum": 100,
+                          "const": 100
+                        },
+                        "data": {
+                          "minItems": 1,
+                          "maxItems": 100,
+                          "items": {
+                            "$ref": "#/components/schemas/TeamMember-2"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "example": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "object": "assignee",
+                      "id": 34535,
+                      "type": "team_member",
+                      "team_member": {
+                        "object": "team_member",
+                        "id": 121,
+                        "name": "Lorraine Baines",
+                        "email": "lorraine@example.com",
+                        "role": "owner"
+                      }
+                    },
+                    {
+                      "object": "assignee",
+                      "id": 34541,
+                      "type": "team_member",
+                      "team_member": {
+                        "object": "team_member",
+                        "id": 523,
+                        "name": "Clara Clayton",
+                        "email": "clara@example.com",
+                        "role": "owner"
+                      }
+                    }
+                  ],
+                  "total": 2,
+                  "count": 2,
+                  "limit": 100,
+                  "has_more": false,
+                  "url": "https://id.amiqus.co/api/v2/organisations/87249/assignees"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content (assignees to the organisation have been successfully deleted or there are no changes)"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Organisation not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/schema"
+                },
+                "example": {
+                  "errors": [
+                    "The submitted value must be an array of assignee objects"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell + Curl",
+            "source": "curl --request PUT \\\n  --url https://id.amiqus.co/api/v2/organisations/%7Bid%7D/assignees \\\n  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \\\n  --header 'content-type: application/json' \\\n  --data '[{\"type\":\"team_member\",\"team_member\":0}]'"
+          },
+          {
+            "lang": "Node + Request",
+            "source": "const request = require('request');\n\nconst options = {\n  method: 'PUT',\n  url: 'https://id.amiqus.co/api/v2/organisations/%7Bid%7D/assignees',\n  headers: {\n    Authorization: 'Bearer REPLACE_BEARER_TOKEN',\n    'content-type': 'application/json'\n  },\n  body: [{type: 'team_member', team_member: 0}],\n  json: true\n};\n\nrequest(options, function (error, response, body) {\n  if (error) throw new Error(error);\n\n  console.log(body);\n});\n"
+          },
+          {
+            "lang": "Javascript + Xhr",
+            "source": "const data = JSON.stringify([\n  {\n    \"type\": \"team_member\",\n    \"team_member\": 0\n  }\n]);\n\nconst xhr = new XMLHttpRequest();\nxhr.withCredentials = true;\n\nxhr.addEventListener(\"readystatechange\", function () {\n  if (this.readyState === this.DONE) {\n    console.log(this.responseText);\n  }\n});\n\nxhr.open(\"PUT\", \"https://id.amiqus.co/api/v2/organisations/%7Bid%7D/assignees\");\nxhr.setRequestHeader(\"Authorization\", \"Bearer REPLACE_BEARER_TOKEN\");\nxhr.setRequestHeader(\"content-type\", \"application/json\");\n\nxhr.send(data);"
+          },
+          {
+            "lang": "Php + Http2",
+            "source": "<?php\n\n$client = new http\\Client;\n$request = new http\\Client\\Request;\n\n$body = new http\\Message\\Body;\n$body->append('[{\"type\":\"team_member\",\"team_member\":0}]');\n\n$request->setRequestUrl('https://id.amiqus.co/api/v2/organisations/%7Bid%7D/assignees');\n$request->setRequestMethod('PUT');\n$request->setBody($body);\n\n$request->setHeaders([\n  'Authorization' => 'Bearer REPLACE_BEARER_TOKEN',\n  'content-type' => 'application/json'\n]);\n\n$client->enqueue($request)->send();\n$response = $client->getResponse();\n\necho $response->getBody();"
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete assignees for an organisation",
+        "description": "Remove all assignees from an organisation.\n\nIf you want to remove a specific assignee from an organisation,\nrefer to **[Delete assignee for an organisation](#operation/delete-organisations-id-assignees-assigneeId)**.\n",
+        "operationId": "delete-organisations-id-assignees",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Organisation Assignees"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {}
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Organisation not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell + Curl",
+            "source": "curl --request DELETE \\\n  --url https://id.amiqus.co/api/v2/organisations/%7Bid%7D/assignees \\\n  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'"
+          },
+          {
+            "lang": "Node + Request",
+            "source": "const request = require('request');\n\nconst options = {\n  method: 'DELETE',\n  url: 'https://id.amiqus.co/api/v2/organisations/%7Bid%7D/assignees',\n  headers: {Authorization: 'Bearer REPLACE_BEARER_TOKEN'}\n};\n\nrequest(options, function (error, response, body) {\n  if (error) throw new Error(error);\n\n  console.log(body);\n});\n"
+          },
+          {
+            "lang": "Javascript + Xhr",
+            "source": "const data = null;\n\nconst xhr = new XMLHttpRequest();\nxhr.withCredentials = true;\n\nxhr.addEventListener(\"readystatechange\", function () {\n  if (this.readyState === this.DONE) {\n    console.log(this.responseText);\n  }\n});\n\nxhr.open(\"DELETE\", \"https://id.amiqus.co/api/v2/organisations/%7Bid%7D/assignees\");\nxhr.setRequestHeader(\"Authorization\", \"Bearer REPLACE_BEARER_TOKEN\");\n\nxhr.send(data);"
+          },
+          {
+            "lang": "Php + Http2",
+            "source": "<?php\n\n$client = new http\\Client;\n$request = new http\\Client\\Request;\n\n$request->setRequestUrl('https://id.amiqus.co/api/v2/organisations/%7Bid%7D/assignees');\n$request->setRequestMethod('DELETE');\n$request->setHeaders([\n  'Authorization' => 'Bearer REPLACE_BEARER_TOKEN'\n]);\n\n$client->enqueue($request)->send();\n$response = $client->getResponse();\n\necho $response->getBody();"
+          }
+        ]
+      }
+    },
+    "/organisations/{id}/assignees/{assigneeId}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/resourceId",
+          "description": "Unique organisation identifier."
+        }
+      ],
+      "delete": {
+        "summary": "Delete assignee for an organisation",
+        "description": "Remove a single assignee from an organisation.\n\nTo remove all of an organisation's assignees, see **[Delete assignees for an organisation](#operation/delete-organisations-id-assignees)**.\n",
+        "operationId": "delete-organisations-id-assignees-assigneeId",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Organisation Assignees"
+        ],
+        "parameters": [
+          {
+            "name": "assigneeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "Unique assignee identifier."
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {}
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "Organisation not found",
+                        "Assignee not found"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell + Curl",
+            "source": "curl --request DELETE \\\n  --url https://id.amiqus.co/api/v2/organisations/%7Bid%7D/assignees/%7BassigneeId%7D \\\n  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'"
+          },
+          {
+            "lang": "Node + Request",
+            "source": "const request = require('request');\n\nconst options = {\n  method: 'DELETE',\n  url: 'https://id.amiqus.co/api/v2/organisations/%7Bid%7D/assignees/%7BassigneeId%7D',\n  headers: {Authorization: 'Bearer REPLACE_BEARER_TOKEN'}\n};\n\nrequest(options, function (error, response, body) {\n  if (error) throw new Error(error);\n\n  console.log(body);\n});\n"
+          },
+          {
+            "lang": "Javascript + Xhr",
+            "source": "const data = null;\n\nconst xhr = new XMLHttpRequest();\nxhr.withCredentials = true;\n\nxhr.addEventListener(\"readystatechange\", function () {\n  if (this.readyState === this.DONE) {\n    console.log(this.responseText);\n  }\n});\n\nxhr.open(\"DELETE\", \"https://id.amiqus.co/api/v2/organisations/%7Bid%7D/assignees/%7BassigneeId%7D\");\nxhr.setRequestHeader(\"Authorization\", \"Bearer REPLACE_BEARER_TOKEN\");\n\nxhr.send(data);"
+          },
+          {
+            "lang": "Php + Http2",
+            "source": "<?php\n\n$client = new http\\Client;\n$request = new http\\Client\\Request;\n\n$request->setRequestUrl('https://id.amiqus.co/api/v2/organisations/%7Bid%7D/assignees/%7BassigneeId%7D');\n$request->setRequestMethod('DELETE');\n$request->setHeaders([\n  'Authorization' => 'Bearer REPLACE_BEARER_TOKEN'\n]);\n\n$client->enqueue($request)->send();\n$response = $client->getResponse();\n\necho $response->getBody();"
           }
         ]
       }
@@ -23060,7 +23738,8 @@
       "name": "Organisations",
       "tags": [
         "Organisations",
-        "Organisation Clients"
+        "Organisation Clients",
+        "Organisation Assignees"
       ]
     },
     {

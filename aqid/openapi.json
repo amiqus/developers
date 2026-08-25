@@ -6916,6 +6916,22 @@
         }
       ]
     },
+    "/organisations/records/{id}/assignees": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/resourceId",
+          "description": "Unique organisation record identifier."
+        }
+      ]
+    },
+    "/organisations/records/{id}/assignees/{assigneeId}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/resourceId",
+          "description": "Unique organisation record identifier."
+        }
+      ]
+    },
     "/records": {
       "get": {
         "summary": "List all records",
@@ -23748,7 +23764,8 @@
         "Records",
         "Record Assignees",
         "Steps",
-        "Organisation Records"
+        "Organisation Records",
+        "Organisation Record Assignees"
       ]
     },
     {

@@ -2,7 +2,18 @@
  * Shared design tokens for the top-of-page navigation. Consumed by both the
  * VitePress theme (docs/.vitepress/theme/style.css) and the static Redoc
  * reference pages (docs/public/assets/css/reference.css, linked from
- * _layouts/redoc.hbs). Change a value here once and both navs stay in sync.
+ * _layouts/redoc.hbs).
+ *
+ * Genuinely shared: the brand colours and the font family, which style.css maps
+ * onto its --vp-* equivalents, so changing one here keeps both sites in sync.
+ * The nav height, the lockup's typography and the remaining colours are read by
+ * reference.css alone — see the note below on the four that match VitePress's
+ * own values by hand.
+ *
+ * No layout values either way. The reference pages run full-bleed on Redoc's own
+ * rhythm and deliberately do not mirror the guides site's title column or
+ * centred container, so there is nothing here to keep in step with Redoc's JS
+ * theme config.
  *
  * Light-mode only, by design: the Redoc reference pages keep their original,
  * non-dark-mode appearance. Do not add a dark-mode override block here.
@@ -11,7 +22,20 @@
     --amiqus-brand: #00ad09;
     --amiqus-brand-hover: #018a00;
     --amiqus-font-family: 'Source Sans 3', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+    /* Redoc-side values that match VitePress's own rather than genuinely shared
+       inputs: 64px and 24px are vars.css's --vp-nav-height and
+       --vp-nav-logo-height defaults, while 16px/600 are literals
+       VPNavBarTitle.vue hardcodes in its .title rule. Nothing on the VitePress
+       side reads these, so changing any of these here would desync the two
+       headers, not keep them in step. */
     --amiqus-nav-height: 64px;
+    --amiqus-nav-logo-height: 24px;
+    --amiqus-nav-title-size: 16px;
+    --amiqus-nav-title-weight: 600;
+    /* The reference header's own horizontal inset, matching the 20px Redoc
+       gives its menu items and search field so the lockup lines up with the
+       menu below it. Not a mirror of anything in VitePress. */
+    --amiqus-nav-inset: 20px;
     --amiqus-nav-bg: #ffffff;
     --amiqus-nav-border: #e5e7eb;
     --amiqus-nav-text: #333333;

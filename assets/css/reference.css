@@ -62,11 +62,20 @@ body {
     text-decoration: none!important;
 }
 
-.nav-container  {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* *********** header / nav *********** */
+
+/*
+ * The reference header shares the guides site's lockup, typography and link
+ * styling, but not its positioning: these pages run full-bleed so the reference
+ * content gets the whole window, and the header sits on Redoc's own 20px inset
+ * rather than VitePress's title column and centred container.
+ */
+.nav-container {
     background: var(--amiqus-nav-bg, #ffffff);
+    /* One full-width divider under the whole bar, so the header is 65px tall in
+       total. VitePress draws its own in two abutting segments because its nav
+       can be transparent over a hero; these pages have no hero, so a single
+       border does the job with one declaration to keep in sync. */
     border-bottom: 1px solid var(--amiqus-nav-border, #e5e7eb);
     /* Positioned so the z-index below applies at all — without this the header
        is static, its stacking order is DOM order, and the hydration overlay in
@@ -79,6 +88,7 @@ body {
     height: var(--amiqus-nav-height, 64px);
     z-index: 1000;
     font-family: var(--amiqus-font-family, 'Source Sans 3', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif);
+    white-space: nowrap;
 }
 
 #main-container {
@@ -86,16 +96,45 @@ body {
     min-height: 100%;
 }
 
-.logo {
-    margin: 0 0 0 .45em;
-}
-
-.logo, .navigation {
-    list-style: none;
-}
-
-.navigation  {
+/* Full-bleed: the bar spans the window and both ends sit on the same 20px inset
+   Redoc gives its own menu and search field, so the lockup lines up with the
+   menu items below it wherever Redoc shows the menu. */
+.nav-inner {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: var(--amiqus-nav-height, 64px);
+    padding: 0 var(--amiqus-nav-inset, 20px);
+}
+
+.nav-title {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    font-size: var(--amiqus-nav-title-size, 16px);
+    font-weight: var(--amiqus-nav-title-weight, 600);
+    color: var(--amiqus-nav-text, #333333);
+    text-decoration: none;
+}
+
+.nav-title__logo {
+    margin-right: 8px;
+    height: var(--amiqus-nav-logo-height, 24px);
+    width: auto;
+}
+
+/* The explicit height is load-bearing: .nav-hamburger is height: 100%. */
+.nav-content-body {
+    display: flex;
+    align-items: center;
+    height: var(--amiqus-nav-height, 64px);
+}
+
+.navigation {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-dropdown {
@@ -183,7 +222,10 @@ body {
     justify-content: center;
     width: 48px;
     height: 100%;
-    margin-right: 8px;
+    /* No margin: the inset comes from .nav-inner's padding alone, so the
+       hamburger's right edge sits on the same 20px as the lockup's left. A
+       margin here would stack on top of it and push the control further in. */
+    margin-right: 0;
     background: none;
     border: none;
     cursor: pointer;
@@ -330,22 +372,6 @@ body {
 @media (min-width: 768px) {
     .nav-screen {
         display: none;
-    }
-}
-
-/* *********** media queries *********** */
-@media all and (max-width: 990px) {
-    .logo {
-        margin: 0;
-    }
-}
-
-
-/* ****** ****** */
-@media all and (max-width: 600px) {
-
-    .logo {
-        margin: .25em 0;
     }
 }
 

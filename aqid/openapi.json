@@ -56,9 +56,6 @@
       "name": "Steps"
     },
     {
-      "name": "Teams"
-    },
-    {
       "name": "Organisations"
     },
     {
@@ -624,6 +621,14 @@
               "minimum": 1,
               "maximum": 100
             }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "description": "Search for team members by name. Search is case-insensitive and fuzzy.",
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -680,19 +685,19 @@
         "x-codeSamples": [
           {
             "lang": "Shell + Curl",
-            "source": "curl --request GET \\\n  --url 'https://id.amiqus.co/api/v2/team/members?page=INTEGER_VALUE&limit=INTEGER_VALUE' \\\n  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'"
+            "source": "curl --request GET \\\n  --url 'https://id.amiqus.co/api/v2/team/members?page=INTEGER_VALUE&limit=INTEGER_VALUE&search=STRING_VALUE' \\\n  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'"
           },
           {
             "lang": "Node + Request",
-            "source": "const request = require('request');\n\nconst options = {\n  method: 'GET',\n  url: 'https://id.amiqus.co/api/v2/team/members',\n  qs: {page: 'INTEGER_VALUE', limit: 'INTEGER_VALUE'},\n  headers: {Authorization: 'Bearer REPLACE_BEARER_TOKEN'}\n};\n\nrequest(options, function (error, response, body) {\n  if (error) throw new Error(error);\n\n  console.log(body);\n});\n"
+            "source": "const request = require('request');\n\nconst options = {\n  method: 'GET',\n  url: 'https://id.amiqus.co/api/v2/team/members',\n  qs: {page: 'INTEGER_VALUE', limit: 'INTEGER_VALUE', search: 'STRING_VALUE'},\n  headers: {Authorization: 'Bearer REPLACE_BEARER_TOKEN'}\n};\n\nrequest(options, function (error, response, body) {\n  if (error) throw new Error(error);\n\n  console.log(body);\n});\n"
           },
           {
             "lang": "Javascript + Xhr",
-            "source": "const data = null;\n\nconst xhr = new XMLHttpRequest();\nxhr.withCredentials = true;\n\nxhr.addEventListener(\"readystatechange\", function () {\n  if (this.readyState === this.DONE) {\n    console.log(this.responseText);\n  }\n});\n\nxhr.open(\"GET\", \"https://id.amiqus.co/api/v2/team/members?page=INTEGER_VALUE&limit=INTEGER_VALUE\");\nxhr.setRequestHeader(\"Authorization\", \"Bearer REPLACE_BEARER_TOKEN\");\n\nxhr.send(data);"
+            "source": "const data = null;\n\nconst xhr = new XMLHttpRequest();\nxhr.withCredentials = true;\n\nxhr.addEventListener(\"readystatechange\", function () {\n  if (this.readyState === this.DONE) {\n    console.log(this.responseText);\n  }\n});\n\nxhr.open(\"GET\", \"https://id.amiqus.co/api/v2/team/members?page=INTEGER_VALUE&limit=INTEGER_VALUE&search=STRING_VALUE\");\nxhr.setRequestHeader(\"Authorization\", \"Bearer REPLACE_BEARER_TOKEN\");\n\nxhr.send(data);"
           },
           {
             "lang": "Php + Http2",
-            "source": "<?php\n\n$client = new http\\Client;\n$request = new http\\Client\\Request;\n\n$request->setRequestUrl('https://id.amiqus.co/api/v2/team/members');\n$request->setRequestMethod('GET');\n$request->setQuery(new http\\QueryString([\n  'page' => 'INTEGER_VALUE',\n  'limit' => 'INTEGER_VALUE'\n]));\n\n$request->setHeaders([\n  'Authorization' => 'Bearer REPLACE_BEARER_TOKEN'\n]);\n\n$client->enqueue($request)->send();\n$response = $client->getResponse();\n\necho $response->getBody();"
+            "source": "<?php\n\n$client = new http\\Client;\n$request = new http\\Client\\Request;\n\n$request->setRequestUrl('https://id.amiqus.co/api/v2/team/members');\n$request->setRequestMethod('GET');\n$request->setQuery(new http\\QueryString([\n  'page' => 'INTEGER_VALUE',\n  'limit' => 'INTEGER_VALUE',\n  'search' => 'STRING_VALUE'\n]));\n\n$request->setHeaders([\n  'Authorization' => 'Bearer REPLACE_BEARER_TOKEN'\n]);\n\n$client->enqueue($request)->send();\n$response = $client->getResponse();\n\necho $response->getBody();"
           }
         ]
       }
@@ -9718,179 +9723,6 @@
           "description": "Unique team identifier."
         }
       ]
-    },
-    "/teams/{teamId}/members": {
-      "get": {
-        "summary": "List all team members",
-        "description": "List all team members.",
-        "operationId": "get-teams-teamId-members",
-        "security": [
-          {
-            "personal_token": []
-          },
-          {
-            "oauth": []
-          }
-        ],
-        "tags": [
-          "Teams"
-        ],
-        "parameters": [
-          {
-            "name": "teamId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/PaginatedList"
-                    },
-                    {
-                      "type": "object",
-                      "properties": {
-                        "data": {
-                          "items": {
-                            "$ref": "#/components/schemas/TeamMember"
-                          }
-                        }
-                      }
-                    }
-                  ]
-                },
-                "example": {
-                  "object": "paginated_list",
-                  "data": [
-                    {
-                      "object": "team_member",
-                      "id": 121,
-                      "name": "Lorraine Baines",
-                      "email": "lorraine@example.com",
-                      "role": "owner"
-                    },
-                    {
-                      "object": "team_member",
-                      "id": 472,
-                      "name": "Dennis Jones",
-                      "email": "dennis@example.com",
-                      "role": "member"
-                    }
-                  ],
-                  "total": 2,
-                  "count": 2,
-                  "limit": 100,
-                  "current_page": 1,
-                  "total_pages": 1,
-                  "links": null
-                }
-              }
-            }
-          }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Shell + Curl",
-            "source": "curl --request GET \\\n  --url https://id.amiqus.co/api/v2/teams/%7BteamId%7D/members \\\n  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'"
-          },
-          {
-            "lang": "Node + Request",
-            "source": "const request = require('request');\n\nconst options = {\n  method: 'GET',\n  url: 'https://id.amiqus.co/api/v2/teams/%7BteamId%7D/members',\n  headers: {Authorization: 'Bearer REPLACE_BEARER_TOKEN'}\n};\n\nrequest(options, function (error, response, body) {\n  if (error) throw new Error(error);\n\n  console.log(body);\n});\n"
-          },
-          {
-            "lang": "Javascript + Xhr",
-            "source": "const data = null;\n\nconst xhr = new XMLHttpRequest();\nxhr.withCredentials = true;\n\nxhr.addEventListener(\"readystatechange\", function () {\n  if (this.readyState === this.DONE) {\n    console.log(this.responseText);\n  }\n});\n\nxhr.open(\"GET\", \"https://id.amiqus.co/api/v2/teams/%7BteamId%7D/members\");\nxhr.setRequestHeader(\"Authorization\", \"Bearer REPLACE_BEARER_TOKEN\");\n\nxhr.send(data);"
-          },
-          {
-            "lang": "Php + Http2",
-            "source": "<?php\n\n$client = new http\\Client;\n$request = new http\\Client\\Request;\n\n$request->setRequestUrl('https://id.amiqus.co/api/v2/teams/%7BteamId%7D/members');\n$request->setRequestMethod('GET');\n$request->setHeaders([\n  'Authorization' => 'Bearer REPLACE_BEARER_TOKEN'\n]);\n\n$client->enqueue($request)->send();\n$response = $client->getResponse();\n\necho $response->getBody();"
-          }
-        ]
-      }
-    },
-    "/teams/{teamId}/members/{teamMemberId}": {
-      "get": {
-        "summary": "Retrieve a team member",
-        "description": "Returns the member of a team.",
-        "operationId": "get-teams-teamId-members-teamMemberId",
-        "security": [
-          {
-            "personal_token": []
-          },
-          {
-            "oauth": []
-          }
-        ],
-        "tags": [
-          "Teams"
-        ],
-        "parameters": [
-          {
-            "name": "teamId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "name": "teamMemberId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TeamMember"
-                },
-                "example": {
-                  "object": "team_member",
-                  "id": 121,
-                  "name": "Lorraine Baines",
-                  "email": "lorraine@example.com",
-                  "role": "owner"
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/401"
-          }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Shell + Curl",
-            "source": "curl --request GET \\\n  --url https://id.amiqus.co/api/v2/teams/%7BteamId%7D/members/%7BteamMemberId%7D \\\n  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'"
-          },
-          {
-            "lang": "Node + Request",
-            "source": "const request = require('request');\n\nconst options = {\n  method: 'GET',\n  url: 'https://id.amiqus.co/api/v2/teams/%7BteamId%7D/members/%7BteamMemberId%7D',\n  headers: {Authorization: 'Bearer REPLACE_BEARER_TOKEN'}\n};\n\nrequest(options, function (error, response, body) {\n  if (error) throw new Error(error);\n\n  console.log(body);\n});\n"
-          },
-          {
-            "lang": "Javascript + Xhr",
-            "source": "const data = null;\n\nconst xhr = new XMLHttpRequest();\nxhr.withCredentials = true;\n\nxhr.addEventListener(\"readystatechange\", function () {\n  if (this.readyState === this.DONE) {\n    console.log(this.responseText);\n  }\n});\n\nxhr.open(\"GET\", \"https://id.amiqus.co/api/v2/teams/%7BteamId%7D/members/%7BteamMemberId%7D\");\nxhr.setRequestHeader(\"Authorization\", \"Bearer REPLACE_BEARER_TOKEN\");\n\nxhr.send(data);"
-          },
-          {
-            "lang": "Php + Http2",
-            "source": "<?php\n\n$client = new http\\Client;\n$request = new http\\Client\\Request;\n\n$request->setRequestUrl('https://id.amiqus.co/api/v2/teams/%7BteamId%7D/members/%7BteamMemberId%7D');\n$request->setRequestMethod('GET');\n$request->setHeaders([\n  'Authorization' => 'Bearer REPLACE_BEARER_TOKEN'\n]);\n\n$client->enqueue($request)->send();\n$response = $client->getResponse();\n\necho $response->getBody();"
-          }
-        ]
-      }
     },
     "/documents": {
       "get": {

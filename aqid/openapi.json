@@ -7031,6 +7031,18 @@
                 "amendments",
                 "reviewed"
               ],
+              "x-enumDescriptions": {
+                "pending": "Active without any completed steps",
+                "started": "Active with at least one completed step",
+                "complete": "All steps completed",
+                "incomplete": "Expired with at least one completed step",
+                "waiting": "At least one check step is awaiting results",
+                "failed": "_Deprecated_",
+                "empty": "Expired without any completed steps",
+                "paused": "At least one paused check step",
+                "amendments": "Pending record amendment approval or rejection",
+                "reviewed": "Record marked as having been reviewed"
+              },
               "description": "The overall status of the record.\n\nStatus is determined by the combined states of a record's steps, expiry and review.\n"
             }
           },
@@ -17738,6 +17750,18 @@
           "amendments",
           "reviewed"
         ],
+        "x-enumDescriptions": {
+          "pending": "Active without any completed steps",
+          "started": "Active with at least one completed step",
+          "complete": "All steps completed",
+          "incomplete": "Expired with at least one completed step",
+          "waiting": "At least one check step is awaiting results",
+          "failed": "_Deprecated_",
+          "empty": "Expired without any completed steps",
+          "paused": "At least one paused check step",
+          "amendments": "Pending record amendment approval or rejection",
+          "reviewed": "Record marked as having been reviewed"
+        },
         "description": "The overall status of the record.\n\nStatus is determined by the combined states of a record's steps, expiry and review.\n"
       },
       "Step": {

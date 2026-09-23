@@ -21108,7 +21108,13 @@
           "peps_sanctions",
           "peps_sanctions_media",
           "peps_sanctions_media_extended"
-        ]
+        ],
+        "x-enumDescriptions": {
+          "sanctions": "Sanctions only",
+          "peps_sanctions": "PEPs and sanctions",
+          "peps_sanctions_media": "PEPs, sanctions and adverse media",
+          "peps_sanctions_media_extended": "PEPs, sanctions and adverse media (extended)"
+        }
       },
       "Watchlist-2": {
         "type": "object",
@@ -21144,7 +21150,7 @@
               },
               "search_profile": {
                 "$ref": "#/components/schemas/SearchProfile",
-                "description": "Specifies the search profile to use for the watchlist check.\n\n**PEPs, sanctions and adverse media : +1 additional credit**\\\n**PEPs and sanctions and only : +1 additional credit**\n",
+                "description": "Specifies the search profile to use for the watchlist check.\n\n**PEPs, sanctions and adverse media : +1 additional credit**\\\n**PEPs and sanctions and only : +1 additional credit**\n\n`sanctions`, `peps_sanctions`, and `peps_sanctions_media_extended` may not be enabled for all teams.\n",
                 "default": "peps_sanctions_media"
               },
               "all_entity_types": {

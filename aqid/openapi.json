@@ -10242,6 +10242,179 @@
                       "updated_at": "2022-05-22T08:22:12Z"
                     }
                   },
+                  "identity_clear": {
+                    "summary": "Identity: verified\n",
+                    "description": "An Experian identity check where the person was matched and nothing was held against them. The rules listed under `identity` are the evidence Experian matched on, not findings against the person.\n",
+                    "value": {
+                      "object": "check",
+                      "id": 82342,
+                      "type": "identity",
+                      "record": 983434,
+                      "status": "accepted",
+                      "response": {
+                        "object": "check_response.identity",
+                        "provider": "experian",
+                        "verdicts": {
+                          "identity": {
+                            "decision": "continue",
+                            "reason": "Identity verified",
+                            "rules": [
+                              {
+                                "id": "5200",
+                                "text": "Two or more Primary or Secondary Data Sources with a name and address and DoB"
+                              },
+                              {
+                                "id": "5720",
+                                "text": "2 or more Prim. or Second. w/ name & add, incl. at least 1 Secondary w/ name, add, DoB"
+                              },
+                              {
+                                "id": "6710",
+                                "text": "At least one Primary or Secondary Data Source, with a name and address"
+                              }
+                            ]
+                          },
+                          "warnings": {
+                            "decision": "continue",
+                            "reason": "No Contra-indicator alerts",
+                            "rules": []
+                          }
+                        }
+                      },
+                      "allow_replay": true,
+                      "allow_cancel": true,
+                      "requires_consent": true,
+                      "created_at": "2022-05-22T08:22:12Z",
+                      "updated_at": "2022-05-22T08:22:12Z"
+                    }
+                  },
+                  "identity_refer": {
+                    "summary": "Identity: limited verification\n",
+                    "description": "Experian matched the person against fewer sources than it needs to verify them outright, so the identity verdict refers. Nothing was held against them, so the warning signs verdict continues.\n",
+                    "value": {
+                      "object": "check",
+                      "id": 82343,
+                      "type": "identity",
+                      "record": 983434,
+                      "status": "refer",
+                      "response": {
+                        "object": "check_response.identity",
+                        "provider": "experian",
+                        "verdicts": {
+                          "identity": {
+                            "decision": "refer",
+                            "reason": "Limited verification of Identity",
+                            "rules": [
+                              {
+                                "id": "6710",
+                                "text": "At least one Primary or Secondary Data Source, with a name and address"
+                              }
+                            ]
+                          },
+                          "warnings": {
+                            "decision": "continue",
+                            "reason": "No Contra-indicator alerts",
+                            "rules": []
+                          }
+                        }
+                      },
+                      "allow_replay": true,
+                      "allow_cancel": true,
+                      "requires_consent": true,
+                      "created_at": "2022-05-22T08:22:12Z",
+                      "updated_at": "2022-05-22T08:22:12Z"
+                    }
+                  },
+                  "identity_contras": {
+                    "summary": "Identity: contra-indicators raised\n",
+                    "description": "The person was verified, but Experian holds something that counts against them, so the warning signs verdict refers on its own. The two verdicts move independently and either can refer the check.\n",
+                    "value": {
+                      "object": "check",
+                      "id": 82345,
+                      "type": "identity",
+                      "record": 983434,
+                      "status": "refer",
+                      "response": {
+                        "object": "check_response.identity",
+                        "provider": "experian",
+                        "verdicts": {
+                          "identity": {
+                            "decision": "continue",
+                            "reason": "Identity verified",
+                            "rules": [
+                              {
+                                "id": "5200",
+                                "text": "Two or more Primary or Secondary Data Sources with a name and address and DoB"
+                              },
+                              {
+                                "id": "6710",
+                                "text": "At least one Primary or Secondary Data Source, with a name and address"
+                              }
+                            ]
+                          },
+                          "warnings": {
+                            "decision": "refer",
+                            "reason": "Contra-indicators alert(s) requiring referral",
+                            "rules": [
+                              {
+                                "id": "C9110",
+                                "text": "Existance of a Mortality Record from the Halo/Millennium data source"
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      "allow_replay": true,
+                      "allow_cancel": true,
+                      "requires_consent": true,
+                      "created_at": "2022-05-22T08:22:12Z",
+                      "updated_at": "2022-05-22T08:22:12Z"
+                    }
+                  },
+                  "identity_stop": {
+                    "summary": "Identity: unable to verify\n",
+                    "description": "Experian could not match the person at all. The rules listed record what was missing rather than what was found.\n",
+                    "value": {
+                      "object": "check",
+                      "id": 82344,
+                      "type": "identity",
+                      "record": 983434,
+                      "status": "rejected",
+                      "response": {
+                        "object": "check_response.identity",
+                        "provider": "experian",
+                        "verdicts": {
+                          "identity": {
+                            "decision": "stop",
+                            "reason": "Unable to verify Identity",
+                            "rules": [
+                              {
+                                "id": "6988",
+                                "text": "No Primary, Secondary or Tertiary data sources were found"
+                              },
+                              {
+                                "id": "6998",
+                                "text": "No Data Sources were found"
+                              },
+                              {
+                                "id": "6999",
+                                "text": "No Data Items were found"
+                              }
+                            ]
+                          },
+                          "warnings": {
+                            "decision": "continue",
+                            "reason": "No Contra-indicator alerts",
+                            "rules": []
+                          }
+                        }
+                      },
+                      "allow_replay": true,
+                      "allow_cancel": true,
+                      "requires_consent": true,
+                      "created_at": "2022-05-22T08:22:12Z",
+                      "updated_at": "2022-05-22T08:22:12Z"
+                    }
+                  },
                   "other": {
                     "summary": "Expanded response: Unavailable check type\n",
                     "description": "A check type with an expanded response that is not yet available from the API.",
@@ -19980,12 +20153,128 @@
           }
         }
       },
+      "Rule": {
+        "title": "Rule",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "text"
+        ],
+        "description": "A rule that fired when Experian evaluated the identity check.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Experian's identifier for the rule."
+          },
+          "text": {
+            "type": "string",
+            "description": "Experian's own description of what the rule matched on, written for\ntheir analysts.\n"
+          }
+        }
+      },
+      "Verdict": {
+        "title": "Verdict",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "decision",
+          "reason",
+          "rules"
+        ],
+        "description": "One of the questions Experian answers about an identity check. Each carries\nits own decision, and either can refer or stop the check.\n",
+        "properties": {
+          "decision": {
+            "type": "string",
+            "enum": [
+              "continue",
+              "refer",
+              "stop"
+            ],
+            "description": "Experian's decision for this verdict."
+          },
+          "reason": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Experian's own one-line summary for this verdict, such as\n`Limited verification of Identity`. `null` when none was returned.\n"
+          },
+          "rules": {
+            "type": "array",
+            "description": "The rules that fired for this verdict. Empty when none did.",
+            "items": {
+              "$ref": "#/components/schemas/Rule"
+            }
+          }
+        }
+      },
+      "IdentityResponse": {
+        "title": "Identity",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "object",
+          "provider",
+          "verdicts"
+        ],
+        "description": "The evidence behind an identity check carried out by Experian.",
+        "properties": {
+          "object": {
+            "type": "string",
+            "const": "check_response.identity"
+          },
+          "provider": {
+            "type": "string",
+            "const": "experian",
+            "description": "Identifies which provider carried out the check and so which shape this response takes."
+          },
+          "verdicts": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "A verdict Experian did not return is absent rather than empty. Which\nverdicts are returned depends on the team's workflow.\n",
+            "properties": {
+              "identity": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Verdict"
+                  },
+                  {
+                    "title": "Identity match",
+                    "description": "Whether Experian matched the person against its records."
+                  }
+                ]
+              },
+              "warnings": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Verdict"
+                  },
+                  {
+                    "title": "Warning signs",
+                    "description": "Whether Experian holds anything that counts against the person."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
       "CheckResponse": {
         "title": "Check Response",
         "anyOf": [
           {
             "title": "Photo ID",
             "$ref": "#/components/schemas/Response"
+          },
+          {
+            "title": "Identity",
+            "description": "Identity checks are backed by more than one provider and the shapes have\nnothing in common, so `provider` identifies which one produced the\nresponse. A check carries one, so exactly one of these applies.\n",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/IdentityResponse"
+              }
+            ]
           },
           {
             "title": "Other",

@@ -20865,6 +20865,23 @@
           }
         ]
       },
+      "ExperianIdentity": {
+        "title": "Experian",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Check"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "const": "check.identity"
+              }
+            }
+          }
+        ]
+      },
       "NhsEsr": {
         "title": "NHS ESR",
         "allOf": [
@@ -21912,6 +21929,22 @@
                   },
                   {
                     "$ref": "#/components/schemas/EquifaxIdentity"
+                  },
+                  {
+                    "$ref": "#/components/schemas/RecordCheck"
+                  },
+                  {
+                    "$ref": "#/components/schemas/Metadata"
+                  }
+                ]
+              },
+              {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Step"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ExperianIdentity"
                   },
                   {
                     "$ref": "#/components/schemas/RecordCheck"
@@ -23432,6 +23465,16 @@
                     "$ref": "#/components/schemas/EquifaxIdentity"
                   }
                 ]
+              },
+              {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Step"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ExperianIdentity"
+                  }
+                ]
               }
             ]
           },
@@ -23969,6 +24012,16 @@
                   },
                   {
                     "$ref": "#/components/schemas/EquifaxIdentity"
+                  }
+                ]
+              },
+              {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/PresetStep"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ExperianIdentity"
                   }
                 ]
               }
@@ -25075,6 +25128,19 @@
                   },
                   {
                     "$ref": "#/components/schemas/EquifaxIdentity"
+                  },
+                  {
+                    "$ref": "#/components/schemas/Costs"
+                  }
+                ]
+              },
+              {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/AvailableStep"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ExperianIdentity"
                   },
                   {
                     "$ref": "#/components/schemas/Costs"

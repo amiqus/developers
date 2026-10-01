@@ -10276,7 +10276,7 @@
                           "warnings": {
                             "decision": "continue",
                             "reason": "No Contra-indicator alerts",
-                            "rules": []
+                            "rules": null
                           }
                         }
                       },
@@ -10313,7 +10313,7 @@
                           "warnings": {
                             "decision": "continue",
                             "reason": "No Contra-indicator alerts",
-                            "rules": []
+                            "rules": null
                           }
                         }
                       },
@@ -10404,7 +10404,7 @@
                           "warnings": {
                             "decision": "continue",
                             "reason": "No Contra-indicator alerts",
-                            "rules": []
+                            "rules": null
                           }
                         }
                       },
@@ -20201,8 +20201,12 @@
             "description": "Experian's own one-line summary for this verdict, such as\n`Limited verification of Identity`. `null` when none was returned.\n"
           },
           "rules": {
-            "type": "array",
-            "description": "The rules that fired for this verdict. Empty when none did.",
+            "type": [
+              "null",
+              "array"
+            ],
+            "description": "The rules that fired for this verdict, and `null` when none did.",
+            "minItems": 1,
             "items": {
               "$ref": "#/components/schemas/Rule"
             }
@@ -20230,9 +20234,13 @@
             "description": "Identifies which provider carried out the check and so which shape this response takes."
           },
           "verdicts": {
-            "type": "object",
+            "type": [
+              "null",
+              "object"
+            ],
             "additionalProperties": false,
-            "description": "A verdict Experian did not return is absent rather than empty. Which\nverdicts are returned depends on the team's workflow.\n",
+            "minProperties": 1,
+            "description": "Which verdicts are returned depends on the team's workflow, and `null` when Experian returned neither.",
             "properties": {
               "identity": {
                 "allOf": [

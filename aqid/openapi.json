@@ -2461,19 +2461,6 @@
                       "company_number": "SF12188",
                       "jurisdiction": "gb",
                       "reference": "PP-001",
-                      "address": {
-                        "object": "address",
-                        "unit": null,
-                        "house_name": "Probert House",
-                        "house_number": null,
-                        "street_name": "42 Market Street",
-                        "second_street": null,
-                        "district": null,
-                        "city": "London",
-                        "province": null,
-                        "postcode": "EC1A 1BB",
-                        "country": "GB"
-                      },
                       "incorporated_at": "2015-06-01",
                       "assignees": [
                         187,
@@ -2609,19 +2596,6 @@
                           "company_number": "SF12188",
                           "jurisdiction": "gb",
                           "reference": "PP-001",
-                          "address": {
-                            "object": "address",
-                            "unit": null,
-                            "house_name": "Probert House",
-                            "house_number": null,
-                            "street_name": "42 Market Street",
-                            "second_street": null,
-                            "district": null,
-                            "city": "London",
-                            "province": null,
-                            "postcode": "EC1A 1BB",
-                            "country": "GB"
-                          },
                           "incorporated_at": "2015-06-01",
                           "assignees": [
                             187,
@@ -2656,19 +2630,6 @@
                           "company_number": "SF12188",
                           "jurisdiction": "gb",
                           "reference": "PP-001",
-                          "address": {
-                            "object": "address",
-                            "unit": null,
-                            "house_name": "Probert House",
-                            "house_number": null,
-                            "street_name": "42 Market Street",
-                            "second_street": null,
-                            "district": null,
-                            "city": "London",
-                            "province": null,
-                            "postcode": "EC1A 1BB",
-                            "country": "GB"
-                          },
                           "incorporated_at": "2015-06-01",
                           "assignees": [
                             187,
@@ -2690,7 +2651,6 @@
                           "company_number": "11249",
                           "jurisdiction": "us_ca",
                           "reference": null,
-                          "address": null,
                           "incorporated_at": null,
                           "assignees": null,
                           "clients": [
@@ -2835,19 +2795,6 @@
                       "company_number": "SF12188",
                       "jurisdiction": "gb",
                       "reference": "PP-001",
-                      "address": {
-                        "object": "address",
-                        "unit": null,
-                        "house_name": "Probert House",
-                        "house_number": null,
-                        "street_name": "42 Market Street",
-                        "second_street": null,
-                        "district": null,
-                        "city": "London",
-                        "province": null,
-                        "postcode": "EC1A 1BB",
-                        "country": "GB"
-                      },
                       "incorporated_at": "2015-06-01",
                       "assignees": [
                         187,
@@ -2869,7 +2816,6 @@
                       "company_number": "11249",
                       "jurisdiction": "us_ca",
                       "reference": null,
-                      "address": null,
                       "incorporated_at": null,
                       "assignees": null,
                       "clients": [
@@ -5252,19 +5198,6 @@
                           "company_number": "SF12188",
                           "jurisdiction": "gb",
                           "reference": "PP-001",
-                          "address": {
-                            "object": "address",
-                            "unit": null,
-                            "house_name": "Probert House",
-                            "house_number": null,
-                            "street_name": "42 Market Street",
-                            "second_street": null,
-                            "district": null,
-                            "city": "London",
-                            "province": null,
-                            "postcode": "EC1A 1BB",
-                            "country": "GB"
-                          },
                           "incorporated_at": "2015-06-01",
                           "assignees": [
                             187,
@@ -5300,19 +5233,6 @@
                           "company_number": "SF12188",
                           "jurisdiction": "gb",
                           "reference": "PP-001",
-                          "address": {
-                            "object": "address",
-                            "unit": null,
-                            "house_name": "Probert House",
-                            "house_number": null,
-                            "street_name": "42 Market Street",
-                            "second_street": null,
-                            "district": null,
-                            "city": "London",
-                            "province": null,
-                            "postcode": "EC1A 1BB",
-                            "country": "GB"
-                          },
                           "incorporated_at": "2015-06-01",
                           "assignees": {
                             "object": "list",
@@ -5368,19 +5288,6 @@
                           "company_number": "SF12188",
                           "jurisdiction": "gb",
                           "reference": "PP-001",
-                          "address": {
-                            "object": "address",
-                            "unit": null,
-                            "house_name": "Probert House",
-                            "house_number": null,
-                            "street_name": "42 Market Street",
-                            "second_street": null,
-                            "district": null,
-                            "city": "London",
-                            "province": null,
-                            "postcode": "EC1A 1BB",
-                            "country": "GB"
-                          },
                           "incorporated_at": "2015-06-01",
                           "assignees": [
                             187,
@@ -5476,7 +5383,6 @@
                           "company_number": "11249",
                           "jurisdiction": "us_ca",
                           "reference": null,
-                          "address": null,
                           "incorporated_at": null,
                           "assignees": null,
                           "clients": null,
@@ -5562,18 +5468,6 @@
                 "company_number": "SF12188",
                 "jurisdiction": "gb",
                 "reference": "PP-001",
-                "address": {
-                  "unit": null,
-                  "house_name": "Probert House",
-                  "house_number": null,
-                  "street_name": "42 Market Street",
-                  "second_street": null,
-                  "district": null,
-                  "city": "London",
-                  "province": null,
-                  "postcode": "EC1A 1BB",
-                  "country": "GB"
-                },
                 "incorporated_at": "2015-06-01"
               }
             }
@@ -5595,19 +5489,6 @@
                   "company_number": "SF12188",
                   "jurisdiction": "gb",
                   "reference": "PP-001",
-                  "address": {
-                    "object": "address",
-                    "unit": null,
-                    "house_name": "Probert House",
-                    "house_number": null,
-                    "street_name": "42 Market Street",
-                    "second_street": null,
-                    "district": null,
-                    "city": "London",
-                    "province": null,
-                    "postcode": "EC1A 1BB",
-                    "country": "GB"
-                  },
                   "incorporated_at": "2015-06-01",
                   "assignees": null,
                   "clients": null,
@@ -5631,19 +5512,19 @@
         "x-codeSamples": [
           {
             "lang": "Shell + Curl",
-            "source": "curl --request POST \\\n  --url https://id.amiqus.co/api/v2/organisations \\\n  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \\\n  --header 'content-type: application/json' \\\n  --data '{\"status\":\"pending\",\"name\":\"string\",\"company_number\":null,\"jurisdiction\":null,\"reference\":null,\"address\":{},\"incorporated_at\":null}'"
+            "source": "curl --request POST \\\n  --url https://id.amiqus.co/api/v2/organisations \\\n  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \\\n  --header 'content-type: application/json' \\\n  --data '{\"status\":\"pending\",\"name\":\"string\",\"company_number\":null,\"jurisdiction\":null,\"reference\":null,\"incorporated_at\":null}'"
           },
           {
             "lang": "Node + Request",
-            "source": "const request = require('request');\n\nconst options = {\n  method: 'POST',\n  url: 'https://id.amiqus.co/api/v2/organisations',\n  headers: {\n    Authorization: 'Bearer REPLACE_BEARER_TOKEN',\n    'content-type': 'application/json'\n  },\n  body: {\n    status: 'pending',\n    name: 'string',\n    company_number: null,\n    jurisdiction: null,\n    reference: null,\n    address: {},\n    incorporated_at: null\n  },\n  json: true\n};\n\nrequest(options, function (error, response, body) {\n  if (error) throw new Error(error);\n\n  console.log(body);\n});\n"
+            "source": "const request = require('request');\n\nconst options = {\n  method: 'POST',\n  url: 'https://id.amiqus.co/api/v2/organisations',\n  headers: {\n    Authorization: 'Bearer REPLACE_BEARER_TOKEN',\n    'content-type': 'application/json'\n  },\n  body: {\n    status: 'pending',\n    name: 'string',\n    company_number: null,\n    jurisdiction: null,\n    reference: null,\n    incorporated_at: null\n  },\n  json: true\n};\n\nrequest(options, function (error, response, body) {\n  if (error) throw new Error(error);\n\n  console.log(body);\n});\n"
           },
           {
             "lang": "Javascript + Xhr",
-            "source": "const data = JSON.stringify({\n  \"status\": \"pending\",\n  \"name\": \"string\",\n  \"company_number\": null,\n  \"jurisdiction\": null,\n  \"reference\": null,\n  \"address\": {},\n  \"incorporated_at\": null\n});\n\nconst xhr = new XMLHttpRequest();\nxhr.withCredentials = true;\n\nxhr.addEventListener(\"readystatechange\", function () {\n  if (this.readyState === this.DONE) {\n    console.log(this.responseText);\n  }\n});\n\nxhr.open(\"POST\", \"https://id.amiqus.co/api/v2/organisations\");\nxhr.setRequestHeader(\"Authorization\", \"Bearer REPLACE_BEARER_TOKEN\");\nxhr.setRequestHeader(\"content-type\", \"application/json\");\n\nxhr.send(data);"
+            "source": "const data = JSON.stringify({\n  \"status\": \"pending\",\n  \"name\": \"string\",\n  \"company_number\": null,\n  \"jurisdiction\": null,\n  \"reference\": null,\n  \"incorporated_at\": null\n});\n\nconst xhr = new XMLHttpRequest();\nxhr.withCredentials = true;\n\nxhr.addEventListener(\"readystatechange\", function () {\n  if (this.readyState === this.DONE) {\n    console.log(this.responseText);\n  }\n});\n\nxhr.open(\"POST\", \"https://id.amiqus.co/api/v2/organisations\");\nxhr.setRequestHeader(\"Authorization\", \"Bearer REPLACE_BEARER_TOKEN\");\nxhr.setRequestHeader(\"content-type\", \"application/json\");\n\nxhr.send(data);"
           },
           {
             "lang": "Php + Http2",
-            "source": "<?php\n\n$client = new http\\Client;\n$request = new http\\Client\\Request;\n\n$body = new http\\Message\\Body;\n$body->append('{\"status\":\"pending\",\"name\":\"string\",\"company_number\":null,\"jurisdiction\":null,\"reference\":null,\"address\":{},\"incorporated_at\":null}');\n\n$request->setRequestUrl('https://id.amiqus.co/api/v2/organisations');\n$request->setRequestMethod('POST');\n$request->setBody($body);\n\n$request->setHeaders([\n  'Authorization' => 'Bearer REPLACE_BEARER_TOKEN',\n  'content-type' => 'application/json'\n]);\n\n$client->enqueue($request)->send();\n$response = $client->getResponse();\n\necho $response->getBody();"
+            "source": "<?php\n\n$client = new http\\Client;\n$request = new http\\Client\\Request;\n\n$body = new http\\Message\\Body;\n$body->append('{\"status\":\"pending\",\"name\":\"string\",\"company_number\":null,\"jurisdiction\":null,\"reference\":null,\"incorporated_at\":null}');\n\n$request->setRequestUrl('https://id.amiqus.co/api/v2/organisations');\n$request->setRequestMethod('POST');\n$request->setBody($body);\n\n$request->setHeaders([\n  'Authorization' => 'Bearer REPLACE_BEARER_TOKEN',\n  'content-type' => 'application/json'\n]);\n\n$client->enqueue($request)->send();\n$response = $client->getResponse();\n\necho $response->getBody();"
           }
         ]
       }
@@ -5707,19 +5588,6 @@
                       "company_number": "SF12188",
                       "jurisdiction": "gb",
                       "reference": "PP-001",
-                      "address": {
-                        "object": "address",
-                        "unit": null,
-                        "house_name": "Probert House",
-                        "house_number": null,
-                        "street_name": "42 Market Street",
-                        "second_street": null,
-                        "district": null,
-                        "city": "London",
-                        "province": null,
-                        "postcode": "EC1A 1BB",
-                        "country": "GB"
-                      },
                       "incorporated_at": "2015-06-01",
                       "assignees": [
                         187,
@@ -5744,19 +5612,6 @@
                       "company_number": "SF12188",
                       "jurisdiction": "gb",
                       "reference": "PP-001",
-                      "address": {
-                        "object": "address",
-                        "unit": null,
-                        "house_name": "Probert House",
-                        "house_number": null,
-                        "street_name": "42 Market Street",
-                        "second_street": null,
-                        "district": null,
-                        "city": "London",
-                        "province": null,
-                        "postcode": "EC1A 1BB",
-                        "country": "GB"
-                      },
                       "incorporated_at": "2015-06-01",
                       "assignees": {
                         "object": "list",
@@ -5801,19 +5656,6 @@
                       "company_number": "SF12188",
                       "jurisdiction": "gb",
                       "reference": "PP-001",
-                      "address": {
-                        "object": "address",
-                        "unit": null,
-                        "house_name": "Probert House",
-                        "house_number": null,
-                        "street_name": "42 Market Street",
-                        "second_street": null,
-                        "district": null,
-                        "city": "London",
-                        "province": null,
-                        "postcode": "EC1A 1BB",
-                        "country": "GB"
-                      },
                       "incorporated_at": "2015-06-01",
                       "assignees": [
                         187,
@@ -5974,7 +5816,6 @@
                 "status": "rejected",
                 "name": "Probert Publishing Co",
                 "reference": "PP-002",
-                "address": null,
                 "incorporated_at": "2015-06-01"
               }
             }
@@ -5996,7 +5837,6 @@
                   "company_number": "SF12188",
                   "jurisdiction": "gb",
                   "reference": "PP-002",
-                  "address": null,
                   "incorporated_at": "2015-06-01",
                   "assignees": [
                     187,
@@ -6042,19 +5882,19 @@
         "x-codeSamples": [
           {
             "lang": "Shell + Curl",
-            "source": "curl --request PATCH \\\n  --url https://id.amiqus.co/api/v2/organisations/%7Bid%7D \\\n  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \\\n  --header 'content-type: application/json' \\\n  --data '{\"status\":\"pending\",\"name\":\"string\",\"company_number\":null,\"jurisdiction\":null,\"reference\":null,\"address\":{},\"incorporated_at\":null}'"
+            "source": "curl --request PATCH \\\n  --url https://id.amiqus.co/api/v2/organisations/%7Bid%7D \\\n  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \\\n  --header 'content-type: application/json' \\\n  --data '{\"status\":\"pending\",\"name\":\"string\",\"company_number\":null,\"jurisdiction\":null,\"reference\":null,\"incorporated_at\":null}'"
           },
           {
             "lang": "Node + Request",
-            "source": "const request = require('request');\n\nconst options = {\n  method: 'PATCH',\n  url: 'https://id.amiqus.co/api/v2/organisations/%7Bid%7D',\n  headers: {\n    Authorization: 'Bearer REPLACE_BEARER_TOKEN',\n    'content-type': 'application/json'\n  },\n  body: {\n    status: 'pending',\n    name: 'string',\n    company_number: null,\n    jurisdiction: null,\n    reference: null,\n    address: {},\n    incorporated_at: null\n  },\n  json: true\n};\n\nrequest(options, function (error, response, body) {\n  if (error) throw new Error(error);\n\n  console.log(body);\n});\n"
+            "source": "const request = require('request');\n\nconst options = {\n  method: 'PATCH',\n  url: 'https://id.amiqus.co/api/v2/organisations/%7Bid%7D',\n  headers: {\n    Authorization: 'Bearer REPLACE_BEARER_TOKEN',\n    'content-type': 'application/json'\n  },\n  body: {\n    status: 'pending',\n    name: 'string',\n    company_number: null,\n    jurisdiction: null,\n    reference: null,\n    incorporated_at: null\n  },\n  json: true\n};\n\nrequest(options, function (error, response, body) {\n  if (error) throw new Error(error);\n\n  console.log(body);\n});\n"
           },
           {
             "lang": "Javascript + Xhr",
-            "source": "const data = JSON.stringify({\n  \"status\": \"pending\",\n  \"name\": \"string\",\n  \"company_number\": null,\n  \"jurisdiction\": null,\n  \"reference\": null,\n  \"address\": {},\n  \"incorporated_at\": null\n});\n\nconst xhr = new XMLHttpRequest();\nxhr.withCredentials = true;\n\nxhr.addEventListener(\"readystatechange\", function () {\n  if (this.readyState === this.DONE) {\n    console.log(this.responseText);\n  }\n});\n\nxhr.open(\"PATCH\", \"https://id.amiqus.co/api/v2/organisations/%7Bid%7D\");\nxhr.setRequestHeader(\"Authorization\", \"Bearer REPLACE_BEARER_TOKEN\");\nxhr.setRequestHeader(\"content-type\", \"application/json\");\n\nxhr.send(data);"
+            "source": "const data = JSON.stringify({\n  \"status\": \"pending\",\n  \"name\": \"string\",\n  \"company_number\": null,\n  \"jurisdiction\": null,\n  \"reference\": null,\n  \"incorporated_at\": null\n});\n\nconst xhr = new XMLHttpRequest();\nxhr.withCredentials = true;\n\nxhr.addEventListener(\"readystatechange\", function () {\n  if (this.readyState === this.DONE) {\n    console.log(this.responseText);\n  }\n});\n\nxhr.open(\"PATCH\", \"https://id.amiqus.co/api/v2/organisations/%7Bid%7D\");\nxhr.setRequestHeader(\"Authorization\", \"Bearer REPLACE_BEARER_TOKEN\");\nxhr.setRequestHeader(\"content-type\", \"application/json\");\n\nxhr.send(data);"
           },
           {
             "lang": "Php + Http2",
-            "source": "<?php\n\n$client = new http\\Client;\n$request = new http\\Client\\Request;\n\n$body = new http\\Message\\Body;\n$body->append('{\"status\":\"pending\",\"name\":\"string\",\"company_number\":null,\"jurisdiction\":null,\"reference\":null,\"address\":{},\"incorporated_at\":null}');\n\n$request->setRequestUrl('https://id.amiqus.co/api/v2/organisations/%7Bid%7D');\n$request->setRequestMethod('PATCH');\n$request->setBody($body);\n\n$request->setHeaders([\n  'Authorization' => 'Bearer REPLACE_BEARER_TOKEN',\n  'content-type' => 'application/json'\n]);\n\n$client->enqueue($request)->send();\n$response = $client->getResponse();\n\necho $response->getBody();"
+            "source": "<?php\n\n$client = new http\\Client;\n$request = new http\\Client\\Request;\n\n$body = new http\\Message\\Body;\n$body->append('{\"status\":\"pending\",\"name\":\"string\",\"company_number\":null,\"jurisdiction\":null,\"reference\":null,\"incorporated_at\":null}');\n\n$request->setRequestUrl('https://id.amiqus.co/api/v2/organisations/%7Bid%7D');\n$request->setRequestMethod('PATCH');\n$request->setBody($body);\n\n$request->setHeaders([\n  'Authorization' => 'Bearer REPLACE_BEARER_TOKEN',\n  'content-type' => 'application/json'\n]);\n\n$client->enqueue($request)->send();\n$response = $client->getResponse();\n\necho $response->getBody();"
           }
         ]
       }
@@ -17804,17 +17644,6 @@
             ],
             "maxLength": 255,
             "description": "An external reference or identifier to cross-reference with your system."
-          },
-          "address": {
-            "oneOf": [
-              {
-                "type": "null"
-              },
-              {
-                "$ref": "#/components/schemas/Address"
-              }
-            ],
-            "description": "The organisation's registered address.\n\nThe full object must be provided on update — partial updates are not supported. Set to `null` to unset.\n"
           },
           "incorporated_at": {
             "type": [

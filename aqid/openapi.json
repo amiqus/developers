@@ -8475,7 +8475,7 @@
     "/checks/{id}": {
       "get": {
         "summary": "Retrieve a check",
-        "description": "Retrieve a check.",
+        "description": "Retrieve a check.\n\nUse `expand=response` to return the check's result data. Granular data is returned for Photo\nID checks (`check_response.photo_id`) and for identity checks carried out by Experian\n(`check_response.identity`). Checks whose response is not yet available from the API return\n`check_response.other`.\n\nWithout `expand=response`, `response` is `true` when there is a response available to expand,\nand `null` when there is none yet, such as while the check is pending.\n",
         "operationId": "get-checks-id",
         "security": [
           {
@@ -8496,6 +8496,7 @@
           {
             "name": "expand",
             "in": "query",
+            "description": "Comma-separated list of properties to expand. `record` returns the full record object, and\n`response` returns the check's result data.\n",
             "explode": false,
             "schema": {
               "type": "array",
@@ -8541,7 +8542,7 @@
                     "value": {
                       "object": "check",
                       "id": 82342,
-                      "type": "identity",
+                      "type": "photo_id",
                       "record": 983434,
                       "status": "accepted",
                       "response": {
@@ -8827,7 +8828,7 @@
                     "value": {
                       "object": "check",
                       "id": 82343,
-                      "type": "identity",
+                      "type": "photo_id",
                       "record": 983434,
                       "status": "accepted",
                       "response": {
@@ -9275,7 +9276,7 @@
                     "value": {
                       "object": "check",
                       "id": 82344,
-                      "type": "identity",
+                      "type": "photo_id",
                       "record": 983434,
                       "status": "accepted",
                       "response": {
@@ -9738,7 +9739,7 @@
                     "value": {
                       "object": "check",
                       "id": 82345,
-                      "type": "identity",
+                      "type": "photo_id",
                       "record": 983434,
                       "status": "refer",
                       "response": {

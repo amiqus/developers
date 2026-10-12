@@ -10985,6 +10985,305 @@
                       "updated_at": "2022-05-22T08:22:12Z"
                     }
                   },
+                  "photo_id_known_fraud": {
+                    "summary": "Photo ID: known fraud match\n",
+                    "description": "The document report is clear, but a member of the SIRA consortium has flagged the person's identity as suspected fraud. The known fraud report counts towards the check's result, so the result is `consider`. The match gives an indication only, and needs a person to review it.\n",
+                    "value": {
+                      "object": "check",
+                      "id": 82346,
+                      "type": "photo_id",
+                      "record": 983434,
+                      "status": "refer",
+                      "response": {
+                        "object": "check_response.photo_id",
+                        "status": "complete",
+                        "result": "consider",
+                        "reports": [
+                          {
+                            "type": "document",
+                            "status": "complete",
+                            "result": "clear",
+                            "breakdown": {
+                              "age_validation": {
+                                "result": "clear",
+                                "breakdown": {
+                                  "minimum_accepted_age": {
+                                    "result": "clear"
+                                  }
+                                }
+                              },
+                              "compromised_document": {
+                                "result": "clear",
+                                "breakdown": {
+                                  "document_database": {
+                                    "result": "clear"
+                                  },
+                                  "repeat_attempts": {
+                                    "result": "clear"
+                                  }
+                                }
+                              },
+                              "data_comparison": {
+                                "result": "clear",
+                                "breakdown": {
+                                  "first_name": {
+                                    "result": "clear"
+                                  },
+                                  "last_name": {
+                                    "result": "clear"
+                                  },
+                                  "date_of_birth": {
+                                    "result": "clear"
+                                  }
+                                }
+                              },
+                              "data_consistency": {
+                                "result": "clear",
+                                "breakdown": {
+                                  "issuing_country": {
+                                    "result": "clear"
+                                  },
+                                  "document_numbers": {
+                                    "result": "clear"
+                                  },
+                                  "nationality": {
+                                    "result": "clear"
+                                  },
+                                  "gender": {
+                                    "result": "clear"
+                                  },
+                                  "document_type": {
+                                    "result": "clear"
+                                  },
+                                  "date_of_expiry": {
+                                    "result": "clear"
+                                  },
+                                  "date_of_birth": {
+                                    "result": "clear"
+                                  },
+                                  "last_name": {
+                                    "result": "clear"
+                                  },
+                                  "first_name": {
+                                    "result": "clear"
+                                  }
+                                }
+                              },
+                              "data_validation": {
+                                "result": "clear",
+                                "breakdown": {
+                                  "mrz": {
+                                    "result": "clear"
+                                  },
+                                  "document_expiration": {
+                                    "result": "clear"
+                                  },
+                                  "expiry_date": {
+                                    "result": "clear"
+                                  },
+                                  "date_of_birth": {
+                                    "result": "clear"
+                                  },
+                                  "gender": {
+                                    "result": "clear"
+                                  },
+                                  "document_numbers": {
+                                    "result": "clear"
+                                  }
+                                }
+                              },
+                              "image_integrity": {
+                                "result": "clear",
+                                "breakdown": {
+                                  "supported_document": {
+                                    "result": "clear"
+                                  },
+                                  "image_quality": {
+                                    "result": "clear",
+                                    "properties": {
+                                      "glare_on_photo": {
+                                        "result": "clear"
+                                      },
+                                      "blurred_photo": {
+                                        "result": "clear"
+                                      },
+                                      "covered_photo": {
+                                        "result": "clear"
+                                      },
+                                      "other_photo_issue": {
+                                        "result": "clear"
+                                      },
+                                      "incorrect_side": {
+                                        "result": "clear"
+                                      },
+                                      "cut_off_document": {
+                                        "result": "clear"
+                                      },
+                                      "no_document_in_image": {
+                                        "result": "clear"
+                                      },
+                                      "two_documents_uploaded": {
+                                        "result": "clear"
+                                      }
+                                    }
+                                  },
+                                  "colour_picture": {
+                                    "result": "clear"
+                                  },
+                                  "conclusive_document_quality": {
+                                    "result": "clear",
+                                    "properties": {
+                                      "watermarks_digital_text_overlay": {
+                                        "result": "clear"
+                                      },
+                                      "punctured_document": {
+                                        "result": "clear"
+                                      },
+                                      "obscured_security_features": {
+                                        "result": "clear"
+                                      },
+                                      "obscured_data_points": {
+                                        "result": "clear"
+                                      },
+                                      "missing_back": {
+                                        "result": "clear"
+                                      },
+                                      "digital_document": {
+                                        "result": "clear"
+                                      },
+                                      "corner_removed": {
+                                        "result": "clear"
+                                      },
+                                      "abnormal_document_features": {
+                                        "result": "clear"
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "issuing_authority": {
+                                "result": "clear",
+                                "breakdown": {
+                                  "nfc_passive_authentication": {
+                                    "result": "clear"
+                                  },
+                                  "nfc_active_authentication": {
+                                    "result": "clear"
+                                  }
+                                }
+                              },
+                              "police_record": {
+                                "result": "clear"
+                              },
+                              "visual_authenticity": {
+                                "result": "clear",
+                                "breakdown": {
+                                  "face_detection": {
+                                    "result": "clear"
+                                  },
+                                  "digital_tampering": {
+                                    "result": "clear"
+                                  },
+                                  "original_document_present": {
+                                    "result": "clear",
+                                    "properties": {
+                                      "screenshot": {
+                                        "result": "clear"
+                                      },
+                                      "document_on_printed_paper": {
+                                        "result": "clear"
+                                      },
+                                      "photo_of_screen": {
+                                        "result": "clear"
+                                      },
+                                      "scan": {
+                                        "result": "clear"
+                                      }
+                                    }
+                                  },
+                                  "picture_face_integrity": {
+                                    "result": "clear"
+                                  },
+                                  "security_features": {
+                                    "result": "clear"
+                                  },
+                                  "fonts": {
+                                    "result": "clear"
+                                  },
+                                  "template": {
+                                    "result": "clear"
+                                  }
+                                }
+                              }
+                            },
+                            "document_data": {
+                              "document_type": "passport",
+                              "first_name": "MARTIN",
+                              "last_name": "MCFLY",
+                              "middle_name": null,
+                              "date_of_birth": "1968-06-12",
+                              "gender": "male",
+                              "document_numbers": [
+                                {
+                                  "type": "document_number",
+                                  "value": "112233445"
+                                }
+                              ],
+                              "issuing_authority": null,
+                              "issuing_country": "GBR",
+                              "issuing_state": null,
+                              "issuing_date": "2019-08-24",
+                              "date_of_expiry": "2039-07-01",
+                              "mrz_line1": "P<GBRMMCFLY<<<<<MARTIN<<<<<<<<<<<<<<<<<<<<<<",
+                              "mrz_line2": "1122334459GBR6806121M3907019<<<<<<<<<<<<<<01",
+                              "mrz_line3": null,
+                              "nationality": "GBR",
+                              "place_of_birth": "EDINBURGH",
+                              "nfc": null
+                            }
+                          },
+                          {
+                            "type": "known_fraud",
+                            "status": "complete",
+                            "result": "consider",
+                            "breakdown": {
+                              "fraud": {
+                                "result": "consider"
+                              },
+                              "impersonation": {
+                                "result": "clear"
+                              }
+                            }
+                          }
+                        ],
+                        "media": [
+                          {
+                            "type": "document",
+                            "attachment": {
+                              "object": "attachment",
+                              "id": 31785,
+                              "name": "14592310-706e-4bae-9171-83db2fa9d0fb.jpg",
+                              "original": "passport.jpg",
+                              "type": "image/jpeg",
+                              "size": 16053,
+                              "av_status": "clean",
+                              "created_at": "2022-05-22T08:22:12Z",
+                              "updated_at": "2022-05-22T08:22:12Z"
+                            },
+                            "document_type": "passport",
+                            "side": "front",
+                            "issuing_country": "GBR",
+                            "has_nfc": false
+                          }
+                        ]
+                      },
+                      "allow_replay": true,
+                      "allow_cancel": true,
+                      "requires_consent": true,
+                      "created_at": "2022-05-22T08:22:12Z",
+                      "updated_at": "2022-05-22T08:22:12Z"
+                    }
+                  },
                   "identity_clear": {
                     "summary": "Identity: verified\n",
                     "description": "An Experian identity check where the person was matched and nothing was held against them. The rules listed under `identity` are the evidence Experian matched on, not findings against the person.\n",
@@ -20739,6 +21038,56 @@
           }
         }
       },
+      "KnownFraud": {
+        "title": "Known Fraud",
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "known_fraud",
+            "description": "_Known fraud reports may not be enabled for all teams._\n"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "processing",
+              "complete"
+            ]
+          },
+          "result": {
+            "type": "string",
+            "enum": [
+              "clear",
+              "consider"
+            ],
+            "description": "* `clear` - No member of the SIRA consortium has flagged the person.\n* `consider` - A member of the SIRA consortium has flagged the person. This gives an indication\n  only, and needs a person to review it.\n"
+          },
+          "breakdown": {
+            "description": "The records checked to reach the report's result. `null` when the report returned no breakdown.\n",
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "fraud": {
+                "description": "Whether the person's identity has been flagged as suspected fraud.",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/BreakdownResult"
+                  }
+                ]
+              },
+              "impersonation": {
+                "description": "Whether the person has been flagged as a possible victim of identity fraud.",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/BreakdownResult"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
       "Document-2": {
         "title": "Document",
         "type": "object",
@@ -20843,6 +21192,9 @@
                     },
                     {
                       "$ref": "#/components/schemas/Evisa"
+                    },
+                    {
+                      "$ref": "#/components/schemas/KnownFraud"
                     },
                     {
                       "title": "Other",

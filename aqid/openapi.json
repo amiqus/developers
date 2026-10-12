@@ -26,10 +26,10 @@
       "name": "Your Team"
     },
     {
-      "name": "Records"
+      "name": "Client Records"
     },
     {
-      "name": "Record Assignees"
+      "name": "Client Record Assignees"
     },
     {
       "name": "Clients"
@@ -63,6 +63,9 @@
     },
     {
       "name": "Organisation Assignees"
+    },
+    {
+      "name": "Organisation Records"
     },
     {
       "name": "Documents"
@@ -6755,20 +6758,909 @@
         ]
       }
     },
+    "/organisations/records": {
+      "get": {
+        "summary": "List all organisation records",
+        "description": "List all records created for organisations.",
+        "operationId": "get-organisations-records",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Organisation Records"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/page"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "name",
+                "reference",
+                "created_at",
+                "updated_at",
+                "archived_at"
+              ],
+              "x-enumDescriptions": {
+                "name": "Organisation name",
+                "reference": "Reference",
+                "created_at": "Record created date",
+                "updated_at": "Record last updated date",
+                "archived_at": "Record archival date _(`visibility: archived`)_"
+              }
+            },
+            "description": "Sort results by organisation name or date. Results returned in created_at order by default"
+          },
+          {
+            "$ref": "#/components/parameters/order_by"
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "organisation",
+                  "assignees"
+                ]
+              }
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "description": "Search for records by organisation name, or exact reference.\n\nAll searches are case-insensitive and name searches are fuzzy matched.\n"
+            }
+          },
+          {
+            "name": "status",
+            "description": "Filter records by their current status. More than one status can be supplied as a comma-separated list, returning all organisation records matching any of them.\n",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/RecordStatus"
+              }
+            },
+            "examples": {
+              "one": {
+                "value": [
+                  "complete"
+                ],
+                "summary": "Filter by a single status."
+              },
+              "multiple": {
+                "value": [
+                  "pending",
+                  "started",
+                  "waiting"
+                ],
+                "summary": "Filter by multiple statuses."
+              }
+            }
+          },
+          {
+            "name": "visibility",
+            "description": "Filter records by their current visibility. Both \"active\" and \"archived\" records are returned by default.",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "active",
+                "archived"
+              ]
+            }
+          },
+          {
+            "name": "organisation_visibility",
+            "description": "Filter records by the visibility of their associated organisation. Records are returned for both active and archived organisations by default.",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "active",
+                "archived"
+              ]
+            }
+          },
+          {
+            "name": "created_by",
+            "description": "Filter records created by team member user ID",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "assignee",
+            "description": "Filter records assigned to team member user ID or use `false` to filter unassigned records only. Both assigned and unassigned records are returned by default.",
+            "in": "query",
+            "schema": {
+              "oneOf": [
+                {
+                  "type": "integer",
+                  "description": "Filter records assigned to team member user ID"
+                },
+                {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ],
+                  "description": "Filter unassigned records"
+                }
+              ]
+            },
+            "required": false
+          },
+          {
+            "name": "batch",
+            "description": "Filter records by a batch ID. Returns records selected as part of a bulk action, such as archive or expire.",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/PaginatedList"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "items": {
+                            "$ref": "#/components/schemas/OrganisationRecord"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "default": {
+                    "summary": "Organisation records",
+                    "value": {
+                      "object": "paginated_list",
+                      "data": [
+                        {
+                          "object": "organisation_record",
+                          "id": 552210,
+                          "status": "closed",
+                          "organisation": {
+                            "object": "organisation",
+                            "id": 44210,
+                            "status": "pending",
+                            "name": "Fusion Industries",
+                            "company_number": "09876543",
+                            "jurisdiction": "gb",
+                            "reference": null,
+                            "incorporated_at": "1985-11-05",
+                            "assignees": null,
+                            "clients": null,
+                            "created_at": "2022-05-01T10:00:00Z",
+                            "updated_at": "2022-05-15T10:00:00Z",
+                            "archived_at": null
+                          },
+                          "steps": [
+                            {
+                              "object": "step",
+                              "id": 1,
+                              "type": "check.watchlist",
+                              "preferences": {
+                                "monitor": 1,
+                                "search_profile": "sanctions_media",
+                                "all_entity_types": false
+                              },
+                              "check": 88120,
+                              "cost": 3,
+                              "completed_at": "2022-05-25T11:00:00Z"
+                            }
+                          ],
+                          "assignees": null,
+                          "created_at": "2022-05-20T10:00:00Z",
+                          "updated_at": "2022-05-25T11:00:00Z",
+                          "archived_at": null
+                        },
+                        {
+                          "object": "organisation_record",
+                          "id": 552298,
+                          "status": "closed",
+                          "organisation": {
+                            "object": "organisation",
+                            "id": 44299,
+                            "status": "approved",
+                            "name": "Biff's Auto Detailing",
+                            "company_number": "10112233",
+                            "jurisdiction": "us_ca",
+                            "reference": "BAD-001",
+                            "incorporated_at": "1955-11-12",
+                            "assignees": null,
+                            "clients": null,
+                            "created_at": "2022-04-01T09:00:00Z",
+                            "updated_at": "2022-04-10T09:00:00Z",
+                            "archived_at": null
+                          },
+                          "steps": [
+                            {
+                              "object": "step",
+                              "id": 1,
+                              "type": "check.watchlist",
+                              "preferences": {
+                                "monitor": false,
+                                "search_profile": "sanctions",
+                                "all_entity_types": false
+                              },
+                              "check": 88177,
+                              "cost": 2,
+                              "completed_at": "2022-04-18T16:45:00Z"
+                            }
+                          ],
+                          "assignees": [
+                            947
+                          ],
+                          "created_at": "2022-04-15T09:30:00Z",
+                          "updated_at": "2022-04-18T16:45:00Z",
+                          "archived_at": null
+                        }
+                      ],
+                      "total": 2,
+                      "count": 2,
+                      "limit": 100,
+                      "current_page": 1,
+                      "total_pages": 1,
+                      "links": null
+                    }
+                  },
+                  "search": {
+                    "summary": "Search filtering (\"biff\")",
+                    "value": {
+                      "object": "paginated_list",
+                      "data": [
+                        {
+                          "object": "organisation_record",
+                          "id": 552298,
+                          "status": "closed",
+                          "organisation": {
+                            "object": "organisation",
+                            "id": 44299,
+                            "status": "approved",
+                            "name": "Biff's Auto Detailing",
+                            "company_number": "10112233",
+                            "jurisdiction": "us_ca",
+                            "reference": "BAD-001",
+                            "incorporated_at": "1955-11-12",
+                            "assignees": null,
+                            "clients": null,
+                            "created_at": "2022-04-01T09:00:00Z",
+                            "updated_at": "2022-04-10T09:00:00Z",
+                            "archived_at": null
+                          },
+                          "steps": [
+                            {
+                              "object": "step",
+                              "id": 1,
+                              "type": "check.watchlist",
+                              "preferences": {
+                                "monitor": false,
+                                "search_profile": "sanctions",
+                                "all_entity_types": false
+                              },
+                              "check": 88177,
+                              "cost": 2,
+                              "completed_at": "2022-04-18T16:45:00Z"
+                            }
+                          ],
+                          "assignees": [
+                            947
+                          ],
+                          "created_at": "2022-04-15T09:30:00Z",
+                          "updated_at": "2022-04-18T16:45:00Z",
+                          "archived_at": null
+                        }
+                      ],
+                      "total": 1,
+                      "count": 1,
+                      "limit": 100,
+                      "current_page": 1,
+                      "total_pages": 1,
+                      "links": null
+                    }
+                  },
+                  "assignees_expanded": {
+                    "summary": "Assignees expanded",
+                    "value": {
+                      "object": "paginated_list",
+                      "data": [
+                        {
+                          "object": "organisation_record",
+                          "id": 552210,
+                          "status": "closed",
+                          "organisation": {
+                            "object": "organisation",
+                            "id": 44210,
+                            "status": "pending",
+                            "name": "Fusion Industries",
+                            "company_number": "09876543",
+                            "jurisdiction": "gb",
+                            "reference": null,
+                            "incorporated_at": "1985-11-05",
+                            "created_at": "2022-05-01T10:00:00Z",
+                            "updated_at": "2022-05-15T10:00:00Z",
+                            "archived_at": null
+                          },
+                          "steps": [
+                            {
+                              "object": "step",
+                              "id": 1,
+                              "type": "check.watchlist",
+                              "preferences": {
+                                "monitor": 1,
+                                "search_profile": "sanctions_media",
+                                "all_entity_types": false
+                              },
+                              "check": 88120,
+                              "cost": 3,
+                              "completed_at": "2022-05-25T11:00:00Z"
+                            }
+                          ],
+                          "assignees": null,
+                          "created_at": "2022-05-20T10:00:00Z",
+                          "updated_at": "2022-05-25T11:00:00Z",
+                          "archived_at": null
+                        },
+                        {
+                          "object": "organisation_record",
+                          "id": 552298,
+                          "status": "closed",
+                          "organisation": {
+                            "object": "organisation",
+                            "id": 44299,
+                            "status": "approved",
+                            "name": "Biff's Auto Detailing",
+                            "company_number": "10112233",
+                            "jurisdiction": "us_ca",
+                            "reference": "BAD-001",
+                            "incorporated_at": "1955-11-12",
+                            "created_at": "2022-04-01T09:00:00Z",
+                            "updated_at": "2022-04-10T09:00:00Z",
+                            "archived_at": null
+                          },
+                          "steps": [
+                            {
+                              "object": "step",
+                              "id": 1,
+                              "type": "check.watchlist",
+                              "preferences": {
+                                "monitor": false,
+                                "search_profile": "sanctions",
+                                "all_entity_types": false
+                              },
+                              "check": 88177,
+                              "cost": 2,
+                              "completed_at": "2022-04-18T16:45:00Z"
+                            }
+                          ],
+                          "assignees": {
+                            "object": "list",
+                            "data": [
+                              {
+                                "object": "team_member",
+                                "id": 947,
+                                "name": "Wayne Murray",
+                                "email": "wayne.murray@example.com",
+                                "role": "member"
+                              }
+                            ],
+                            "total": 1,
+                            "count": 1,
+                            "limit": 25,
+                            "has_more": false,
+                            "url": "https://id.amiqus.co/api/v2/organisations/records/552298/assignees"
+                          },
+                          "created_at": "2022-04-15T09:30:00Z",
+                          "updated_at": "2022-04-18T16:45:00Z",
+                          "archived_at": null
+                        }
+                      ],
+                      "total": 2,
+                      "count": 2,
+                      "limit": 100,
+                      "current_page": 1,
+                      "total_pages": 1,
+                      "links": null
+                    }
+                  },
+                  "no_records_returned": {
+                    "summary": "No records returned",
+                    "value": {
+                      "object": "paginated_list",
+                      "data": [],
+                      "total": 0,
+                      "count": 0,
+                      "limit": 100,
+                      "current_page": 1,
+                      "total_pages": 1,
+                      "links": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "429": {
+            "$ref": "#/components/responses/429"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell + Curl",
+            "source": "curl --request GET \\\n  --url 'https://id.amiqus.co/api/v2/organisations/records?page=INTEGER_VALUE&limit=INTEGER_VALUE&sort_by=STRING_VALUE&order_by=STRING_VALUE&expand=ARRAY_VALUE&search=STRING_VALUE&status=complete&visibility=STRING_VALUE&organisation_visibility=STRING_VALUE&created_by=INTEGER_VALUE&assignee=QUERY_VALUE&batch=INTEGER_VALUE' \\\n  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'"
+          },
+          {
+            "lang": "Node + Request",
+            "source": "const request = require('request');\n\nconst options = {\n  method: 'GET',\n  url: 'https://id.amiqus.co/api/v2/organisations/records',\n  qs: {\n    page: 'INTEGER_VALUE',\n    limit: 'INTEGER_VALUE',\n    sort_by: 'STRING_VALUE',\n    order_by: 'STRING_VALUE',\n    expand: 'ARRAY_VALUE',\n    search: 'STRING_VALUE',\n    status: 'complete',\n    visibility: 'STRING_VALUE',\n    organisation_visibility: 'STRING_VALUE',\n    created_by: 'INTEGER_VALUE',\n    assignee: 'QUERY_VALUE',\n    batch: 'INTEGER_VALUE'\n  },\n  headers: {Authorization: 'Bearer REPLACE_BEARER_TOKEN'}\n};\n\nrequest(options, function (error, response, body) {\n  if (error) throw new Error(error);\n\n  console.log(body);\n});\n"
+          },
+          {
+            "lang": "Javascript + Xhr",
+            "source": "const data = null;\n\nconst xhr = new XMLHttpRequest();\nxhr.withCredentials = true;\n\nxhr.addEventListener(\"readystatechange\", function () {\n  if (this.readyState === this.DONE) {\n    console.log(this.responseText);\n  }\n});\n\nxhr.open(\"GET\", \"https://id.amiqus.co/api/v2/organisations/records?page=INTEGER_VALUE&limit=INTEGER_VALUE&sort_by=STRING_VALUE&order_by=STRING_VALUE&expand=ARRAY_VALUE&search=STRING_VALUE&status=complete&visibility=STRING_VALUE&organisation_visibility=STRING_VALUE&created_by=INTEGER_VALUE&assignee=QUERY_VALUE&batch=INTEGER_VALUE\");\nxhr.setRequestHeader(\"Authorization\", \"Bearer REPLACE_BEARER_TOKEN\");\n\nxhr.send(data);"
+          },
+          {
+            "lang": "Php + Http2",
+            "source": "<?php\n\n$client = new http\\Client;\n$request = new http\\Client\\Request;\n\n$request->setRequestUrl('https://id.amiqus.co/api/v2/organisations/records');\n$request->setRequestMethod('GET');\n$request->setQuery(new http\\QueryString([\n  'page' => 'INTEGER_VALUE',\n  'limit' => 'INTEGER_VALUE',\n  'sort_by' => 'STRING_VALUE',\n  'order_by' => 'STRING_VALUE',\n  'expand' => 'ARRAY_VALUE',\n  'search' => 'STRING_VALUE',\n  'status' => 'complete',\n  'visibility' => 'STRING_VALUE',\n  'organisation_visibility' => 'STRING_VALUE',\n  'created_by' => 'INTEGER_VALUE',\n  'assignee' => 'QUERY_VALUE',\n  'batch' => 'INTEGER_VALUE'\n]));\n\n$request->setHeaders([\n  'Authorization' => 'Bearer REPLACE_BEARER_TOKEN'\n]);\n\n$client->enqueue($request)->send();\n$response = $client->getResponse();\n\necho $response->getBody();"
+          }
+        ]
+      },
+      "post": {
+        "summary": "Create an organisation record",
+        "description": "Create a record for an existing organisation.",
+        "operationId": "post-organisations-records",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Organisation Records"
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganisationRecord"
+                },
+                "examples": {
+                  "default": {
+                    "summary": "Organisation record created",
+                    "value": {
+                      "object": "organisation_record",
+                      "id": 5678,
+                      "status": "pending",
+                      "organisation": 4321,
+                      "steps": [
+                        {
+                          "object": "step",
+                          "id": 1,
+                          "type": "check.watchlist",
+                          "preferences": {
+                            "monitor": 1,
+                            "search_profile": "sanctions_media",
+                            "all_entity_types": false
+                          },
+                          "check": 8901,
+                          "cost": 3,
+                          "completed_at": null
+                        }
+                      ],
+                      "assignees": null,
+                      "created_at": "2026-07-10T11:22:00Z",
+                      "updated_at": "2026-07-10T11:22:00Z",
+                      "archived_at": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "type": "object",
+                    "required": [
+                      "organisation"
+                    ],
+                    "properties": {
+                      "organisation": {
+                        "type": "integer",
+                        "description": "Unique organisation identifier."
+                      }
+                    }
+                  },
+                  {
+                    "$ref": "#/components/schemas/OrganisationRecordSettings"
+                  },
+                  {
+                    "properties": {
+                      "steps": {
+                        "items": {
+                          "$ref": "#/components/schemas/OrganisationRecordStepsWrite"
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "organisation": 4321,
+                "steps": [
+                  {
+                    "type": "check.watchlist",
+                    "preferences": {
+                      "monitor": 1,
+                      "search_profile": "sanctions_media",
+                      "all_entity_types": false
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell + Curl",
+            "source": "curl --request POST \\\n  --url https://id.amiqus.co/api/v2/organisations/records \\\n  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \\\n  --header 'content-type: application/json' \\\n  --data '{\"organisation\":0,\"steps\":[{\"type\":\"check.watchlist\",\"preferences\":{\"monitor\":false,\"search_profile\":\"sanctions\",\"all_entity_types\":false}}]}'"
+          },
+          {
+            "lang": "Node + Request",
+            "source": "const request = require('request');\n\nconst options = {\n  method: 'POST',\n  url: 'https://id.amiqus.co/api/v2/organisations/records',\n  headers: {\n    Authorization: 'Bearer REPLACE_BEARER_TOKEN',\n    'content-type': 'application/json'\n  },\n  body: {\n    organisation: 0,\n    steps: [\n      {\n        type: 'check.watchlist',\n        preferences: {monitor: false, search_profile: 'sanctions', all_entity_types: false}\n      }\n    ]\n  },\n  json: true\n};\n\nrequest(options, function (error, response, body) {\n  if (error) throw new Error(error);\n\n  console.log(body);\n});\n"
+          },
+          {
+            "lang": "Javascript + Xhr",
+            "source": "const data = JSON.stringify({\n  \"organisation\": 0,\n  \"steps\": [\n    {\n      \"type\": \"check.watchlist\",\n      \"preferences\": {\n        \"monitor\": false,\n        \"search_profile\": \"sanctions\",\n        \"all_entity_types\": false\n      }\n    }\n  ]\n});\n\nconst xhr = new XMLHttpRequest();\nxhr.withCredentials = true;\n\nxhr.addEventListener(\"readystatechange\", function () {\n  if (this.readyState === this.DONE) {\n    console.log(this.responseText);\n  }\n});\n\nxhr.open(\"POST\", \"https://id.amiqus.co/api/v2/organisations/records\");\nxhr.setRequestHeader(\"Authorization\", \"Bearer REPLACE_BEARER_TOKEN\");\nxhr.setRequestHeader(\"content-type\", \"application/json\");\n\nxhr.send(data);"
+          },
+          {
+            "lang": "Php + Http2",
+            "source": "<?php\n\n$client = new http\\Client;\n$request = new http\\Client\\Request;\n\n$body = new http\\Message\\Body;\n$body->append('{\"organisation\":0,\"steps\":[{\"type\":\"check.watchlist\",\"preferences\":{\"monitor\":false,\"search_profile\":\"sanctions\",\"all_entity_types\":false}}]}');\n\n$request->setRequestUrl('https://id.amiqus.co/api/v2/organisations/records');\n$request->setRequestMethod('POST');\n$request->setBody($body);\n\n$request->setHeaders([\n  'Authorization' => 'Bearer REPLACE_BEARER_TOKEN',\n  'content-type' => 'application/json'\n]);\n\n$client->enqueue($request)->send();\n$response = $client->getResponse();\n\necho $response->getBody();"
+          }
+        ]
+      }
+    },
     "/organisations/records/{id}": {
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId",
           "description": "Unique organisation record identifier."
         }
-      ]
+      ],
+      "get": {
+        "summary": "Retrieve an organisation record",
+        "description": "Retrieve an organisation record.",
+        "operationId": "get-organisations-records-id",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Organisation Records"
+        ],
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "organisation",
+                  "assignees"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganisationRecord"
+                },
+                "examples": {
+                  "default": {
+                    "summary": "Organisation record",
+                    "value": {
+                      "object": "organisation_record",
+                      "id": 5678,
+                      "status": "complete",
+                      "organisation": 4321,
+                      "steps": [
+                        {
+                          "object": "step",
+                          "id": 1,
+                          "type": "check.watchlist",
+                          "preferences": {
+                            "monitor": 1,
+                            "search_profile": "sanctions_media",
+                            "all_entity_types": false
+                          },
+                          "check": 8901,
+                          "cost": 3,
+                          "completed_at": "2026-07-10T11:25:00Z"
+                        }
+                      ],
+                      "assignees": [
+                        947
+                      ],
+                      "created_at": "2026-07-10T11:22:00Z",
+                      "updated_at": "2026-07-10T11:25:00Z",
+                      "archived_at": null
+                    }
+                  },
+                  "organisation_expanded": {
+                    "summary": "Organisation expanded",
+                    "value": {
+                      "object": "organisation_record",
+                      "id": 5678,
+                      "status": "complete",
+                      "organisation": {
+                        "object": "organisation",
+                        "id": 4321,
+                        "status": "approved",
+                        "name": "Probert Publishing",
+                        "company_number": "SF12188",
+                        "jurisdiction": "gb",
+                        "reference": "PP-001",
+                        "incorporated_at": "2015-06-01",
+                        "assignees": [
+                          187,
+                          947
+                        ],
+                        "clients": [
+                          73845,
+                          73841
+                        ],
+                        "created_at": "2022-03-15T21:43:16Z",
+                        "updated_at": "2022-03-15T21:43:16Z",
+                        "archived_at": null
+                      },
+                      "steps": [
+                        {
+                          "object": "step",
+                          "id": 1,
+                          "type": "check.watchlist",
+                          "preferences": {
+                            "monitor": 1,
+                            "search_profile": "sanctions_media",
+                            "all_entity_types": false
+                          },
+                          "check": 8901,
+                          "cost": 3,
+                          "completed_at": "2026-07-10T11:25:00Z"
+                        }
+                      ],
+                      "assignees": [
+                        947
+                      ],
+                      "created_at": "2026-07-10T11:22:00Z",
+                      "updated_at": "2026-07-10T11:25:00Z",
+                      "archived_at": null
+                    }
+                  },
+                  "assignees_expanded": {
+                    "summary": "Assignees expanded",
+                    "value": {
+                      "object": "organisation_record",
+                      "id": 5678,
+                      "status": "complete",
+                      "organisation": 4321,
+                      "steps": [
+                        {
+                          "object": "step",
+                          "id": 1,
+                          "type": "check.watchlist",
+                          "preferences": {
+                            "monitor": 1,
+                            "search_profile": "sanctions_media",
+                            "all_entity_types": false
+                          },
+                          "check": 8901,
+                          "cost": 3,
+                          "completed_at": "2026-07-10T11:25:00Z"
+                        }
+                      ],
+                      "assignees": {
+                        "object": "list",
+                        "data": [
+                          {
+                            "object": "team_member",
+                            "id": 947,
+                            "name": "Wayne Murray",
+                            "email": "wayne.murray@example.com",
+                            "role": "member"
+                          }
+                        ],
+                        "total": 1,
+                        "count": 1,
+                        "limit": 25,
+                        "has_more": false,
+                        "url": "https://id.amiqus.co/api/v2/organisations/5678/assignees"
+                      },
+                      "created_at": "2026-07-10T11:22:00Z",
+                      "updated_at": "2026-07-10T11:25:00Z",
+                      "archived_at": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Organisation record not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell + Curl",
+            "source": "curl --request GET \\\n  --url 'https://id.amiqus.co/api/v2/organisations/records/%7Bid%7D?expand=ARRAY_VALUE' \\\n  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'"
+          },
+          {
+            "lang": "Node + Request",
+            "source": "const request = require('request');\n\nconst options = {\n  method: 'GET',\n  url: 'https://id.amiqus.co/api/v2/organisations/records/%7Bid%7D',\n  qs: {expand: 'ARRAY_VALUE'},\n  headers: {Authorization: 'Bearer REPLACE_BEARER_TOKEN'}\n};\n\nrequest(options, function (error, response, body) {\n  if (error) throw new Error(error);\n\n  console.log(body);\n});\n"
+          },
+          {
+            "lang": "Javascript + Xhr",
+            "source": "const data = null;\n\nconst xhr = new XMLHttpRequest();\nxhr.withCredentials = true;\n\nxhr.addEventListener(\"readystatechange\", function () {\n  if (this.readyState === this.DONE) {\n    console.log(this.responseText);\n  }\n});\n\nxhr.open(\"GET\", \"https://id.amiqus.co/api/v2/organisations/records/%7Bid%7D?expand=ARRAY_VALUE\");\nxhr.setRequestHeader(\"Authorization\", \"Bearer REPLACE_BEARER_TOKEN\");\n\nxhr.send(data);"
+          },
+          {
+            "lang": "Php + Http2",
+            "source": "<?php\n\n$client = new http\\Client;\n$request = new http\\Client\\Request;\n\n$request->setRequestUrl('https://id.amiqus.co/api/v2/organisations/records/%7Bid%7D');\n$request->setRequestMethod('GET');\n$request->setQuery(new http\\QueryString([\n  'expand' => 'ARRAY_VALUE'\n]));\n\n$request->setHeaders([\n  'Authorization' => 'Bearer REPLACE_BEARER_TOKEN'\n]);\n\n$client->enqueue($request)->send();\n$response = $client->getResponse();\n\necho $response->getBody();"
+          }
+        ]
+      }
     },
     "/organisations/records/{id}/download": {
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
         }
-      ]
+      ],
+      "get": {
+        "summary": "Download an organisation record",
+        "description": "Download an organisation record.",
+        "operationId": "get-organisations-records-id-download",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Organisation Records"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell + Curl",
+            "source": "curl --request GET \\\n  --url https://id.amiqus.co/api/v2/organisations/records/%7Bid%7D/download \\\n  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'"
+          },
+          {
+            "lang": "Node + Request",
+            "source": "const request = require('request');\n\nconst options = {\n  method: 'GET',\n  url: 'https://id.amiqus.co/api/v2/organisations/records/%7Bid%7D/download',\n  headers: {Authorization: 'Bearer REPLACE_BEARER_TOKEN'}\n};\n\nrequest(options, function (error, response, body) {\n  if (error) throw new Error(error);\n\n  console.log(body);\n});\n"
+          },
+          {
+            "lang": "Javascript + Xhr",
+            "source": "const data = null;\n\nconst xhr = new XMLHttpRequest();\nxhr.withCredentials = true;\n\nxhr.addEventListener(\"readystatechange\", function () {\n  if (this.readyState === this.DONE) {\n    console.log(this.responseText);\n  }\n});\n\nxhr.open(\"GET\", \"https://id.amiqus.co/api/v2/organisations/records/%7Bid%7D/download\");\nxhr.setRequestHeader(\"Authorization\", \"Bearer REPLACE_BEARER_TOKEN\");\n\nxhr.send(data);"
+          },
+          {
+            "lang": "Php + Http2",
+            "source": "<?php\n\n$client = new http\\Client;\n$request = new http\\Client\\Request;\n\n$request->setRequestUrl('https://id.amiqus.co/api/v2/organisations/records/%7Bid%7D/download');\n$request->setRequestMethod('GET');\n$request->setHeaders([\n  'Authorization' => 'Bearer REPLACE_BEARER_TOKEN'\n]);\n\n$client->enqueue($request)->send();\n$response = $client->getResponse();\n\necho $response->getBody();"
+          }
+        ]
+      }
     },
     "/organisations/records/{id}/assignees": {
       "parameters": [
@@ -6788,8 +7680,8 @@
     },
     "/records": {
       "get": {
-        "summary": "List all records",
-        "description": "List all records.",
+        "summary": "List all client records",
+        "description": "List all client records.",
         "operationId": "get-records",
         "security": [
           {
@@ -6800,7 +7692,7 @@
           }
         ],
         "tags": [
-          "Records"
+          "Client Records"
         ],
         "parameters": [
           {
@@ -6877,7 +7769,8 @@
                 "empty",
                 "paused",
                 "amendments",
-                "reviewed"
+                "reviewed",
+                "closed"
               ],
               "x-enumDescriptions": {
                 "pending": "Active without any completed steps",
@@ -6889,7 +7782,8 @@
                 "empty": "Expired without any completed steps",
                 "paused": "At least one paused check step",
                 "amendments": "Pending record amendment approval or rejection",
-                "reviewed": "Record marked as having been reviewed"
+                "reviewed": "Record marked as having been reviewed",
+                "closed": "Completed with no further action required _(Organisation records only)_"
               },
               "description": "The overall status of the record.\n\nStatus is determined by the combined states of a record's steps, expiry and review.\n"
             }
@@ -7089,8 +7983,8 @@
         ]
       },
       "post": {
-        "summary": "Create a record",
-        "description": "Create a record.",
+        "summary": "Create a client record",
+        "description": "Create a client record.",
         "operationId": "post-records",
         "security": [
           {
@@ -7101,7 +7995,7 @@
           }
         ],
         "tags": [
-          "Records"
+          "Client Records"
         ],
         "responses": {
           "201": {
@@ -7419,12 +8313,12 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId",
-          "description": "Unique record identifier."
+          "description": "Unique client record identifier."
         }
       ],
       "get": {
-        "summary": "Retrieve a record",
-        "description": "Retrieve a record.",
+        "summary": "Retrieve a client record",
+        "description": "Retrieve a client record.",
         "operationId": "get-records-id",
         "security": [
           {
@@ -7435,7 +8329,7 @@
           }
         ],
         "tags": [
-          "Records"
+          "Client Records"
         ],
         "parameters": [
           {
@@ -7579,8 +8473,8 @@
         ]
       },
       "patch": {
-        "summary": "Update a record",
-        "description": "Update the details of a record.\n",
+        "summary": "Update a client record",
+        "description": "Update the details of a client record.\n",
         "operationId": "patch-records-id",
         "security": [
           {
@@ -7591,7 +8485,7 @@
           }
         ],
         "tags": [
-          "Records"
+          "Client Records"
         ],
         "requestBody": {
           "required": true,
@@ -7776,8 +8670,8 @@
         }
       ],
       "post": {
-        "summary": "Archive a record",
-        "description": "Archive a record.\n\nThis operation is deprecated and will be removed in future versions. To archive a record, please refer to **[Update a record](#operation/patch-records-id)**.\n",
+        "summary": "Archive a client record",
+        "description": "Archive a client record.\n\nThis operation is deprecated and will be removed in future versions. To archive a client record, please refer to **[Update a client record](#operation/patch-records-id)**.\n",
         "operationId": "post-records-id-archive",
         "security": [
           {
@@ -7788,7 +8682,7 @@
           }
         ],
         "tags": [
-          "Records"
+          "Client Records"
         ],
         "deprecated": true,
         "parameters": [
@@ -7846,12 +8740,12 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId",
-          "description": "Unique record identifier."
+          "description": "Unique client record identifier."
         }
       ],
       "post": {
-        "summary": "Expire a record",
-        "description": "Expire a record.",
+        "summary": "Expire a client record",
+        "description": "Expire a client record.",
         "operationId": "post-records-id-expire",
         "security": [
           {
@@ -7862,7 +8756,7 @@
           }
         ],
         "tags": [
-          "Records"
+          "Client Records"
         ],
         "parameters": [
           {
@@ -7944,8 +8838,8 @@
         }
       ],
       "get": {
-        "summary": "Download a record",
-        "description": "Download a record.",
+        "summary": "Download a client record",
+        "description": "Download a client record.",
         "operationId": "get-records-id-download",
         "security": [
           {
@@ -7956,7 +8850,7 @@
           }
         ],
         "tags": [
-          "Records"
+          "Client Records"
         ],
         "responses": {
           "200": {
@@ -8007,8 +8901,8 @@
         }
       ],
       "get": {
-        "summary": "List all steps for a record",
-        "description": "List all steps for a record.",
+        "summary": "List all steps for a client record",
+        "description": "List all steps for a client record.",
         "operationId": "get-records-id-steps",
         "security": [
           {
@@ -8019,7 +8913,7 @@
           }
         ],
         "tags": [
-          "Records"
+          "Client Records"
         ],
         "parameters": [
           {
@@ -8182,8 +9076,8 @@
         }
       ],
       "get": {
-        "summary": "List all documents for a record",
-        "description": "List all documents for a record.",
+        "summary": "List all documents for a client record",
+        "description": "List all documents for a client record.",
         "operationId": "get-records-id-documents",
         "security": [
           {
@@ -8194,7 +9088,7 @@
           }
         ],
         "tags": [
-          "Records"
+          "Client Records"
         ],
         "parameters": [
           {
@@ -8486,7 +9380,7 @@
           }
         ],
         "tags": [
-          "Records"
+          "Client Records"
         ],
         "parameters": [
           {
@@ -10334,12 +11228,12 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId",
-          "description": "Unique record identifier."
+          "description": "Unique client record identifier."
         }
       ],
       "get": {
-        "summary": "List all assignees for a record",
-        "description": "List all assignees for a record.",
+        "summary": "List all assignees for a client record",
+        "description": "List all assignees for a client record.",
         "operationId": "get-records-id-assignees",
         "security": [
           {
@@ -10350,7 +11244,7 @@
           }
         ],
         "tags": [
-          "Record Assignees"
+          "Client Record Assignees"
         ],
         "parameters": [
           {
@@ -10474,7 +11368,7 @@
         ]
       },
       "post": {
-        "summary": "Add assignees to a record",
+        "summary": "Add assignees to a client record",
         "description": "Add one or more assignees to a record, merging them with existing assignees.\n\nExisting assignees to the record are not included in the response. Only added assignees to the record will be returned.\n\nTo replace assignees, refer to **[Replace assignees for a record](#operation/put-records-id-assignees)**.\n",
         "operationId": "post-records-id-assignees",
         "security": [
@@ -10486,7 +11380,7 @@
           }
         ],
         "tags": [
-          "Record Assignees"
+          "Client Record Assignees"
         ],
         "requestBody": {
           "content": {
@@ -10668,8 +11562,8 @@
         ]
       },
       "put": {
-        "summary": "Replace assignees for a record",
-        "description": "Replacing all existing assignees for a record.\n\nExisting assignees to the record that are included in the request will be part of the updated assignees to the record but they will not be shown in the response. Only added assignees will be returned.\n\nTo add additional assignees, refer to **[Add assignees for a record](#operation/post-records-id-assignees)**.\n",
+        "summary": "Replace assignees for a client record",
+        "description": "Replacing all existing assignees for a client record.\n\nExisting assignees to the record that are included in the request will be part of the updated assignees to the record but they will not be shown in the response. Only added assignees will be returned.\n\nTo add additional assignees, refer to **[Add assignees for a client record](#operation/post-records-id-assignees)**.\n",
         "operationId": "put-records-id-assignees",
         "security": [
           {
@@ -10680,7 +11574,7 @@
           }
         ],
         "tags": [
-          "Record Assignees"
+          "Client Record Assignees"
         ],
         "requestBody": {
           "content": {
@@ -10862,8 +11756,8 @@
         ]
       },
       "delete": {
-        "summary": "Delete assignees for a record",
-        "description": "Remove all assignees from a record.",
+        "summary": "Delete assignees for a client record",
+        "description": "Remove all assignees from a client record.",
         "operationId": "delete-records-id-assignees",
         "security": [
           {
@@ -10874,7 +11768,7 @@
           }
         ],
         "tags": [
-          "Record Assignees"
+          "Client Record Assignees"
         ],
         "requestBody": {
           "content": {
@@ -10930,8 +11824,8 @@
     },
     "/records/{recordId}/assignees/{assigneeId}": {
       "delete": {
-        "summary": "Delete assignee for a record",
-        "description": "Remove a single assignee from a record.\n\nTo list all of a record's assignees, see **[List all assignees for a record](#operation/get-records-id-assignees)**.\n",
+        "summary": "Delete assignee for a client record",
+        "description": "Remove a single assignee from a client record.\n\nTo list all of a client record's assignees, see **[List all assignees for a client record](#operation/get-records-id-assignees)**.\n",
         "operationId": "delete-records-recordId-assignees-assigneeId",
         "security": [
           {
@@ -10942,7 +11836,7 @@
           }
         ],
         "tags": [
-          "Record Assignees"
+          "Client Record Assignees"
         ],
         "parameters": [
           {
@@ -10951,7 +11845,7 @@
             "required": true,
             "schema": {
               "type": "integer",
-              "description": "Unique record identifier."
+              "description": "Unique client record identifier."
             }
           },
           {
@@ -16095,7 +16989,7 @@
           "required": true,
           "schema": {
             "type": "integer",
-            "description": "The unique record identifier."
+            "description": "The unique client record identifier."
           }
         },
         {
@@ -16104,13 +16998,13 @@
           "required": true,
           "schema": {
             "type": "integer",
-            "description": "The unique record step identifier."
+            "description": "The unique client record step identifier."
           }
         }
       ],
       "get": {
-        "summary": "List all reviews for a record step",
-        "description": "List all reviews for a record step.",
+        "summary": "List all reviews for a client record step",
+        "description": "List all reviews for a client record step.",
         "operationId": "get-records-recordId-steps-stepId-reviews",
         "security": [
           {
@@ -16121,7 +17015,7 @@
           }
         ],
         "tags": [
-          "Records"
+          "Client Records"
         ],
         "parameters": [
           {
@@ -16307,8 +17201,8 @@
         ]
       },
       "post": {
-        "summary": "Create a review for a record step",
-        "description": "Create a review for a record step.",
+        "summary": "Create a review for a client record step",
+        "description": "Create a review for a client record step.",
         "operationId": "post-records-recordId-steps-stepId-reviews",
         "security": [
           {
@@ -16319,7 +17213,7 @@
           }
         ],
         "tags": [
-          "Records"
+          "Client Records"
         ],
         "parameters": [
           {
@@ -17759,7 +18653,8 @@
           "empty",
           "paused",
           "amendments",
-          "reviewed"
+          "reviewed",
+          "closed"
         ],
         "x-enumDescriptions": {
           "pending": "Active without any completed steps",
@@ -17771,7 +18666,8 @@
           "empty": "Expired without any completed steps",
           "paused": "At least one paused check step",
           "amendments": "Pending record amendment approval or rejection",
-          "reviewed": "Record marked as having been reviewed"
+          "reviewed": "Record marked as having been reviewed",
+          "closed": "Completed with no further action required _(Organisation records only)_"
         },
         "description": "The overall status of the record.\n\nStatus is determined by the combined states of a record's steps, expiry and review.\n"
       },
@@ -23140,6 +24036,240 @@
           }
         }
       },
+      "OrganisationSearchProfile": {
+        "type": "string",
+        "enum": [
+          "sanctions",
+          "sanctions_media",
+          "sanctions_media_extended"
+        ],
+        "x-enumDescriptions": {
+          "sanctions": "Sanctions only",
+          "sanctions_media": "Sanctions and adverse media",
+          "sanctions_media_extended": "Sanctions and adverse media (extended)"
+        }
+      },
+      "OrganisationWatchlist": {
+        "type": "object",
+        "properties": {
+          "preferences": {
+            "type": "object",
+            "properties": {
+              "monitor": {
+                "description": "Continually monitor changes to the check results for one or three years.\n\nIn the request body, set the number of years to monitor for, or `false` to disable ongoing monitoring.\n\nThe response body reflects the current state of monitoring. It is `1` or `3` when monitoring is active for one or three years,\nand `false` if monitoring is not currently active.\n",
+                "default": false,
+                "oneOf": [
+                  {
+                    "type": "integer",
+                    "enum": [
+                      1,
+                      3
+                    ],
+                    "description": "Continually monitor changes to the check results for one or three years.\n\nIn a response body, this indicates that monitoring is currently active.\n\n**Costs 1–2 additional credits**\n"
+                  },
+                  {
+                    "type": "boolean",
+                    "enum": [
+                      false
+                    ],
+                    "description": "Disable ongoing monitoring.\n\nIn a response body, this indicates that monitoring is not currently active.\n"
+                  }
+                ]
+              },
+              "search_profile": {
+                "$ref": "#/components/schemas/OrganisationSearchProfile",
+                "description": "Specifies the search profile to use for the watchlist check.\n\n`sanctions_media_extended` may not be enabled for all teams.\n",
+                "default": "sanctions_media"
+              },
+              "all_entity_types": {
+                "type": "boolean",
+                "default": false,
+                "description": "Include results for people, vessels, aircraft and other non-organisation entities.\nThis will broaden the search and may return more results.\n"
+              }
+            }
+          }
+        }
+      },
+      "OrganisationRecordCheck": {
+        "type": "object",
+        "properties": {
+          "check": {
+            "readOnly": true,
+            "type": "integer",
+            "description": "The unique organisation check identifier."
+          }
+        }
+      },
+      "OrganisationMetadata": {
+        "type": "object",
+        "properties": {
+          "cost": {
+            "type": "integer",
+            "minimum": 0,
+            "readOnly": true
+          },
+          "completed_at": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time",
+            "readOnly": true
+          }
+        }
+      },
+      "OrganisationRecordSteps": {
+        "title": "Organisation Record Steps",
+        "anyOf": [
+          {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Step"
+              },
+              {
+                "$ref": "#/components/schemas/Watchlist"
+              },
+              {
+                "$ref": "#/components/schemas/OrganisationWatchlist"
+              },
+              {
+                "$ref": "#/components/schemas/OrganisationRecordCheck"
+              },
+              {
+                "$ref": "#/components/schemas/OrganisationMetadata"
+              }
+            ]
+          }
+        ]
+      },
+      "OrganisationRecord": {
+        "title": "Organisation Record",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "object": {
+            "type": "string",
+            "readOnly": true,
+            "const": "organisation_record"
+          },
+          "id": {
+            "type": "integer",
+            "readOnly": true,
+            "description": "The unique organisation record identifier."
+          },
+          "status": {
+            "$ref": "#/components/schemas/RecordStatus"
+          },
+          "organisation": {
+            "readOnly": true,
+            "x-expandable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Organisation"
+              },
+              {
+                "type": "integer",
+                "description": "Unique organisation identifier."
+              }
+            ]
+          },
+          "steps": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/OrganisationRecordSteps"
+            },
+            "description": "List of complete and incomplete steps."
+          },
+          "assignees": {
+            "readOnly": true,
+            "x-expandable": true,
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "description": "The unique team member identifier.",
+                  "minItems": 1,
+                  "maxItems": 25
+                }
+              },
+              {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/List"
+                  },
+                  {
+                    "properties": {
+                      "data": {
+                        "items": {
+                          "$ref": "#/components/schemas/TeamMember"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "description": "Date and time the record was created."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "description": "Date and time the record's details were last updated or a step was completed."
+          },
+          "archived_at": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time",
+            "readOnly": true,
+            "description": "Date and time the record was archived."
+          }
+        }
+      },
+      "OrganisationRecordSettings": {
+        "title": "Organisation Record Settings",
+        "type": "object",
+        "required": [
+          "steps"
+        ],
+        "properties": {
+          "steps": {
+            "type": "array",
+            "minItems": 1,
+            "description": "Steps to be completed for the organisation."
+          }
+        }
+      },
+      "OrganisationRecordStepsWrite": {
+        "title": "Organisation Record Steps",
+        "anyOf": [
+          {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Step"
+              },
+              {
+                "$ref": "#/components/schemas/Watchlist"
+              },
+              {
+                "$ref": "#/components/schemas/OrganisationWatchlist"
+              }
+            ]
+          }
+        ]
+      },
       "RecordSettings": {
         "title": "Record Settings",
         "type": "object",
@@ -25536,6 +26666,54 @@
           }
         }
       },
+      "429": {
+        "description": "Too Many Requests",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error",
+              "properties": {
+                "error": {
+                  "const": "Too Many Attempts."
+                }
+              }
+            },
+            "example": {
+              "error": "Too Many Attempts."
+            }
+          }
+        },
+        "headers": {
+          "X-RateLimit-Limit": {
+            "description": "Maximum number of attempts that can be made to this operation in the request time period.",
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "X-RateLimit-Remaining": {
+            "description": "Number of attempts remaining for this operation in the request time period.",
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "Retry-After": {
+            "description": "The number of seconds remaining before the rate limit resets.",
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "X-RateLimit-Reset": {
+            "description": "The unix timestamp of when the rate limit resets.",
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        }
+      },
       "500": {
         "description": "Internal Server Error",
         "content": {
@@ -25546,6 +26724,22 @@
                 "message": {
                   "type": "string",
                   "description": "Description of the error."
+                }
+              }
+            }
+          }
+        }
+      },
+      "503": {
+        "description": "Service Unavailable",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "Service Unavailable"
                 }
               }
             }
@@ -25647,7 +26841,9 @@
         "Clients",
         "Client Assignees",
         "Client Files",
-        "Client Organisations"
+        "Client Organisations",
+        "Client Records",
+        "Client Record Assignees"
       ]
     },
     {
@@ -25655,15 +26851,7 @@
       "tags": [
         "Organisations",
         "Organisation Clients",
-        "Organisation Assignees"
-      ]
-    },
-    {
-      "name": "Records & Steps",
-      "tags": [
-        "Records",
-        "Record Assignees",
-        "Steps",
+        "Organisation Assignees",
         "Organisation Records",
         "Organisation Record Assignees"
       ]
@@ -25687,6 +26875,7 @@
     {
       "name": "Other",
       "tags": [
+        "Steps",
         "Files",
         "Forms",
         "Webhooks",

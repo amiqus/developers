@@ -630,7 +630,8 @@
           "empty",
           "paused",
           "amendments",
-          "reviewed"
+          "reviewed",
+          "closed"
         ],
         "x-enumDescriptions": {
           "pending": "Active without any completed steps",
@@ -642,7 +643,8 @@
           "empty": "Expired without any completed steps",
           "paused": "At least one paused check step",
           "amendments": "Pending record amendment approval or rejection",
-          "reviewed": "Record marked as having been reviewed"
+          "reviewed": "Record marked as having been reviewed",
+          "closed": "Completed with no further action required _(Organisation records only)_"
         },
         "description": "The overall status of the record.\n\nStatus is determined by the combined states of a record's steps, expiry and review.\n"
       },

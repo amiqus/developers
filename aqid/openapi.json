@@ -10023,12 +10023,7 @@
                             "report": {
                               "name": "Martin McFly",
                               "reference": "A1B2CD34E",
-                              "conditions": {
-                                "primary": null,
-                                "voluntary_work": null,
-                                "additional_part_time_work": null,
-                                "work_placement": null
-                              },
+                              "conditions": null,
                               "restrictions": null,
                               "starts_at": "2023-01-28",
                               "expires_at": null
@@ -10479,7 +10474,9 @@
                                 "additional_part_time_work": null,
                                 "work_placement": [
                                   "Placement with the sponsoring employer only"
-                                ]
+                                ],
+                                "education": null,
+                                "permanent_full_time_start": null
                               },
                               "restrictions": [
                                 "No recourse to public funds"
@@ -20573,6 +20570,26 @@
                   },
                   "work_placement": {
                     "description": "Conditions that apply to a work placement.",
+                    "type": [
+                      "null",
+                      "array"
+                    ],
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "education": {
+                    "description": "The work conditions of an education visa, such as the hours allowed in term time.\nGOV.UK lists these under \"While their visa is valid\".\n",
+                    "type": [
+                      "null",
+                      "array"
+                    ],
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "permanent_full_time_start": {
+                    "description": "The conditions to meet before the person can start a permanent full-time job. GOV.UK\nlists these under \"When they can start a permanent full-time job\".\n",
                     "type": [
                       "null",
                       "array"

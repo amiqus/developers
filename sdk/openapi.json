@@ -305,6 +305,27 @@
                     "privacy_policy": true
                   }
                 },
+                "identity_report_no_dates": {
+                  "summary": "Identity report without move-in dates (Experian)",
+                  "value": {
+                    "title": "miss",
+                    "dob": "1967-10-29",
+                    "address_history": [
+                      {
+                        "address": {
+                          "unit": "3rd Floor",
+                          "house_name": "Citypoint",
+                          "house_number": "65",
+                          "street_name": "Haymarket Terrace",
+                          "city": "Edinburgh",
+                          "postcode": "EH12 5HD",
+                          "country": "GB"
+                        }
+                      }
+                    ],
+                    "privacy_policy": true
+                  }
+                },
                 "dummy": {
                   "summary": "Dummy",
                   "value": {
@@ -1232,7 +1253,7 @@
           "address_history": {
             "type": "array",
             "minItems": 1,
-            "description": "12 months of address history, most recent address country must be `GB`.",
+            "description": "Address history, most recent first. The most recent address country must be `GB`.\n\nMove-in dates are optional, and no minimum period of history is required.\n",
             "items": {
               "title": "Address Period",
               "type": "object",
@@ -1282,12 +1303,12 @@
                 },
                 "start": {
                   "type": "string",
-                  "format": "date"
+                  "format": "date",
+                  "description": "The date the Client moved in to the address. Optional."
                 }
               },
               "required": [
-                "address",
-                "start"
+                "address"
               ]
             }
           },
@@ -1307,7 +1328,7 @@
       },
       "IdentityReport": {
         "title": "Identity report",
-        "description": "The shape depends on which provider backs the team's identity checks. The\nfields are the same either way; only the address field limits differ.\n",
+        "description": "The shape depends on which provider backs the team's identity checks. The\nfields are the same either way, but Experian does not require an address\n`start` date or 12 months of history, and its address field limits differ.\n",
         "anyOf": [
           {
             "$ref": "#/components/schemas/CallValidate"

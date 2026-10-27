@@ -5532,6 +5532,22 @@
         ]
       }
     },
+    "/organisations/imports/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/resourceId",
+          "description": "Unique organisation import identifier, returned as the `id` of the attachment created by **[Upload an organisation import file](#operation/post-organisations-imports)**."
+        }
+      ]
+    },
+    "/organisations/imports/{id}/mappings": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/resourceId",
+          "description": "Unique organisation import identifier, returned as the `id` of the attachment created by **[Upload an organisation import file](#operation/post-organisations-imports)**."
+        }
+      ]
+    },
     "/organisations/{id}": {
       "parameters": [
         {
@@ -18824,7 +18840,8 @@
               "us_wa",
               "us_wv",
               "us_wi",
-              "us_wy"
+              "us_wy",
+              null
             ],
             "description": "The country code or region where the company is registered.\n\nRequired if `company_number` is provided.\n"
           },
@@ -27221,6 +27238,7 @@
         "Organisations",
         "Organisation Clients",
         "Organisation Assignees",
+        "Organisation Imports",
         "Organisation Records",
         "Organisation Record Assignees"
       ]

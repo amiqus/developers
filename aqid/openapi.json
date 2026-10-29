@@ -29095,7 +29095,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
                   "default": "File scan detected a virus"
                 }
@@ -29111,7 +29111,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
                   "enum": [
                     "File scan is not yet complete",

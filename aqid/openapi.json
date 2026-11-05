@@ -7000,6 +7000,7 @@
                           "assignees": null,
                           "created_at": "2022-05-20T10:00:00Z",
                           "updated_at": "2022-05-25T11:00:00Z",
+                          "expired_at": "2022-05-30T10:00:00Z",
                           "archived_at": null
                         },
                         {
@@ -7041,6 +7042,7 @@
                           ],
                           "created_at": "2022-04-15T09:30:00Z",
                           "updated_at": "2022-04-18T16:45:00Z",
+                          "expired_at": "2022-04-25T09:30:00Z",
                           "archived_at": null
                         }
                       ],
@@ -7096,6 +7098,7 @@
                           ],
                           "created_at": "2022-04-15T09:30:00Z",
                           "updated_at": "2022-04-18T16:45:00Z",
+                          "expired_at": "2022-04-25T09:30:00Z",
                           "archived_at": null
                         }
                       ],
@@ -7147,6 +7150,7 @@
                           "assignees": null,
                           "created_at": "2022-05-20T10:00:00Z",
                           "updated_at": "2022-05-25T11:00:00Z",
+                          "expired_at": "2022-05-30T10:00:00Z",
                           "archived_at": null
                         },
                         {
@@ -7200,6 +7204,7 @@
                           },
                           "created_at": "2022-04-15T09:30:00Z",
                           "updated_at": "2022-04-18T16:45:00Z",
+                          "expired_at": "2022-04-25T09:30:00Z",
                           "archived_at": null
                         }
                       ],
@@ -7312,6 +7317,7 @@
                       "assignees": null,
                       "created_at": "2026-07-10T11:22:00Z",
                       "updated_at": "2026-07-10T11:22:00Z",
+                      "expired_at": "2026-07-20T11:22:00Z",
                       "archived_at": null
                     }
                   }
@@ -7471,6 +7477,7 @@
                       ],
                       "created_at": "2026-07-10T11:22:00Z",
                       "updated_at": "2026-07-10T11:25:00Z",
+                      "expired_at": "2026-07-20T11:22:00Z",
                       "archived_at": null
                     }
                   },
@@ -7521,6 +7528,7 @@
                       ],
                       "created_at": "2026-07-10T11:22:00Z",
                       "updated_at": "2026-07-10T11:25:00Z",
+                      "expired_at": "2026-07-20T11:22:00Z",
                       "archived_at": null
                     }
                   },
@@ -7565,6 +7573,7 @@
                       },
                       "created_at": "2026-07-10T11:22:00Z",
                       "updated_at": "2026-07-10T11:25:00Z",
+                      "expired_at": "2026-07-20T11:22:00Z",
                       "archived_at": null
                     }
                   }
@@ -26568,6 +26577,12 @@
             "format": "date-time",
             "readOnly": true,
             "description": "Date and time the record's details were last updated or a step was completed."
+          },
+          "expired_at": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "description": "Date and time the record will expire."
           },
           "archived_at": {
             "type": [

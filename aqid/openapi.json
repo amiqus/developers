@@ -6990,7 +6990,8 @@
                               "preferences": {
                                 "monitor": 1,
                                 "search_profile": "sanctions_media",
-                                "all_entity_types": false
+                                "all_entity_types": false,
+                                "monitor_ended_at": null
                               },
                               "check": 88120,
                               "cost": 3,
@@ -7030,7 +7031,8 @@
                               "preferences": {
                                 "monitor": false,
                                 "search_profile": "sanctions",
-                                "all_entity_types": false
+                                "all_entity_types": false,
+                                "monitor_ended_at": null
                               },
                               "check": 88177,
                               "cost": 2,
@@ -7044,10 +7046,50 @@
                           "updated_at": "2022-04-18T16:45:00Z",
                           "expired_at": "2022-04-25T09:30:00Z",
                           "archived_at": null
+                        },
+                        {
+                          "object": "organisation_record",
+                          "id": 552341,
+                          "status": "closed",
+                          "organisation": {
+                            "object": "organisation",
+                            "id": 44341,
+                            "status": "approved",
+                            "name": "Northwind Logistics",
+                            "company_number": "04567890",
+                            "jurisdiction": "gb",
+                            "reference": null,
+                            "incorporated_at": "1998-03-24",
+                            "assignees": null,
+                            "clients": null,
+                            "created_at": "2022-02-01T10:00:00Z",
+                            "updated_at": "2022-02-20T10:00:00Z",
+                            "archived_at": null
+                          },
+                          "steps": [
+                            {
+                              "object": "step",
+                              "id": 1,
+                              "type": "check.watchlist",
+                              "preferences": {
+                                "monitor": false,
+                                "search_profile": "sanctions_media",
+                                "all_entity_types": false,
+                                "monitor_ended_at": "2023-03-02T11:20:00Z"
+                              },
+                              "check": 88203,
+                              "cost": 3,
+                              "completed_at": "2022-03-02T11:20:00Z"
+                            }
+                          ],
+                          "assignees": null,
+                          "created_at": "2022-03-01T11:00:00Z",
+                          "updated_at": "2023-03-02T11:20:00Z",
+                          "archived_at": null
                         }
                       ],
-                      "total": 2,
-                      "count": 2,
+                      "total": 3,
+                      "count": 3,
                       "limit": 100,
                       "current_page": 1,
                       "total_pages": 1,
@@ -7086,7 +7128,8 @@
                               "preferences": {
                                 "monitor": false,
                                 "search_profile": "sanctions",
-                                "all_entity_types": false
+                                "all_entity_types": false,
+                                "monitor_ended_at": null
                               },
                               "check": 88177,
                               "cost": 2,
@@ -7140,7 +7183,8 @@
                               "preferences": {
                                 "monitor": 1,
                                 "search_profile": "sanctions_media",
-                                "all_entity_types": false
+                                "all_entity_types": false,
+                                "monitor_ended_at": null
                               },
                               "check": 88120,
                               "cost": 3,
@@ -7178,7 +7222,8 @@
                               "preferences": {
                                 "monitor": false,
                                 "search_profile": "sanctions",
-                                "all_entity_types": false
+                                "all_entity_types": false,
+                                "monitor_ended_at": null
                               },
                               "check": 88177,
                               "cost": 2,
@@ -7307,7 +7352,8 @@
                           "preferences": {
                             "monitor": 1,
                             "search_profile": "sanctions_media",
-                            "all_entity_types": false
+                            "all_entity_types": false,
+                            "monitor_ended_at": null
                           },
                           "check": 8901,
                           "cost": 3,
@@ -7465,7 +7511,8 @@
                           "preferences": {
                             "monitor": 1,
                             "search_profile": "sanctions_media",
-                            "all_entity_types": false
+                            "all_entity_types": false,
+                            "monitor_ended_at": null
                           },
                           "check": 8901,
                           "cost": 3,
@@ -7516,7 +7563,8 @@
                           "preferences": {
                             "monitor": 1,
                             "search_profile": "sanctions_media",
-                            "all_entity_types": false
+                            "all_entity_types": false,
+                            "monitor_ended_at": null
                           },
                           "check": 8901,
                           "cost": 3,
@@ -7547,7 +7595,8 @@
                           "preferences": {
                             "monitor": 1,
                             "search_profile": "sanctions_media",
-                            "all_entity_types": false
+                            "all_entity_types": false,
+                            "monitor_ended_at": null
                           },
                           "check": 8901,
                           "cost": 3,
@@ -24556,6 +24605,15 @@
                 "type": "boolean",
                 "default": false,
                 "description": "Include results for organisations, vessels, aircraft and other non-individual entities.\nThis will broaden the search and may return more results.\n"
+              },
+              "monitor_ended_at": {
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time",
+                "readOnly": true,
+                "description": "Date and time ongoing monitoring ended, or `null` if it never started or is still active.\n"
               }
             }
           }
@@ -26436,6 +26494,15 @@
                 "type": "boolean",
                 "default": false,
                 "description": "Include results for people, vessels, aircraft and other non-organisation entities.\nThis will broaden the search and may return more results.\n"
+              },
+              "monitor_ended_at": {
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time",
+                "readOnly": true,
+                "description": "Date and time ongoing monitoring ended, or `null` if it never started or is still active.\n"
               }
             }
           }

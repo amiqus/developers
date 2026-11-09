@@ -7448,6 +7448,188 @@
         ]
       }
     },
+    "/organisations/records/bulk": {
+      "post": {
+        "summary": "Create organisation records in bulk",
+        "description": "Create a record for each of the given organisations in one call. The same steps are used for every\nrecord, and the records are grouped together as a batch. The records are created in the background.\n\nThere is no limit on the number of organisations in a single request, but large selections are best\nsent in batches of around 1,000.\n",
+        "operationId": "post-organisations-records-bulk",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Organisation Records"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "type": "object",
+                    "required": [
+                      "organisations"
+                    ],
+                    "properties": {
+                      "organisations": {
+                        "type": "array",
+                        "minItems": 1,
+                        "uniqueItems": true,
+                        "items": {
+                          "type": "integer"
+                        },
+                        "description": "Unique organisation identifiers. Each organisation must belong to the team."
+                      }
+                    }
+                  },
+                  {
+                    "$ref": "#/components/schemas/OrganisationRecordSettings"
+                  },
+                  {
+                    "properties": {
+                      "steps": {
+                        "items": {
+                          "$ref": "#/components/schemas/OrganisationRecordStepsWrite"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "properties": {
+                      "batch_name": {
+                        "type": [
+                          "null",
+                          "string"
+                        ],
+                        "maxLength": 255,
+                        "description": "Name for the batch. If omitted or `null`, the batch is named \"Create organisation requests\".\n"
+                      }
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "organisations": [
+                  4321,
+                  4322,
+                  4323
+                ],
+                "steps": [
+                  {
+                    "type": "check.watchlist",
+                    "preferences": {
+                      "monitor": 1,
+                      "search_profile": "sanctions_media",
+                      "all_entity_types": false
+                    }
+                  }
+                ],
+                "batch_name": "Q4 supplier screening"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Batch"
+                    },
+                    {
+                      "properties": {
+                        "type": {
+                          "const": "organisation_records.create"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "example": {
+                  "object": "batch",
+                  "id": 48219,
+                  "type": "organisation_records.create",
+                  "name": "Q4 supplier screening",
+                  "item_count": 3,
+                  "created_at": "2026-10-12T09:14:51Z"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/schema"
+                },
+                "examples": {
+                  "organisations_required": {
+                    "summary": "Organisations and steps missing",
+                    "value": {
+                      "organisations": [
+                        "The organisations field is required"
+                      ],
+                      "steps": [
+                        "The steps field is required"
+                      ]
+                    }
+                  },
+                  "organisation_not_found": {
+                    "summary": "Organisation not in the team, or not visible to the user",
+                    "value": {
+                      "organisations.1": [
+                        "Organisation 4322 could not be found"
+                      ]
+                    }
+                  },
+                  "insufficient_credits": {
+                    "summary": "Not enough credits",
+                    "value": {
+                      "errors": [
+                        "Insufficient credit available, 9 credits required"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell + Curl",
+            "source": "curl --request POST \\\n  --url https://id.amiqus.co/api/v2/organisations/records/bulk \\\n  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \\\n  --header 'content-type: application/json' \\\n  --data '{\"organisations\":[0],\"steps\":[{\"type\":\"check.watchlist\",\"preferences\":{\"monitor\":false,\"search_profile\":\"sanctions\",\"all_entity_types\":false}}],\"batch_name\":null}'"
+          },
+          {
+            "lang": "Node + Request",
+            "source": "const request = require('request');\n\nconst options = {\n  method: 'POST',\n  url: 'https://id.amiqus.co/api/v2/organisations/records/bulk',\n  headers: {\n    Authorization: 'Bearer REPLACE_BEARER_TOKEN',\n    'content-type': 'application/json'\n  },\n  body: {\n    organisations: [0],\n    steps: [\n      {\n        type: 'check.watchlist',\n        preferences: {monitor: false, search_profile: 'sanctions', all_entity_types: false}\n      }\n    ],\n    batch_name: null\n  },\n  json: true\n};\n\nrequest(options, function (error, response, body) {\n  if (error) throw new Error(error);\n\n  console.log(body);\n});\n"
+          },
+          {
+            "lang": "Javascript + Xhr",
+            "source": "const data = JSON.stringify({\n  \"organisations\": [\n    0\n  ],\n  \"steps\": [\n    {\n      \"type\": \"check.watchlist\",\n      \"preferences\": {\n        \"monitor\": false,\n        \"search_profile\": \"sanctions\",\n        \"all_entity_types\": false\n      }\n    }\n  ],\n  \"batch_name\": null\n});\n\nconst xhr = new XMLHttpRequest();\nxhr.withCredentials = true;\n\nxhr.addEventListener(\"readystatechange\", function () {\n  if (this.readyState === this.DONE) {\n    console.log(this.responseText);\n  }\n});\n\nxhr.open(\"POST\", \"https://id.amiqus.co/api/v2/organisations/records/bulk\");\nxhr.setRequestHeader(\"Authorization\", \"Bearer REPLACE_BEARER_TOKEN\");\nxhr.setRequestHeader(\"content-type\", \"application/json\");\n\nxhr.send(data);"
+          },
+          {
+            "lang": "Php + Http2",
+            "source": "<?php\n\n$client = new http\\Client;\n$request = new http\\Client\\Request;\n\n$body = new http\\Message\\Body;\n$body->append('{\"organisations\":[0],\"steps\":[{\"type\":\"check.watchlist\",\"preferences\":{\"monitor\":false,\"search_profile\":\"sanctions\",\"all_entity_types\":false}}],\"batch_name\":null}');\n\n$request->setRequestUrl('https://id.amiqus.co/api/v2/organisations/records/bulk');\n$request->setRequestMethod('POST');\n$request->setBody($body);\n\n$request->setHeaders([\n  'Authorization' => 'Bearer REPLACE_BEARER_TOKEN',\n  'content-type' => 'application/json'\n]);\n\n$client->enqueue($request)->send();\n$response = $client->getResponse();\n\necho $response->getBody();"
+          }
+        ]
+      }
+    },
     "/organisations/records/{id}": {
       "parameters": [
         {
@@ -26693,6 +26875,52 @@
             ]
           }
         ]
+      },
+      "Batch": {
+        "title": "Batch",
+        "type": "object",
+        "additionalProperties": false,
+        "description": "A group of items processed together in the background as part of a bulk action.\n",
+        "properties": {
+          "object": {
+            "type": "string",
+            "readOnly": true,
+            "const": "batch"
+          },
+          "id": {
+            "type": "integer",
+            "readOnly": true,
+            "description": "Unique batch identifier."
+          },
+          "type": {
+            "type": "string",
+            "readOnly": true,
+            "enum": [
+              "organisation_records.create"
+            ],
+            "x-enumDescriptions": {
+              "organisation_records.create": "Organisation records created for selected organisations"
+            },
+            "description": "The bulk action the batch performs."
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 255,
+            "readOnly": true,
+            "description": "The batch name, as submitted. When no name is submitted, a default name for the batch type is used."
+          },
+          "item_count": {
+            "type": "integer",
+            "readOnly": true,
+            "minimum": 1,
+            "description": "Number of items included in the batch."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          }
+        }
       },
       "RecordSettings": {
         "title": "Record Settings",

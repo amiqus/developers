@@ -7853,6 +7853,199 @@
             "source": "<?php\n\n$client = new http\\Client;\n$request = new http\\Client\\Request;\n\n$request->setRequestUrl('https://id.amiqus.co/api/v2/organisations/records/%7Bid%7D');\n$request->setRequestMethod('GET');\n$request->setQuery(new http\\QueryString([\n  'expand' => 'ARRAY_VALUE'\n]));\n\n$request->setHeaders([\n  'Authorization' => 'Bearer REPLACE_BEARER_TOKEN'\n]);\n\n$client->enqueue($request)->send();\n$response = $client->getResponse();\n\necho $response->getBody();"
           }
         ]
+      },
+      "patch": {
+        "summary": "Update an organisation record",
+        "description": "Update the details of an organisation record.\n",
+        "operationId": "patch-organisations-records-id",
+        "security": [
+          {
+            "personal_token": []
+          },
+          {
+            "oauth": []
+          }
+        ],
+        "tags": [
+          "Organisation Records"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "minProperties": 1,
+                "properties": {
+                  "is_reviewed": {
+                    "type": "boolean",
+                    "description": "Allows toggling of reviewed state.\n"
+                  }
+                }
+              },
+              "examples": {
+                "mark_reviewed": {
+                  "summary": "Mark as reviewed",
+                  "value": {
+                    "is_reviewed": true
+                  }
+                },
+                "unmark_reviewed": {
+                  "summary": "Unmark as reviewed",
+                  "value": {
+                    "is_reviewed": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganisationRecord"
+                },
+                "examples": {
+                  "reviewed": {
+                    "summary": "Marked as reviewed",
+                    "value": {
+                      "object": "organisation_record",
+                      "id": 5678,
+                      "status": "reviewed",
+                      "organisation": 4321,
+                      "steps": [
+                        {
+                          "object": "step",
+                          "id": 1,
+                          "type": "check.watchlist",
+                          "preferences": {
+                            "monitor": 1,
+                            "search_profile": "sanctions_media",
+                            "all_entity_types": false,
+                            "monitor_ended_at": null
+                          },
+                          "check": 8901,
+                          "cost": 3,
+                          "completed_at": "2026-07-10T11:25:00Z"
+                        }
+                      ],
+                      "assignees": [
+                        947
+                      ],
+                      "created_at": "2026-07-10T11:22:00Z",
+                      "updated_at": "2026-07-10T12:05:00Z",
+                      "expired_at": "2026-07-20T11:22:00Z",
+                      "archived_at": null
+                    }
+                  },
+                  "unreviewed": {
+                    "summary": "Unmarked as reviewed",
+                    "value": {
+                      "object": "organisation_record",
+                      "id": 5678,
+                      "status": "complete",
+                      "organisation": 4321,
+                      "steps": [
+                        {
+                          "object": "step",
+                          "id": 1,
+                          "type": "check.watchlist",
+                          "preferences": {
+                            "monitor": 1,
+                            "search_profile": "sanctions_media",
+                            "all_entity_types": false,
+                            "monitor_ended_at": null
+                          },
+                          "check": 8901,
+                          "cost": 3,
+                          "completed_at": "2026-07-10T11:25:00Z"
+                        }
+                      ],
+                      "assignees": [
+                        947
+                      ],
+                      "created_at": "2026-07-10T11:22:00Z",
+                      "updated_at": "2026-07-10T12:10:00Z",
+                      "expired_at": "2026-07-20T11:22:00Z",
+                      "archived_at": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "default": "Organisation record not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content. Returned when the request body is empty, or when `is_reviewed` is `true` and the\nrecord's status is not `complete`, `incomplete` or `closed`.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/schema"
+                },
+                "examples": {
+                  "record_cannot_be_reviewed": {
+                    "summary": "Record cannot be reviewed",
+                    "value": {
+                      "is_reviewed": [
+                        "This record can't be reviewed"
+                      ]
+                    }
+                  },
+                  "property_required": {
+                    "summary": "Empty request body",
+                    "value": {
+                      "errors": [
+                        "At least one property is required"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell + Curl",
+            "source": "curl --request PATCH \\\n  --url https://id.amiqus.co/api/v2/organisations/records/%7Bid%7D \\\n  --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \\\n  --header 'content-type: application/json' \\\n  --data '{\"is_reviewed\":true}'"
+          },
+          {
+            "lang": "Node + Request",
+            "source": "const request = require('request');\n\nconst options = {\n  method: 'PATCH',\n  url: 'https://id.amiqus.co/api/v2/organisations/records/%7Bid%7D',\n  headers: {\n    Authorization: 'Bearer REPLACE_BEARER_TOKEN',\n    'content-type': 'application/json'\n  },\n  body: {is_reviewed: true},\n  json: true\n};\n\nrequest(options, function (error, response, body) {\n  if (error) throw new Error(error);\n\n  console.log(body);\n});\n"
+          },
+          {
+            "lang": "Javascript + Xhr",
+            "source": "const data = JSON.stringify({\n  \"is_reviewed\": true\n});\n\nconst xhr = new XMLHttpRequest();\nxhr.withCredentials = true;\n\nxhr.addEventListener(\"readystatechange\", function () {\n  if (this.readyState === this.DONE) {\n    console.log(this.responseText);\n  }\n});\n\nxhr.open(\"PATCH\", \"https://id.amiqus.co/api/v2/organisations/records/%7Bid%7D\");\nxhr.setRequestHeader(\"Authorization\", \"Bearer REPLACE_BEARER_TOKEN\");\nxhr.setRequestHeader(\"content-type\", \"application/json\");\n\nxhr.send(data);"
+          },
+          {
+            "lang": "Php + Http2",
+            "source": "<?php\n\n$client = new http\\Client;\n$request = new http\\Client\\Request;\n\n$body = new http\\Message\\Body;\n$body->append('{\"is_reviewed\":true}');\n\n$request->setRequestUrl('https://id.amiqus.co/api/v2/organisations/records/%7Bid%7D');\n$request->setRequestMethod('PATCH');\n$request->setBody($body);\n\n$request->setHeaders([\n  'Authorization' => 'Bearer REPLACE_BEARER_TOKEN',\n  'content-type' => 'application/json'\n]);\n\n$client->enqueue($request)->send();\n$response = $client->getResponse();\n\necho $response->getBody();"
+          }
+        ]
       }
     },
     "/organisations/records/{id}/download": {

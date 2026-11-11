@@ -665,7 +665,7 @@
           "paused": "At least one paused check step",
           "amendments": "Pending record amendment approval or rejection",
           "reviewed": "Record marked as having been reviewed",
-          "closed": "Completed before review tracking was introduced; can still be marked as reviewed _(Organisation records only)_"
+          "closed": "Completed with no further action required _(Organisation records only)_"
         },
         "description": "The overall status of the record.\n\nStatus is determined by the combined states of a record's steps, expiry and review.\n"
       },

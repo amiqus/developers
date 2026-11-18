@@ -10468,15 +10468,19 @@
                           {
                             "type": "evisa",
                             "status": "complete",
+                            "completed_at": "2022-05-22T08:22:12Z",
                             "result": "clear",
                             "report": {
                               "name": "Martin McFly",
                               "reference": "A1B2CD34E",
                               "conditions": null,
                               "restrictions": null,
-                              "starts_at": "2023-01-28",
-                              "expires_at": null
+                              "starts_at": "2021-01-28",
+                              "expires_at": null,
+                              "recheck_after": null
                             },
+                            "is_recheck_required": false,
+                            "recheck_at": null,
                             "report_type": "right_to_work",
                             "breakdown": {
                               "name_match": {
@@ -10496,6 +10500,10 @@
                                 "reason": null
                               },
                               "expires_at": {
+                                "result": "clear",
+                                "reason": null
+                              },
+                              "recheck": {
                                 "result": "clear",
                                 "reason": null
                               },
@@ -10947,6 +10955,7 @@
                           {
                             "type": "evisa",
                             "status": "complete",
+                            "completed_at": "2022-05-22T08:22:12Z",
                             "result": "consider",
                             "report": {
                               "name": "Martin McFly",
@@ -10966,9 +10975,12 @@
                               "restrictions": [
                                 "No recourse to public funds"
                               ],
-                              "starts_at": "2023-01-28",
-                              "expires_at": "2029-08-31"
+                              "starts_at": "2021-01-28",
+                              "expires_at": "2029-08-31",
+                              "recheck_after": null
                             },
+                            "is_recheck_required": false,
+                            "recheck_at": null,
                             "report_type": "right_to_work",
                             "breakdown": {
                               "name_match": {
@@ -10997,6 +11009,528 @@
                                 "result": "consider",
                                 "reason": {
                                   "type": "time_limited",
+                                  "message": "Restrictions apply"
+                                }
+                              },
+                              "recheck": {
+                                "result": "clear",
+                                "reason": null
+                              },
+                              "image_match": {
+                                "result": "clear",
+                                "reason": null,
+                                "breakdown": {
+                                  "face_comparison": {
+                                    "result": "clear",
+                                    "breakdown": {
+                                      "face_match": {
+                                        "result": "clear",
+                                        "properties": {
+                                          "score": 0.89
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "image_integrity": {
+                                    "result": "clear",
+                                    "breakdown": {
+                                      "face_detected": {
+                                        "result": "clear"
+                                      },
+                                      "source_integrity": {
+                                        "result": "clear"
+                                      }
+                                    }
+                                  },
+                                  "visual_authenticity": {
+                                    "result": "clear",
+                                    "breakdown": {
+                                      "spoofing_detection": {
+                                        "result": "clear",
+                                        "properties": {
+                                          "score": 0.02
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "attachments": {
+                              "image": {
+                                "object": "attachment",
+                                "id": 31788,
+                                "name": "4f2c9a1b-2f5e-4a77-9c3d-6b1e8d4a55c2.jpeg",
+                                "original": "evisa_selfie.jpeg",
+                                "type": "image/jpeg",
+                                "size": 24817,
+                                "av_status": "clean",
+                                "created_at": "2022-05-22T08:22:12Z",
+                                "updated_at": "2022-05-22T08:22:12Z"
+                              },
+                              "pdf": {
+                                "object": "attachment",
+                                "id": 31789,
+                                "name": "9b7e1d34-8c62-4f10-a5db-2e97c4f0aa13.pdf",
+                                "original": "evisa_report.pdf",
+                                "type": "application/pdf",
+                                "size": 118204,
+                                "av_status": "clean",
+                                "created_at": "2022-05-22T08:22:12Z",
+                                "updated_at": "2022-05-22T08:22:12Z"
+                              }
+                            },
+                            "errors": null
+                          },
+                          {
+                            "type": "right_to_work",
+                            "status": "complete",
+                            "result": "consider",
+                            "basis": "evidence",
+                            "jurisdiction": "GBR",
+                            "breakdown": {
+                              "identity_verification": {
+                                "result": "clear",
+                                "breakdown": {
+                                  "document_report": {
+                                    "result": "clear"
+                                  },
+                                  "facial_similarity": {
+                                    "result": "clear"
+                                  }
+                                }
+                              },
+                              "document_type": {
+                                "result": "clear"
+                              },
+                              "issuing_country": {
+                                "result": "consider"
+                              },
+                              "nationality": {
+                                "result": "consider"
+                              },
+                              "document_expiry": {
+                                "result": "clear"
+                              }
+                            },
+                            "evidence": {
+                              "share_code": "W1B2CD34E",
+                              "citizenship": null
+                            }
+                          }
+                        ],
+                        "media": [
+                          {
+                            "type": "document",
+                            "attachment": {
+                              "object": "attachment",
+                              "id": 31785,
+                              "name": "14592310-706e-4bae-9171-83db2fa9d0fb.jpg",
+                              "original": "passport.jpg",
+                              "type": "image/jpeg",
+                              "size": 16053,
+                              "av_status": "clean",
+                              "created_at": "2022-05-22T08:22:12Z",
+                              "updated_at": "2022-05-22T08:22:12Z"
+                            },
+                            "document_type": "passport",
+                            "side": "front",
+                            "issuing_country": "FRA",
+                            "has_nfc": false
+                          },
+                          {
+                            "type": "motion_capture",
+                            "attachment": {
+                              "object": "attachment",
+                              "id": 31786,
+                              "name": "7a1f0c58-3d9b-42e6-8f74-1c05b9e3d720.mp4",
+                              "original": "motion_capture.mp4",
+                              "type": "video/mp4",
+                              "size": 842119,
+                              "av_status": "clean",
+                              "created_at": "2022-05-22T08:22:12Z",
+                              "updated_at": "2022-05-22T08:22:12Z"
+                            }
+                          }
+                        ]
+                      },
+                      "allow_replay": true,
+                      "allow_cancel": true,
+                      "requires_consent": true,
+                      "created_at": "2022-05-22T08:22:12Z",
+                      "updated_at": "2022-05-22T08:22:12Z"
+                    }
+                  },
+                  "photo_id_evisa_recheck": {
+                    "summary": "Photo ID with right to work: eVisa re-check required\n",
+                    "description": "The right to work holds for a limited period, so it must be checked again by `recheck_at`. Amiqus counts the period that the .GOV service gives from the date the report completed. If the period cannot be read, `is_recheck_required` is still `true` but `recheck_at` is `null`, and the eVisa report PDF gives the .GOV wording. The `recheck` breakdown entry raises the re-check for a person to read, even when nothing else on the report would.\n",
+                    "value": {
+                      "object": "check",
+                      "id": 82344,
+                      "type": "photo_id",
+                      "record": 983434,
+                      "status": "accepted",
+                      "response": {
+                        "object": "check_response.photo_id",
+                        "status": "complete",
+                        "result": "clear",
+                        "reports": [
+                          {
+                            "type": "document",
+                            "status": "complete",
+                            "result": "clear",
+                            "breakdown": {
+                              "age_validation": {
+                                "result": "clear",
+                                "breakdown": {
+                                  "minimum_accepted_age": {
+                                    "result": "clear"
+                                  }
+                                }
+                              },
+                              "compromised_document": {
+                                "result": "clear",
+                                "breakdown": {
+                                  "document_database": {
+                                    "result": "clear"
+                                  },
+                                  "repeat_attempts": {
+                                    "result": "clear"
+                                  }
+                                }
+                              },
+                              "data_comparison": {
+                                "result": "clear",
+                                "breakdown": {
+                                  "first_name": {
+                                    "result": "clear"
+                                  },
+                                  "last_name": {
+                                    "result": "clear"
+                                  },
+                                  "date_of_birth": {
+                                    "result": "clear"
+                                  }
+                                }
+                              },
+                              "data_consistency": {
+                                "result": "clear",
+                                "breakdown": {
+                                  "issuing_country": {
+                                    "result": "clear"
+                                  },
+                                  "document_numbers": {
+                                    "result": "clear"
+                                  },
+                                  "nationality": {
+                                    "result": "clear"
+                                  },
+                                  "gender": {
+                                    "result": "clear"
+                                  },
+                                  "document_type": {
+                                    "result": "clear"
+                                  },
+                                  "date_of_expiry": {
+                                    "result": "clear"
+                                  },
+                                  "date_of_birth": {
+                                    "result": "clear"
+                                  },
+                                  "last_name": {
+                                    "result": "clear"
+                                  },
+                                  "first_name": {
+                                    "result": "clear"
+                                  }
+                                }
+                              },
+                              "data_validation": {
+                                "result": "clear",
+                                "breakdown": {
+                                  "mrz": {
+                                    "result": "clear"
+                                  },
+                                  "document_expiration": {
+                                    "result": "clear"
+                                  },
+                                  "expiry_date": {
+                                    "result": "clear"
+                                  },
+                                  "date_of_birth": {
+                                    "result": "clear"
+                                  },
+                                  "gender": {
+                                    "result": "clear"
+                                  },
+                                  "document_numbers": {
+                                    "result": "clear"
+                                  }
+                                }
+                              },
+                              "image_integrity": {
+                                "result": "clear",
+                                "breakdown": {
+                                  "supported_document": {
+                                    "result": "clear"
+                                  },
+                                  "image_quality": {
+                                    "result": "clear",
+                                    "properties": {
+                                      "glare_on_photo": {
+                                        "result": "clear"
+                                      },
+                                      "blurred_photo": {
+                                        "result": "clear"
+                                      },
+                                      "covered_photo": {
+                                        "result": "clear"
+                                      },
+                                      "other_photo_issue": {
+                                        "result": "clear"
+                                      },
+                                      "incorrect_side": {
+                                        "result": "clear"
+                                      },
+                                      "cut_off_document": {
+                                        "result": "clear"
+                                      },
+                                      "no_document_in_image": {
+                                        "result": "clear"
+                                      },
+                                      "two_documents_uploaded": {
+                                        "result": "clear"
+                                      }
+                                    }
+                                  },
+                                  "colour_picture": {
+                                    "result": "clear"
+                                  },
+                                  "conclusive_document_quality": {
+                                    "result": "clear",
+                                    "properties": {
+                                      "watermarks_digital_text_overlay": {
+                                        "result": "clear"
+                                      },
+                                      "punctured_document": {
+                                        "result": "clear"
+                                      },
+                                      "obscured_security_features": {
+                                        "result": "clear"
+                                      },
+                                      "obscured_data_points": {
+                                        "result": "clear"
+                                      },
+                                      "missing_back": {
+                                        "result": "clear"
+                                      },
+                                      "digital_document": {
+                                        "result": "clear"
+                                      },
+                                      "corner_removed": {
+                                        "result": "clear"
+                                      },
+                                      "abnormal_document_features": {
+                                        "result": "clear"
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "issuing_authority": {
+                                "result": "clear",
+                                "breakdown": {
+                                  "nfc_passive_authentication": {
+                                    "result": "clear"
+                                  },
+                                  "nfc_active_authentication": {
+                                    "result": "clear"
+                                  }
+                                }
+                              },
+                              "police_record": {
+                                "result": "clear"
+                              },
+                              "visual_authenticity": {
+                                "result": "clear",
+                                "breakdown": {
+                                  "face_detection": {
+                                    "result": "clear"
+                                  },
+                                  "digital_tampering": {
+                                    "result": "clear"
+                                  },
+                                  "original_document_present": {
+                                    "result": "clear",
+                                    "properties": {
+                                      "screenshot": {
+                                        "result": "clear"
+                                      },
+                                      "document_on_printed_paper": {
+                                        "result": "clear"
+                                      },
+                                      "photo_of_screen": {
+                                        "result": "clear"
+                                      },
+                                      "scan": {
+                                        "result": "clear"
+                                      }
+                                    }
+                                  },
+                                  "picture_face_integrity": {
+                                    "result": "clear"
+                                  },
+                                  "security_features": {
+                                    "result": "clear"
+                                  },
+                                  "fonts": {
+                                    "result": "clear"
+                                  },
+                                  "template": {
+                                    "result": "clear"
+                                  }
+                                }
+                              }
+                            },
+                            "document_data": {
+                              "document_type": "passport",
+                              "first_name": "MARTIN",
+                              "last_name": "MCFLY",
+                              "middle_name": null,
+                              "date_of_birth": "1968-06-12",
+                              "gender": "male",
+                              "document_numbers": [
+                                {
+                                  "type": "document_number",
+                                  "value": "112233445"
+                                }
+                              ],
+                              "issuing_authority": null,
+                              "issuing_country": "FRA",
+                              "issuing_state": null,
+                              "issuing_date": "2019-08-24",
+                              "date_of_expiry": "2039-07-01",
+                              "mrz_line1": "P<FRAMCFLY<<<<<MARTIN<<<<<<<<<<<<<<<<<<<<<<<",
+                              "mrz_line2": "1122334459FRA6806121M3907019<<<<<<<<<<<<<<01",
+                              "mrz_line3": null,
+                              "nationality": "FRA",
+                              "place_of_birth": "PARIS",
+                              "nfc": null
+                            }
+                          },
+                          {
+                            "type": "facial_similarity_motion",
+                            "status": "complete",
+                            "result": "clear",
+                            "breakdown": {
+                              "face_comparison": {
+                                "result": "clear",
+                                "breakdown": {
+                                  "face_match": {
+                                    "result": "clear",
+                                    "properties": {
+                                      "score": 0.91
+                                    }
+                                  }
+                                }
+                              },
+                              "image_integrity": {
+                                "result": "clear",
+                                "breakdown": {
+                                  "face_detected": {
+                                    "result": "clear"
+                                  },
+                                  "source_integrity": {
+                                    "result": "clear"
+                                  }
+                                }
+                              },
+                              "visual_authenticity": {
+                                "result": "clear",
+                                "breakdown": {
+                                  "liveness_detected": {
+                                    "result": "clear"
+                                  },
+                                  "spoofing_detection": {
+                                    "result": "clear",
+                                    "properties": {
+                                      "score": 0.01
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "evisa",
+                            "status": "complete",
+                            "completed_at": "2022-05-22T08:22:12Z",
+                            "result": "consider",
+                            "report": {
+                              "name": "Martin McFly",
+                              "reference": "A1B2CD34E",
+                              "conditions": {
+                                "primary": null,
+                                "voluntary_work": null,
+                                "additional_part_time_work": null,
+                                "work_placement": [
+                                  "a compulsory part of their course",
+                                  "assessed as part of their course"
+                                ],
+                                "education": [
+                                  "up to 20 hours a week during term time",
+                                  "full-time during periods outside of term time"
+                                ],
+                                "permanent_full_time_start": [
+                                  "they are studying full-time at degree level or above with a higher education provider that has a track record of compliance as a student sponsor",
+                                  "they made a valid Skilled Worker or Graduate visa application when they had permission as a student",
+                                  "they are waiting for a decision on your Skilled Worker or Graduate visa application, or the outcome of any administrative review against a refusal"
+                                ]
+                              },
+                              "restrictions": [
+                                "work as a professional sportsperson or sports coach",
+                                "work as an entertainer",
+                                "work in a position which would fill a permanent full-time vacancy unless they apply for a Skilled Worker or Graduate visa",
+                                "run a business or be self-employed - unless they have applied for a Start-up visa"
+                              ],
+                              "starts_at": null,
+                              "expires_at": null,
+                              "recheck_after": "6 months"
+                            },
+                            "is_recheck_required": true,
+                            "recheck_at": "2022-11-22",
+                            "report_type": "right_to_work",
+                            "breakdown": {
+                              "name_match": {
+                                "result": "clear",
+                                "reason": null
+                              },
+                              "conditions": {
+                                "result": "consider",
+                                "reason": {
+                                  "type": "conditions",
+                                  "message": "Restrictions apply"
+                                }
+                              },
+                              "restrictions": {
+                                "result": "consider",
+                                "reason": {
+                                  "type": "restrictions",
+                                  "message": "Restrictions apply"
+                                }
+                              },
+                              "starts_at": {
+                                "result": "clear",
+                                "reason": null
+                              },
+                              "expires_at": {
+                                "result": "clear",
+                                "reason": null
+                              },
+                              "recheck": {
+                                "result": "consider",
+                                "reason": {
+                                  "type": "recheck_required",
                                   "message": "Restrictions apply"
                                 }
                               },
@@ -11448,8 +11982,11 @@
                           {
                             "type": "evisa",
                             "status": "complete",
+                            "completed_at": null,
                             "result": "consider",
                             "report": null,
+                            "is_recheck_required": null,
+                            "recheck_at": null,
                             "report_type": "right_to_work",
                             "breakdown": null,
                             "attachments": null,
@@ -22632,6 +23169,14 @@
             ],
             "description": "* `processing` - The report has been requested from the eVisa service but has not returned yet.\n* `complete` - The report has finished, whether or not it produced any data.\n"
           },
+          "completed_at": {
+            "description": "When the report finished, whether or not it produced any data. `null` while the report is\nprocessing, and when no report was requested.\n",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
           "result": {
             "description": "* `clear` - The eVisa report raised nothing for review.\n* `consider` - Something on the report needs a person to look at it.\n* `null` - The report has not finished, so it has reached no result.\n",
             "oneOf": [
@@ -22766,8 +23311,30 @@
                   "string"
                 ],
                 "format": "date"
+              },
+              "recheck_after": {
+                "description": "The period after which the right to work must be checked again, as the .GOV service writes\nit, e.g. `6 months`. It counts from `completed_at`, and is `null` when no re-check is\nrequired. The text is passed through unchecked, so it may not be a period that Amiqus can\nread. See `recheck_at` for the date.\n",
+                "type": [
+                  "null",
+                  "string"
+                ]
               }
             }
+          },
+          "is_recheck_required": {
+            "description": "Whether the .GOV service says that the right to work must be checked again after a period, for\nexample while the person waits for a decision on another visa application. `true` whenever\n`report.recheck_after` has a value. `null` whenever `report` is `null`: while the report is\nprocessing, and when the report produced no data.\n",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "recheck_at": {
+            "description": "The date by which to check the right to work again. Amiqus takes the UTC date of\n`completed_at` and adds `report.recheck_after`. A period in months or years ends on the same\nday of the month. If that month is shorter, the period ends on the last day of the month, so\n6 months after 31 August is 28 February, or 29 February in a leap year.\n\n`null` when `is_recheck_required` is not `true`. Also `null` when a re-check is required but\nAmiqus could not read `report.recheck_after`. In that case the eVisa report PDF in\n`attachments` gives the .GOV wording.\n",
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date"
           },
           "report_type": {
             "description": "The permission the report establishes. Always `right_to_work` - it is the only permission an\neVisa report is currently requested for.\n",
@@ -22882,6 +23449,34 @@
                           "type": {
                             "type": "string",
                             "const": "time_limited"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              "recheck": {
+                "description": "Whether the right to work must be checked again after a period. Refers whenever\n`is_recheck_required` is `true`, including when `recheck_at` is `null` because the period\ncould not be read.\n",
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/BreakdownResult"
+                  },
+                  {
+                    "properties": {
+                      "reason": {
+                        "type": [
+                          "null",
+                          "object"
+                        ],
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "const": "recheck_required"
                           },
                           "message": {
                             "type": "string"

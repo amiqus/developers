@@ -249,7 +249,7 @@
     "/steps/{id}": {
       "post": {
         "summary": "Submit a step",
-        "description": "Submit a step.\n\n**Photo ID steps:** Before a Photo ID check step can be submitted, supporting photo ID documentation must first be uploaded using the Onfido SDK. See [Create an Onfido SDK token](#operation/post-providers-onfido-token) for further details.\n\nOnly Photo ID checks configured with the **standard report type** can be submitted using this operation. Checks configured with the biometric report type must be completed using a web browser and Amiqus mobile app.\n",
+        "description": "Submit a step.\n\n**Photo ID steps:** Before a Photo ID check step can be submitted, supporting photo ID documentation must first be uploaded using the Onfido SDK. See [Create an Onfido SDK token](#operation/post-providers-onfido-token) for further details.\nAttempting to submit a Photo ID check step before Onfido has received the data will result in a HTTP 409 response. This may happen due to network latency and the submission should be retried.\n\nOnly Photo ID checks configured with the **standard report type** can be submitted using this operation. Checks configured with the biometric report type must be completed using a web browser and Amiqus mobile app.\n",
         "operationId": "post-steps-id",
         "security": [
           {
@@ -373,6 +373,30 @@
                     "error": {
                       "type": "string",
                       "default": "Step not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "headers": {
+              "Retry-After": {
+                "description": "The number of seconds to wait before the submission can be retried.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
                     }
                   }
                 }
